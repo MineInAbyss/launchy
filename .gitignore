@@ -11,3 +11,7 @@ out
 eclipse
 *.ipr
 *.iws
+
+packaging/appimage/Launchy.AppDir/usr/
+*.AppImage
+*.DirIcon
