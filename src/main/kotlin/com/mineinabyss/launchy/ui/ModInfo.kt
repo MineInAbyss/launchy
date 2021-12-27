@@ -16,13 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LaunchyState
+import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
-import com.mineinabyss.launchy.util.Option
 
 @Composable
-fun ModInfo(mod: Mod, groupOption: Option) {
-    val state = LaunchyState
+fun ModInfo(group: Group, mod: Mod) {
+    val state = LocalLaunchyState
     val modEnabled by derivedStateOf { mod in state.enabledMods }
 
     var showDesc by remember { mutableStateOf(false) }
@@ -41,8 +41,8 @@ fun ModInfo(mod: Mod, groupOption: Option) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Switch(
-                    enabled = groupOption == Option.DEFAULT,
-                    checked = groupOption == Option.ENABLED || (modEnabled && groupOption != Option.DISABLED),
+                    enabled = !group.forced,
+                    checked = modEnabled,
                     onCheckedChange = { state.setModEnabled(mod, !modEnabled) }
                 )
 

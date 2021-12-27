@@ -27,7 +27,7 @@ import com.mineinabyss.launchy.ui.screens.MainScreen
 //    @Composable
 //    get() = LocalVersionsProvider.current
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
-val LaunchyState: LaunchyState
+val LocalLaunchyState: LaunchyState
     @Composable
     get() = LaunchyStateProvider.current
 

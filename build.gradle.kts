@@ -37,9 +37,6 @@ compose.desktop {
         mainClass = "com.mineinabyss.launchy.MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.AppImage)
-            linux {
-
-            }
             packageName = "launchy"
             packageVersion = "1.0.0"
         }

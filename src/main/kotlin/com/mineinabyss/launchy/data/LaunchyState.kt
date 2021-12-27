@@ -3,7 +3,6 @@ package com.mineinabyss.launchy.data
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.logic.Downloader
-import com.mineinabyss.launchy.util.Option
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -19,12 +18,20 @@ class LaunchyState(
     val versions: Versions,
     val scaffoldState: ScaffoldState
 ) {
-    val groups = mutableStateMapOf<GroupName, Option>().apply { putAll(config.groups) }
-    val toggledMods = mutableStateSetOf<Mod>().apply { addAll(config.toggledMods.mapNotNull { it.toMod() }) }
-    val enabledMods: Set<Mod> by derivedStateOf {
-        modsInGroup(Option.ENABLED) + toggledMods - modsInGroup(Option.DISABLED)
+    val enabledMods = mutableStateSetOf<Mod>().apply {
+        addAll(config.toggledMods.mapNotNull { it.toMod() })
+        val defaults = versions.groups
+            .filter { it.enabledByDefault }
+            .map { it.name } - config.seenGroups
+        val fullEnabled = config.fullEnabledGroups
+        val forced = versions.groups.filter { it.forced }.map { it.name }
+        addAll((fullEnabled + defaults + forced).toSet()
+            .mapNotNull { it.toGroup() }
+            .mapNotNull { versions.modGroups[it] }.flatten()
+        )
     }
-    val disabledMods: Set<Mod> by derivedStateOf { versions.mods.values.toSet() - enabledMods }
+
+    val disabledMods: Set<Mod> by derivedStateOf { versions.nameToMod.values.toSet() - enabledMods }
 
     val downloads = mutableStateMapOf<Mod, DownloadURL>().apply {
         putAll(config.downloads
@@ -45,8 +52,8 @@ class LaunchyState(
     val isDownloading by derivedStateOf { downloading.isNotEmpty() }
 
     fun setModEnabled(mod: Mod, enabled: Boolean) {
-        if (enabled) toggledMods += mod
-        else toggledMods -= mod
+        if (enabled) enabledMods += mod
+        else enabledMods -= mod
     }
 
     suspend fun downloadAndRemoveQueued() = coroutineScope {
@@ -74,22 +81,19 @@ class LaunchyState(
         }
     }
 
-    fun modsInGroup(option: Option) = groups
-        // Add all mods from enabled groups
-        .filterValues { it == option }
-        .mapNotNull { versions.modGroups[it.key] }
-        .flatten()
-        .toSet()
-
     fun save() {
         config.copy(
-            groups = groups,
-            toggledMods = toggledMods.mapTo(mutableSetOf()) { it.name },
-            downloads = downloads.mapKeys { it.key.name }
+            fullEnabledGroups = versions.modGroups
+                .filter { enabledMods.containsAll(it.value) }.keys
+                .map { it.name }.toSet(),
+            toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
+            downloads = downloads.mapKeys { it.key.name },
+            seenGroups = versions.groups.map { it.name }.toSet()
         ).save()
     }
 
-    fun ModName.toMod(): Mod? = versions.mods[this]
+    fun ModName.toMod(): Mod? = versions.nameToMod[this]
+    fun GroupName.toGroup(): Group? = versions.nameToGroup[this]
 
     val Mod.file get() = Dirs.mods / "${name}.jar"
     val Mod.isDownloaded get() = file.exists()

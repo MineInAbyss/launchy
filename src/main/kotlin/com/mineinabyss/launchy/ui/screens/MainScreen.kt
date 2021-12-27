@@ -16,14 +16,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LaunchyState
+import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
 
 @Composable
 @Preview
 fun MainScreen() {
-    val state = LaunchyState
+    val state = LocalLaunchyState
     Scaffold(
         topBar = {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(2.dp)) {
