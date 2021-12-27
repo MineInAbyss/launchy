@@ -13,37 +13,37 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalConfig
+import com.mineinabyss.launchy.LaunchyState
+import com.mineinabyss.launchy.data.GroupName
 import com.mineinabyss.launchy.data.Mod
 import com.mineinabyss.launchy.util.Option
 
 @Composable
-fun ModGroup(group: String, mods: Collection<Mod>) {
+fun ModGroup(groupName: GroupName, mods: Collection<Mod>) {
     var expanded by remember { mutableStateOf(false) }
-    val config = LocalConfig
+    val state = LaunchyState
 
     Card(Modifier.padding(2.dp).fillMaxWidth().clickable { expanded = !expanded }) {
         Column {
-            var groupChecked by remember { mutableStateOf(config.groups[group] ?: Option.DEFAULT) }
+            val groupOption = state.groups.getOrDefault(groupName, Option.DEFAULT)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.height(40.dp)
             ) {
-                TripleSwitch(groupChecked, onSwitch = {
-                    config.groups[group] = it
-                    groupChecked = it
+                TripleSwitch(groupOption, onSwitch = {
+                    state.groups[groupName] = it
                 })
                 Spacer(Modifier.width(10.dp))
                 Text(
-                    group, Modifier.weight(1f),
+                    groupName, Modifier.weight(1f),
                     style = MaterialTheme.typography.h5,
                 )
                 Icon(Icons.Rounded.ArrowDropDown, "Show mods")
             }
             AnimatedVisibility(expanded) {
                 Column {
-                    for (mod in mods) ModInfo(mod, groupChecked)
+                    for (mod in mods) ModInfo(mod, groupOption)
                 }
             }
         }

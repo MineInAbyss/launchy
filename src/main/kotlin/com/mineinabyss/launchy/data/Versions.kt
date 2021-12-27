@@ -1,8 +1,8 @@
 package com.mineinabyss.launchy.data
 
 import com.charleskorn.kaml.Yaml
+import com.mineinabyss.launchy.logic.Downloader
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlin.io.path.inputStream
@@ -16,12 +16,11 @@ data class Versions(
         .associateBy { it.name }
 
     companion object {
-        suspend fun readLatest(): Versions {
-            return withContext(Dispatchers.IO) {
-                delay(1000)
-//                Downloader.download("", Dirs.versionsFile)
-                Yaml.default.decodeFromStream(serializer(), Dirs.versionsFile.inputStream())
-            }
+        const val VERSIONS_URL = "https://raw.githubusercontent.com/MineInAbyss/server-config/master/versions.yml"
+
+        suspend fun readLatest(): Versions = withContext(Dispatchers.IO) {
+            Downloader.download(VERSIONS_URL, Dirs.versionsFile)
+            Yaml.default.decodeFromStream(serializer(), Dirs.versionsFile.inputStream())
         }
     }
 }

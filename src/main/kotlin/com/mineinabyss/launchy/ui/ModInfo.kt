@@ -6,36 +6,34 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.HelpOutline
 import androidx.compose.material.icons.rounded.Link
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalConfig
+import com.mineinabyss.launchy.LaunchyState
 import com.mineinabyss.launchy.data.Mod
 import com.mineinabyss.launchy.util.Option
 
 @Composable
-fun ModInfo(mod: Mod, groupEnabled: Option) {
-    val config = LocalConfig
-    var modEnabled by remember { mutableStateOf(mod.name in config.enabledMods) }
+fun ModInfo(mod: Mod, groupOption: Option) {
+    val state = LaunchyState
+    val modEnabled by derivedStateOf { mod in state.enabledMods }
+
     var showDesc by remember { mutableStateOf(false) }
     var linkExpanded by remember { mutableStateOf(false) }
     val qRotationState by animateFloatAsState(targetValue = if (showDesc) 180f else 0f)
     val linkRotationState by animateFloatAsState(targetValue = if (linkExpanded) 180f else 0f)
-    remember(modEnabled) {
-        if (modEnabled)
-            config.enabledMods += mod.name
-        else
-            config.enabledMods -= mod.name
-    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { modEnabled = !modEnabled }
+            .clickable { state.setModEnabled(mod, !modEnabled) }
     ) {
         Column(Modifier.padding(2.dp)) {
             Row(
@@ -43,9 +41,9 @@ fun ModInfo(mod: Mod, groupEnabled: Option) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Switch(
-                    enabled = groupEnabled == Option.DEFAULT,
-                    checked = groupEnabled == Option.ENABLED || (modEnabled && groupEnabled != Option.DISABLED),
-                    onCheckedChange = { modEnabled = !modEnabled }
+                    enabled = groupOption == Option.DEFAULT,
+                    checked = groupOption == Option.ENABLED || (modEnabled && groupOption != Option.DISABLED),
+                    onCheckedChange = { state.setModEnabled(mod, !modEnabled) }
                 )
 
                 Row(Modifier.weight(6f)) {
@@ -56,6 +54,21 @@ fun ModInfo(mod: Mod, groupEnabled: Option) {
                         mod.desc,
                         style = MaterialTheme.typography.subtitle1,
                         modifier = Modifier.alpha(ContentAlpha.medium)
+                    )
+                }
+                AnimatedVisibility(mod in state.queuedDeletions) {
+                    Icon(
+                        imageVector = Icons.Rounded.Delete,
+                        contentDescription = "Remove queued",
+                        modifier = Modifier.alpha(ContentAlpha.medium),
+                    )
+                }
+                AnimatedVisibility(mod !in state.upToDate) {
+                    //TODO button
+                    Icon(
+                        imageVector = Icons.Rounded.Update,
+                        contentDescription = "Update available",
+                        modifier = Modifier.alpha(ContentAlpha.medium),
                     )
                 }
                 IconButton(

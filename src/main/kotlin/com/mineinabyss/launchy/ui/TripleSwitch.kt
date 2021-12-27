@@ -11,6 +11,7 @@ import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.DisabledByDefault
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -30,7 +31,7 @@ fun TripleSwitch(option: Option, onSwitch: (Option) -> Unit) {
                 Icon(Icons.Rounded.Close, "Disabled")
             }
             TripleSwitchButton(MaterialTheme.colors.surface, option, Option.DEFAULT, onSwitch) {
-                Text("/")
+                Icon(Icons.Rounded.Remove, "Default")
             }
             TripleSwitchButton(MaterialTheme.colors.primary, option, Option.ENABLED, onSwitch) {
                 Icon(Icons.Rounded.Check, "Enabled")

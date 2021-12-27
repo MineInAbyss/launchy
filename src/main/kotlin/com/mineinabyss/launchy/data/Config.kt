@@ -11,9 +11,9 @@ import kotlin.io.path.writeText
 @Serializable
 data class Config(
     val minecraftDir: String? = null,
-    val groups: MutableMap<GroupName, Option> = mutableMapOf(),
-    val enabledMods: MutableSet<ModName> = mutableSetOf(),
-    val downloads: MutableMap<ModName, DownloadURL> = mutableMapOf()
+    val groups: Map<GroupName, Option> = mutableMapOf(),
+    val toggledMods: Set<ModName> = mutableSetOf(),
+    val downloads: Map<ModName, DownloadURL> = mutableMapOf()
 ) {
     fun save() {
         Dirs.configFile.writeText(Yaml.default.encodeToString(this))
