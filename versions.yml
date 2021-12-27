@@ -72,9 +72,9 @@ modGroups:
     - name: Drip Sounds
       desc: Adds sounds for drip particles landing.
       url: https://cdn.modrinth.com/data/T8MMXTpr/versions/1.18-0.3.0/DripSounds-1.18-0.3.0.jar
-    #- name: Sound Physics Remastered
-    #  desc: Provides realistic sound attenuation, reverberation, and absorption through blocks.
-    #  url: https://github.com/henkelmax/sound-physics-remastered
+    - name: Sound Physics Remastered
+      desc: Provides realistic sound attenuation, reverberation, and absorption through blocks.
+      url: https://github.com/vlad2305m/Sound-Physics-Fabric/releases/download/v0.5.2/soundphysics-0.5.2.jar
   Misc Enchancements:
     - name: Sodium Extra
       desc: Extra features not available in Sodium.
