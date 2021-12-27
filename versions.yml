@@ -16,7 +16,7 @@ modGroups:
     - name: Starlight
       desc: Rewrites light engine to reduces chunk load stuttering.
       url: https://cdn.modrinth.com/data/H8CaAYZC/versions/Starlight%201.0.0%201.18.x/starlight-1.0.0+fabric.d0a3220.jar
-    - name: Enhanced block entities
+    - name: Enhanced Block Entities
       desc: Makes blocks like chests render faster and nicer.
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.5+1.18/enhancedblockentities-0.5+1.18.jar
     - name: LazyDFU
@@ -25,35 +25,87 @@ modGroups:
     - name: Lithium
       desc: General-purpose performance enhancements
       url: https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.18.1-0.7.6/lithium-fabric-mc1.18.1-0.7.6.jar
-  Key enhancements:
-    - name: Iris shaders
-      desc: Shaders for fabric
-      url: https://github.com/IrisShaders/Iris/releases/download/1.16.x%2Fv1.1.3/iris-mc1.18.1-1.1.3.jar
+    - name: Krypton
+      desc: Optimizes Minecrafts networking stack.
+      url: https://cdn.modrinth.com/data/fQEb0iXm/versions/0.1.6/krypton-0.1.6.jar
+    - name: FerriteCore
+      desc: Optimizes memory usage
+      url: https://cdn.modrinth.com/data/uXXizFIs/versions/4.0.0/ferritecore-4.0.0-fabric.jar
+    - name: Cull Leaves
+      desc: Adds culling to leaf-blocks.
+      url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.2/cullleaves-2.3.2.jar
+    - name: Concurrent Chunk Management Engine
+      desc: Improves chunk performance of Minecraft
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.5.106%201.18.1/c2me-fabric-mc1.18.1-0.2.0+alpha.5.106-all.jar
     #    - name: !!!Farsight
     #      desc: Increased view distance.
     #      url: UNLICENSED, NOT OPEN SOURCE
+  Visual Enchancements:
+    - name: Iris shaders
+      desc: Shaders for fabric
+      url: https://github.com/IrisShaders/Iris/releases/download/1.16.x%2Fv1.1.3/iris-mc1.18.1-1.1.3.jar
+    - name: Falling leaves
+      desc: Adds falling leaf particles to trees.
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.8.1/fallingleaves-1.8.1+1.18.1.jar
+    - name: Continuity
+      desc: Provides default connected textures.
+      url: https://cdn.modrinth.com/data/1IjD5062/versions/1.0.3+1.18/continuity-1.0.3+1.18.jar
+    - name: LambdaBetterGrass
+      desc: Adds better grass and snow to the game.
+      url: https://cdn.modrinth.com/data/2Uev7LdA/versions/1.2.1+1.17/lambdabettergrass-1.2.1+1.17.jar
     - name: Lamb Dynamic Lights
-      desc: Makes light when you hold torches.
+      desc: Makes light dynamic. Holding a torch or shooting flame-arrow will light up areas.
       url: https://github.com/LambdAurora/LambDynamicLights/releases/download/v2.1.0%2B1.17/lambdynamiclights-2.1.0+1.17.jar
-    - name: Multi Connect
-      desc: Allows you to join any Minecraft version.
-      url: https://github.com/Earthcomputer/multiconnect/releases/download/v1.5.7/multiconnect-1.5.7.jar
-  Small enhancements:
+    - name: Effective
+      desc: Cool splash effects for lava, water and waterfalls.
+      url: https://github.com/Ladysnake/Effective/releases/download/1.1/effective-1.1.jar
+    - name: FabricSkyBoxes
+      desc: Adds custom skybox support to Fabric
+      url: https://cdn.modrinth.com/data/YBz7DOs8/versions/0.5.4/fabricskyboxes-1.18-0.5.4.jar
+    - name: Physics Mod
+      desc: Adds physics to blocks and entities.
+      url: https://minecraftphysicsmod.com/s/physics-mod-261-mc-118-fabric.jar
+  Audio Enchancements:
+    - name: Presence Footseps
+      desc: Improved stepping sound effects
+      url: https://cdn.modrinth.com/data/rcTfTZr3/versions/1.4.0/PresenceFootsteps-1.4.0.jar
+    - name: Drip Sounds
+      desc: Adds sounds for drip particles landing.
+      url: https://cdn.modrinth.com/data/T8MMXTpr/versions/1.18-0.3.0/DripSounds-1.18-0.3.0.jar
+    #- name: Sound Physics Remastered
+    #  desc: Provides realistic sound attenuation, reverberation, and absorption through blocks.
+    #  url: https://github.com/henkelmax/sound-physics-remastered
+  Misc Enchancements:
+    - name: Sodium Extra
+      desc: Extra features not available in Sodium.
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/mc1.18-0.3.7/sodium-extra-mc1.18-0.3.7.jar
+    - name: Plasmo Proximity Voice Chat
+      desc: Adds proximity voice chat.
+      url: https://cdn.modrinth.com/data/1bZhdhsH/versions/fabric-1.18-1.2.9/plasmovoice-fabric-1.18.1-1.2.9.jar
+    - name: Inventory Move
+      desc: Allows you to walk around while in your inventory.
+      url: https://cdn.modrinth.com/data/McNdqLv2/versions/1.18-0.1.0/InvMove-fabric-1.18-0.1.0.jar
     - name: OK Zoomer
       desc: Lets you zoom in by pressing a button.
       url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.3%2B1.17.1/okzoomer-5.0.0-beta.3+1.17.1.jar
-    - name: Falling leaves
-      desc: Adds falling leaf particles.
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.8.1/fallingleaves-1.8.1+1.18.1.jar
-      # - name: Presence Footseps
-      # desc: Improved stepping sound effects
-      # url: NEED TO SELFHOST
+    - name: AppleSkin
+      desc: Improvements to food/hunger related HUD elements.
+      url: https://cdn.modrinth.com/data/EsAfCjCV/versions/forge-mc1.18-2.2.0/appleskin-forge-mc1.18-2.2.0.jar
+    - name: Custom Splash Screen
+      desc: Lets you customize Minecrafts loading screen.
+      url: https://cdn.modrinth.com/data/BwFQLeCh/versions/1.2.0/customsplashscreen-1.2.0.jar
+    - name: Fabrishot
+      desc: Take screenshots at insanely large resolutions, because why not.
+      url: https://cdn.modrinth.com/data/3qsfQtE9/versions/1.6.0/fabrishot-1.6.0.jar
+    - name: Blur
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://cdn.modrinth.com/data/NK39zBp2/versions/2.4.1/blur-2.4.1.jar
     - name: Click-through Signs
       desc: Click through signs and item frames to chests.
       url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/1.18-fabric0.43.1-0.4/clickthrough-1.18-fabric0.43.1-0.4.jar
-    # - name: CraftPresence
-    #   desc: Discord playing status with a config for our server.
-    #   url: NEED TO SELFHOST
-    - name: Effective
-      desc: Cool splash effects
-      url: https://github.com/Ladysnake/Effective/releases/download/1.0/effective-1.0.jar
+    - name: Better F3
+      desc: Makes the F3-menu customizable and cleaner.
+      url: https://cdn.modrinth.com/data/8shC1gFX/versions/1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
+    - name: Boat Item View
+      desc: Lets you see the held items whilst in a moving boat.
+      url: https://cdn.modrinth.com/data/BdKIyOLe/versions/1.18-0.0.3-fabric/Boat-Item-View-Fabric-1.18-0.0.3.jar
