@@ -4,36 +4,67 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cancel
-import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.DisabledByDefault
-import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Group
+import com.mineinabyss.launchy.data.Mod
 import com.mineinabyss.launchy.util.Option
 
 @Composable
-fun TripleSwitch(option: Option, onSwitch: (Option) -> Unit) {
+fun ToggleButtons(
+    onSwitch: (Option) -> Unit,
+    group: Group,
+    mods: Collection<Mod>,
+) {
+    val state = LocalLaunchyState
+    val offColor = MaterialTheme.colors.surface
+    val forced = group.forced
+
     Card {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.width(140.dp)
         ) {
-            TripleSwitchButton(MaterialTheme.colors.error, option, Option.DISABLED, onSwitch) {
-                Icon(Icons.Rounded.Close, "Disabled")
-            }
-            TripleSwitchButton(MaterialTheme.colors.surface, option, Option.DEFAULT, onSwitch) {
-                Icon(Icons.Rounded.Remove, "Default")
-            }
-            TripleSwitchButton(MaterialTheme.colors.primary, option, Option.ENABLED, onSwitch) {
+            val fullEnable = state.enabledMods.containsAll(mods)
+            val fullDisable = mods.none { it in state.enabledMods }
+
+            val disableColor by animateColorAsState(
+                if (fullDisable) MaterialTheme.colors.error
+                else offColor,
+            )
+            if (!forced)
+                TripleSwitchButton(Option.DISABLED, disableColor, onSwitch, true, Modifier.weight(1f)) {
+                    Icon(Icons.Rounded.Close, "Disabled")
+                }
+
+            val enableColor by animateColorAsState(
+                if (fullEnable) MaterialTheme.colors.primary
+                else if (!fullDisable) MaterialTheme.colors.primary.copy(alpha = 0.6f)
+                else offColor
+//                spring(
+//                    dampingRatio = Spring.DampingRatioNoBouncy,
+//                    stiffness = Spring.StiffnessVeryLow
+//                ),
+            )
+            TripleSwitchButton(
+                Option.ENABLED,
+                enableColor,
+                onSwitch,
+                !forced,
+                Modifier.weight(1f)
+            ) {
                 Icon(Icons.Rounded.Check, "Enabled")
             }
         }
@@ -42,20 +73,19 @@ fun TripleSwitch(option: Option, onSwitch: (Option) -> Unit) {
 
 @Composable
 fun TripleSwitchButton(
-    enabledColor: Color,
-    option: Option,
     setTo: Option,
+    enabledColor: Color,
     onSwitch: (Option) -> Unit,
+    enabled: Boolean = true,
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
-    val on = option == setTo
-    val bgColor by animateColorAsState(if (on) enabledColor else MaterialTheme.colors.surface)
-
     Button(
-        colors = ButtonDefaults.buttonColors(backgroundColor = bgColor),
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(backgroundColor = enabledColor),
         shape = RectangleShape,
         onClick = { onSwitch(setTo) },
-        modifier = Modifier.fillMaxHeight()
+        modifier = modifier.fillMaxHeight()
     ) {
         content()
     }
