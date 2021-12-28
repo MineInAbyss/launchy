@@ -46,7 +46,7 @@ modGroups:
     #    - name: !!!Farsight
     #      desc: Increased view distance.
     #      url: UNLICENSED, NOT OPEN SOURCE
-  Visual Enchancements:
+  Visual Enhancements:
     - name: Iris shaders
       desc: Shaders for fabric
       url: https://github.com/IrisShaders/Iris/releases/download/1.16.x%2Fv1.1.3/iris-mc1.18.1-1.1.3.jar
@@ -77,7 +77,7 @@ modGroups:
     #- name: NotEnoughAnimations
     #  desc: Adds missing animations from third-person to first-person.
     #  url: https://github.com/tr7zw/NotEnoughAnimations
-  Audio Enchancements:
+  Audio Enhancements:
     - name: Presence Footseps
       desc: Improved stepping sound effects
       url: https://cdn.modrinth.com/data/rcTfTZr3/versions/1.4.0/PresenceFootsteps-1.4.0.jar
@@ -87,7 +87,7 @@ modGroups:
     - name: Sound Physics Remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks.
       url: https://github.com/vlad2305m/Sound-Physics-Fabric/releases/download/v0.5.2/soundphysics-0.5.2.jar
-  Misc Enchancements:
+  Misc Enhancements:
     - name: Sodium Extra
       desc: Extra features not available in Sodium.
       url: https://cdn.modrinth.com/data/PtjYWJkn/versions/mc1.18-0.3.7/sodium-extra-mc1.18-0.3.7.jar
