@@ -62,9 +62,9 @@ modGroups:
     - name: Lamb Dynamic Lights
       desc: Makes light dynamic. Holding a torch or shooting flame-arrow will light up areas.
       url: https://github.com/LambdAurora/LambDynamicLights/releases/download/v2.1.0%2B1.17/lambdynamiclights-2.1.0+1.17.jar
-    - name: Effective
-      desc: Cool splash effects for lava, water and waterfalls.
-      url: https://github.com/Ladysnake/Effective/releases/download/1.1/effective-1.1.jar
+    #- name: Effective (Sound issues in 1.1 and 1.0 doesnt work. Got to wait for 1.2)
+    #  desc: Cool splash effects for lava, water and waterfalls.
+    #  url: https://github.com/Ladysnake/Effective/releases/download/1.1/effective-1.1.jar
     - name: FabricSkyBoxes
       desc: Adds custom skybox support to Fabric
       url: https://cdn.modrinth.com/data/YBz7DOs8/versions/0.5.4/fabricskyboxes-1.18-0.5.4.jar
