@@ -15,7 +15,9 @@ import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
+import com.mineinabyss.launchy.ui.Browser
 import com.mineinabyss.launchy.ui.screens.MainScreen
+import edu.stanford.ejalbert.BrowserLauncher
 
 //private val LocalConfigProvider = compositionLocalOf<Config> { error("No local config provided") }
 //val LocalConfig: Config
@@ -32,31 +34,33 @@ val LocalLaunchyState: LaunchyState
     get() = LaunchyStateProvider.current
 
 
-fun main() = application {
-    val versions by produceState<Versions?>(null) { value = Versions.readLatest() }
-    val config by produceState<Config?>(null) { value = Config.read() }
-    val scaffoldState = rememberScaffoldState()
-    val launchyState by remember(versions, config, scaffoldState) {
-        mutableStateOf(config?.let { c -> versions?.let { v -> LaunchyState(c, v, scaffoldState) } })
-    }
-    Window(onCloseRequest = {
-        exitApplication()
-        launchyState?.save()
-    }) {
-        val ready = launchyState != null
-        MaterialTheme(colors = darkColors()) {
-            Scaffold(scaffoldState = scaffoldState) {
-                AnimatedVisibility(!ready, exit = fadeOut()) {
-                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text("Getting latest plugin versions...")
+fun main() {
+    application {
+        val scaffoldState = rememberScaffoldState()
+        val launchyState by produceState<LaunchyState?>(null) {
+            val config = Config.read()
+            val versions = Versions.readLatest(config.downloadUpdates)
+            value = LaunchyState(config, versions, scaffoldState)
+        }
+        Window(onCloseRequest = {
+            exitApplication()
+            launchyState?.save()
+        }) {
+            val ready = launchyState != null
+            MaterialTheme(colors = darkColors()) {
+                Scaffold(scaffoldState = scaffoldState) {
+                    AnimatedVisibility(!ready, exit = fadeOut()) {
+                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Text("Getting latest plugin versions...")
+                        }
                     }
-                }
-                AnimatedVisibility(ready, enter = fadeIn()) {
-                    CompositionLocalProvider(
-                        LaunchyStateProvider provides launchyState!!,
-                    ) {
-                        Dirs.createDirs()
-                        MainScreen()
+                    AnimatedVisibility(ready, enter = fadeIn()) {
+                        CompositionLocalProvider(
+                            LaunchyStateProvider provides launchyState!!,
+                        ) {
+                            Dirs.createDirs()
+                            MainScreen()
+                        }
                     }
                 }
             }

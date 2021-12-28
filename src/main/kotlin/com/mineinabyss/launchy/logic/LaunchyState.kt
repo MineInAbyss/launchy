@@ -55,7 +55,11 @@ class LaunchyState(
     val queuedDownloads by derivedStateOf { enabledMods - upToDate }
     val queuedUpdates by derivedStateOf { queuedDownloads.filter { it.isDownloaded }.toSet() }
     val queuedInstalls by derivedStateOf { queuedDownloads - queuedUpdates }
-    val queuedDeletions by derivedStateOf { disabledMods.filter { it.isDownloaded } }
+    private var _deleted by mutableStateOf(0)
+    val queuedDeletions by derivedStateOf {
+        _deleted
+        disabledMods.filter { it.isDownloaded }.also { if(it.isEmpty()) updateNotPresent() }
+    }
 
     val downloading = mutableStateMapOf<Mod, Long>()
     val isDownloading by derivedStateOf { downloading.isNotEmpty() }
@@ -78,10 +82,15 @@ class LaunchyState(
         if (!fabricUpToDate)
             installFabric()
         for (mod in queuedDownloads)
-            launch(Dispatchers.IO) { download(mod) }
+            launch(Dispatchers.IO) {
+                download(mod)
+                updateNotPresent()
+            }
         for (mod in queuedDeletions) {
-            launch(Dispatchers.IO) { mod.file.deleteIfExists() }
-            queuedDeletions
+            launch(Dispatchers.IO) {
+                mod.file.deleteIfExists()
+                _deleted++
+            }
         }
     }
 
@@ -113,7 +122,6 @@ class LaunchyState(
                 "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
             )
         }
-        updateNotPresent()
     }
 
     fun save() {

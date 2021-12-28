@@ -18,6 +18,16 @@ import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
+import edu.stanford.ejalbert.BrowserLauncher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.awt.Desktop
+import java.net.URI
+object Browser {
+    val desktop = Desktop.getDesktop()
+    fun browse(url: String ) = synchronized(desktop) { desktop.browse(URI.create(url))}
+}
 
 @Composable
 fun ModInfo(group: Group, mod: Mod) {
@@ -65,16 +75,18 @@ fun ModInfo(group: Group, mod: Mod) {
                         modifier = Modifier.alpha(ContentAlpha.medium),
                     )
                 }
-                IconButton(
-                    modifier = Modifier
-                        .alpha(ContentAlpha.medium)
-                        .rotate(linkRotationState),
-                    onClick = { linkExpanded = !linkExpanded }) {
-                    Icon(
-                        imageVector = Icons.Rounded.Link,
-                        contentDescription = "URL"
-                    )
-                }
+                val coroutineScope = rememberCoroutineScope()
+                if (mod.homepage != null)
+                    IconButton(
+                        modifier = Modifier
+                            .alpha(ContentAlpha.medium)
+                            .rotate(linkRotationState),
+                        onClick = { BrowserLauncher().openURLinBrowser(mod.homepage) }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Link,
+                            contentDescription = "URL"
+                        )
+                    }
             }
             AnimatedVisibility(linkExpanded) {
                 Text(

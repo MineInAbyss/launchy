@@ -26,8 +26,8 @@ data class Versions(
     companion object {
         const val VERSIONS_URL = "https://raw.githubusercontent.com/MineInAbyss/launchy/master/versions.yml"
 
-        suspend fun readLatest(): Versions = withContext(Dispatchers.IO) {
-            Downloader.download(VERSIONS_URL, Dirs.versionsFile)
+        suspend fun readLatest(download: Boolean): Versions = withContext(Dispatchers.IO) {
+            if(download) Downloader.download(VERSIONS_URL, Dirs.versionsFile)
             Formats.yaml.decodeFromStream(serializer(), Dirs.versionsFile.inputStream())
         }
     }

@@ -9,7 +9,19 @@ plugins {
     id("com.mineinabyss.conventions.publication")
     id("org.jetbrains.compose") version "1.0.1"
     kotlin("plugin.serialization")
+//    id("com.github.johnrengelman.shadow") version "7.1.1"
+//    id("proguard") version "7.1.0"
+
 }
+
+/*buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.guardsquare:proguard-gradle:7.1.0")
+    }
+}*/
 
 repositories {
     google()
@@ -19,6 +31,7 @@ repositories {
 }
 
 dependencies {
+    implementation(files("deps/BrowserLauncher2-all-1_3.jar"))
     implementation(compose.desktop.currentOs)
     implementation(compose.materialIconsExtended)
     implementation(Deps.kotlinx.serialization.json)
@@ -28,10 +41,11 @@ dependencies {
 
     implementation("org.json:json:20210307")
     implementation("net.fabricmc:fabric-installer:0.9.0")
+    implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 compose.desktop {
@@ -46,5 +60,29 @@ compose.desktop {
             packageName = "launchy"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+/*
+tasks {
+    shadowJar {
+        mergeServiceFiles()
+        minimize {
+            exclude(dependency("org.jetbrains.compose.desktop:desktop-jvm.*:.*"))
+            exclude(dependency("io.ktor:ktor-client.*:.*"))
+            exclude(dependency(("org.jetbrains.compose.material:material-icons.*:.*")))
+            exclude("androidx/compose/material/icons/filled/**")
+            exclude("androidx/compose/material/icons/outlined/**")
+            exclude("androidx/compose/material/icons/sharp/**")
+            exclude("androidx/compose/material/icons/twotone/**")
+        }
+
+        manifest {
+            attributes(mapOf("Main-Class" to "com.mineinabyss.launchy.MainKt"))
+        }
+    }
+
+    build {
+        dependsOn(shadowJar)
     }
 }
