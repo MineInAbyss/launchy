@@ -1,3 +1,13 @@
+fabricVersion: 0.12.12
+minecraftVersion: 1.18.1
+groups:
+  - name: Core
+    forced: true
+  - name: Performance
+    enabledByDefault: true
+  - name: Visual Enhancements
+  - name: Audio Enhancements
+  - name: Misc Enhancements
 modGroups:
   Core:
     - name: Fabric API
