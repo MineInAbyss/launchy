@@ -42,6 +42,7 @@ compose.desktop {
                 targetFormats(TargetFormat.Dmg)
             else
                 targetFormats(TargetFormat.AppImage)
+            modules("java.instrument", "jdk.unsupported")
             packageName = "launchy"
             packageVersion = "1.0.0"
         }

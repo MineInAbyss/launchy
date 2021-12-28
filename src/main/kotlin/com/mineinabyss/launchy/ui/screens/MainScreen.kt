@@ -10,18 +10,17 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Download
-import androidx.compose.material.icons.rounded.HistoryEdu
-import androidx.compose.material.icons.rounded.Update
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
+import kotlin.io.path.exists
 
 @Composable
 @Preview
@@ -37,11 +36,12 @@ fun MainScreen() {
                     val updatesQueued = state.queuedUpdates.isNotEmpty()
                     val installsQueued = state.queuedInstalls.isNotEmpty()
                     val deletionsQueued = state.queuedDeletions.isNotEmpty()
+                    val minecraftValid = Dirs.minecraft.exists()
                     val operationsQueued = updatesQueued || installsQueued || deletionsQueued || !state.fabricUpToDate
 
                     val coroutineScope = rememberCoroutineScope()
 
-                    Button(enabled = !state.isDownloading && operationsQueued, onClick = {
+                    Button(enabled = !state.isDownloading && operationsQueued && minecraftValid, onClick = {
                         coroutineScope.launch { state.install() }
                     }) {
                         Icon(Icons.Rounded.Download, "Download")
@@ -53,6 +53,12 @@ fun MainScreen() {
                         }
                     }
                     Spacer(Modifier.width(10.dp))
+
+                    ActionButton(
+                        shown = !minecraftValid,
+                        icon = Icons.Rounded.Error,
+                        desc = "No minecraft installation found",
+                    )
 
                     ActionButton(
                         shown = !state.fabricUpToDate,

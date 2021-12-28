@@ -5,6 +5,9 @@ import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import java.nio.file.Path
+import kotlin.io.path.createDirectories
+import kotlin.io.path.createFile
+import kotlin.io.path.exists
 import kotlin.io.path.writeBytes
 
 object Downloader {
@@ -22,6 +25,9 @@ object Downloader {
             }
 
         }.receive<ByteArray>()
+        writeTo.parent.createDirectories()
+        if (!writeTo.exists())
+            writeTo.createFile()
         writeTo.writeBytes(response)
     }
 }
