@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.mineinabyss.conventions.kotlin")
-    id("com.mineinabyss.conventions.publication")
     id("org.jetbrains.compose") version "1.0.1"
     kotlin("plugin.serialization")
 //    id("com.github.johnrengelman.shadow") version "7.1.1"
@@ -58,7 +57,7 @@ compose.desktop {
                 targetFormats(TargetFormat.AppImage)
             modules("java.instrument", "jdk.unsupported")
             packageName = "launchy"
-            packageVersion = "1.0.0"
+            packageVersion = "${project.version}"
         }
     }
 }
