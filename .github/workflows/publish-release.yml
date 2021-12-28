@@ -1,5 +1,13 @@
 name: Publish release
-on: [push]
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+      - 'versions.yml'
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -26,6 +34,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-${{ matrix.os }}
-          path: build/compose.binaries/main/app/
+          path: build/compose/binaries/main/app/
 
 
