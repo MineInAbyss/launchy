@@ -14,6 +14,7 @@ repositories {
     google()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven("https://maven.fabricmc.net")
 }
 
 dependencies {
@@ -21,11 +22,11 @@ dependencies {
     implementation(compose.materialIconsExtended)
     implementation(Deps.kotlinx.serialization.json)
     implementation(Deps.kotlinx.serialization.kaml)
-//    implementation("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("io.ktor:ktor-client-core:1.6.7")
-    implementation("io.ktor:ktor-client-java:1.6.7")
-//    val korioVersion = "2.4.10"
-//    implementation("com.soywiz.korlibs.korio:korio-jvm:$korioVersion")
+    implementation("io.ktor:ktor-client-cio:1.6.7")
+
+    implementation("org.json:json:20210307")
+    implementation("net.fabricmc:fabric-installer:0.9.0")
 }
 
 tasks.withType<KotlinCompile> {

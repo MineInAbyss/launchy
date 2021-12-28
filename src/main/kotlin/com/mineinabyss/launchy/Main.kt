@@ -13,8 +13,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.LaunchyState
 import com.mineinabyss.launchy.data.Versions
+import com.mineinabyss.launchy.logic.LaunchyState
 import com.mineinabyss.launchy.ui.screens.MainScreen
 
 //private val LocalConfigProvider = compositionLocalOf<Config> { error("No local config provided") }

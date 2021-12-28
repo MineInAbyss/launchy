@@ -13,6 +13,8 @@ data class Versions(
     val groups: Set<Group>,
     @SerialName("modGroups")
     private val _modGroups: Map<GroupName, Set<Mod>>,
+    val fabricVersion: String,
+    val minecraftVersion: String
 ) {
     val nameToGroup: Map<GroupName, Group> = groups.associateBy { it.name }
     @Transient

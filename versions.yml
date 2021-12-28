@@ -1,3 +1,5 @@
+fabricVersion: 0.12.12
+minecraftVersion: 1.18.1
 groups:
   - name: Core
     forced: true

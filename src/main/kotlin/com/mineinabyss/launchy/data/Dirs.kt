@@ -7,16 +7,16 @@ object Dirs {
     val home = Path(System.getProperty("user.home"))
     val minecraft = when(OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA")) / "Roaming" / ".minecraft"
-        OS.MAC -> TODO()
+        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/minecraft"
         OS.LINUX -> Path(System.getProperty("user.home")) / ".minecraft"
     }
     val mods = minecraft / "mods"
 
     val config = when (OS.get()) {
-        OS.WINDOWS -> TODO()
-        OS.MAC -> TODO()
-        OS.LINUX -> home / ".config/mineinabyss"
-    }
+        OS.WINDOWS -> Path(System.getenv("APPDATA")) / "Roaming"
+        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support"
+        OS.LINUX -> home / ".config"
+    } / "mineinabyss"
 
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"

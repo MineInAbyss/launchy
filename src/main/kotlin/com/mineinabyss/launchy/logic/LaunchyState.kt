@@ -1,8 +1,8 @@
-package com.mineinabyss.launchy.data
+package com.mineinabyss.launchy.logic
 
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.*
-import com.mineinabyss.launchy.logic.Downloader
+import com.mineinabyss.launchy.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -33,38 +33,72 @@ class LaunchyState(
 
     val disabledMods: Set<Mod> by derivedStateOf { versions.nameToMod.values.toSet() - enabledMods }
 
-    val downloads = mutableStateMapOf<Mod, DownloadURL>().apply {
+    val downloadURLs = mutableStateMapOf<Mod, DownloadURL>().apply {
         putAll(config.downloads
             .mapNotNull { it.key.toMod()?.to(it.value) }
             .toMap()
         )
     }
+    var installedFabricVersion by mutableStateOf(config.installedFabricVersion)
+
     var notPresentDownloads by mutableStateOf(setOf<Mod>())
         private set
 
+    init {
+        updateNotPresent()
+    }
+
     val upToDate: Set<Mod> by derivedStateOf {
-        (downloads - notPresentDownloads).filter { (mod, url) -> mod.url == url }.keys
+        (downloadURLs - notPresentDownloads).filter { (mod, url) -> mod.url == url }.keys
     }
 
     val queuedDownloads by derivedStateOf { enabledMods - upToDate }
+    val queuedUpdates by derivedStateOf { queuedDownloads.filter { it.isDownloaded }.toSet() }
+    val queuedInstalls by derivedStateOf { queuedDownloads - queuedUpdates }
     val queuedDeletions by derivedStateOf { disabledMods.filter { it.isDownloaded } }
+
     val downloading = mutableStateMapOf<Mod, Long>()
     val isDownloading by derivedStateOf { downloading.isNotEmpty() }
+
+    var installingProfile by mutableStateOf(false)
+    val fabricUpToDate by derivedStateOf {
+        installedFabricVersion == versions.fabricVersion && FabricInstaller.isProfileInstalled(
+            Dirs.minecraft,
+            "Mine in Abyss"
+        )
+    }
 
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) enabledMods += mod
         else enabledMods -= mod
     }
 
-    suspend fun downloadAndRemoveQueued() = coroutineScope {
+    suspend fun install() = coroutineScope {
         updateNotPresent()
+        if (!fabricUpToDate)
+            installFabric()
         for (mod in queuedDownloads)
             launch(Dispatchers.IO) { download(mod) }
         for (mod in queuedDeletions) {
             launch(Dispatchers.IO) { mod.file.deleteIfExists() }
             queuedDeletions
         }
-        updateNotPresent()
+    }
+
+
+    fun installFabric() {
+        installingProfile = true
+        FabricInstaller.installToLauncher(
+            Dirs.minecraft,
+            Dirs.minecraft,
+            "Mine in Abyss",
+            versions.minecraftVersion,
+            "fabric-loader",
+            versions.fabricVersion,
+        )
+        installingProfile = false
+        installedFabricVersion = "Installing..."
+        installedFabricVersion = versions.fabricVersion
     }
 
     suspend fun download(mod: Mod) {
@@ -72,13 +106,14 @@ class LaunchyState(
             downloading[mod] = 0 //TODO download progress?
             Downloader.download(url = mod.url, writeTo = mod.file)
             downloading -= mod
-            downloads[mod] = mod.url
+            downloadURLs[mod] = mod.url
             save()
         }.onFailure {
             scaffoldState.snackbarHostState.showSnackbar(
                 "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
             )
         }
+        updateNotPresent()
     }
 
     fun save() {
@@ -87,8 +122,9 @@ class LaunchyState(
                 .filter { enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
             toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
-            downloads = downloads.mapKeys { it.key.name },
-            seenGroups = versions.groups.map { it.name }.toSet()
+            downloads = downloadURLs.mapKeys { it.key.name },
+            seenGroups = versions.groups.map { it.name }.toSet(),
+            installedFabricVersion = installedFabricVersion
         ).save()
     }
 
@@ -98,8 +134,8 @@ class LaunchyState(
     val Mod.file get() = Dirs.mods / "${name}.jar"
     val Mod.isDownloaded get() = file.exists()
 
-    private fun updateNotPresent() {
-        notPresentDownloads = downloads.filter { !it.key.isDownloaded }.keys
+    private fun updateNotPresent(): Set<Mod> {
+        return downloadURLs.filter { !it.key.isDownloaded }.keys.also { notPresentDownloads = it }
     }
 }
 

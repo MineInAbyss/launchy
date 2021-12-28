@@ -12,6 +12,7 @@ data class Config(
     val toggledMods: Set<ModName> = setOf(),
     val downloads: Map<ModName, DownloadURL> = mapOf(),
     val seenGroups: Set<GroupName> = setOf(),
+    val installedFabricVersion: String? = null
 ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))
