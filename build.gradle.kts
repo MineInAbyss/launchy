@@ -1,4 +1,5 @@
 import Com_mineinabyss_conventions_platform_gradle.Deps
+import org.codehaus.plexus.util.Os
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -37,7 +38,10 @@ compose.desktop {
     application {
         mainClass = "com.mineinabyss.launchy.MainKt"
         nativeDistributions {
-            targetFormats(TargetFormat.AppImage)
+            if (Os.isFamily(Os.FAMILY_MAC))
+                targetFormats(TargetFormat.Dmg)
+            else
+                targetFormats(TargetFormat.AppImage)
             packageName = "launchy"
             packageVersion = "1.0.0"
         }
