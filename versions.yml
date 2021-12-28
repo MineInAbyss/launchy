@@ -47,9 +47,6 @@ modGroups:
     - name: Entity Culling
       desc: Skips rendering Tiles/Entities that are not visible.
       url: https://github.com/tr7zw/EntityCulling/releases/download/1.3.3-1.18/entityculling-fabric-mc1.18-1.3.3.jar
-    - name: Cull Leaves
-      desc: Adds culling to leaf-blocks.
-      url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.2/cullleaves-2.3.2.jar
     - name: Concurrent Chunk Management Engine
       desc: Improves chunk performance of Minecraft
       url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.5.106%201.18.1/c2me-fabric-mc1.18.1-0.2.0+alpha.5.106-all.jar
