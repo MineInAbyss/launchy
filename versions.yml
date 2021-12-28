@@ -91,16 +91,10 @@ modGroups:
     - name: Drip Sounds
       desc: Adds sounds for drip particles landing
       url: https://cdn.modrinth.com/data/T8MMXTpr/versions/1.18-0.3.0/DripSounds-1.18-0.3.0.jar
-    - name: Sound Physics Remastered
-      desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://github.com/vlad2305m/Sound-Physics-Fabric/releases/download/v0.5.2/soundphysics-0.5.2.jar
   Misc Enhancements:
     - name: Sodium Extra
       desc: Extra features not available in Sodium
       url: https://cdn.modrinth.com/data/PtjYWJkn/versions/mc1.18-0.3.7/sodium-extra-mc1.18-0.3.7.jar
-    - name: Xaero's Minimap
-      desc: Adds a configurable minimap to the HUD
-      url: https://chocolateminecraft.com/mods2/minimapfair/Xaeros_Minimap_FP21.22.6_Fabric_1.18.jar
     - name: Plasmo Proximity Voice Chat
       desc: Adds proximity voice chat
       url: https://cdn.modrinth.com/data/1bZhdhsH/versions/fabric-1.18-1.2.9/plasmovoice-fabric-1.18.1-1.2.9.jar
