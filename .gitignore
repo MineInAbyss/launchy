@@ -12,6 +12,7 @@ eclipse
 *.ipr
 *.iws
 
-packaging/appimage/Launchy.AppDir/usr/
+**/*.AppDir/usr/
 *.AppImage
 *.DirIcon
+releases

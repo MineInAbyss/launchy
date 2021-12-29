@@ -1,4 +1,5 @@
 import Com_mineinabyss_conventions_platform_gradle.Deps
+import de.undercouch.gradle.tasks.download.Download
 import org.codehaus.plexus.util.Os
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
@@ -47,6 +48,8 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+val appName = "Mine in Abyss"
+
 compose.desktop {
     application {
         mainClass = "com.mineinabyss.launchy.MainKt"
@@ -56,8 +59,67 @@ compose.desktop {
             else
                 targetFormats(TargetFormat.AppImage)
             modules("java.instrument", "jdk.unsupported")
-            packageName = "launchy"
+            packageName = appName
             packageVersion = "${project.version}"
+            val iconsRoot = project.file("packaging/icons")
+            macOS {
+                iconFile.set(iconsRoot.resolve("icon.icns"))
+            }
+            windows {
+                iconFile.set(iconsRoot.resolve("icon.ico"))
+            }
+            linux {
+                iconFile.set(iconsRoot.resolve("icon.png"))
+            }
+        }
+    }
+}
+
+val linuxAppDir = project.file("packaging/appimage/Mine in Abyss.AppDir")
+val appImageTool = project.file("deps/appimagetool.AppImage")
+
+tasks {
+    val downloadAppImageBuilder by registering(Download::class) {
+        src("https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage")
+        dest(appImageTool)
+        doLast {
+            exec {
+                commandLine("chmod", "+x", "deps/appimagetool.AppImage")
+            }
+        }
+    }
+
+    val deleteOldAppDirFiles by registering(Delete::class) {
+        delete("$linuxAppDir/usr/bin", "$linuxAppDir/usr/lib")
+    }
+
+    val copyBuildToPackaging by registering(Copy::class) {
+        dependsOn("package")
+        dependsOn(deleteOldAppDirFiles)
+        from("$buildDir/compose/binaries/main/app/$appName")
+        into("$linuxAppDir/usr")
+    }
+
+    val executeAppImageBuilder by registering(Exec::class) {
+        dependsOn(downloadAppImageBuilder)
+        dependsOn(copyBuildToPackaging)
+        commandLine(appImageTool, linuxAppDir, "releases/$appName-${project.version}.AppImage")
+
+    }
+
+    val zipRelease by registering(Zip::class) {
+        dependsOn("package")
+        val dirName = if (Os.isFamily(Os.FAMILY_MAC)) "dmg" else "app"
+        from("$buildDir/compose/binaries/main/$dirName")
+        archiveBaseName.set("$appName-${Os.OS_NAME}")
+        destinationDirectory.set(file("releases"))
+    }
+
+    val packageForRelease by registering {
+        if (Os.isFamily(Os.FAMILY_UNIX)) {
+            dependsOn(executeAppImageBuilder)
+        } else {
+            dependsOn(zipRelease)
         }
     }
 }

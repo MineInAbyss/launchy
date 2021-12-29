@@ -9,15 +9,15 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
-import com.mineinabyss.launchy.ui.Browser
 import com.mineinabyss.launchy.ui.screens.MainScreen
-import edu.stanford.ejalbert.BrowserLauncher
 
 //private val LocalConfigProvider = compositionLocalOf<Config> { error("No local config provided") }
 //val LocalConfig: Config
@@ -36,18 +36,27 @@ val LocalLaunchyState: LaunchyState
 
 fun main() {
     application {
+        val icon = painterResource("mia_profile_icon.png")
         val scaffoldState = rememberScaffoldState()
         val launchyState by produceState<LaunchyState?>(null) {
             val config = Config.read()
             val versions = Versions.readLatest(config.downloadUpdates)
             value = LaunchyState(config, versions, scaffoldState)
         }
-        Window(onCloseRequest = {
-            exitApplication()
-            launchyState?.save()
-        }) {
+        Window(
+            title = "Mine in Abyss - Launcher",
+            icon = icon,
+            onCloseRequest = {
+                exitApplication()
+                launchyState?.save()
+            }) {
             val ready = launchyState != null
-            MaterialTheme(colors = darkColors()) {
+            MaterialTheme(
+                colors = darkColors(
+                    primary = Color(0xFFFF7043),
+                    secondary = Color(0xFFFFCA28),
+                )
+            ) {
                 Scaffold(scaffoldState = scaffoldState) {
                     AnimatedVisibility(!ready, exit = fadeOut()) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {

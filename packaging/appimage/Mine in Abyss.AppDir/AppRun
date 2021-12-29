@@ -1,5 +1,5 @@
 #!/bin/bash
 
 HERE="$(dirname $"$(readlink -f "${0}")")"
-EXEC="${HERE}/usr/bin/launchy"
+EXEC="${HERE}/usr/bin/Mine in Abyss"
 exec "${EXEC}"
