@@ -90,5 +90,5 @@ jobs:
           prerelease: false
           automatic_release_tag: v${{ steps.extract_version.outputs.version }}
           files: |
-            release/*
+            releases/*
 
