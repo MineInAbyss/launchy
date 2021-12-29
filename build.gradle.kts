@@ -59,7 +59,6 @@ compose.desktop {
             else
                 targetFormats(TargetFormat.AppImage)
             modules("java.instrument", "jdk.unsupported")
-            packageName = appName
             packageVersion = "${project.version}"
             val iconsRoot = project.file("packaging/icons")
             macOS {
@@ -110,7 +109,7 @@ tasks {
     val zipRelease by registering(Zip::class) {
         dependsOn("package")
         from(composePackageDir)
-        archiveBaseName.set("$appName-${Os.OS_NAME}")
+        archiveBaseName.set("$appName-windows")
         destinationDirectory.set(file("releases"))
     }
 
