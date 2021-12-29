@@ -20,7 +20,7 @@ modGroups:
       license: LGPL-3
       homepage: https://github.com/shedaniel/cloth-config/
       desc: A config API used by many mods
-      url: https://github.com/MineInAbyss/launchy/releases/download/v1.0.0/cloth-config-6.1.48-fabric.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/cloth-config-6.1.48-fabric.jar
 
     - name: Mod menu
       license: MIT
