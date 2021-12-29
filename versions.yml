@@ -237,3 +237,9 @@ modGroups:
       homepage: https://modrinth.com/mod/notenoughcrashes
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/yM94ont6/versions/4.1.3+1.18.1-fabric/notenoughcrashes-4.1.3+1.18.1-fabric.jar
+
+    - name: Craft Presence
+      license: MIT
+      homepage: https://www.curseforge.com/minecraft/mc-mods/craftpresence
+      desc: Displays server info in your Discord Rich Presence
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence-Fabric-1.18.1-Release-1.8.8.jar
