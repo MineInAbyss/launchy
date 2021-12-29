@@ -54,17 +54,22 @@ compose.desktop {
     application {
         mainClass = "com.mineinabyss.launchy.MainKt"
         nativeDistributions {
-            if (Os.isFamily(Os.FAMILY_MAC))
-                targetFormats(TargetFormat.Dmg)
-            else
-                targetFormats(TargetFormat.AppImage)
+            when {
+                Os.isFamily(Os.FAMILY_MAC) -> targetFormats(TargetFormat.Dmg)
+                Os.isFamily(Os.FAMILY_WINDOWS) -> targetFormats(TargetFormat.Exe)
+                else -> targetFormats(TargetFormat.AppImage)
+            }
+
             modules("java.instrument", "jdk.unsupported")
+            packageName = appName
             packageVersion = "${project.version}"
             val iconsRoot = project.file("packaging/icons")
             macOS {
                 iconFile.set(iconsRoot.resolve("icon.icns"))
             }
             windows {
+                menu = true
+                upgradeUuid = "b627d78b-947c-4f5c-9f3b-ae02bfa97d08"
                 iconFile.set(iconsRoot.resolve("icon.ico"))
             }
             linux {
@@ -76,7 +81,13 @@ compose.desktop {
 
 val linuxAppDir = project.file("packaging/appimage/Mine in Abyss.AppDir")
 val appImageTool = project.file("deps/appimagetool.AppImage")
-val composePackageDir = "$buildDir/compose/binaries/main/${if (Os.isFamily(Os.FAMILY_MAC)) "dmg" else "app"}"
+val composePackageDir = "$buildDir/compose/binaries/main/${
+    when {
+        Os.isFamily(Os.FAMILY_MAC) -> "dmg"
+        Os.isFamily(Os.FAMILY_WINDOWS) -> "exe"
+        else -> "app"
+    }
+}"
 
 tasks {
     val downloadAppImageBuilder by registering(Download::class) {
@@ -106,11 +117,11 @@ tasks {
         commandLine(appImageTool, linuxAppDir, "releases/$appName-${project.version}.AppImage")
     }
 
-    val zipRelease by registering(Zip::class) {
+    val exeRelease by registering(Copy::class) {
         dependsOn("package")
         from(composePackageDir)
-        archiveBaseName.set("$appName-windows")
-        destinationDirectory.set(file("releases"))
+        include("*.exe")
+        into("releases")
     }
 
     val dmgRelease by registering(Copy::class) {
@@ -123,7 +134,7 @@ tasks {
     val packageForRelease by registering {
         mkdir(project.file("releases"))
         when {
-            Os.isFamily(Os.FAMILY_WINDOWS) -> dependsOn(zipRelease)
+            Os.isFamily(Os.FAMILY_WINDOWS) -> dependsOn(exeRelease)
             Os.isFamily(Os.FAMILY_MAC) -> dependsOn(dmgRelease)
             else -> dependsOn(executeAppImageBuilder)
         }
