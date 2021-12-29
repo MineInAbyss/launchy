@@ -30,11 +30,18 @@ jobs:
       - name: Run gradle package
         run: gradle package
 
-      - name: Upload build
+      - name: Zip build
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'build-${{ matrix.os }}.zip'
+          directory: build/compose/binaries/main/app/
+
+      - name: Upload zipped build
         uses: actions/upload-artifact@v2
         with:
           name: build-${{ matrix.os }}
-          path: build/compose/binaries/main/app/
+          path: 'build-${{ matrix.os }}.zip'
 
       - name: Get version from gradle
         shell: bash
