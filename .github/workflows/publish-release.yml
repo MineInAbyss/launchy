@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-${{ matrix.os }}
-          path: 'build-${{ matrix.os }}.zip'
+          path: 'build/compose/binaries/main/app/build-${{ matrix.os }}.zip'
 
       - name: Get version from gradle
         shell: bash
