@@ -77,6 +77,7 @@ compose.desktop {
 
 val linuxAppDir = project.file("packaging/appimage/Mine in Abyss.AppDir")
 val appImageTool = project.file("deps/appimagetool.AppImage")
+val composePackageDir = "$buildDir/compose/binaries/main/${if (Os.isFamily(Os.FAMILY_MAC)) "dmg" else "app"}"
 
 tasks {
     val downloadAppImageBuilder by registering(Download::class) {
@@ -108,18 +109,24 @@ tasks {
 
     val zipRelease by registering(Zip::class) {
         dependsOn("package")
-        val dirName = if (Os.isFamily(Os.FAMILY_MAC)) "dmg" else "app"
-        from("$buildDir/compose/binaries/main/$dirName")
+        from(composePackageDir)
         archiveBaseName.set("$appName-${Os.OS_NAME}")
         destinationDirectory.set(file("releases"))
     }
 
+    val dmgRelease by registering(Copy::class) {
+        dependsOn("package")
+        from(composePackageDir)
+        include("*.dmg")
+        into("releases")
+    }
+
     val packageForRelease by registering {
         mkdir(project.file("releases"))
-        if (Os.isFamily(Os.FAMILY_UNIX)) {
-            dependsOn(executeAppImageBuilder)
-        } else {
-            dependsOn(zipRelease)
+        when {
+            Os.isFamily(Os.FAMILY_WINDOWS) -> dependsOn(zipRelease)
+            Os.isFamily(Os.FAMILY_MAC) -> dependsOn(dmgRelease)
+            else -> dependsOn(executeAppImageBuilder)
         }
     }
 }
