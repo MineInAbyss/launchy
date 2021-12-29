@@ -104,7 +104,6 @@ tasks {
         dependsOn(downloadAppImageBuilder)
         dependsOn(copyBuildToPackaging)
         commandLine(appImageTool, linuxAppDir, "releases/$appName-${project.version}.AppImage")
-
     }
 
     val zipRelease by registering(Zip::class) {
@@ -116,6 +115,7 @@ tasks {
     }
 
     val packageForRelease by registering {
+        mkdir(project.file("releases"))
         if (Os.isFamily(Os.FAMILY_UNIX)) {
             dependsOn(executeAppImageBuilder)
         } else {
