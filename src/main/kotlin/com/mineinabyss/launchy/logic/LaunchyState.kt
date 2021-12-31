@@ -10,9 +10,8 @@ import kotlinx.coroutines.launch
 import java.awt.FileDialog
 import java.io.File
 import java.util.*
-import kotlin.io.path.deleteIfExists
-import kotlin.io.path.div
-import kotlin.io.path.exists
+import kotlin.io.path.*
+
 
 class LaunchyState(
     // Config should never be mutated unless it also updates UI state
@@ -98,13 +97,17 @@ class LaunchyState(
     }
 
     suspend fun addFile() = coroutineScope {
-        return@coroutineScope pickLocalMod(ComposeWindow(), "Select a Mod to add", listOf(".jar"), true)
+        val mods = pickLocalMod(ComposeWindow(), "Select a Mod to add", listOf(".jar"), true)
+        mods.forEach {
+            val writeTo = Dirs.mods / it.name
+            writeTo.parent.createDirectories()
+            if (!writeTo.exists()){
+                writeTo.createFile()
+
+            }
+            writeTo.writeBytes(it.readBytes())
+        }
     }
-
-    suspend fun addMod(localMod: File) {
-
-    }
-
 
     fun installFabric() {
         installingProfile = true
@@ -157,10 +160,11 @@ class LaunchyState(
         return downloadURLs.filter { !it.key.isDownloaded }.keys.also { notPresentDownloads = it }
     }
 
-    fun pickLocalMod(window: ComposeWindow,
-                     title: String,
-                     allowedExtensions: List<String>,
-                     allowMultiSelection: Boolean = true
+    fun pickLocalMod(
+        window: ComposeWindow,
+        title: String,
+        allowedExtensions: List<String>,
+        allowMultiSelection: Boolean = true
     ) : Set<File> {
         return FileDialog(window, title, FileDialog.LOAD).apply {
             isMultipleMode = allowMultiSelection
@@ -174,6 +178,8 @@ class LaunchyState(
                     name.endsWith(".jar")
                 }
             }
+
+            //TODO Mac
 
             isVisible = true
         }.files.toSet()
