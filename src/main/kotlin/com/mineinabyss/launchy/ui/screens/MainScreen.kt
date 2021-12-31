@@ -54,6 +54,19 @@ fun MainScreen() {
                     }
                     Spacer(Modifier.width(10.dp))
 
+                    Button(enabled = !state.isDownloading && minecraftValid, onClick = {
+                        coroutineScope.launch { state.addFile() }
+                    }) {
+                        Icon(Icons.Rounded.Download, "Add Mod")
+                        AnimatedVisibility(!state.isDownloading) {
+                            Text("Add Mod")
+                        }
+                        AnimatedVisibility(state.isDownloading) {
+                            Text("Add Mod")
+                        }
+                    }
+                    Spacer(Modifier.width(10.dp))
+
                     ActionButton(
                         shown = !minecraftValid,
                         icon = Icons.Rounded.Error,

@@ -2,10 +2,13 @@ package com.mineinabyss.launchy.logic
 
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.*
+import androidx.compose.ui.awt.ComposeWindow
 import com.mineinabyss.launchy.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import java.awt.FileDialog
+import java.io.File
 import java.util.*
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.div
@@ -94,6 +97,14 @@ class LaunchyState(
         }
     }
 
+    suspend fun addFile() = coroutineScope {
+        return@coroutineScope pickLocalMod(ComposeWindow(), "Select a Mod to add", listOf(".jar"), true)
+    }
+
+    suspend fun addMod(localMod: File) {
+
+    }
+
 
     fun installFabric() {
         installingProfile = true
@@ -144,6 +155,28 @@ class LaunchyState(
 
     private fun updateNotPresent(): Set<Mod> {
         return downloadURLs.filter { !it.key.isDownloaded }.keys.also { notPresentDownloads = it }
+    }
+
+    fun pickLocalMod(window: ComposeWindow,
+                     title: String,
+                     allowedExtensions: List<String>,
+                     allowMultiSelection: Boolean = true
+    ) : Set<File> {
+        return FileDialog(window, title, FileDialog.LOAD).apply {
+            isMultipleMode = allowMultiSelection
+
+            // Windows
+            file = allowedExtensions.joinToString(";") { "*.jar" } // e.g. '*.jpg'
+
+            // linux
+            setFilenameFilter { _, name ->
+                allowedExtensions.any {
+                    name.endsWith(".jar")
+                }
+            }
+
+            isVisible = true
+        }.files.toSet()
     }
 }
 

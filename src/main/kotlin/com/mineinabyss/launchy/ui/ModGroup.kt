@@ -44,7 +44,7 @@ fun ModGroup(group: Group, mods: Collection<Mod>) {
                                 ?.forEach { state.setModEnabled(it, false) }
                     },
                     group = group,
-                    mods = mods
+                    mods = mods,
                 )
 
                 Spacer(Modifier.width(10.dp))
