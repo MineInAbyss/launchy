@@ -28,6 +28,36 @@ modGroups:
       desc: Adds a menu that allows configuration of mods
       url: https://github.com/TerraformersMC/ModMenu/releases/download/v3.0.1/modmenu-3.0.1.jar
 
+    - name: Indium
+      license: APACHE
+      homepage: https://modrinth.com/mod/indium
+      desc: Sodium addon providing support for Fabric Rendering API
+      url: https://github.com/comp500/Indium/releases/download/1.0.2-alpha1%2Bmc1.18/indium-1.0.2-alpha1+mc1.18.jar
+
+    - name: FancyMenu
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
+      desc: Customizes game menus
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.4.3_MC_1.18.jar
+
+    - name: Load My Resources
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
+      desc: Pre-loads the resourcepack and other assets on launch.
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1-1_MC_1.18.jar
+
+    - name: Konkrete
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
+      desc: Library dependency for LoadMyResources and FancyMenu
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.2_MC_1.18.jar
+
+    - name: Resclone
+      license: MIT
+      homepage: https://modrinth.com/mod/resclone
+      desc: Downloads and updates resourcepacks automatically
+      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.8.0/resclone-1.8.0.jar
+
   Performance:
     - name: Sodium
       license: LGPL-3
@@ -110,7 +140,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/lambdabettergrass
       desc: Adds better grass and snow to the game
-      url: https://github.com/LambdAurora/LambdaBetterGrass/releases/download/1.2.1%2B1.17/lambdabettergrass-1.2.1+1.17.jar
+      url: https://cdn.modrinth.com/data/2Uev7LdA/versions/1.2.2+1.17/lambdabettergrass-1.2.2+1.17.jar
 
     - name: Lamb Dynamic Lights
       license: MIT
@@ -165,12 +195,6 @@ modGroups:
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
       url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18-0.3.7/sodium-extra-mc1.18-0.3.7.jar
-
-    - name: Plasmo Voice
-      license: ALL RIGHTS RESERVED
-      homepage: https://modrinth.com/mod/plasmo-voice
-      desc: Adds proximity voice chat
-      url: https://github.com/plasmoapp/plasmo-voice/releases/download/1.2.9/plasmovoice-fabric-1.18.1-1.2.9.jar
 
     - name: InvMove
       license: LGPL-3
@@ -244,20 +268,4 @@ modGroups:
       desc: Displays server info in your Discord Rich Presence
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence-Fabric-1.18.1-Release-1.8.8.jar
 
-    - name: FancyMenu
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
-      desc: Customizes game menus
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.4.3_MC_1.18.jar
 
-    - name: Konkrete
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
-      desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.2_MC_1.18.jar
-
-    - name: Load My Resources
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
-      desc: Pre-loads the resourcepack on launch.
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1-1_MC_1.18.jar
