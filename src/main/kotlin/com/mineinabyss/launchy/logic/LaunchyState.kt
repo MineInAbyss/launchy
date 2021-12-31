@@ -170,7 +170,7 @@ class LaunchyState(
             isMultipleMode = allowMultiSelection
 
             // Windows
-            file = allowedExtensions.joinToString(";") { "*.jar" } // e.g. '*.jpg'
+            file = allowedExtensions.joinToString(";") { "*.jar" }
 
             // linux
             setFilenameFilter { _, name ->
