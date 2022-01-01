@@ -6,6 +6,9 @@
  */
 package com.mineinabyss.launchy.logic
 
+import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.data.downloadConfig
+import com.mineinabyss.launchy.data.unzip
 import mjson.Json
 import mjson.Json.read
 import net.fabricmc.installer.client.ProfileInstaller
@@ -20,6 +23,7 @@ import java.nio.file.Path
 import java.util.*
 import java.util.stream.Collectors
 import javax.swing.JOptionPane
+import kotlin.io.path.div
 
 object FabricInstaller {
     fun isProfileInstalled(mcDir: Path, name: String): Boolean {
@@ -28,7 +32,8 @@ object FabricInstaller {
         val profiles: JSONObject = jsonObject.getJSONObject("profiles")
         return profiles.has(name)
     }
-    fun installToLauncher(
+
+    suspend fun installToLauncher(
         vanillaGameDir: Path,
         instanceDir: Path,
         profileName: String,
@@ -72,7 +77,13 @@ object FabricInstaller {
         Utils.writeToFile(profileJsonPath, profileJson.toString())
     }
 
-    private fun installProfile(
+    suspend fun installBaseConfigs() {
+        downloadConfig()
+        unzip((Dirs.minecraft / "configs.zip").toFile(), Dirs.minecraft.toString())
+        (Dirs.minecraft / "configs.zip").toFile().delete()
+    }
+
+    private suspend fun installProfile(
         mcDir: Path,
         instanceDir: Path,
         profileName: String,
@@ -113,6 +124,8 @@ object FabricInstaller {
         profiles.put(foundProfileName, profile)
         jsonObject.put("profiles", profiles)
         Utils.writeToFile(launcherProfiles, jsonObject.toString())
+
+        installBaseConfigs()
     }
 
     private fun createProfile(name: String, instanceDir: Path, versionId: String): JSONObject {
