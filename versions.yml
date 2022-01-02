@@ -59,6 +59,12 @@ modGroups:
       desc: Downloads and updates resourcepacks automatically
       url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.8.0/resclone-1.8.0.jar
 
+    - name: Skip Resourcepack Prompt
+      license: Personal Mod
+      homepage: https://github.com/Keksuccino/miarpskip
+      desc: Skips the RP Prompt as this modpack already has it installed
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/miarpskip_fabric_1.0.0_MC_1.18-1.18.1.jar
+
   Performance:
     - name: Sodium
       license: LGPL-3
