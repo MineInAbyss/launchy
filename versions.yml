@@ -7,6 +7,7 @@ groups:
     enabledByDefault: true
   - name: Visual Enhancements
   - name: Audio Enhancements
+  - name: HUD & Menu Enhancements
   - name: Misc Enhancements
 modGroups:
   Core:
@@ -189,6 +190,37 @@ modGroups:
       desc: Adds sounds for drip particles landing
       url: https://github.com/PieKing1215/DripSounds-Fabric/releases/download/v0.3.0/DripSounds-1.18-0.3.0.jar
 
+  HUD & Menu Enhancements:
+    - name: AppleSkin
+      license: The Unlicense
+      homepage: https://modrinth.com/mod/appleskin
+      desc: Improvements to food/hunger related HUD elements
+      url: https://github.com/squeek502/AppleSkin/releases/download/v2.2.0/appleskin-fabric-mc1.18-2.2.0.jar
+
+    - name: Status Effect Timer
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/status-effect-timer
+      desc: Adds status effect information to the hud
+      url: https://github.com/magicus/statuseffecttimer/releases/download/v1.1.0-1.18.1/statuseffecttimer-1.1.0+1.18.1.jar
+
+    - name: Drippy Loading Screen
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/drippy-loading-screen-fabric
+      desc: Lets you customize Minecrafts loading screen
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/drippyloadingscreen_fabric_1.4.2_MC_1.18.jar
+
+    - name: Blur
+      license: MIT
+      homepage: https://modrinth.com/mod/blur-fabric
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://github.com/Motschen/Blur/releases/download/v2.4.1/blur-2.4.1.jar
+
+    - name: BetterF3
+      license: MIT
+      homepage: https://modrinth.com/mod/betterf3
+      desc: Makes the F3-menu customizable and cleaner
+      url: https://github.com/cominixo/BetterF3/releases/download/v1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
+
   Misc Enhancements:
     - name: Sodium Extra
       license: LGPL-3
@@ -208,41 +240,17 @@ modGroups:
       desc: Lets you zoom in by pressing a button
       url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.3%2B1.17.1/okzoomer-5.0.0-beta.3+1.17.1.jar
 
-    - name: AppleSkin
-      license: The Unlicense
-      homepage: https://modrinth.com/mod/appleskin
-      desc: Improvements to food/hunger related HUD elements
-      url: https://github.com/squeek502/AppleSkin/releases/download/v2.2.0/appleskin-fabric-mc1.18-2.2.0.jar
-
-    - name: Drippy Loading Screen
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/drippy-loading-screen-fabric
-      desc: Lets you customize Minecrafts loading screen
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/drippyloadingscreen_fabric_1.4.2_MC_1.18.jar
-
     - name: Fabrishot
       license: MIT
       homepage: https://modrinth.com/mod/fabrishot
       desc: Take screenshots at insanely large resolutions, because why not
       url: https://cdn.modrinth.com/data/3qsfQtE9/versions/1.6.0/fabrishot-1.6.0.jar
 
-    - name: Blur
-      license: MIT
-      homepage: https://modrinth.com/mod/blur-fabric
-      desc: Adds immersive blur to GUI backgrounds
-      url: https://github.com/Motschen/Blur/releases/download/v2.4.1/blur-2.4.1.jar
-
     - name: ClickThrough
       license: MIT
       homepage: https://modrinth.com/mod/clickthrough
       desc: Click through signs and item frames to chests
       url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/1.18-fabric0.43.1-0.4/clickthrough-1.18-fabric0.43.1-0.4.jar
-
-    - name: BetterF3
-      license: MIT
-      homepage: https://modrinth.com/mod/betterf3
-      desc: Makes the F3-menu customizable and cleaner
-      url: https://github.com/cominixo/BetterF3/releases/download/v1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
 
     - name: Boat Item View
       license: LGPL-3
