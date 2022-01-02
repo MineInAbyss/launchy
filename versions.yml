@@ -48,7 +48,7 @@ modGroups:
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1-1_MC_1.18.jar
 
     - name: Konkrete
-      license: Special Permission
+      license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
       desc: Library dependency for LoadMyResources and FancyMenu
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.2_MC_1.18.jar
