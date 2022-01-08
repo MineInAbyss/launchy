@@ -7,6 +7,7 @@ groups:
     enabledByDefault: true
   - name: Visual Enhancements
   - name: Audio Enhancements
+  - name: HUD & Menu Enhancements
   - name: Misc Enhancements
 modGroups:
   Core:
@@ -27,6 +28,42 @@ modGroups:
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
       url: https://github.com/TerraformersMC/ModMenu/releases/download/v3.0.1/modmenu-3.0.1.jar
+
+    - name: Indium
+      license: APACHE
+      homepage: https://modrinth.com/mod/indium
+      desc: Sodium addon providing support for Fabric Rendering API
+      url: https://github.com/comp500/Indium/releases/download/1.0.2-alpha1%2Bmc1.18/indium-1.0.2-alpha1+mc1.18.jar
+
+    - name: FancyMenu
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
+      desc: Customizes game menus
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.4.3_MC_1.18.jar
+
+    - name: Load My Resources
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
+      desc: Pre-loads the resourcepack and other assets on launch.
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1-1_MC_1.18.jar
+
+    - name: Konkrete
+      license: GPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
+      desc: Library dependency for LoadMyResources and FancyMenu
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.2_MC_1.18.jar
+
+    - name: Resclone
+      license: MIT
+      homepage: https://modrinth.com/mod/resclone
+      desc: Downloads and updates resourcepacks automatically
+      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.8.0/resclone-1.8.0.jar
+
+    - name: Skip Resourcepack Prompt
+      license: Personal Mod
+      homepage: https://github.com/Keksuccino/miarpskip
+      desc: Skips the RP Prompt as this modpack already has it installed
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/miarpskip_fabric_1.0.0_MC_1.18-1.18.1.jar
 
   Performance:
     - name: Sodium
@@ -81,10 +118,12 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.5.106%201.18.1/c2me-fabric-mc1.18.1-0.2.0+alpha.5.106-all.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.5.110%201.18.1/c2me-fabric-mc1.18.1-0.2.0+alpha.5.110-all.jar
+
     #    - name: !!!Farsight
     #      desc: Increased view distance.
     #      url: UNLICENSED, NOT OPEN SOURCE
+
   Visual Enhancements:
     - name: Iris shaders
       license: LGPL-3
@@ -108,13 +147,14 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/lambdabettergrass
       desc: Adds better grass and snow to the game
-      url: https://github.com/LambdAurora/LambdaBetterGrass/releases/download/1.2.1%2B1.17/lambdabettergrass-1.2.1+1.17.jar
+      url: https://cdn.modrinth.com/data/2Uev7LdA/versions/1.2.2+1.17/lambdabettergrass-1.2.2+1.17.jar
 
     - name: Lamb Dynamic Lights
       license: MIT
       homepage: https://modrinth.com/mod/lambdynamiclights
       desc: Holding a torch will light up your surroundings
       url: https://github.com/LambdAurora/LambDynamicLights/releases/download/v2.1.0%2B1.17/lambdynamiclights-2.1.0+1.17.jar
+
     #- name: Effective (Sound issues in 1.1 and 1.0 doesnt work. Got to wait for 1.2)
     #  desc: Cool splash effects for lava, water and waterfalls.
     #  url: https://github.com/Ladysnake/Effective/releases/download/1.1/effective-1.1.jar
@@ -125,13 +165,25 @@ modGroups:
       desc: Adds custom skybox support to Fabric
       url: https://github.com/AMereBagatelle/fabricskyboxes/releases/download/0.5.4/fabricskyboxes-1.18-0.5.4.jar
 
-    #- name: First Person Models
-    #  desc: Enables the third-person model in first-person, making for a more "realistic" experience
-    #  url: https://github.com/tr7zw/FirstPersonModel
-    #- name: NotEnoughAnimations
-    #  desc: Adds missing animations from third-person to first-person
-    #  url: https://github.com/tr7zw/NotEnoughAnimations
+    - name: First Person Models
+      license: MIT
+      homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
+      desc: Enables the third-person model in first-person, making for a more "realistic" experience
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/firstperson-fabric-2.1.0-mc1.18-pre1.jar
+
+    - name: NotEnoughAnimations
+      license: MIT
+      homepage: https://www.curseforge.com/minecraft/mc-mods/not-enough-animations
+      desc: Adds missing animations from third-person to first-person
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/notenoughanimations-fabric-1.4.0-mc1.18-pre1.jar
+
   Audio Enhancements:
+    - name: Sound Physics Remastered
+      license: GPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered
+      desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/soundphysics-fabric-1.18.1-1.0.3.jar
+
     - name: Presence Footseps
       license: MIT
       homepage: https://modrinth.com/mod/presence-footsteps
@@ -144,18 +196,43 @@ modGroups:
       desc: Adds sounds for drip particles landing
       url: https://github.com/PieKing1215/DripSounds-Fabric/releases/download/v0.3.0/DripSounds-1.18-0.3.0.jar
 
+  HUD & Menu Enhancements:
+    - name: AppleSkin
+      license: The Unlicense
+      homepage: https://modrinth.com/mod/appleskin
+      desc: Improvements to food/hunger related HUD elements
+      url: https://github.com/squeek502/AppleSkin/releases/download/v2.2.0/appleskin-fabric-mc1.18-2.2.0.jar
+
+    - name: Status Effect Timer
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/status-effect-timer
+      desc: Adds status effect information to the hud
+      url: https://github.com/magicus/statuseffecttimer/releases/download/v1.1.0-1.18.1/statuseffecttimer-1.1.0+1.18.1.jar
+
+    - name: Drippy Loading Screen
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/drippy-loading-screen-fabric
+      desc: Lets you customize Minecrafts loading screen
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/drippyloadingscreen_fabric_1.4.2_MC_1.18.jar
+
+    - name: Blur
+      license: MIT
+      homepage: https://modrinth.com/mod/blur-fabric
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://github.com/Motschen/Blur/releases/download/v2.4.1/blur-2.4.1.jar
+
+    - name: BetterF3
+      license: MIT
+      homepage: https://modrinth.com/mod/betterf3
+      desc: Makes the F3-menu customizable and cleaner
+      url: https://github.com/cominixo/BetterF3/releases/download/v1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
+
   Misc Enhancements:
     - name: Sodium Extra
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
       url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18-0.3.7/sodium-extra-mc1.18-0.3.7.jar
-
-    - name: Plasmo Voice
-      license: ALL RIGHTS RESERVED
-      homepage: https://modrinth.com/mod/plasmo-voice
-      desc: Adds proximity voice chat
-      url: https://github.com/plasmoapp/plasmo-voice/releases/download/1.2.9/plasmovoice-fabric-1.18.1-1.2.9.jar
 
     - name: InvMove
       license: LGPL-3
@@ -169,29 +246,11 @@ modGroups:
       desc: Lets you zoom in by pressing a button
       url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.3%2B1.17.1/okzoomer-5.0.0-beta.3+1.17.1.jar
 
-    - name: AppleSkin
-      license: The Unlicense
-      homepage: https://modrinth.com/mod/appleskin
-      desc: Improvements to food/hunger related HUD elements
-      url: https://github.com/squeek502/AppleSkin/releases/download/v2.2.0/appleskin-fabric-mc1.18-2.2.0.jar
-
-    - name: Custom Splash Screen
-      license: MIT
-      homepage: https://modrinth.com/mod/custom-splash-screen
-      desc: Lets you customize Minecrafts loading screen
-      url: https://github.com/TeamMidnightDust/CustomSplashScreen/releases/download/v1.2.0/customsplashscreen-1.2.0.jar
-
     - name: Fabrishot
       license: MIT
       homepage: https://modrinth.com/mod/fabrishot
       desc: Take screenshots at insanely large resolutions, because why not
       url: https://cdn.modrinth.com/data/3qsfQtE9/versions/1.6.0/fabrishot-1.6.0.jar
-
-    - name: Blur
-      license: MIT
-      homepage: https://modrinth.com/mod/blur-fabric
-      desc: Adds immersive blur to GUI backgrounds
-      url: https://github.com/Motschen/Blur/releases/download/v2.4.1/blur-2.4.1.jar
 
     - name: ClickThrough
       license: MIT
@@ -199,14 +258,28 @@ modGroups:
       desc: Click through signs and item frames to chests
       url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/1.18-fabric0.43.1-0.4/clickthrough-1.18-fabric0.43.1-0.4.jar
 
-    - name: BetterF3
-      license: MIT
-      homepage: https://modrinth.com/mod/betterf3
-      desc: Makes the F3-menu customizable and cleaner
-      url: https://github.com/cominixo/BetterF3/releases/download/v1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
-
     - name: Boat Item View
       license: LGPL-3
       homepage: https://modrinth.com/mod/boat-item-view
       desc: Lets you see the held items whilst in a moving boat
       url: https://cdn.modrinth.com/data/BdKIyOLe/versions/1.18-0.0.3-fabric/Boat-Item-View-Fabric-1.18-0.0.3.jar
+
+    - name: Show Backpack Content
+      license: MIT
+      homepage: https://www.curseforge.com/minecraft/mc-mods/shulkerboxtooltip
+      desc: Shows what is inside your backpack/shulkerbox
+      url: https://github.com/MisterPeModder/ShulkerBoxTooltip/releases/download/v3.0.5%2B1.18/shulkerboxtooltip-3.0.5+1.18.jar
+
+    - name: Not Enough Crashes
+      license: MIT
+      homepage: https://modrinth.com/mod/notenoughcrashes
+      desc: Sends you to title screen instead of crashing your game
+      url: https://cdn.modrinth.com/data/yM94ont6/versions/4.1.3+1.18.1-fabric/notenoughcrashes-4.1.3+1.18.1-fabric.jar
+
+    - name: Craft Presence
+      license: MIT
+      homepage: https://www.curseforge.com/minecraft/mc-mods/craftpresence
+      desc: Displays server info in your Discord Rich Presence
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence-Fabric-1.18.1-Release-1.8.8.jar
+
+
