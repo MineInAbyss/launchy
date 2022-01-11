@@ -15,7 +15,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://github.com/FabricMC/fabric/releases/download/0.45.0%2B1.18/fabric-api-0.45.0+1.18.jar
+      url: https://github.com/FabricMC/fabric/releases/download/0.45.2%2B1.18/fabric-api-0.45.2+1.18.jar
 
     - name: Cloth config
       license: LGPL-3
@@ -94,7 +94,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/lithium
       desc: General-purpose performance enhancements
-      url: https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.18.1-0.7.6/lithium-fabric-mc1.18.1-0.7.6.jar
+      url: https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.18.1-0.7.7/lithium-fabric-mc1.18.1-0.7.7.jar
 
     - name: Krypton
       license: LGPL-3
@@ -118,7 +118,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.5.110%201.18.1/c2me-fabric-mc1.18.1-0.2.0+alpha.5.110-all.jar
+      url: https://github.com/RelativityMC/C2ME-fabric/releases/download/0.2.0%2Balpha.6/c2me-fabric-mc1.18.1-0.2.0+alpha.6.1-all.jar
 
     #    - name: !!!Farsight
     #      desc: Increased view distance.
@@ -129,7 +129,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://github.com/IrisShaders/Iris/releases/download/1.16.x%2Fv1.1.3/iris-mc1.18.1-1.1.3.jar
+      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x%2Fv1.1.4/iris-mc1.18.1-1.1.4.jar
 
     - name: Falling leaves
       license: MIT
@@ -154,6 +154,12 @@ modGroups:
       homepage: https://modrinth.com/mod/lambdynamiclights
       desc: Holding a torch will light up your surroundings
       url: https://github.com/LambdAurora/LambDynamicLights/releases/download/v2.1.0%2B1.17/lambdynamiclights-2.1.0+1.17.jar
+    
+    - name: Visuality
+      license: MIT
+      homepage: https://modrinth.com/mod/visuality/versions
+      desc: Adds a bunch of new particles
+      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/1.18-0.4.0-fabric/visuality-0.4.0-1.18-fabric.jar
 
     #- name: Effective (Sound issues in 1.1 and 1.0 doesnt work. Got to wait for 1.2)
     #  desc: Cool splash effects for lava, water and waterfalls.
@@ -168,7 +174,7 @@ modGroups:
     - name: First Person Models
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
-      desc: Enables the third-person model in first-person, making for a more "realistic" experience
+      desc: Enables the third-person model in first-person, making for a more realistic experience
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/firstperson-fabric-2.1.0-mc1.18-pre1.jar
 
     - name: NotEnoughAnimations
@@ -281,5 +287,10 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/craftpresence
       desc: Displays server info in your Discord Rich Presence
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence-Fabric-1.18.1-Release-1.8.8.jar
+    - name: PingList
+      license: MPL
+      homepage: https://modrinth.com/mod/pinglist
+      desc: Makes the tablist ping display in numbers
+      url: https://cdn.modrinth.com/data/GzmTgzUV/versions/1.3.3/pinglist-1.3.3.jar
 
 
