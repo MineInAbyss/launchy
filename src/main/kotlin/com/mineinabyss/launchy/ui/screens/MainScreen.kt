@@ -57,7 +57,7 @@ fun MainScreen() {
                     Button(enabled = !state.isDownloading && minecraftValid, onClick = {
                         coroutineScope.launch { state.addFile() }
                     }) {
-                        Icon(Icons.Rounded.Download, "Add Mod")
+                        Icon(Icons.Rounded.Add, "Add Mod")
                         AnimatedVisibility(!state.isDownloading) {
                             Text("Add Mod")
                         }
