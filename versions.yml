@@ -15,7 +15,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://github.com/FabricMC/fabric/releases/download/0.45.2%2B1.18/fabric-api-0.45.2+1.18.jar
+      url: https://github.com/FabricMC/fabric/releases/download/0.46.0%2B1.18/fabric-api-0.46.0+1.18.jar
 
     - name: Cloth config
       license: LGPL-3
@@ -129,13 +129,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x%2Fv1.1.4/iris-mc1.18.1-1.1.4.jar
+      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x%2Fv1.1.5/iris-mc1.18.1-1.1.5.jar
 
     - name: Falling leaves
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.8.1/fallingleaves-1.8.1+1.18.1.jar
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.9.0/fallingleaves-1.9.0+1.18.1.jar
 
     - name: Continuity
       license: LGPL-3
@@ -238,7 +238,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18-0.3.7/sodium-extra-mc1.18-0.3.7.jar
+      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18.1-0.3.8/sodium-extra-mc1.18.1-0.3.8.jar
 
     - name: InvMove
       license: LGPL-3
