@@ -123,7 +123,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x%2Fv1.1.5/iris-mc1.18.1-1.1.5.jar
+      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x%2Fv1.2.0/iris-mc1.18.1-1.2.0-pre.jar
 
     - name: Falling leaves
       license: MIT
