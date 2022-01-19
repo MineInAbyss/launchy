@@ -33,7 +33,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://github.com/comp500/Indium/releases/download/1.0.2-alpha1%2Bmc1.18/indium-1.0.2-alpha1+mc1.18.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/1.0.2-alpha2+mc1.18.1/indium-1.0.2-alpha2+mc1.18.1.jar
 
     - name: Load My Resources
       license: Special Permission
