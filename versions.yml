@@ -35,12 +35,6 @@ modGroups:
       desc: Sodium addon providing support for Fabric Rendering API
       url: https://github.com/comp500/Indium/releases/download/1.0.2-alpha1%2Bmc1.18/indium-1.0.2-alpha1+mc1.18.jar
 
-    - name: FancyMenu
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
-      desc: Customizes game menus
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.4.3_MC_1.18.jar
-
     - name: Load My Resources
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
@@ -70,7 +64,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/mc1.18-0.40-alpha5/sodium-fabric-mc1.18-0.4.0-alpha5+build.9.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/mc1.18.1-0.4.0-alpha6/sodium-fabric-mc1.18.1-0.4.0-alpha6+build.14.jar
 
     - name: Starlight
       license: LGPL-3
@@ -232,6 +226,12 @@ modGroups:
       homepage: https://modrinth.com/mod/betterf3
       desc: Makes the F3-menu customizable and cleaner
       url: https://github.com/cominixo/BetterF3/releases/download/v1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
+
+    - name: FancyMenu
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
+      desc: Customizes game menus
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.4.3_MC_1.18.jar
 
   Misc Enhancements:
     - name: Sodium Extra
