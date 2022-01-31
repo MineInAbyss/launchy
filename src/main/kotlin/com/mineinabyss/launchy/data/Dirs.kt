@@ -5,12 +5,18 @@ import kotlin.io.path.*
 
 object Dirs {
     val home = Path(System.getProperty("user.home"))
-    val minecraft = when(OS.get()) {
+    val minecraft = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".minecraft"
         OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/minecraft"
         OS.LINUX -> Path(System.getProperty("user.home")) / ".minecraft"
     }
-    val mods = minecraft / "mods"
+
+    val mineinabyss = when (OS.get()) {
+        OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".mineinabyss"
+        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss"
+        OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
+    }
+    val mods = mineinabyss / "mods"
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))
@@ -18,11 +24,18 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
+    //val profileFile = minecraft / "launcher_profiles.json"
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"
 
     fun createDirs() {
         config.createDirectories()
+        mineinabyss.createDirectories()
+    }
+
+    fun createProfileFiles() {
+//        if (profileFile.notExists())
+//            profileFile.createFile().writeText("{\n  \"profiles\" : {\n  }\n}\n")
     }
 
     fun createConfigFiles() {

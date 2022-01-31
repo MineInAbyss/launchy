@@ -68,6 +68,7 @@ fun main() {
                             LaunchyStateProvider provides launchyState!!,
                         ) {
                             Dirs.createDirs()
+                            Dirs.createProfileFiles()
                             MainScreen()
                         }
                     }
