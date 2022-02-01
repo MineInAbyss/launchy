@@ -24,18 +24,12 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
-    //val profileFile = minecraft / "launcher_profiles.json"
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"
 
     fun createDirs() {
         config.createDirectories()
         mineinabyss.createDirectories()
-    }
-
-    fun createProfileFiles() {
-//        if (profileFile.notExists())
-//            profileFile.createFile().writeText("{\n  \"profiles\" : {\n  }\n}\n")
     }
 
     fun createConfigFiles() {
