@@ -293,11 +293,5 @@ modGroups:
       homepage: https://modrinth.com/mod/pinglist
       desc: Makes the tablist ping display in numbers
       url: https://cdn.modrinth.com/data/GzmTgzUV/versions/1.3.3/pinglist-1.3.3.jar
-      
-    - name: Custom Cursor
-      license: GPL-3
-      homepage: https://modrinth.com/mod/cursormod/versions
-      desc: Lets you customize the look of the cursor
-      url: https://cdn.modrinth.com/data/57tyahcz/versions/1.3.0-1.18.1-20221901/FabricCustomCursorMod-1.3.0.jar
 
 
