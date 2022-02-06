@@ -1,6 +1,10 @@
 package com.mineinabyss.launchy.data
 
+import com.mineinabyss.launchy.logic.FabricInstaller
 import com.mineinabyss.launchy.util.OS
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.io.path.*
 
 object Dirs {
@@ -27,9 +31,13 @@ object Dirs {
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun createDirs() {
         config.createDirectories()
-        mineinabyss.createDirectories()
+        if (mineinabyss.notExists()) {
+            mineinabyss.createDirectories()
+            GlobalScope.launch { FabricInstaller.installBaseConfigs() }
+        }
     }
 
     fun createConfigFiles() {

@@ -94,7 +94,7 @@ class LaunchyState(
         }
     }
 
-    suspend fun installFabric() {
+    fun installFabric() {
         installingProfile = true
         FabricInstaller.installToLauncher(
             Dirs.minecraft,

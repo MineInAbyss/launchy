@@ -33,7 +33,7 @@ object FabricInstaller {
         return profiles.has(name)
     }
 
-    suspend fun installToLauncher(
+    fun installToLauncher(
         vanillaGameDir: Path,
         instanceDir: Path,
         profileName: String,
@@ -83,7 +83,7 @@ object FabricInstaller {
         (Dirs.mineinabyss / "configs.zip").toFile().delete()
     }
 
-    private suspend fun installProfile(
+    private fun installProfile(
         mcDir: Path,
         instanceDir: Path,
         profileName: String,
@@ -124,8 +124,6 @@ object FabricInstaller {
         profiles.put(foundProfileName, profile)
         jsonObject.put("profiles", profiles)
         Utils.writeToFile(launcherProfiles, jsonObject.toString())
-
-        installBaseConfigs()
     }
 
     private fun createProfile(name: String, instanceDir: Path, versionId: String): JSONObject {
