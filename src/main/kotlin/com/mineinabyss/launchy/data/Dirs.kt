@@ -5,12 +5,18 @@ import kotlin.io.path.*
 
 object Dirs {
     val home = Path(System.getProperty("user.home"))
-    val minecraft = when(OS.get()) {
+    val minecraft = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".minecraft"
         OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/minecraft"
         OS.LINUX -> Path(System.getProperty("user.home")) / ".minecraft"
     }
-    val mods = minecraft / "mods"
+
+    val mineinabyss = when (OS.get()) {
+        OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".mineinabyss"
+        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss"
+        OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
+    }
+    val mods = mineinabyss / "mods"
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))
@@ -23,6 +29,7 @@ object Dirs {
 
     fun createDirs() {
         config.createDirectories()
+        mineinabyss.createDirectories()
     }
 
     fun createConfigFiles() {

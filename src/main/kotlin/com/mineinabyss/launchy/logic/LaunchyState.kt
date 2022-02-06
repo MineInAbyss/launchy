@@ -98,7 +98,7 @@ class LaunchyState(
         installingProfile = true
         FabricInstaller.installToLauncher(
             Dirs.minecraft,
-            Dirs.minecraft,
+            Dirs.mineinabyss,
             "Mine in Abyss",
             versions.minecraftVersion,
             "fabric-loader",
