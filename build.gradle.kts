@@ -48,7 +48,7 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-val appName = "MineInAbyss-Launcher"
+val appName = "MineInAbyss_Launcher"
 
 compose.desktop {
     application {
