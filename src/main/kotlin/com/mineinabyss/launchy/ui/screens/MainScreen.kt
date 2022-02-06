@@ -41,15 +41,20 @@ fun MainScreen() {
 
                     val coroutineScope = rememberCoroutineScope()
 
-                    Button(enabled = !state.isDownloading && operationsQueued && minecraftValid, onClick = {
-                        coroutineScope.launch { state.install() }
-                    }) {
+                    Button(
+                        enabled = !state.isDownloading && !state.installingProfile && operationsQueued && minecraftValid,
+                        onClick = {
+                            coroutineScope.launch { state.install() }
+                        }) {
                         Icon(Icons.Rounded.Download, "Download")
-                        AnimatedVisibility(!state.isDownloading) {
+                        AnimatedVisibility(!state.isDownloading && !state.installingProfile) {
                             Text("Install")
                         }
+                        AnimatedVisibility(state.installingProfile) {
+                            Text("Installing Profile...")
+                        }
                         AnimatedVisibility(state.isDownloading) {
-                            Text("Installing...")
+                            Text("Downloading mods...")
                         }
                     }
                     Spacer(Modifier.width(10.dp))

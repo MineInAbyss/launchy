@@ -66,5 +66,5 @@ fun extractFile(inputStream: InputStream, destFilePath: String) {
 
 suspend fun downloadConfig() {
     val configUrl = "https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/configs.zip"
-    Downloader.download(configUrl, Dirs.minecraft / "configs.zip")
+    Downloader.download(configUrl, Dirs.mineinabyss / "configs.zip")
 }

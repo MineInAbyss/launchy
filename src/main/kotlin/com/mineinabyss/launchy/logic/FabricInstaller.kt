@@ -79,8 +79,8 @@ object FabricInstaller {
 
     suspend fun installBaseConfigs() {
         downloadConfig()
-        unzip((Dirs.minecraft / "configs.zip").toFile(), Dirs.minecraft.toString())
-        (Dirs.minecraft / "configs.zip").toFile().delete()
+        unzip((Dirs.mineinabyss / "configs.zip").toFile(), Dirs.mineinabyss.toString())
+        (Dirs.mineinabyss / "configs.zip").toFile().delete()
     }
 
     private suspend fun installProfile(
