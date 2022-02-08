@@ -39,6 +39,14 @@ class LaunchyState(
             .toMap()
         )
     }
+
+    val downloadConfigURLs = mutableStateMapOf<Mod, DownloadURL>().apply {
+        putAll(config.downloads
+            .mapNotNull { it.key.toMod()?.to(it.value) }
+            .toMap()
+        )
+    }
+
     var installedFabricVersion by mutableStateOf(config.installedFabricVersion)
 
     var notPresentDownloads by mutableStateOf(setOf<Mod>())
@@ -116,6 +124,13 @@ class LaunchyState(
             downloading -= mod
             downloadURLs[mod] = mod.url
             save()
+
+            if (mod.configUrl != null) {
+                Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
+                downloadConfigURLs[mod] = mod.configUrl
+                unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
+                (Dirs.configZip).toFile().delete()
+            }
         }.onFailure {
             scaffoldState.snackbarHostState.showSnackbar(
                 "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"

@@ -1,11 +1,9 @@
 package com.mineinabyss.launchy.data
 
-import com.mineinabyss.launchy.logic.Downloader
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.io.*
 import java.util.zip.ZipFile
-import kotlin.io.path.div
 import kotlin.io.path.inputStream
 import kotlin.io.path.writeText
 
@@ -64,7 +62,3 @@ fun extractFile(inputStream: InputStream, destFilePath: String) {
     buffer.close()
 }
 
-suspend fun downloadConfig() {
-    val configUrl = "https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/configs.zip"
-    Downloader.download(configUrl, Dirs.mineinabyss / "configs.zip")
-}

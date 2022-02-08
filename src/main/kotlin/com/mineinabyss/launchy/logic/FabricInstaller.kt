@@ -6,9 +6,6 @@
  */
 package com.mineinabyss.launchy.logic
 
-import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.downloadConfig
-import com.mineinabyss.launchy.data.unzip
 import mjson.Json
 import mjson.Json.read
 import net.fabricmc.installer.client.ProfileInstaller
@@ -23,7 +20,6 @@ import java.nio.file.Path
 import java.util.*
 import java.util.stream.Collectors
 import javax.swing.JOptionPane
-import kotlin.io.path.div
 
 object FabricInstaller {
     fun isProfileInstalled(mcDir: Path, name: String): Boolean {
@@ -75,12 +71,6 @@ object FabricInstaller {
         )
         val profileJson: Json = read(profileUrl)
         Utils.writeToFile(profileJsonPath, profileJson.toString())
-    }
-
-    suspend fun installBaseConfigs() {
-        downloadConfig()
-        unzip((Dirs.mineinabyss / "configs.zip").toFile(), Dirs.mineinabyss.toString())
-        (Dirs.mineinabyss / "configs.zip").toFile().delete()
     }
 
     private fun installProfile(

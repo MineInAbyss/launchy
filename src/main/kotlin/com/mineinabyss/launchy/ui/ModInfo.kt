@@ -19,9 +19,6 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
 import edu.stanford.ejalbert.BrowserLauncher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.awt.Desktop
 import java.net.URI
 object Browser {
