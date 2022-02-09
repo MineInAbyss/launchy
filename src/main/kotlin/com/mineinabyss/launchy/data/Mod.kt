@@ -10,4 +10,5 @@ data class Mod(
     val desc: String,
     val url: String,
     val configUrl: String? = null,
+    val forceConfigDownload: Boolean = false,
 )

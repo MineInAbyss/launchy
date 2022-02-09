@@ -56,6 +56,7 @@ class LaunchyState(
         updateNotPresent()
     }
 
+
     val upToDate: Set<Mod> by derivedStateOf {
         (downloadURLs - notPresentDownloads).filter { (mod, url) -> mod.url == url }.keys
     }
@@ -66,8 +67,17 @@ class LaunchyState(
     private var _deleted by mutableStateOf(0)
     val queuedDeletions by derivedStateOf {
         _deleted
-        disabledMods.filter { it.isDownloaded }.also { if(it.isEmpty()) updateNotPresent() }
+        disabledMods.filter { it.isDownloaded }.also { if (it.isEmpty()) updateNotPresent() }
     }
+
+    var notPresentConfigDownloads by mutableStateOf(setOf<Mod>())
+        private set
+
+    init {
+        configUpdateNotPresent()
+    }
+
+    var configToggleState = true
 
     val downloading = mutableStateMapOf<Mod, Long>()
     val isDownloading by derivedStateOf { downloading.isNotEmpty() }
@@ -125,7 +135,7 @@ class LaunchyState(
             downloadURLs[mod] = mod.url
             save()
 
-            if (mod.configUrl != null) {
+            if (mod.configUrl != null && configToggleState) {
                 Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
                 downloadConfigURLs[mod] = mod.configUrl
                 unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
@@ -158,6 +168,10 @@ class LaunchyState(
 
     private fun updateNotPresent(): Set<Mod> {
         return downloadURLs.filter { !it.key.isDownloaded }.keys.also { notPresentDownloads = it }
+    }
+
+    private fun configUpdateNotPresent(): Set<Mod> {
+        return downloadConfigURLs.filter { !it.key.isDownloaded }.keys.also { notPresentConfigDownloads = it }
     }
 }
 
