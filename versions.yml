@@ -16,6 +16,8 @@ modGroups:
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
       url: https://github.com/FabricMC/fabric/releases/download/0.46.4%2B1.18/fabric-api-0.46.4+1.18.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/GenericStuff_1.0.zip
+      forceConfigDownload: true
 
     - name: Cloth config
       license: LGPL-3
@@ -40,6 +42,8 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
       desc: Pre-loads the resourcepack and other assets on launch.
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1-1_MC_1.18.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LoadMyResources_1.0.zip
+      forceConfigDownload: true
 
     - name: Konkrete
       license: GPL-3
@@ -52,12 +56,16 @@ modGroups:
       homepage: https://modrinth.com/mod/resclone
       desc: Downloads and updates resourcepacks automatically
       url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.8.0/resclone-1.8.0.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_1.0.zip
+      forceConfigDownload: true
 
     - name: Skip Resourcepack Prompt
       license: Personal Mod
       homepage: https://github.com/Keksuccino/miarpskip
       desc: Skips the RP Prompt as this modpack already has it installed
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/miarpskip_fabric_1.0.0_MC_1.18-1.18.1.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
+      forceConfigDownload: true
 
   Performance:
     - name: Sodium
@@ -124,12 +132,14 @@ modGroups:
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
       url: https://github.com/IrisShaders/Iris/releases/download/1.18.x%2Fv1.2.0/iris-mc1.18.1-1.2.0-pre.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
 
     - name: Falling leaves
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
       url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.9.0/fallingleaves-1.9.0+1.18.1.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
 
     - name: Continuity
       license: LGPL-3
@@ -220,6 +230,7 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/drippy-loading-screen-fabric
       desc: Lets you customize Minecrafts loading screen
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/drippyloadingscreen_fabric_1.4.2_MC_1.18.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DrippyLoadingScreen_1.0.zip
 
     - name: Blur
       license: MIT
@@ -232,12 +243,14 @@ modGroups:
       homepage: https://modrinth.com/mod/betterf3
       desc: Makes the F3-menu customizable and cleaner
       url: https://github.com/cominixo/BetterF3/releases/download/v1.2.2/BetterF3-1.2.2-Fabric-1.18.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/BetterF3_1.0.zip
 
     - name: FancyMenu
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
       desc: Customizes game menus
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.4.3_MC_1.18.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenu_1.0.zip
 
   Misc Enhancements:
     - name: Sodium Extra
@@ -293,6 +306,7 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/craftpresence
       desc: Displays server info in your Discord Rich Presence
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence-Fabric-1.18.1-Release-1.8.8.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
       
     - name: PingList
       license: MPL
