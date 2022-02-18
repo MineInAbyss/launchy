@@ -176,6 +176,12 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/not-enough-animations
       desc: Adds missing animations from third-person to first-person
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/notenoughanimations-fabric-1.4.0-mc1.18-pre1.jar
+    
+    - name: Physics Mod
+      license: AAR
+      homepage: https://minecraftphysicsmod.com/
+      desc: Adds more immersive physics to just about every aspect of the game
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/physics-mod-2.6.7-mc-1.18-fabric.jar
 
   Audio Enhancements:
     - name: Sound Physics Remastered
