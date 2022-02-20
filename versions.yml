@@ -114,6 +114,12 @@ modGroups:
       desc: Improves chunk performance of Minecraft
       url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.6.53/c2me-fabric-mc1.18.1-0.2.0%2Balpha.6.53-all.jar
 
+    - name: Chat Lag Fix
+      license: MIT
+      homepage: https://modrinth.com/mod/chat-lag-fix
+      desc: Fixes Minecraft client lag from receiving chat messages
+      url: https://cdn.modrinth.com/data/fKi1znuF/versions/2.0.2/chatlagfix-1.18.1-2.0.2.jar
+
     #    - name: !!!Farsight
     #      desc: Increased view distance.
     #      url: UNLICENSED, NOT OPEN SOURCE

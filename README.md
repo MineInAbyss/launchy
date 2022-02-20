@@ -19,7 +19,7 @@ Install it from our [releases](https://github.com/MineInAbyss/launchy/releases/l
 - Installs to the default mods folder and doesn't touch other present mods
 - Looks for updates in our mod recommendations on startup
 
-# Common problems
+# FAQ
 
 ### My game uses my default mods folder
 - Delete the `Mine in Abyss` profile and reinstall it with our launcher.
