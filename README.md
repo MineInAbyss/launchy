@@ -18,3 +18,9 @@ Install it from our [releases](https://github.com/MineInAbyss/launchy/releases/l
 - Allows you to choose recommended mods by group or individually
 - Installs to the default mods folder and doesn't touch other present mods
 - Looks for updates in our mod recommendations on startup
+
+# Common problems
+
+### My game uses my default mods folder
+- Delete the `Mine in Abyss` profile and reinstall it with our launcher.
+- On Linux, Flatpak users should make sure the Minecraft launcher has access to `~/.mineinabyss` (you may need to allow access to the entire home directory.)
