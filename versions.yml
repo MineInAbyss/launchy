@@ -100,7 +100,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/ferrite-core
       desc: Optimizes memory usage
-      url: https://cdn.modrinth.com/data/uXXizFIs/versions/4.1.1/ferritecore-4.1.1-fabric.jar
+      url: https://cdn.modrinth.com/data/uXXizFIs/versions/4.1.2/ferritecore-4.1.2-fabric.jar
 
     - name: Entity Culling
       license: MIT
@@ -112,13 +112,19 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.6.53/c2me-fabric-mc1.18.1-0.2.0%2Balpha.6.53-all.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.6.55+1.18.1/c2me-fabric-mc1.18.1-0.2.0%2Balpha.6.55-all.jar
 
     #    - name: !!!Farsight
     #      desc: Increased view distance.
     #      url: UNLICENSED, NOT OPEN SOURCE
 
   Visual Enhancements:
+    - name: Distant Horizons
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/distanthorizons
+      desc: Leve-Of-Detail mod to allow for better performance and higher render-distance
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.1a-1.18.1/DistantHorizons-1.6.1a-1.18.1.jar
+      
     - name: Iris shaders
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
@@ -135,7 +141,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/continuity
       desc: Provides default connected textures
-      url: https://github.com/PepperCode1/Continuity/releases/download/v1.0.3%2B1.18/continuity-1.0.3+1.18.jar
+      url: https://github.com/PepperCode1/Continuity/releases/download/v1.1.0%2B1.18/continuity-1.1.0+1.18.jar
 
     - name: LambdaBetterGrass
       license: MIT
@@ -153,7 +159,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/visuality/versions
       desc: Adds a bunch of new particles
-      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/1.18-0.4.0-fabric/visuality-0.4.0-1.18-fabric.jar
+      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/0.4.1/visuality-0.4.1.jar
 
     #- name: Effective (Sound issues in 1.1 and 1.0 doesnt work. Got to wait for 1.2)
     #  desc: Cool splash effects for lava, water and waterfalls.
@@ -250,13 +256,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18.1-0.3.9/sodium-extra-mc1.18.1-0.3.9.jar
+      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18.1-0.4.0/sodium-extra-mc1.18.1-0.4.0.jar
 
     - name: InvMove
       license: LGPL-3
       homepage: https://modrinth.com/mod/invmove-fabric
       desc: Allows you to walk around while in your inventory
-      url: https://github.com/PieKing1215/InvMove-Fabric/releases/download/v0.1.0-1.18/InvMove-fabric-1.18-0.1.0.jar
+      url: https://github.com/PieKing1215/InvMove/releases/download/v0.5.0/InvMove-1.18-0.5.0-Fabric.jar
 
     - name: OK Zoomer
       license: MIT
