@@ -169,12 +169,11 @@ modGroups:
     #  desc: Cool splash effects for lava, water and waterfalls.
     #  url: https://github.com/Ladysnake/Effective/releases/download/1.1/effective-1.1.jar
 
-    # 1.18.2 not supported
-    #    - name: FabricSkyBoxes
-    #      license: MIT
-    #      homepage: https://modrinth.com/mod/fabricskyboxes
-    #      desc: Adds custom skybox support to Fabric
-    #      url: https://github.com/AMereBagatelle/fabricskyboxes/releases/download/0.5.4/fabricskyboxes-1.18-0.5.4.jar
+    - name: FabricSkyBoxes
+      license: MIT
+      homepage: https://modrinth.com/mod/fabricskyboxes
+      desc: Adds custom skybox support to Fabric
+      url: https://github.com/AMereBagatelle/fabricskyboxes/releases/download/0.5.5/fabricskyboxes-1.18.2-0.5.5.jar
 
     - name: First Person Models
       license: MIT
