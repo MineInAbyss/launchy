@@ -9,6 +9,7 @@ import kotlin.io.path.writeText
 data class Config(
     val minecraftDir: String? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
+    val fullDisabledGroups: Set<GroupName> = setOf(),
     val toggledMods: Set<ModName> = setOf(),
     val downloads: Map<ModName, DownloadURL> = mapOf(),
     val seenGroups: Set<GroupName> = setOf(),
