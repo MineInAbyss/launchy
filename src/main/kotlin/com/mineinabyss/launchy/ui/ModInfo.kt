@@ -12,7 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
@@ -25,6 +28,7 @@ object Browser {
     fun browse(url: String) = synchronized(desktop) { desktop.browse(URI.create(url)) }
 }
 
+@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ModInfo(group: Group, mod: Mod) {
     val state = LocalLaunchyState
@@ -107,18 +111,23 @@ fun ModInfo(group: Group, mod: Mod) {
                 )
             }
             AnimatedVisibility(configExpanded) {
-                Text("Toggle Config Download: ", style = MaterialTheme.typography.caption)
+                Text(
+                    "Toggle Config Download: ${mod.configUrl}",
+                    style = MaterialTheme.typography.subtitle1,
+                    fontSize = 12.sp
+                )
                 IconButton(
                     onClick = { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }) {
                     if (!configEnabled && !mod.forceConfigDownload) {
                         Icon(
                             imageVector = Icons.Rounded.ToggleOff,
                             contentDescription = "Config Toggle",
-                            modifier = Modifier.alpha(ContentAlpha.medium).size(40.dp)
+                            modifier = Modifier.alpha(ContentAlpha.disabled).size(40.dp)
                         )
                     } else {
                         Icon(
                             imageVector = Icons.Rounded.ToggleOn,
+                            tint = Color.hsl(15F, 1F, 0.65F),
                             contentDescription = "Config Toggle",
                             modifier = Modifier.size(40.dp)
                         )
