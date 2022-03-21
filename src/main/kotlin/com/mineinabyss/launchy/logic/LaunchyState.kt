@@ -77,7 +77,11 @@ class LaunchyState(
         configUpdateNotPresent()
     }
 
-    var configToggleState = true
+    val enabledConfigs = mutableStateSetOf<Mod>().apply {
+        addAll(config.toggledConfigs.mapNotNull { it.toMod() })
+        //removeAll(versions.nameToMod.values.toSet() - disabledMods)
+
+    }
 
     val downloading = mutableStateMapOf<Mod, Long>()
     val isDownloading by derivedStateOf { downloading.isNotEmpty() }
@@ -93,6 +97,11 @@ class LaunchyState(
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) enabledMods += mod
         else enabledMods -= mod
+    }
+
+    fun setModConfigEnabled(mod: Mod, enabled: Boolean) {
+        if (enabled) enabledConfigs += mod
+        else enabledConfigs -= mod
     }
 
     suspend fun install() = coroutineScope {
@@ -135,7 +144,7 @@ class LaunchyState(
             downloadURLs[mod] = mod.url
             save()
 
-            if (mod.configUrl != null && configToggleState) {
+            if (mod.configUrl != null && enabledConfigs.contains(mod)) {
                 Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
                 downloadConfigURLs[mod] = mod.configUrl
                 unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
@@ -154,6 +163,7 @@ class LaunchyState(
                 .filter { enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
             toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
+            toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name },
             downloads = downloadURLs.mapKeys { it.key.name },
             seenGroups = versions.groups.map { it.name }.toSet(),
             installedFabricVersion = installedFabricVersion

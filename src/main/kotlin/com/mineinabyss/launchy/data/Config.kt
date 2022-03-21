@@ -13,6 +13,7 @@ data class Config(
     val minecraftDir: String? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val toggledMods: Set<ModName> = setOf(),
+    val toggledConfigs: Set<ModName> = setOf(),
     val downloads: Map<ModName, DownloadURL> = mapOf(),
     val seenGroups: Set<GroupName> = setOf(),
     val installedFabricVersion: String? = null,

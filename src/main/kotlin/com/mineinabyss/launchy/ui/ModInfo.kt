@@ -6,7 +6,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Link
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +31,7 @@ object Browser {
 fun ModInfo(group: Group, mod: Mod) {
     val state = LocalLaunchyState
     val modEnabled by derivedStateOf { mod in state.enabledMods }
-    val configEnabled by derivedStateOf { state.configToggleState }
+    val configEnabled by derivedStateOf { mod in state.enabledConfigs }
 
     var linkExpanded by remember { mutableStateOf(false) }
     val linkRotationState by animateFloatAsState(targetValue = if (linkExpanded) 180f else 0f)
@@ -85,28 +87,12 @@ fun ModInfo(group: Group, mod: Mod) {
                         )
                     }
                 if (mod.configUrl != null) {
-                    var isEnabled by remember { mutableStateOf(configEnabled) }
-                    IconButton(
-                        onClick = {
-                            if (!mod.forceConfigDownload) {
-                                state.configToggleState = !state.configToggleState
-                                isEnabled = state.configToggleState
-                            }
-                        }) {
-                        if (isEnabled && !mod.forceConfigDownload) {
-                            Icon(
-                                imageVector = Icons.Rounded.ToggleOn,
-                                contentDescription = "Config Download Enabled",
-                                modifier = Modifier.alpha(ContentAlpha.high),
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Rounded.ToggleOff,
-                                contentDescription = "Config Download Disabled",
-                                modifier = Modifier.alpha(ContentAlpha.disabled),
-                            )
-                        }
-                    }
+                    Switch(
+                        enabled = !mod.forceConfigDownload,
+                        checked = configEnabled,
+                        onCheckedChange = { state.setModConfigEnabled(mod, !configEnabled) },
+
+                        )
                 }
             }
             AnimatedVisibility(linkExpanded) {
