@@ -115,6 +115,12 @@ modGroups:
       desc: Improves chunk performance of Minecraft
       url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.7.0+1.18.2/c2me-fabric-mc1.18.2-0.2.0%2Balpha.7.0-all.jar
 
+    - name: ForgetMeChunk
+      license: No License
+      homepage: https://modrinth.com/mod/forgetmechunk
+      desc: Removes light-update when unloading chunks to fix lag spikes
+      url: https://github.com/mjwells2002/ForgetMeChunk/releases/download/1.0.3/forgetmechunk-1.18.X-1.0.3.jar
+
     #    - name: !!!Farsight
     #      desc: Increased view distance.
     #      url: UNLICENSED, NOT OPEN SOURCE
