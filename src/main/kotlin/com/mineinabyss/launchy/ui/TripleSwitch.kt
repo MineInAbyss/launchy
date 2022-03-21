@@ -29,7 +29,7 @@ fun ToggleButtons(
 ) {
     val state = LocalLaunchyState
     val offColor = MaterialTheme.colors.surface
-    val forced = group.forced
+    val forced = group.forceEnabled || group.forceDisabled
 
     Card {
         Row(

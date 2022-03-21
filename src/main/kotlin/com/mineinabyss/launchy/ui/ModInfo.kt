@@ -19,11 +19,9 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
 import edu.stanford.ejalbert.BrowserLauncher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.awt.Desktop
 import java.net.URI
+
 object Browser {
     val desktop = Desktop.getDesktop()
     fun browse(url: String ) = synchronized(desktop) { desktop.browse(URI.create(url))}
@@ -40,7 +38,7 @@ fun ModInfo(group: Group, mod: Mod) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { if (!group.forced) state.setModEnabled(mod, !modEnabled) }
+            .clickable { if (!group.forceEnabled && !group.forceDisabled) state.setModEnabled(mod, !modEnabled) }
     ) {
         Column(Modifier.padding(2.dp)) {
             Row(
@@ -48,7 +46,7 @@ fun ModInfo(group: Group, mod: Mod) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Switch(
-                    enabled = !group.forced,
+                    enabled = !group.forceEnabled && !group.forceDisabled,
                     checked = modEnabled,
                     onCheckedChange = { state.setModEnabled(mod, !modEnabled) }
                 )

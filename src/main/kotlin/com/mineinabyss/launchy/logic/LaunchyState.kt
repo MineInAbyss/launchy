@@ -20,15 +20,18 @@ class LaunchyState(
 ) {
     val enabledMods = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledMods.mapNotNull { it.toMod() })
-        val defaults = versions.groups
+        val defaultEnabled = versions.groups
             .filter { it.enabledByDefault }
             .map { it.name } - config.seenGroups
         val fullEnabled = config.fullEnabledGroups
-        val forced = versions.groups.filter { it.forced }.map { it.name }
-        addAll((fullEnabled + defaults + forced).toSet()
+        val forceEnabled = versions.groups.filter { it.forceEnabled }.map { it.name }
+        val forceDisabled = versions.groups.filter { it.forceDisabled }
+        val fullDisabled = config.fullDisabledGroups
+        addAll(((fullEnabled + defaultEnabled + forceEnabled).toSet())
             .mapNotNull { it.toGroup() }
             .mapNotNull { versions.modGroups[it] }.flatten()
         )
+        removeAll((forceDisabled + fullDisabled).toSet().mapNotNull { versions.modGroups[it] }.flatten().toSet())
     }
 
     val disabledMods: Set<Mod> by derivedStateOf { versions.nameToMod.values.toSet() - enabledMods }
