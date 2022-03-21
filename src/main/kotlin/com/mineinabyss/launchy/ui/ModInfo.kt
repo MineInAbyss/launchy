@@ -6,9 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Link
-import androidx.compose.material.icons.rounded.Update
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +22,7 @@ import java.net.URI
 
 object Browser {
     val desktop = Desktop.getDesktop()
-    fun browse(url: String ) = synchronized(desktop) { desktop.browse(URI.create(url))}
+    fun browse(url: String) = synchronized(desktop) { desktop.browse(URI.create(url)) }
 }
 
 @Composable
@@ -35,6 +33,9 @@ fun ModInfo(group: Group, mod: Mod) {
 
     var linkExpanded by remember { mutableStateOf(false) }
     val linkRotationState by animateFloatAsState(targetValue = if (linkExpanded) 180f else 0f)
+
+    var configExpanded by remember { mutableStateOf(false) }
+    val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
     Box(
         modifier = Modifier
@@ -87,12 +88,15 @@ fun ModInfo(group: Group, mod: Mod) {
                         )
                     }
                 if (mod.configUrl != null) {
-                    Switch(
-                        enabled = !mod.forceConfigDownload,
-                        checked = configEnabled,
-                        onCheckedChange = { state.setModConfigEnabled(mod, !configEnabled) },
-
+                    IconButton(
+                        modifier = Modifier.alpha(ContentAlpha.medium).rotate(configTabState),
+                        onClick = { if (!mod.forceConfigDownload) configExpanded = !configExpanded }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Settings,
+                            contentDescription = "ConfigTab"
                         )
+                    }
                 }
             }
             AnimatedVisibility(linkExpanded) {
@@ -101,6 +105,25 @@ fun ModInfo(group: Group, mod: Mod) {
                     style = MaterialTheme.typography.subtitle2,
                     modifier = Modifier.alpha(ContentAlpha.medium)
                 )
+            }
+            AnimatedVisibility(configExpanded) {
+                Text("Toggle Config Download: ", style = MaterialTheme.typography.caption)
+                IconButton(
+                    onClick = { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }) {
+                    if (!configEnabled && !mod.forceConfigDownload) {
+                        Icon(
+                            imageVector = Icons.Rounded.ToggleOff,
+                            contentDescription = "Config Toggle",
+                            modifier = Modifier.alpha(ContentAlpha.medium).size(40.dp)
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Rounded.ToggleOn,
+                            contentDescription = "Config Toggle",
+                            modifier = Modifier.size(40.dp)
+                        )
+                    }
+                }
             }
         }
     }
