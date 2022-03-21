@@ -111,27 +111,40 @@ fun ModInfo(group: Group, mod: Mod) {
                 )
             }
             AnimatedVisibility(configExpanded) {
-                Text(
-                    "Toggle Config Download: ${mod.configUrl}",
-                    style = MaterialTheme.typography.subtitle1,
-                    fontSize = 12.sp
-                )
-                IconButton(
-                    onClick = { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }) {
-                    if (!configEnabled && !mod.forceConfigDownload) {
-                        Icon(
-                            imageVector = Icons.Rounded.ToggleOff,
-                            contentDescription = "Config Toggle",
-                            modifier = Modifier.alpha(ContentAlpha.disabled).size(40.dp)
-                        )
-                    } else {
-                        Icon(
-                            imageVector = Icons.Rounded.ToggleOn,
-                            tint = Color.hsl(15F, 1F, 0.65F),
-                            contentDescription = "Config Toggle",
-                            modifier = Modifier.size(40.dp)
-                        )
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                    IconButton(
+                        onClick = { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }) {
+                        if (!configEnabled && !mod.forceConfigDownload) {
+                            Icon(
+                                imageVector = Icons.Rounded.ToggleOff,
+                                contentDescription = "Config Toggle",
+                                modifier = Modifier.alpha(ContentAlpha.disabled).size(40.dp)
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Rounded.ToggleOn,
+                                tint = Color.hsl(15F, 1F, 0.65F),
+                                contentDescription = "Config Toggle",
+                                modifier = Modifier.size(40.dp)
+                            )
+                        }
                     }
+                    Text(
+                        "Toggle Config Download",
+                        style = MaterialTheme.typography.subtitle1,
+                        fontSize = 16.sp
+                    )
+
+//                    IconButton(
+//                        modifier = Modifier
+//                            .alpha(ContentAlpha.medium)
+//                            .rotate(linkRotationState),
+//                        onClick = { BrowserLauncher().openURLinBrowser(mod.configUrl) }) {
+//                        Icon(
+//                            imageVector = Icons.Rounded.Info,
+//                            contentDescription = "URL"
+//                        )
+//                    }
                 }
             }
         }
