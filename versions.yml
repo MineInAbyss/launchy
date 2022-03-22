@@ -190,7 +190,7 @@ modGroups:
       license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://github.com/vlad2305m/Sound-Physics-Fabric/releases/download/v0.5.5/soundphysics-0.5.5.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/soundphysics-fabric-1.18.2-1.0.4.jar
 
     - name: Presence Footseps
       license: MIT
