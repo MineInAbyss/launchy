@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.logic
 
-import androidx.compose.material.ScaffoldState
+import androidx.compose.material3.Badge
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.*
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ class LaunchyState(
     private val config: Config,
     // Versions are immutable, we don't care for reading
     val versions: Versions,
-    val scaffoldState: ScaffoldState
+//    val scaffoldState: ScaffoldState
 ) {
     val enabledMods = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledMods.mapNotNull { it.toMod() })
@@ -61,7 +62,7 @@ class LaunchyState(
     private var _deleted by mutableStateOf(0)
     val queuedDeletions by derivedStateOf {
         _deleted
-        disabledMods.filter { it.isDownloaded }.also { if(it.isEmpty()) updateNotPresent() }
+        disabledMods.filter { it.isDownloaded }.also { if (it.isEmpty()) updateNotPresent() }
     }
 
     val downloading = mutableStateMapOf<Mod, Long>()
@@ -121,9 +122,12 @@ class LaunchyState(
             downloadURLs[mod] = mod.url
             save()
         }.onFailure {
-            scaffoldState.snackbarHostState.showSnackbar(
-                "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
-            )
+//            Badge {
+//                Text("Failed to download ${mod.name}: ${it.localizedMessage}!"/*, "OK"*/)
+//            }
+//            scaffoldState.snackbarHostState.showSnackbar(
+//                "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
+//            )
         }
     }
 

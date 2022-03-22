@@ -28,6 +28,7 @@ object FabricInstaller {
         val profiles: JSONObject = jsonObject.getJSONObject("profiles")
         return profiles.has(name)
     }
+
     fun installToLauncher(
         vanillaGameDir: Path,
         instanceDir: Path,
@@ -40,8 +41,6 @@ object FabricInstaller {
         val launcherType: ProfileInstaller.LauncherType = (if (System.getProperty("os.name")
                 .contains("Windows")
         ) getLauncherType(vanillaGameDir) else  /* Return standalone if we aren't on Windows.*/ ProfileInstaller.LauncherType.WIN32)
-            ?: // The installation has been canceled via closing the window, most likely.
-            return false
         installVersion(vanillaGameDir, gameVersion, loaderName, loaderVersion, launcherType)
         installProfile(vanillaGameDir, instanceDir, profileName, versionId, launcherType)
         return true

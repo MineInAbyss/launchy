@@ -5,7 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +18,8 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
 import com.mineinabyss.launchy.ui.screens.MainScreen
+import kotlin.reflect.KMutableProperty1
+import kotlin.reflect.full.memberProperties
 
 //private val LocalConfigProvider = compositionLocalOf<Config> { error("No local config provided") }
 //val LocalConfig: Config
@@ -37,11 +39,11 @@ val LocalLaunchyState: LaunchyState
 fun main() {
     application {
         val icon = painterResource("mia_profile_icon.png")
-        val scaffoldState = rememberScaffoldState()
+//        val scaffoldState = rememberScaffoldState()
         val launchyState by produceState<LaunchyState?>(null) {
             val config = Config.read()
             val versions = Versions.readLatest(config.downloadUpdates)
-            value = LaunchyState(config, versions, scaffoldState)
+            value = LaunchyState(config, versions/*, scaffoldState*/)
         }
         Window(
             title = "Mine in Abyss - Launcher",
@@ -51,13 +53,19 @@ fun main() {
                 launchyState?.save()
             }) {
             val ready = launchyState != null
+            val scheme = darkColorScheme()
+            ColorScheme::class.memberProperties.filterIsInstance<KMutableProperty1<ColorScheme, Color>>().map { prop ->
+                val col = (prop.get(scheme))
+                val hsbVals = FloatArray(3)
+                val javaCol = java.awt.Color(col.red, col.green, col.blue, col.alpha)
+                java.awt.Color.RGBtoHSB(javaCol.red, javaCol.green, javaCol.blue, hsbVals)
+                val shiftedColor = Color(java.awt.Color.HSBtoRGB(0.02f, hsbVals[1], hsbVals[2]))
+                prop.set(scheme, col.copy(red = shiftedColor.red, blue = shiftedColor.blue, green = shiftedColor.green))
+            }
             MaterialTheme(
-                colors = darkColors(
-                    primary = Color(0xFFFF7043),
-                    secondary = Color(0xFFFFCA28),
-                )
+                colorScheme = scheme
             ) {
-                Scaffold(scaffoldState = scaffoldState) {
+                Scaffold(/*scaffoldState = scaffoldState*/) {
                     AnimatedVisibility(!ready, exit = fadeOut()) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                             Text("Getting latest plugin versions...")

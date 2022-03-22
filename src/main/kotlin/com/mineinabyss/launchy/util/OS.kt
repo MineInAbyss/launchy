@@ -2,6 +2,7 @@ package com.mineinabyss.launchy.util
 
 enum class OS {
     WINDOWS, MAC, LINUX;
+
     companion object {
         fun get(): OS {
             val os = System.getProperty("os.name").lowercase()

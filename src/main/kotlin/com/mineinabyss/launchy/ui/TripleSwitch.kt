@@ -5,16 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
@@ -28,44 +28,67 @@ fun ToggleButtons(
     mods: Collection<Mod>,
 ) {
     val state = LocalLaunchyState
-    val offColor = MaterialTheme.colors.surface
+    val offColor = Color.Transparent
+    val offTextColor = MaterialTheme.colorScheme.surface
     val forced = group.forceEnabled || group.forceDisabled
-
-    Card {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier.width(140.dp)
+    Surface {
+        Surface(
+            color = MaterialTheme.colorScheme.background,
+            shape = RoundedCornerShape(20.0.dp),
+            tonalElevation = 10.dp
         ) {
-            val fullEnable = state.enabledMods.containsAll(mods)
-            val fullDisable = mods.none { it in state.enabledMods }
-
-            val disableColor by animateColorAsState(
-                if (fullDisable) MaterialTheme.colors.error
-                else offColor,
-            )
-            if (!forced)
-                TripleSwitchButton(Option.DISABLED, disableColor, onSwitch, true, Modifier.weight(1f)) {
-                    Icon(Icons.Rounded.Close, "Disabled")
-                }
-
-            val enableColor by animateColorAsState(
-                if (fullEnable) MaterialTheme.colors.primary
-                else if (!fullDisable) MaterialTheme.colors.primary.copy(alpha = 0.6f)
-                else offColor
-//                spring(
-//                    dampingRatio = Spring.DampingRatioNoBouncy,
-//                    stiffness = Spring.StiffnessVeryLow
-//                ),
-            )
-            TripleSwitchButton(
-                Option.ENABLED,
-                enableColor,
-                onSwitch,
-                !forced,
-                Modifier.weight(1f)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.width(140.dp)/*.padding(2.dp)*/
             ) {
-                Icon(Icons.Rounded.Check, "Enabled")
+                val fullEnable = state.enabledMods.containsAll(mods)
+                val fullDisable = mods.none { it in state.enabledMods }
+
+                val disableColorContainer by animateColorAsState(
+                    if (fullDisable) MaterialTheme.colorScheme.onErrorContainer
+                    else offColor,
+                )
+                val disableColor by animateColorAsState(
+                    if (fullDisable) MaterialTheme.colorScheme.onError
+                    else offTextColor,
+                )
+                if (!forced)
+                    TripleSwitchButton(
+                        setTo = Option.DISABLED,
+                        color = ButtonDefaults.buttonColors(
+                            containerColor = disableColorContainer,
+                            contentColor = disableColor
+                        ),
+                        onSwitch = onSwitch,
+                        enabled = true,
+                        modifier = Modifier.weight(1f),
+                    ) {
+                        Icon(Icons.Rounded.Close, "Disabled")
+                    }
+
+                val enableColorContainer by animateColorAsState(
+                    if (fullEnable) MaterialTheme.colorScheme.onPrimaryContainer
+                    else if (!fullDisable) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.6f)
+                    else offColor
+                )
+                val enableColor by animateColorAsState(
+                    if (fullEnable) MaterialTheme.colorScheme.onPrimary
+                    else if (!fullDisable) MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.6f)
+                    else offTextColor
+                )
+                TripleSwitchButton(
+                    setTo = Option.ENABLED,
+                    color = ButtonDefaults.buttonColors(
+                        containerColor = enableColorContainer,
+                        contentColor = enableColor
+                    ),
+                    onSwitch = onSwitch,
+                    enabled = !forced,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(Icons.Rounded.Check, "Enabled")
+                }
             }
         }
     }
@@ -74,16 +97,15 @@ fun ToggleButtons(
 @Composable
 fun TripleSwitchButton(
     setTo: Option,
-    enabledColor: Color,
+    color: ButtonColors,
     onSwitch: (Option) -> Unit,
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Button(
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(backgroundColor = enabledColor),
-        shape = RectangleShape,
+        colors = color,
         onClick = { onSwitch(setTo) },
         modifier = modifier.fillMaxHeight()
     ) {
