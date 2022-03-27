@@ -116,11 +116,17 @@ modGroups:
       desc: Removes light-update when unloading chunks to fix lag spikes
       url: https://github.com/mjwells2002/ForgetMeChunk/releases/download/1.0.3/forgetmechunk-1.18.X-1.0.3.jar
     
-    - name: KEnnyTVsEpicForceCloseLoadingScreenMod
+    - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
       homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
       desc: Improves loading times when changing worlds
       url: https://github.com/kennytv/kennytvs-epic-force-close-loading-screen-mod-for-fabric/releases/download/1.1.0/forcecloseloadingscreen-1.1.0.jar
+    
+    - name: Enhanced Block Entities
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/ebe
+      desc: Makes blocks like chests render faster and nicer
+      url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.6+1.18.2/enhancedblockentities-0.6%2B1.18.2.jar
 
     #    - name: !!!Farsight
     #      desc: Increased view distance.
@@ -332,9 +338,3 @@ modGroups:
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Leve-Of-Detail mod to allow for better performance and higher render-distance
       url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.1a-1.18.1/DistantHorizons-1.6.1a-1.18.1.jar
-
-    - name: Enhanced Block Entities
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/ebe
-      desc: Makes blocks like chests render faster and nicer
-      url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.5+1.18/enhancedblockentities-0.5+1.18.jar
