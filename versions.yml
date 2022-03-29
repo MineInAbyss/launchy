@@ -79,6 +79,12 @@ modGroups:
       homepage: https://modrinth.com/mod/lazydfu
       desc: Makes the game start more quickly
       url: https://github.com/astei/lazydfu/releases/download/0.1.2/lazydfu-0.1.2.jar
+    
+    - name: Dashloader
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/dashloader
+      desc: Improves asset loading times greatly
+      url: https://cdn.modrinth.com/data/ZfQ3kTvR/versions/3.1.1+1.18/dashloader-def-3.1.1%2B1.18.jar
 
     - name: Lithium
       license: LGPL-3
@@ -233,7 +239,7 @@ modGroups:
       license: The Unlicense
       homepage: https://modrinth.com/mod/appleskin
       desc: Improvements to food/hunger related HUD elements
-      url: https://github.com/squeek502/AppleSkin/releases/download/v2.3.0/appleskin-fabric-mc1.18.1-2.3.0.jar
+      url: https://github.com/squeek502/AppleSkin/releases/download/v2.4.0/appleskin-fabric-mc1.18.2-2.4.0.jar
 
     - name: Status Effect Timer
       license: LGPL-3
