@@ -283,13 +283,19 @@ modGroups:
       desc: Customizes game menus
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.6.4_MC_1.18.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenu_1.0.zip
+    
+    - name: Reese's Sodium Options
+      license: MIT
+      homepage: https://modrinth.com/mod/reeses-sodium-options
+      desc: Alternative menu for Sodium
+      url: https://github.com/FlashyReese/reeses-sodium-options/releases/download/mc1.18.2-1.4.2/reeses_sodium_options-mc1.18.2-1.4.2.jar
 
   Misc Enhancements:
     - name: Sodium Extra
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18.2-0.4.2/sodium-extra-mc1.18.2-0.4.2.jar
+      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.18.2-0.4.3/sodium-extra-mc1.18.2-0.4.3.jar
 
     - name: OK Zoomer
       license: MIT
