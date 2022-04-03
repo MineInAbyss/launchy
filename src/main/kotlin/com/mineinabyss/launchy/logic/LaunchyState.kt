@@ -1,7 +1,5 @@
 package com.mineinabyss.launchy.logic
 
-import androidx.compose.material3.Badge
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.*
 import kotlinx.coroutines.Dispatchers
@@ -75,6 +73,11 @@ class LaunchyState(
             "Mine in Abyss"
         )
     }
+    val updatesQueued by derivedStateOf { queuedUpdates.isNotEmpty() }
+    val installsQueued by derivedStateOf { queuedInstalls.isNotEmpty() }
+    val deletionsQueued by derivedStateOf { queuedDeletions.isNotEmpty() }
+    val minecraftValid = Dirs.minecraft.exists()
+    val operationsQueued by derivedStateOf { updatesQueued || installsQueued || deletionsQueued || !fabricUpToDate }
 
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) enabledMods += mod
