@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.mineinabyss.conventions.kotlin")
-    id("org.jetbrains.compose") version "1.0.1"
+    id("org.jetbrains.compose") version "1.1.1"
     kotlin("plugin.serialization")
 //    id("com.github.johnrengelman.shadow") version "7.1.1"
 //    id("proguard") version "7.1.0"
@@ -31,8 +31,13 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("reflect"))
     implementation(files("deps/BrowserLauncher2-all-1_3.jar"))
-    implementation(compose.desktop.currentOs)
+    implementation(compose.desktop.currentOs) {
+        exclude(group = "org.jetbrains.compose.material", module ="material")
+    }
+    @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+    implementation(compose.material3)
     implementation(compose.materialIconsExtended)
     implementation(Deps.kotlinx.serialization.json)
     implementation(Deps.kotlinx.serialization.kaml)
@@ -46,6 +51,7 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.freeCompilerArgs = listOf("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
 }
 
 val appName = "MineInAbyss_Launcher"

@@ -1,6 +1,5 @@
 package com.mineinabyss.launchy.logic
 
-import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.*
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +15,7 @@ class LaunchyState(
     private val config: Config,
     // Versions are immutable, we don't care for reading
     val versions: Versions,
-    val scaffoldState: ScaffoldState
+//    val scaffoldState: ScaffoldState
 ) {
     val enabledMods = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledMods.mapNotNull { it.toMod() })
@@ -42,6 +41,14 @@ class LaunchyState(
             .toMap()
         )
     }
+
+    val downloadConfigURLs = mutableStateMapOf<Mod, DownloadURL>().apply {
+        putAll(config.downloads
+            .mapNotNull { it.key.toMod()?.to(it.value) }
+            .toMap()
+        )
+    }
+
     var installedFabricVersion by mutableStateOf(config.installedFabricVersion)
 
     var notPresentDownloads by mutableStateOf(setOf<Mod>())
@@ -61,7 +68,20 @@ class LaunchyState(
     private var _deleted by mutableStateOf(0)
     val queuedDeletions by derivedStateOf {
         _deleted
-        disabledMods.filter { it.isDownloaded }.also { if(it.isEmpty()) updateNotPresent() }
+        disabledMods.filter { it.isDownloaded }.also { if (it.isEmpty()) updateNotPresent() }
+    }
+
+    var notPresentConfigDownloads by mutableStateOf(setOf<Mod>())
+        private set
+
+    init {
+        configUpdateNotPresent()
+    }
+
+    val enabledConfigs = mutableStateSetOf<Mod>().apply {
+        addAll(config.toggledConfigs.mapNotNull { it.toMod() })
+        //removeAll(versions.nameToMod.values.toSet() - disabledMods)
+
     }
 
     val downloading = mutableStateMapOf<Mod, Long>()
@@ -74,10 +94,20 @@ class LaunchyState(
             "Mine in Abyss"
         )
     }
+    val updatesQueued by derivedStateOf { queuedUpdates.isNotEmpty() }
+    val installsQueued by derivedStateOf { queuedInstalls.isNotEmpty() }
+    val deletionsQueued by derivedStateOf { queuedDeletions.isNotEmpty() }
+    val minecraftValid = Dirs.minecraft.exists()
+    val operationsQueued by derivedStateOf { updatesQueued || installsQueued || deletionsQueued || !fabricUpToDate }
 
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) enabledMods += mod
         else enabledMods -= mod
+    }
+
+    fun setModConfigEnabled(mod: Mod, enabled: Boolean) {
+        if (enabled) enabledConfigs += mod
+        else enabledConfigs -= mod
     }
 
     suspend fun install() = coroutineScope {
@@ -96,7 +126,6 @@ class LaunchyState(
             }
         }
     }
-
 
     fun installFabric() {
         installingProfile = true
@@ -120,10 +149,20 @@ class LaunchyState(
             downloading -= mod
             downloadURLs[mod] = mod.url
             save()
+
+            if (mod.configUrl != null && enabledConfigs.contains(mod)) {
+                Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
+                downloadConfigURLs[mod] = mod.configUrl
+                unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
+                (Dirs.configZip).toFile().delete()
+            }
         }.onFailure {
-            scaffoldState.snackbarHostState.showSnackbar(
-                "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
-            )
+//            Badge {
+//                Text("Failed to download ${mod.name}: ${it.localizedMessage}!"/*, "OK"*/)
+//            }
+//            scaffoldState.snackbarHostState.showSnackbar(
+//                "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
+//            )
         }
     }
 
@@ -133,6 +172,7 @@ class LaunchyState(
                 .filter { enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
             toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
+            toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name },
             downloads = downloadURLs.mapKeys { it.key.name },
             seenGroups = versions.groups.map { it.name }.toSet(),
             installedFabricVersion = installedFabricVersion
@@ -147,6 +187,10 @@ class LaunchyState(
 
     private fun updateNotPresent(): Set<Mod> {
         return downloadURLs.filter { !it.key.isDownloaded }.keys.also { notPresentDownloads = it }
+    }
+
+    private fun configUpdateNotPresent(): Set<Mod> {
+        return downloadConfigURLs.filter { !it.key.isDownloaded }.keys.also { notPresentConfigDownloads = it }
     }
 }
 

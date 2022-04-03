@@ -17,6 +17,7 @@ data class Versions(
     val minecraftVersion: String
 ) {
     val nameToGroup: Map<GroupName, Group> = groups.associateBy { it.name }
+
     @Transient
     val modGroups: Map<Group, Set<Mod>> = _modGroups.mapNotNull { nameToGroup[it.key]?.to(it.value) }.toMap()
     val nameToMod: Map<ModName, Mod> = modGroups.values
@@ -27,7 +28,7 @@ data class Versions(
         const val VERSIONS_URL = "https://raw.githubusercontent.com/MineInAbyss/launchy/master/versions.yml"
 
         suspend fun readLatest(download: Boolean): Versions = withContext(Dispatchers.IO) {
-            if(download) Downloader.download(VERSIONS_URL, Dirs.versionsFile)
+            if (download) Downloader.download(VERSIONS_URL, Dirs.versionsFile)
             Formats.yaml.decodeFromStream(serializer(), Dirs.versionsFile.inputStream())
         }
     }
