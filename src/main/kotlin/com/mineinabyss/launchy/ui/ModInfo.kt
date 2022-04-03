@@ -4,16 +4,17 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Link
+import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,16 +30,11 @@ object Browser {
     fun browse(url: String) = synchronized(desktop) { desktop.browse(URI.create(url)) }
 }
 
-@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ModInfo(group: Group, mod: Mod) {
     val state = LocalLaunchyState
     val modEnabled by derivedStateOf { mod in state.enabledMods }
     val configEnabled by derivedStateOf { mod in state.enabledConfigs }
-
-    var linkExpanded by remember { mutableStateOf(false) }
-    val linkRotationState by animateFloatAsState(targetValue = if (linkExpanded) 180f else 0f)
-
     var configExpanded by remember { mutableStateOf(false) }
     val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
@@ -84,8 +80,7 @@ fun ModInfo(group: Group, mod: Mod) {
                 if (mod.homepage != null)
                     IconButton(
                         modifier = Modifier
-                            .alpha(0.5f)
-                            .rotate(linkRotationState),
+                            .alpha(0.5f),
                         onClick = { BrowserLauncher().openURLinBrowser(mod.homepage) }) {
                         Icon(
                             imageVector = Icons.Rounded.Link,
@@ -94,8 +89,8 @@ fun ModInfo(group: Group, mod: Mod) {
                     }
                 if (mod.configUrl != null) {
                     IconButton(
-                        modifier = Modifier.alpha(ContentAlpha.medium).rotate(configTabState),
-                        onClick = { if (!mod.forceConfigDownload) configExpanded = !configExpanded }
+                        modifier = Modifier.alpha(0.5f).rotate(configTabState),
+                        onClick = { configExpanded = !configExpanded }
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Settings,
@@ -104,35 +99,19 @@ fun ModInfo(group: Group, mod: Mod) {
                     }
                 }
             }
-            AnimatedVisibility(linkExpanded) {
-                Text(
-                    mod.url,
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.alpha(0.5f)
-                )
-            }
             AnimatedVisibility(configExpanded) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                    IconButton(
-                        onClick = { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }) {
-                        if (!configEnabled && !mod.forceConfigDownload) {
-                            Icon(
-                                imageVector = Icons.Rounded.ToggleOff,
-                                contentDescription = "Config Toggle",
-                                modifier = Modifier.alpha(ContentAlpha.disabled).size(40.dp)
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Rounded.ToggleOn,
-                                tint = Color.hsl(15F, 1F, 0.65F),
-                                contentDescription = "Config Toggle",
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
-                    }
+                    Spacer(Modifier.width(20.dp))
+                    Checkbox(
+                        checked = configEnabled || mod.forceConfigDownload,
+                        onCheckedChange = {
+                            if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled)
+                        },
+                        enabled = !mod.forceConfigDownload,
+                    )
                     Text(
-                        "Toggle Config Download",
-                        style = MaterialTheme.typography.subtitle1,
+                        "Download our recommended configuration",
+                        style = MaterialTheme.typography.bodyMedium,
                         fontSize = 16.sp
                     )
 

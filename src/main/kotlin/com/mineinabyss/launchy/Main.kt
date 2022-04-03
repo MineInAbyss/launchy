@@ -48,6 +48,7 @@ val LocalLaunchyState: LaunchyState
 fun WindowScope.AppWindowTitleBar(
     app: ApplicationScope,
     state: WindowState,
+    onCloseRequest: () -> Unit,
 ) = WindowDraggableArea {
     Surface(
         Modifier.fillMaxWidth().height(40.dp),
@@ -80,6 +81,7 @@ fun WindowScope.AppWindowTitleBar(
                 }
                 Spacer(Modifier.width(5.dp))
                 WindowButton(Icons.Rounded.Close) {
+                    onCloseRequest()
                     app.exitApplication()
                 }
             }
@@ -111,14 +113,15 @@ fun main() {
             val versions = Versions.readLatest(config.downloadUpdates)
             value = LaunchyState(config, versions/*, scaffoldState*/)
         }
+        val onClose: () -> Unit = {
+            exitApplication()
+            launchyState?.save()
+        }
         Window(
             state = windowState,
             title = "Mine in Abyss - Launcher",
             icon = icon,
-            onCloseRequest = {
-                exitApplication()
-                launchyState?.save()
-            },
+            onCloseRequest = onClose,
             undecorated = true,
         ) {
 
@@ -137,7 +140,7 @@ fun main() {
             ) {
                 Scaffold(
                     topBar = {
-                        AppWindowTitleBar(this@application, windowState)
+                        AppWindowTitleBar(this@application, windowState, onClose)
                     }
                 ) {
                     AnimatedVisibility(!ready, exit = fadeOut()) {
