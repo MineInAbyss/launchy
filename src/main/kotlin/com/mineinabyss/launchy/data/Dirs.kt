@@ -17,6 +17,7 @@ object Dirs {
         OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
     }
     val mods = mineinabyss / "mods"
+    val configZip = mineinabyss / "configs.zip"
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))

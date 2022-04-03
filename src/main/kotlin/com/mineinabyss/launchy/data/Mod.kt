@@ -9,4 +9,6 @@ data class Mod(
     val homepage: String? = null,
     val desc: String,
     val url: String,
+    val configUrl: String? = null,
+    val forceConfigDownload: Boolean = false,
 )

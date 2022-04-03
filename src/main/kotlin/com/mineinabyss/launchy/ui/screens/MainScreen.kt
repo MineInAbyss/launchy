@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 @Preview
 fun MainScreen() {
     val state = LocalLaunchyState
-    println("Updating!")
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         bottomBar = {

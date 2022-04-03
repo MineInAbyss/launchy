@@ -13,8 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.DefaultAlpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
@@ -27,13 +29,18 @@ object Browser {
     fun browse(url: String) = synchronized(desktop) { desktop.browse(URI.create(url)) }
 }
 
+@OptIn(ExperimentalGraphicsApi::class)
 @Composable
 fun ModInfo(group: Group, mod: Mod) {
     val state = LocalLaunchyState
     val modEnabled by derivedStateOf { mod in state.enabledMods }
+    val configEnabled by derivedStateOf { mod in state.enabledConfigs }
 
     var linkExpanded by remember { mutableStateOf(false) }
     val linkRotationState by animateFloatAsState(targetValue = if (linkExpanded) 180f else 0f)
+
+    var configExpanded by remember { mutableStateOf(false) }
+    val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
     Box(
         modifier = Modifier
@@ -85,6 +92,17 @@ fun ModInfo(group: Group, mod: Mod) {
                             contentDescription = "URL"
                         )
                     }
+                if (mod.configUrl != null) {
+                    IconButton(
+                        modifier = Modifier.alpha(ContentAlpha.medium).rotate(configTabState),
+                        onClick = { if (!mod.forceConfigDownload) configExpanded = !configExpanded }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Settings,
+                            contentDescription = "ConfigTab"
+                        )
+                    }
+                }
             }
             AnimatedVisibility(linkExpanded) {
                 Text(
@@ -92,6 +110,43 @@ fun ModInfo(group: Group, mod: Mod) {
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.alpha(0.5f)
                 )
+            }
+            AnimatedVisibility(configExpanded) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                    IconButton(
+                        onClick = { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }) {
+                        if (!configEnabled && !mod.forceConfigDownload) {
+                            Icon(
+                                imageVector = Icons.Rounded.ToggleOff,
+                                contentDescription = "Config Toggle",
+                                modifier = Modifier.alpha(ContentAlpha.disabled).size(40.dp)
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Rounded.ToggleOn,
+                                tint = Color.hsl(15F, 1F, 0.65F),
+                                contentDescription = "Config Toggle",
+                                modifier = Modifier.size(40.dp)
+                            )
+                        }
+                    }
+                    Text(
+                        "Toggle Config Download",
+                        style = MaterialTheme.typography.subtitle1,
+                        fontSize = 16.sp
+                    )
+
+//                    IconButton(
+//                        modifier = Modifier
+//                            .alpha(ContentAlpha.medium)
+//                            .rotate(linkRotationState),
+//                        onClick = { BrowserLauncher().openURLinBrowser(mod.configUrl) }) {
+//                        Icon(
+//                            imageVector = Icons.Rounded.Info,
+//                            contentDescription = "URL"
+//                        )
+//                    }
+                }
             }
         }
     }
