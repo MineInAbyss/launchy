@@ -5,19 +5,15 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Link
 import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.ExperimentalGraphicsApi
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
@@ -38,10 +34,15 @@ fun ModInfo(group: Group, mod: Mod) {
     var configExpanded by remember { mutableStateOf(false) }
     val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
-    Box(
+    Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { if (!group.forceEnabled && !group.forceDisabled) state.setModEnabled(mod, !modEnabled) }
+            .clickable { if (!group.forceEnabled && !group.forceDisabled) state.setModEnabled(mod, !modEnabled) },
+        color = when (mod) {
+            in state.queuedDeletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
+            in state.queuedInstalls -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)//Color(105, 240, 174, alpha = 25)
+            else -> MaterialTheme.colorScheme.surface
+        }
     ) {
         Column(Modifier.padding(2.dp)) {
             Row(
@@ -55,33 +56,18 @@ fun ModInfo(group: Group, mod: Mod) {
                 )
 
                 Row(Modifier.weight(6f)) {
-                    Text(mod.name, style = MaterialTheme.typography.bodySmall)
+                    Text(mod.name, style = MaterialTheme.typography.bodyLarge)
                 }
                 Text(
                     mod.desc,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.alpha(0.5f)
                 )
-                AnimatedVisibility(mod in state.queuedDeletions) {
-                    Icon(
-                        imageVector = Icons.Rounded.Delete,
-                        contentDescription = "Remove queued",
-                        modifier = Modifier.alpha(0.5f),
-                    )
-                }
-                AnimatedVisibility(mod !in state.upToDate) {
-                    Icon(
-                        imageVector = Icons.Rounded.Update,
-                        contentDescription = "Update available",
-                        modifier = Modifier.alpha(0.5f),
-                    )
-                }
-                val coroutineScope = rememberCoroutineScope()
                 if (mod.homepage != null)
                     IconButton(
-                        modifier = Modifier
-                            .alpha(0.5f),
-                        onClick = { BrowserLauncher().openURLinBrowser(mod.homepage) }) {
+                        modifier = Modifier.alpha(0.5f),
+                        onClick = { BrowserLauncher().openURLinBrowser(mod.homepage) }
+                    ) {
                         Icon(
                             imageVector = Icons.Rounded.Link,
                             contentDescription = "URL"
@@ -100,7 +86,12 @@ fun ModInfo(group: Group, mod: Mod) {
                 }
             }
             AnimatedVisibility(configExpanded) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.clickable {
+                        if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled)
+                    }.fillMaxWidth()
+                ) {
                     Spacer(Modifier.width(20.dp))
                     Checkbox(
                         checked = configEnabled || mod.forceConfigDownload,
@@ -111,20 +102,8 @@ fun ModInfo(group: Group, mod: Mod) {
                     )
                     Text(
                         "Download our recommended configuration",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontSize = 16.sp
+                        style = MaterialTheme.typography.bodyMedium
                     )
-
-//                    IconButton(
-//                        modifier = Modifier
-//                            .alpha(ContentAlpha.medium)
-//                            .rotate(linkRotationState),
-//                        onClick = { BrowserLauncher().openURLinBrowser(mod.configUrl) }) {
-//                        Icon(
-//                            imageVector = Icons.Rounded.Info,
-//                            contentDescription = "URL"
-//                        )
-//                    }
                 }
             }
         }

@@ -3,10 +3,7 @@ package com.mineinabyss.launchy
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
@@ -73,32 +70,28 @@ fun WindowScope.AppWindowTitleBar(
                 WindowButton(Icons.Rounded.Minimize) {
                     state.isMinimized = true
                 }
-                Spacer(Modifier.width(5.dp))
                 WindowButton(Icons.Rounded.CropSquare) {
-                    if(state.placement != WindowPlacement.Maximized)
+                    if (state.placement != WindowPlacement.Maximized)
                         state.placement = WindowPlacement.Maximized
                     else state.placement = WindowPlacement.Floating
                 }
-                Spacer(Modifier.width(5.dp))
                 WindowButton(Icons.Rounded.Close) {
                     onCloseRequest()
                     app.exitApplication()
                 }
             }
-            Spacer(Modifier.width(5.dp))
         }
     }
 }
 
 @Composable
 fun WindowButton(icon: ImageVector, onClick: () -> Unit) {
-    Button(
+    Surface(
         onClick = onClick,
-        Modifier.size(24.dp),
-        contentPadding = PaddingValues(2.dp),
-        colors = ButtonDefaults.outlinedButtonColors()
+        modifier = Modifier.fillMaxHeight().width(44.dp),
+        contentColor = MaterialTheme.colorScheme.primary,
     ) {
-        Icon(icon, "")
+        Icon(icon, "", Modifier.padding(10.dp))
     }
 
 }
@@ -127,14 +120,19 @@ fun main() {
 
             val ready = launchyState != null
             val scheme = darkColorScheme()
-            ColorScheme::class.memberProperties.filterIsInstance<KMutableProperty1<ColorScheme, Color>>().map { prop ->
-                val col = (prop.get(scheme))
-                val hsbVals = FloatArray(3)
-                val javaCol = java.awt.Color(col.red, col.green, col.blue, col.alpha)
-                java.awt.Color.RGBtoHSB(javaCol.red, javaCol.green, javaCol.blue, hsbVals)
-                val shiftedColor = Color(java.awt.Color.HSBtoRGB(0.02f, hsbVals[1], hsbVals[2]))
-                prop.set(scheme, col.copy(red = shiftedColor.red, blue = shiftedColor.blue, green = shiftedColor.green))
-            }
+            ColorScheme::class.memberProperties.filterIsInstance<KMutableProperty1<ColorScheme, Color>>()
+                .filter { "error" !in it.name.toLowerCase() }
+                .map { prop ->
+                    val col = (prop.get(scheme))
+                    val hsbVals = FloatArray(3)
+                    val javaCol = java.awt.Color(col.red, col.green, col.blue, col.alpha)
+                    java.awt.Color.RGBtoHSB(javaCol.red, javaCol.green, javaCol.blue, hsbVals)
+                    val shiftedColor = Color(java.awt.Color.HSBtoRGB(0.02f, hsbVals[1], hsbVals[2]))
+                    prop.set(
+                        scheme,
+                        col.copy(red = shiftedColor.red, blue = shiftedColor.blue, green = shiftedColor.green)
+                    )
+                }
             MaterialTheme(
                 colorScheme = scheme
             ) {

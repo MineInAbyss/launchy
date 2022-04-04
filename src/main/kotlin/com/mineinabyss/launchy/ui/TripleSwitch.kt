@@ -46,11 +46,11 @@ fun ToggleButtons(
                 val fullDisable = mods.none { it in state.enabledMods }
 
                 val disableColorContainer by animateColorAsState(
-                    if (fullDisable) MaterialTheme.colorScheme.onErrorContainer
+                    if (fullDisable) MaterialTheme.colorScheme.errorContainer
                     else offColor,
                 )
                 val disableColor by animateColorAsState(
-                    if (fullDisable) MaterialTheme.colorScheme.onError
+                    if (fullDisable) MaterialTheme.colorScheme.error
                     else offTextColor,
                 )
                 if (!forced)

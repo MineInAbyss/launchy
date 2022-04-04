@@ -103,6 +103,7 @@ class LaunchyState(
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) enabledMods += mod
         else enabledMods -= mod
+        setModConfigEnabled(mod, enabled)
     }
 
     fun setModConfigEnabled(mod: Mod, enabled: Boolean) {
