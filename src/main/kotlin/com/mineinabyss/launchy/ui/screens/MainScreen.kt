@@ -1,13 +1,16 @@
 package com.mineinabyss.launchy.ui.screens
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.*
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.VerticalScrollbar
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
@@ -15,12 +18,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.ApplicationScope
-import androidx.compose.ui.window.WindowScope
-import androidx.compose.ui.window.WindowState
-import com.mineinabyss.launchy.AppWindowTitleBar
+import androidx.compose.ui.zIndex
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
@@ -31,20 +36,146 @@ fun MainScreen() {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
-        bottomBar = {
-            InfoBar()
-        },
+//        bottomBar = {
+//            InfoBar()
+//        },
     ) { paddingValues ->
-        Box(Modifier.padding(paddingValues).padding(start = 10.dp, top = 5.dp)) {
-            val lazyListState = rememberLazyListState()
-            LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), lazyListState) {
-                items(state.versions.modGroups.toList()) { (group, mods) ->
-                    ModGroup(group, mods)
+        var settingsOpen by remember { mutableStateOf(false) }
+        println(settingsOpen)
+        AbyssRender(onSettings = { settingsOpen = !settingsOpen })
+        AnimatedVisibility(
+            settingsOpen,
+            enter = fadeIn() + slideIn(initialOffset = { IntOffset(0, 100) }),
+            exit = fadeOut() + slideOut(targetOffset = { IntOffset(0, 100) }),
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                IconButton(onClick = { settingsOpen = !settingsOpen }) {
+                    Icon(Icons.Rounded.ExpandMore, contentDescription = null)
+                }
+                Surface(
+                    shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
+                    modifier = Modifier.padding(5.dp)
+                ) {
+                    Box(
+                        Modifier.padding(paddingValues)
+                            .padding(start = 10.dp, top = 5.dp)
+                    ) {
+                        val lazyListState = rememberLazyListState()
+                        LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), lazyListState) {
+
+                            items(state.versions.modGroups.toList()) { (group, mods) ->
+                                ModGroup(group, mods)
+                            }
+                        }
+                        VerticalScrollbar(
+                            modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                            adapter = rememberScrollbarAdapter(lazyListState)
+                        )
+                    }
                 }
             }
-            VerticalScrollbar(
-                modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight(),
-                adapter = rememberScrollbarAdapter(lazyListState)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun AbyssRender(onSettings: () -> Unit) {
+    val colors = listOf(
+        Color.Transparent,
+        MaterialTheme.colorScheme.background,
+    )
+    Box {
+        Image(
+            painter = painterResource("mia_render.jpg"),
+            contentDescription = "Main render",
+            modifier = Modifier
+                .fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        Column(
+            Modifier.align(Alignment.Center)
+                .heightIn(0.dp, 500.dp)
+                .fillMaxSize()
+                .zIndex(4f),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource("mia_profile_icon.png"),
+                contentDescription = "Mine in Abyss logo",
+                modifier = Modifier
+                    .widthIn(0.dp, 500.dp)
+                    .fillMaxSize()
+                    .weight(3f),
+                contentScale = ContentScale.FillWidth
+            )
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.Top,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+            ) {
+                Button(
+                    onClick = {}, colors = ButtonDefaults.buttonColors(
+                        MaterialTheme.colorScheme.primaryContainer,
+                        MaterialTheme.colorScheme.primary,
+                    )
+                ) {
+                    Icon(Icons.Rounded.PlayArrow, contentDescription = "Play")
+                    Text("Play")
+                }
+                Spacer(Modifier.width(10.dp))
+                var toggled by remember { mutableStateOf(false) }
+                Button(onClick = { toggled = !toggled }) {
+                    Column() {
+                        Row {
+                            Icon(Icons.Rounded.Update, contentDescription = "Updates")
+                            Text("10 Updates")
+                        }
+                        AnimatedVisibility(toggled) {
+                            Column() {
+                                Row {
+                                    Icon(Icons.Rounded.Download, contentDescription = null)
+                                    Text("5")
+                                }
+                                Row {
+                                    Icon(Icons.Rounded.Update, contentDescription = null)
+                                    Text("5")
+                                }
+                            }
+                        }
+                    }
+                }
+                Spacer(Modifier.width(10.dp))
+                Box {
+                    Button(onClick = {}) {
+                        Icon(Icons.Rounded.Feed, contentDescription = "Settings")
+                        Text("News")
+                    }
+                    Surface(
+                        Modifier.size(12.dp).align(Alignment.TopEnd).offset((-2).dp, (2).dp),
+                        shape = CircleShape,
+                        color = Color(255, 138, 128)
+                    ) {}
+                }
+                Spacer(Modifier.width(10.dp))
+                Button(onClick = onSettings) {
+                    Icon(Icons.Rounded.Settings, contentDescription = "Settings")
+                    Text("Settings")
+                }
+            }
+        }
+        BoxWithConstraints(
+            Modifier
+                .align(Alignment.BottomCenter)
+        ) {
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height(maxHeight / 2)
+                    .background(Brush.verticalGradient(colors))
             )
         }
     }

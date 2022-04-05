@@ -3,6 +3,10 @@ package com.mineinabyss.launchy
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
@@ -16,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
@@ -41,12 +46,21 @@ val LocalLaunchyState: LaunchyState
     @Composable
     get() = LaunchyStateProvider.current
 
+fun toggleMaximized(state: WindowState) {
+    if (state.placement != WindowPlacement.Maximized)
+        state.placement = WindowPlacement.Maximized
+    else state.placement = WindowPlacement.Floating
+}
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WindowScope.AppWindowTitleBar(
     app: ApplicationScope,
     state: WindowState,
     onCloseRequest: () -> Unit,
-) = WindowDraggableArea {
+) = WindowDraggableArea(
+//    Modifier.combinedClickable(onDoubleClick = { toggleMaximized(state) }, onClick = {})
+) {
     Surface(
         Modifier.fillMaxWidth().height(40.dp),
         tonalElevation = 1.dp
@@ -71,9 +85,7 @@ fun WindowScope.AppWindowTitleBar(
                     state.isMinimized = true
                 }
                 WindowButton(Icons.Rounded.CropSquare) {
-                    if (state.placement != WindowPlacement.Maximized)
-                        state.placement = WindowPlacement.Maximized
-                    else state.placement = WindowPlacement.Floating
+                    toggleMaximized(state)
                 }
                 WindowButton(Icons.Rounded.Close) {
                     onCloseRequest()
