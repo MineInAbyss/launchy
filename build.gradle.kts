@@ -34,7 +34,7 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation(files("deps/BrowserLauncher2-all-1_3.jar"))
     implementation(compose.desktop.currentOs) {
-        exclude(group = "org.jetbrains.compose.material", module ="material")
+        exclude(group = "org.jetbrains.compose.material", module = "material")
     }
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.material3)
@@ -54,7 +54,11 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.freeCompilerArgs = listOf("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
 }
 
-val appName = "MineInAbyss_Launcher"
+val appName = "MineInAbyss_Launcher-" + when {
+    Os.isFamily(Os.FAMILY_MAC) -> "macOS"
+    Os.isFamily(Os.FAMILY_WINDOWS) -> "windows"
+    else -> "linux"
+}
 
 compose.desktop {
     application {
@@ -120,6 +124,7 @@ tasks {
     val executeAppImageBuilder by registering(Exec::class) {
         dependsOn(downloadAppImageBuilder)
         dependsOn(copyBuildToPackaging)
+        environment("ARCH", "x86_64")
         commandLine(appImageTool, linuxAppDir, "releases/$appName-${project.version}.AppImage")
     }
 
