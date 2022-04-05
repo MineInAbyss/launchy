@@ -3,120 +3,38 @@ package com.mineinabyss.launchy
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.hoverable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.window.WindowDraggableArea
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.CropSquare
-import androidx.compose.material.icons.rounded.Minimize
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.*
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
+import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
 import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
-import com.mineinabyss.launchy.ui.screens.MainScreen
-import kotlin.reflect.KMutableProperty1
-import kotlin.reflect.full.memberProperties
+import com.mineinabyss.launchy.ui.screens.Content
 
-//private val LocalConfigProvider = compositionLocalOf<Config> { error("No local config provided") }
-//val LocalConfig: Config
-//    @Composable
-//    get() = LocalConfigProvider.current
-//
-//private val LocalVersionsProvider = compositionLocalOf<Versions> { error("No local versions provided") }
-//val LocalVersions: Versions
-//    @Composable
-//    get() = LocalVersionsProvider.current
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 val LocalLaunchyState: LaunchyState
     @Composable
     get() = LaunchyStateProvider.current
 
-fun toggleMaximized(state: WindowState) {
-    if (state.placement != WindowPlacement.Maximized)
-        state.placement = WindowPlacement.Maximized
-    else state.placement = WindowPlacement.Floating
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun WindowScope.AppWindowTitleBar(
-    app: ApplicationScope,
-    state: WindowState,
-    onCloseRequest: () -> Unit,
-) = WindowDraggableArea(
-//    Modifier.combinedClickable(onDoubleClick = { toggleMaximized(state) }, onClick = {})
-) {
-    Surface(
-        Modifier.fillMaxWidth().height(40.dp),
-        tonalElevation = 1.dp
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround,
-        ) {
-            Spacer(Modifier.width(15.dp))
-            Row(
-                Modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    "Mine in Abyss",
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-            Row {
-                WindowButton(Icons.Rounded.Minimize) {
-                    state.isMinimized = true
-                }
-                WindowButton(Icons.Rounded.CropSquare) {
-                    toggleMaximized(state)
-                }
-                WindowButton(Icons.Rounded.Close) {
-                    onCloseRequest()
-                    app.exitApplication()
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun WindowButton(icon: ImageVector, onClick: () -> Unit) {
-    Surface(
-        onClick = onClick,
-        modifier = Modifier.fillMaxHeight().width(44.dp),
-        contentColor = MaterialTheme.colorScheme.primary,
-    ) {
-        Icon(icon, "", Modifier.padding(10.dp))
-    }
-
-}
-
 fun main() {
     application {
         val windowState = rememberWindowState(placement = WindowPlacement.Floating)
         val icon = painterResource("mia_profile_icon.png")
-//        val scaffoldState = rememberScaffoldState()
         val launchyState by produceState<LaunchyState?>(null) {
             val config = Config.read()
             val versions = Versions.readLatest(config.downloadUpdates)
-            value = LaunchyState(config, versions/*, scaffoldState*/)
+            value = LaunchyState(config, versions)
         }
         val onClose: () -> Unit = {
             exitApplication()
@@ -129,41 +47,24 @@ fun main() {
             onCloseRequest = onClose,
             undecorated = true,
         ) {
-
+            val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
-            val scheme = darkColorScheme()
-            ColorScheme::class.memberProperties.filterIsInstance<KMutableProperty1<ColorScheme, Color>>()
-                .filter { "error" !in it.name.toLowerCase() }
-                .map { prop ->
-                    val col = (prop.get(scheme))
-                    val hsbVals = FloatArray(3)
-                    val javaCol = java.awt.Color(col.red, col.green, col.blue, col.alpha)
-                    java.awt.Color.RGBtoHSB(javaCol.red, javaCol.green, javaCol.blue, hsbVals)
-                    val shiftedColor = Color(java.awt.Color.HSBtoRGB(0.02f, hsbVals[1], hsbVals[2]))
-                    prop.set(
-                        scheme,
-                        col.copy(red = shiftedColor.red, blue = shiftedColor.blue, green = shiftedColor.green)
-                    )
-                }
-            MaterialTheme(
-                colorScheme = scheme
-            ) {
-                Scaffold(
-                    topBar = {
-                        AppWindowTitleBar(this@application, windowState, onClose)
-                    }
-                ) {
-                    AnimatedVisibility(!ready, exit = fadeOut()) {
-                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Text("Getting latest plugin versions...")
+            val scheme = rememberMIAColorScheme()
+            MaterialTheme(colorScheme = scheme) {
+                CompositionLocalProvider(TopBarProvider provides topBarState) {
+                    Scaffold {
+                        AnimatedVisibility(!ready, exit = fadeOut()) {
+                            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                Text("Getting latest plugin versions...")
+                            }
                         }
-                    }
-                    AnimatedVisibility(ready, enter = fadeIn()) {
-                        CompositionLocalProvider(
-                            LaunchyStateProvider provides launchyState!!,
-                        ) {
-                            Dirs.createDirs()
-                            MainScreen()
+                        AnimatedVisibility(ready, enter = fadeIn()) {
+                            CompositionLocalProvider(
+                                LaunchyStateProvider provides launchyState!!,
+                            ) {
+                                Dirs.createDirs()
+                                Content()
+                            }
                         }
                     }
                 }
