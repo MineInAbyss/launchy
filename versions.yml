@@ -69,6 +69,13 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
       forceConfigDownload: true
 
+    - name: CIT Resewn
+      license: MIT
+      homepage: https://modrinth.com/mod/cit-resewn
+      desc: Makes custom armor work with shaders
+      url: https://cdn.modrinth.com/data/otVJckYQ/versions/1.0.1+1.18.2/CITResewn-1.0.1%2B1.18.2.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
+
   Performance:
     - name: Sodium
       license: LGPL-3
