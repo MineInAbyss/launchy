@@ -9,6 +9,14 @@
 
 Our custom launcher which makes it easier to set up optional mods and in the future, resourcepack options, and more!
 
+## Screenshots
+<div align="center">
+  
+  <img src="https://user-images.githubusercontent.com/16233018/162873692-36215478-e4ec-4060-bb5d-12dafcdcd1da.png" width="600px">
+  <img src="https://user-images.githubusercontent.com/16233018/162874485-5964893d-2480-42f7-bf2a-6fa40705361d.png" width="600px">
+</div>
+
+
 ## Instructions
 
 Install it from our [releases](https://github.com/MineInAbyss/launchy/releases/latest), set up your preferences then just launch through Minecraft (you will need to reopen the launcher to download any mod updates we provide.)
