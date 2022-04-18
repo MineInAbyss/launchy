@@ -91,7 +91,7 @@ class LaunchyState(
     val fabricUpToDate by derivedStateOf {
         installedFabricVersion == versions.fabricVersion && FabricInstaller.isProfileInstalled(
             Dirs.minecraft,
-            "Mine in Abyss"
+            "HibiscusMC"
         )
     }
     val updatesQueued by derivedStateOf { queuedUpdates.isNotEmpty() }
@@ -132,8 +132,8 @@ class LaunchyState(
         installingProfile = true
         FabricInstaller.installToLauncher(
             Dirs.minecraft,
-            Dirs.mineinabyss,
-            "Mine in Abyss",
+            Dirs.hibiscusmc,
+            "HibiscusMC",
             versions.minecraftVersion,
             "fabric-loader",
             versions.fabricVersion,
@@ -154,7 +154,7 @@ class LaunchyState(
             if (mod.configUrl != null && enabledConfigs.contains(mod)) {
                 Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
                 downloadConfigURLs[mod] = mod.configUrl
-                unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
+                unzip((Dirs.configZip).toFile(), Dirs.hibiscusmc.toString())
                 (Dirs.configZip).toFile().delete()
             }
         }.onFailure {

@@ -131,7 +131,7 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
     Box {
         windowScope.WindowDraggableArea {
             Image(
-                painter = painterResource("mia_render.jpg"),
+                painter = painterResource("hmc_render.png"),
                 contentDescription = "Main render",
                 modifier = Modifier
                     .fillMaxSize(),
@@ -147,8 +147,8 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource("mia_profile_icon.png"),
-                contentDescription = "Mine in Abyss logo",
+                painter = painterResource("hmc_profile_icon.png"),
+                contentDescription = "HibiscusMC logo",
                 modifier = Modifier
                     .widthIn(0.dp, 500.dp)
                     .fillMaxSize()

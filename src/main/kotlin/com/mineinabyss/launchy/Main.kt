@@ -30,7 +30,7 @@ val LocalLaunchyState: LaunchyState
 fun main() {
     application {
         val windowState = rememberWindowState(placement = WindowPlacement.Floating)
-        val icon = painterResource("mia_profile_icon.png")
+        val icon = painterResource("hmc_icon.png")
         val launchyState by produceState<LaunchyState?>(null) {
             val config = Config.read()
             val versions = Versions.readLatest(config.downloadUpdates)
@@ -42,14 +42,14 @@ fun main() {
         }
         Window(
             state = windowState,
-            title = "Mine in Abyss - Launcher",
+            title = "HibiscusMC - Launcher",
             icon = icon,
             onCloseRequest = onClose,
             undecorated = true,
         ) {
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
-            val scheme = rememberMIAColorScheme()
+            val scheme = rememberMIAColorScheme(0.88f)
             MaterialTheme(colorScheme = scheme) {
                 CompositionLocalProvider(TopBarProvider provides topBarState) {
                     Scaffold {

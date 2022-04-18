@@ -11,26 +11,26 @@ object Dirs {
         OS.LINUX -> Path(System.getProperty("user.home")) / ".minecraft"
     }
 
-    val mineinabyss = when (OS.get()) {
-        OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".mineinabyss"
-        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss"
-        OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
+    val hibiscusmc = when (OS.get()) {
+        OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".HibiscusMC"
+        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/HibiscusMC"
+        OS.LINUX -> Path(System.getProperty("user.home")) / ".HibiscusMC"
     }
-    val mods = mineinabyss / "mods"
-    val configZip = mineinabyss / "configs.zip"
+    val mods = hibiscusmc / "mods"
+    val configZip = hibiscusmc / "configs.zip"
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))
         OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support"
         OS.LINUX -> home / ".config"
-    } / "mineinabyss"
+    } / "hibiscusmc"
 
-    val configFile = config / "mia-launcher.yml"
-    val versionsFile = config / "mia-versions.yml"
+    val configFile = config / "hmc-launcher.yml"
+    val versionsFile = config / "hmc-versions.yml"
 
     fun createDirs() {
         config.createDirectories()
-        mineinabyss.createDirectories()
+        hibiscusmc.createDirectories()
     }
 
     fun createConfigFiles() {

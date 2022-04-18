@@ -1,9 +1,6 @@
 package com.mineinabyss.launchy
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
@@ -71,7 +68,7 @@ fun AppTopBar(
                 }
                 AnimatedVisibility(!transparent) {
                     Text(
-                        "Mine in Abyss",
+                        "HibiscusMC",
                         fontWeight = FontWeight.Medium,
                         color = MaterialTheme.colorScheme.primary
                     )
