@@ -148,6 +148,7 @@ modGroups:
       homepage: https://modrinth.com/mod/ebe
       desc: Makes blocks like chests render faster and nicer
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.6+1.18.2/enhancedblockentities-0.6%2B1.18.2.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.properties
 
     #    - name: !!!Farsight
     #      desc: Increased view distance.
