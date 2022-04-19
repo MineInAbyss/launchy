@@ -194,7 +194,7 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                                 modifier = Modifier.align(Alignment.CenterVertically),
                                 onClick = {
                                     (Dirs.minecraft / "options.txt").toFile()
-                                        .copyTo((Dirs.mineinabyss / "optionsss.txt").toFile())
+                                        .copyTo((Dirs.mineinabyss / "options.txt").toFile())
                                     showPopup = !showPopup
                                 }
                             ) {
