@@ -20,23 +20,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.*
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.zIndex
 import com.mineinabyss.launchy.AppTopBar
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.TopBar
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.rememberMIAColorScheme
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
 import kotlin.io.path.div
@@ -128,6 +125,7 @@ fun InfoText(shown: Boolean, icon: ImageVector, desc: String, extra: String = ""
     }
 }
 
+@OptIn(ExperimentalUnitApi::class)
 @Preview
 @Composable
 fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
@@ -135,8 +133,9 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         Color.Transparent,
         MaterialTheme.colorScheme.background,
     )
+    val options = (Dirs.mineinabyss / "options.txt").toFile()
     var showPopup by remember {
-        mutableStateOf(!(Dirs.mineinabyss / "optionss.txt").toFile().exists() && Dirs.minecraft.exists())
+        mutableStateOf(!options.exists() && Dirs.minecraft.exists())
     }
 
     Box {
@@ -145,70 +144,57 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                 painter = painterResource("mia_render.jpg"),
                 contentDescription = "Main render",
                 contentScale = ContentScale.Crop,
-                modifier =
-                if (showPopup) {
-                    Modifier
-                        .fillMaxSize()
-                        .blur(10.dp, 10.dp, BlurredEdgeTreatment.Rectangle)
-                } else Modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize().then(
+                    if (showPopup) {
+                        Modifier.blur(10.dp)
+                    } else Modifier
+                )
             )
         }
 
-
         if (showPopup) {
-            Popup(
-                alignment = Alignment.Center,
-                focusable = true,
-                ) {
-                val popupWidth = 400.dp
-                val popupHeight = 120.dp
-                val cornerSize = 16.dp
 
-                Box(
-                    Modifier
-                        .size(popupWidth, popupHeight)
-                        .background(rememberMIAColorScheme().background, RoundedCornerShape(cornerSize))
+            Surface(
+
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.align(Alignment.Center).height(180.dp).width(400.dp).zIndex(5f),
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top,
                 ) {
-                    Column(
-                        Modifier.align(Alignment.Center)
-                            .heightIn(0.dp, 500.dp)
-                            .fillMaxSize()
-                            .zIndex(4f),
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                    Text(
+                        text = "Import Settings",
+                        color = Color.LightGray,
+                        textAlign = TextAlign.Start,
+                        fontSize = TextUnit(24f, TextUnitType.Sp),
+                        lineHeight = TextUnit(60f, TextUnitType.Sp)
+                    )
+                    Spacer(Modifier.height(10.dp))
+                    Text(
+                        text = "This will import the options.txt file from your .minecraft directory.",
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                        fontSize = TextUnit(16f, TextUnitType.Sp),
+                        lineHeight = TextUnit(20f, TextUnitType.Sp)
+                    )
+                    Spacer(Modifier.height(20.dp))
+                    Row(
+                        verticalAlignment = Alignment.Bottom,
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
-                            "Do you want to import your settings?",
-                            modifier = Modifier.align(Alignment.CenterHorizontally).offset(0.dp, 10.dp)
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.Top,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
+                        TextButton(
+                            onClick = {
+                                (Dirs.minecraft / "options.txt").toFile().copyTo(options)
+                                showPopup = !showPopup
+                            }
                         ) {
-
-                            Button(
-                                modifier = Modifier.align(Alignment.CenterVertically),
-                                onClick = {
-                                    (Dirs.minecraft / "options.txt").toFile()
-                                        .copyTo((Dirs.mineinabyss / "options.txt").toFile())
-                                    showPopup = !showPopup
-                                }
-                            ) {
-                                Icon(Icons.Rounded.Download, contentDescription = "Import Settings")
-                                Text("Import Settings")
-                            }
-                            Spacer(Modifier.width(10.dp))
-                            Button(
-                                modifier = Modifier.align(Alignment.CenterVertically),
-                                onClick = { showPopup = !showPopup },
-                            ) {
-                                Icon(Icons.Rounded.Close, contentDescription = "Dont Import")
-                                Text("Dont Import")
-                            }
+                            Text("Import")
+                        }
+                        TextButton(
+                            onClick = { showPopup = !showPopup }
+                        ) {
+                            Text("Dont Import")
                         }
                     }
                 }
@@ -216,34 +202,27 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         }
 
         Column(
+            modifier =
             Modifier.align(Alignment.Center)
                 .heightIn(0.dp, 500.dp)
                 .fillMaxSize()
-                .zIndex(4f),
+                .zIndex(4f).then(
+                    if (showPopup) Modifier.blur(10.dp)
+                    else Modifier
+                ),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 painter = painterResource("mia_profile_icon.png"),
                 contentDescription = "Mine in Abyss logo",
-                modifier =
-                if (showPopup) Modifier
-                    .widthIn(0.dp, 500.dp)
-                    .fillMaxSize()
-                    .weight(3f)
-                    .blur(5.dp, BlurredEdgeTreatment.Rectangle)
-                else Modifier
-                    .widthIn(0.dp, 500.dp)
-                    .fillMaxSize()
-                    .weight(3f),
+                modifier = Modifier.widthIn(0.dp, 500.dp).fillMaxSize().weight(3f),
                 contentScale = ContentScale.FillWidth
             )
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Top,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
+                modifier = Modifier.fillMaxWidth().weight(1f),
             ) {
                 val state = LocalLaunchyState
                 InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid && !showPopup)
@@ -251,9 +230,6 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                 var toggled by remember { mutableStateOf(false) }
                 AnimatedVisibility(state.operationsQueued) {
                     Button(
-                        modifier =
-                        if (showPopup) Modifier.blur(2.dp, BlurredEdgeTreatment.Unbounded)
-                        else Modifier,
                         enabled = !showPopup,
                         onClick = { toggled = !toggled })
                     {
@@ -263,7 +239,7 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                                 Text("${state.queuedDownloads.size + state.queuedDeletions.size} Updates")
                             }
 
-                            androidx.compose.animation.AnimatedVisibility(
+                            AnimatedVisibility(
                                 toggled,
                                 enter = expandIn(tween(200)) + fadeIn(tween(200, 100)),
                                 exit = fadeOut() + shrinkOut(tween(200, 100))
@@ -301,9 +277,6 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
 //                NewsButton(hasUpdates = true)
 //                Spacer(Modifier.width(10.dp))
                 Button(
-                    modifier =
-                    if (showPopup) Modifier.blur(2.dp, BlurredEdgeTreatment.Unbounded)
-                    else Modifier,
                     enabled = !showPopup,
                     onClick = onSettings
                 ) {
