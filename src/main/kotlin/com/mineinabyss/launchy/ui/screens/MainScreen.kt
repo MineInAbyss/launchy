@@ -20,6 +20,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -27,13 +29,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.zIndex
 import com.mineinabyss.launchy.AppTopBar
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.TopBar
+import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.rememberMIAColorScheme
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
+import kotlin.io.path.div
+import kotlin.io.path.exists
 
 sealed class Screen(val transparentTopBar: Boolean = false) {
     object Default : Screen(transparentTopBar = true)
@@ -128,16 +135,86 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         Color.Transparent,
         MaterialTheme.colorScheme.background,
     )
+    var showPopup by remember {
+        mutableStateOf(!(Dirs.mineinabyss / "optionss.txt").toFile().exists() && Dirs.minecraft.exists())
+    }
+
     Box {
         windowScope.WindowDraggableArea {
             Image(
                 painter = painterResource("mia_render.jpg"),
                 contentDescription = "Main render",
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier =
+                if (showPopup) {
+                    Modifier
+                        .fillMaxSize()
+                        .blur(10.dp, 10.dp, BlurredEdgeTreatment.Rectangle)
+                } else Modifier
+                    .fillMaxSize()
             )
         }
+
+
+        if (showPopup) {
+            Popup(
+                alignment = Alignment.Center,
+                focusable = true,
+                ) {
+                val popupWidth = 400.dp
+                val popupHeight = 120.dp
+                val cornerSize = 16.dp
+
+                Box(
+                    Modifier
+                        .size(popupWidth, popupHeight)
+                        .background(rememberMIAColorScheme().background, RoundedCornerShape(cornerSize))
+                ) {
+                    Column(
+                        Modifier.align(Alignment.Center)
+                            .heightIn(0.dp, 500.dp)
+                            .fillMaxSize()
+                            .zIndex(4f),
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            "Do you want to import your settings?",
+                            modifier = Modifier.align(Alignment.CenterHorizontally).offset(0.dp, 10.dp)
+                        )
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            verticalAlignment = Alignment.Top,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f),
+                        ) {
+
+                            Button(
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                                onClick = {
+                                    (Dirs.minecraft / "options.txt").toFile()
+                                        .copyTo((Dirs.mineinabyss / "optionsss.txt").toFile())
+                                    showPopup = !showPopup
+                                }
+                            ) {
+                                Icon(Icons.Rounded.Download, contentDescription = "Import Settings")
+                                Text("Import Settings")
+                            }
+                            Spacer(Modifier.width(10.dp))
+                            Button(
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                                onClick = { showPopup = !showPopup },
+                            ) {
+                                Icon(Icons.Rounded.Close, contentDescription = "Dont Import")
+                                Text("Dont Import")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         Column(
             Modifier.align(Alignment.Center)
                 .heightIn(0.dp, 500.dp)
@@ -149,7 +226,13 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
             Image(
                 painter = painterResource("mia_profile_icon.png"),
                 contentDescription = "Mine in Abyss logo",
-                modifier = Modifier
+                modifier =
+                if (showPopup) Modifier
+                    .widthIn(0.dp, 500.dp)
+                    .fillMaxSize()
+                    .weight(3f)
+                    .blur(5.dp, BlurredEdgeTreatment.Rectangle)
+                else Modifier
                     .widthIn(0.dp, 500.dp)
                     .fillMaxSize()
                     .weight(3f),
@@ -163,11 +246,17 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                     .weight(1f),
             ) {
                 val state = LocalLaunchyState
-                InstallButton()
+                InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid && !showPopup)
                 Spacer(Modifier.width(10.dp))
                 var toggled by remember { mutableStateOf(false) }
                 AnimatedVisibility(state.operationsQueued) {
-                    Button(onClick = { toggled = !toggled }) {
+                    Button(
+                        modifier =
+                        if (showPopup) Modifier.blur(2.dp, BlurredEdgeTreatment.Unbounded)
+                        else Modifier,
+                        enabled = !showPopup,
+                        onClick = { toggled = !toggled })
+                    {
                         Column() {
                             Row {
                                 Icon(Icons.Rounded.Update, contentDescription = "Updates")
@@ -211,7 +300,13 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                 Spacer(Modifier.width(10.dp))
 //                NewsButton(hasUpdates = true)
 //                Spacer(Modifier.width(10.dp))
-                Button(onClick = onSettings) {
+                Button(
+                    modifier =
+                    if (showPopup) Modifier.blur(2.dp, BlurredEdgeTreatment.Unbounded)
+                    else Modifier,
+                    enabled = !showPopup,
+                    onClick = onSettings
+                ) {
                     Icon(Icons.Rounded.Settings, contentDescription = "Settings")
                     Text("Settings")
                 }
@@ -263,11 +358,11 @@ fun ActionButton(shown: Boolean, icon: ImageVector, desc: String, extra: String 
 }
 
 @Composable
-fun InstallButton() {
+fun InstallButton(enabled: Boolean) {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
     Button(
-        enabled = !state.isDownloading && state.operationsQueued && state.minecraftValid,
+        enabled = enabled,
         onClick = {
             coroutineScope.launch { state.install() }
         },
@@ -307,7 +402,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(6.dp)
         ) {
-            InstallButton()
+            InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
             Spacer(Modifier.width(10.dp))
 
             ActionButton(
