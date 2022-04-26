@@ -52,7 +52,15 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
       desc: Library dependency for LoadMyResources and FancyMenu
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.3_MC_1.18-1.18.1.jar
-
+    
+    - name: FeaturedServers
+      license: MIT
+      homepage: https://modrinth.com/mod/featuredserversfabric
+      desc: Ship servers without modifying servers.dat
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/featuredservers-1.18.2.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FeaturedServerConfig1.zip
+      forceConfigDownload: true
+    
     - name: Resclone
       license: MIT
       homepage: https://modrinth.com/mod/resclone
