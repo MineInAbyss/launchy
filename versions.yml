@@ -179,6 +179,12 @@ modGroups:
       desc: Shaders for fabric
       url: https://github.com/IrisShaders/Iris/releases/download/1.18.x-v1.2.3/iris-mc1.18.2-1.2.3-build.35.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
+    
+    - name: Distant Horizons
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/distanthorizons
+      desc: Leve-Of-Detail mod to allow for better performance and higher render-distance
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.3a-1.18.2/DistantHorizons-1.6.3a-1.18.2.jar
 
     - name: Falling leaves
       license: MIT
@@ -391,9 +397,3 @@ modGroups:
       homepage: https://modrinth.com/mod/invmove-fabric
       desc: Allows you to walk around while in your inventory
       url: https://github.com/PieKing1215/InvMove/releases/download/v0.6.1/InvMove-1.18-0.6.1-Fabric.jar
-
-    - name: Distant Horizons
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/distanthorizons
-      desc: Leve-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.1a-1.18.1/DistantHorizons-1.6.1a-1.18.1.jar
