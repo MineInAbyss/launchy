@@ -185,7 +185,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x-v1.2.3/iris-mc1.18.2-1.2.3-build.35.jar
+      url: https://github.com/IrisShaders/Iris/releases/download/1.18.x-v1.2.4/iris-mc1.18.2-1.2.4-build.38.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
     
     - name: Distant Horizons
