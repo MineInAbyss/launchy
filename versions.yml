@@ -97,6 +97,12 @@ modGroups:
       homepage: https://github.com/HibiscusMC/armor-stand-interpolation
       desc: Interpolates armor stands for smoother ModelEngine animations
       url: https://github.com/HibiscusMC/armor-stand-interpolation/releases/download/1.0/armor-stand-interpolation-1.0.jar
+    
+    - name: Satin
+      license: LGPL-3
+      homepage: https://github.com/Ladysnake/Satin/
+      desc: Dependency for Movement Vision
+      url: https://github.com/Ladysnake/Satin/releases/download/1.7.2/satin-1.7.2.jar
 
   Performance:
     - name: Sodium
