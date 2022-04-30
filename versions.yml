@@ -9,6 +9,8 @@ groups:
   - name: Audio Enhancements
   - name: HUD & Menu Enhancements
   - name: Misc Enhancements
+  - name: MineInAbyss Enhancements
+    enabledByDefault: true
   - name: Outdated/Disabled
     forceDisabled: true
 modGroups:
@@ -333,14 +335,7 @@ modGroups:
       desc: Alternative menu for Sodium
       url: https://github.com/FlashyReese/reeses-sodium-options/releases/download/mc1.18.2-1.4.2/reeses_sodium_options-mc1.18.2-1.4.2.jar
 
-  Misc Enhancements:
-    - name: Movement Vision
-      license: LPGL-3
-      homepage: https://modrinth.com/mod/movement-vision
-      desc: Alternative curse for Layer 5 Blindness
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/movement-vision-1.1.0.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/MovementVisionConfig_1.0.zip
-      
+  Misc Enhancements:     
     - name: Sodium Extra
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
@@ -401,6 +396,14 @@ modGroups:
       homepage: https://modrinth.com/mod/dcch
       desc: Prevents chat-history from being cleared on leaving a server
       url: https://cdn.modrinth.com/data/sUbMm93i/versions/2.0+1.17/DCCH-2.0+1.17.jar
+  
+  MineInAbyss Enhancements:
+    - name: Movement Vision
+      license: LPGL-3
+      homepage: https://modrinth.com/mod/movement-vision
+      desc: Alternative curse for Layer 5 Blindness
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/movement-vision-1.1.0.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/MovementVisionConfig_1.0.zip
 
   Outdated/Disabled:
     - name: InvMove
