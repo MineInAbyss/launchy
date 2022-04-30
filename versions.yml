@@ -10,7 +10,7 @@ groups:
   - name: HUD & Menu Enhancements
   - name: Misc Enhancements
   - name: MineInAbyss Enhancements
-    enabledByDefault: true
+    enabledByDefault: false
   - name: Outdated/Disabled
     forceDisabled: true
 modGroups:
