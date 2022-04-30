@@ -176,10 +176,6 @@ modGroups:
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.6+1.18.2/enhancedblockentities-0.6%2B1.18.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.properties
 
-    #    - name: !!!Farsight
-    #      desc: Increased view distance.
-    #      url: UNLICENSED, NOT OPEN SOURCE
-
   Visual Enhancements:
     - name: Iris shaders
       license: LGPL-3
@@ -338,6 +334,13 @@ modGroups:
       url: https://github.com/FlashyReese/reeses-sodium-options/releases/download/mc1.18.2-1.4.2/reeses_sodium_options-mc1.18.2-1.4.2.jar
 
   Misc Enhancements:
+    - name: Movement Vision
+      license: LPGL-3
+      homepage: https://modrinth.com/mod/movement-vision
+      desc: Alternative curse for Layer 5 Blindness
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/movement-vision-1.1.0.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/MovementVisionConfig_1.0.zip
+      
     - name: Sodium Extra
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
