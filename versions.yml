@@ -122,12 +122,6 @@ modGroups:
       homepage: https://modrinth.com/mod/lazydfu
       desc: Makes the game start more quickly
       url: https://github.com/astei/lazydfu/releases/download/0.1.2/lazydfu-0.1.2.jar
-    
-    - name: Dashloader
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/dashloader
-      desc: Improves asset loading times greatly
-      url: https://cdn.modrinth.com/data/ZfQ3kTvR/versions/3.1.1+1.18/dashloader-def-3.1.1%2B1.18.jar
 
     - name: Lithium
       license: LGPL-3
@@ -417,3 +411,9 @@ modGroups:
       homepage: https://modrinth.com/mod/invmove-fabric
       desc: Allows you to walk around while in your inventory
       url: https://github.com/PieKing1215/InvMove/releases/download/v0.6.1/InvMove-1.18-0.6.1-Fabric.jar
+    
+    - name: Dashloader
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/dashloader
+      desc: Improves asset loading times greatly
+      url: https://cdn.modrinth.com/data/ZfQ3kTvR/versions/3.1.1+1.18/dashloader-def-3.1.1%2B1.18.jar
