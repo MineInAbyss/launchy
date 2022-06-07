@@ -19,7 +19,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://github.com/FabricMC/fabric/releases/download/0.55.2%2B1.19/fabric-api-0.55.2+1.19.jar
+      url: https://github.com/FabricMC/fabric/releases/download/0.55.3%2B1.19/fabric-api-0.55.3+1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/GenericStuff_1.0.zip
       forceConfigDownload: true
 
@@ -27,7 +27,7 @@ modGroups:
       license: LGPL-3
       homepage: https://github.com/shedaniel/cloth-config/
       desc: A config API used by many mods
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/cloth-config-6.2.57-fabric.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/cloth-config-7.0.65-fabric.jar
 
     - name: Mod menu
       license: MIT
@@ -39,13 +39,13 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://github.com/comp500/Indium/releases/download/1.0.3%2Bmc1.18.2/indium-1.0.3+mc1.18.2.jar
+      url: https://github.com/comp500/Indium/releases/download/1.0.4%2Bmc1.19/indium-1.0.4+mc1.19.jar
 
     - name: Load My Resources
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
       desc: Pre-loads the resourcepack and other assets on launch.
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1-1_MC_1.18.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1_MC_1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LoadMyResources_1.0.zip
       forceConfigDownload: true
 
@@ -53,21 +53,26 @@ modGroups:
       license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
       desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.3_MC_1.18-1.18.1.jar
-    
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.3_MC_1.19.jar
+
+    - name: Auudio
+      license: GPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/auudio-fabric
+      desc: Library dependency for DrippyLoadingScreen
+
     - name: FeaturedServers
       license: MIT
       homepage: https://modrinth.com/mod/featuredserversfabric
       desc: Ship servers without modifying servers.dat
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/featuredservers-1.18.2.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/featuredservers-1.19-1.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FeaturedServerConfig1.zip
       forceConfigDownload: true
-    
+
     - name: Resclone
       license: MIT
       homepage: https://modrinth.com/mod/resclone
       desc: Downloads and updates resourcepacks automatically
-      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.8.1/resclone-1.8.1.jar
+      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.9.0/resclone-1.9.0.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_1.0.zip
       forceConfigDownload: true
 
@@ -97,12 +102,24 @@ modGroups:
       homepage: https://github.com/HibiscusMC/armor-stand-interpolation
       desc: Interpolates armor stands for smoother ModelEngine animations
       url: https://github.com/HibiscusMC/armor-stand-interpolation/releases/download/1.0/armor-stand-interpolation-1.0.jar
-    
+
     - name: Satin
       license: LGPL-3
       homepage: https://github.com/Ladysnake/Satin/
       desc: Dependency for Movement Vision
       url: https://github.com/Ladysnake/Satin/releases/download/1.7.2/satin-1.7.2.jar
+
+    - name: NoRpErrorMsg
+      license: MIT
+      homepage: https://modrinth.com/mod/no-resource-pack-warnings
+      desc: Get rid of the scary red borders around outdated resource packs
+      url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
+
+    - name: ClearSkies
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/clear-skies
+      desc: Removes the banding at the horizon of Vanilla Minecraft
+      url: https://github.com/grondag/clear-skies/releases/download/fabric-mc119-2.0.93/clear-skies-fabric-mc119-2.0.93.jar
 
   Performance:
     - name: Sodium
@@ -115,13 +132,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/starlight
       desc: Rewrites light engine to reduces chunk load stuttering
-      url: https://cdn.modrinth.com/data/H8CaAYZC/versions/1.0.2+1.18.2/starlight-1.0.2+fabric.89b8d9f.jar
+      url: https://cdn.modrinth.com/data/H8CaAYZC/versions/1.1.0+1.19/starlight-1.1.0%2Bfabric.eb9df34.jar
 
     - name: LazyDFU
       license: MIT
       homepage: https://modrinth.com/mod/lazydfu
       desc: Makes the game start more quickly
-      url: https://github.com/astei/lazydfu/releases/download/0.1.2/lazydfu-0.1.2.jar
+      url: https://github.com/astei/lazydfu/releases/download/v0.1.3/lazydfu-0.1.3.jar
 
     - name: Lithium
       license: LGPL-3
@@ -133,7 +150,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/krypton
       desc: Optimizes Minecrafts networking stack
-      url: https://github.com/astei/krypton/releases/download/v0.1.9/krypton-0.1.9.jar
+      url: https://github.com/astei/krypton/releases/download/v0.2.0/krypton-0.2.0.jar
 
     - name: FerriteCore
       license: MIT
@@ -145,13 +162,13 @@ modGroups:
       license: MIT
       homepage: https://github.com/tr7zw/EntityCulling
       desc: Skips rendering Tiles/Entities that are not visible.
-      url: https://github.com/tr7zw/EntityCulling/releases/download/1.5.0-1.8/entityculling-forge-mc1.8.9-1.5.0.jar
+      url: https://cdn.modrinth.com/data/NNAgCjsB/versions/1.5.2-fabric-1.19/entityculling-fabric-1.5.2-mc1.19.jar
 
     - name: Cull Leaves
       license: MIT
       homepage: https://modrinth.com/mod/cull-leaves
       desc: Adds culling to leaf blocks
-      url: https://github.com/TeamMidnightDust/CullLeaves/releases/download/v2.3.2/cullleaves-2.3.2.jar
+      url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.4/cullleaves-2.3.4.jar
 
     - name: C2ME
       license: MIT
@@ -170,13 +187,19 @@ modGroups:
       homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
       desc: Improves loading times when changing worlds
       url: https://github.com/kennytv/kennytvs-epic-force-close-loading-screen-mod-for-fabric/releases/download/1.1.0/forcecloseloadingscreen-1.1.0.jar
-    
+
     - name: Enhanced Block Entities
       license: LGPL-3
       homepage: https://modrinth.com/mod/ebe
       desc: Makes blocks like chests render faster and nicer
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.6+1.18.2/enhancedblockentities-0.6%2B1.18.2.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.properties
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.zip
+
+    - name: Memory Leak Fix
+      license: LGPL-2.1
+      homepage: https://modrinth.com/mod/memoryleakfix
+      desc: Fixes multiple memory leaks
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.4.0/memoryleakfix-1.19-0.4.0.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -196,14 +219,14 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.10.0/fallingleaves-1.10.0%2B1.18.2.jar
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/1.12.0/fallingleaves-1.12.0%2B1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
 
     - name: Continuity
       license: LGPL-3
       homepage: https://modrinth.com/mod/continuity
       desc: Provides default connected textures
-      url: https://cdn.modrinth.com/data/1IjD5062/versions/1.1.0+1.18.2/continuity-1.1.0%2B1.18.2.jar
+      url: https://github.com/PepperCode1/Continuity/releases/download/v2.0.0%2B1.19/continuity-2.0.0+1.19.jar
 
     - name: LambdaBetterGrass
       license: MIT
@@ -221,7 +244,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/visuality/versions
       desc: Adds a bunch of new particles
-      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/0.4.2/visuality-0.4.2.jar
+      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/0.5.0/visuality-0.5.0.jar
 
     - name: Effective
       desc: Cool splash effects for lava, water and waterfalls.
@@ -231,7 +254,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fabricskyboxes
       desc: Adds custom skybox support to Fabric
-      url: https://github.com/AMereBagatelle/fabricskyboxes/releases/download/0.5.5/fabricskyboxes-1.18.2-0.5.5.jar
+      url: https://github.com/AMereBagatelle/fabricskyboxes/releases/download/0.5.6/fabricskyboxes-1.19-0.5.6.jar
 
     - name: First Person Models
       license: MIT
@@ -243,7 +266,7 @@ modGroups:
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/not-enough-animations
       desc: Adds missing animations from third-person to first-person
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/notenoughanimations-fabric-1.4.0-mc1.18-pre1.jar
+      url: https://cdn.modrinth.com/data/MPCX6s5C/versions/1.6.0-fabric-1.19/notenoughanimations-fabric-1.6.0-mc1.19.jar
 
     - name: Physics Mod
       license: AAR
@@ -275,7 +298,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/plasmo-voice
       desc: Proximity Voice Chat for Minecraft
-      url: https://github.com/plasmoapp/plasmo-voice/releases/download/1.2.11/plasmovoice-fabric-1.18.2-1.2.11-hotfix1.jar
+      url: https://cdn.modrinth.com/data/1bZhdhsH/versions/fabric-1.19-1.2.14/plasmovoice-fabric-1.19-1.2.14.jar
 
     - name: ExtraSounds
       license: CC0
@@ -284,6 +307,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/uPWCQrVL/versions/2.2.1/extrasounds-2.2.1%2B1.18.2.jar
 
   HUD & Menu Enhancements:
+    - name: ToolTipTweaks
+      license: MIT
+      homepage: https://modrinth.com/mod/tooltiptweaks
+      desc: Adds new tooltips and improves existing tooltips
+      url: https://github.com/bunten2005/tooltiptweaks-mod/releases/download/v1.1.0/tooltiptweaks-1.1.0.jar
+
     - name: Detailed Armor Bar
       license: MIT
       homepage: https://modrinth.com/mod/detail-armor-bar/
@@ -294,7 +323,7 @@ modGroups:
       license: The Unlicense
       homepage: https://modrinth.com/mod/appleskin
       desc: Improvements to food/hunger related HUD elements
-      url: https://github.com/squeek502/AppleSkin/releases/download/v2.4.0/appleskin-fabric-mc1.18.2-2.4.0.jar
+      url: https://github.com/squeek502/AppleSkin/releases/download/v2.4.0/appleskin-fabric-mc1.19-2.4.0.jar
 
     - name: Status Effect Timer
       license: LGPL-3
@@ -306,7 +335,7 @@ modGroups:
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/drippy-loading-screen-fabric
       desc: Lets you customize Minecrafts loading screen
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/drippyloadingscreen_fabric_1.5.1_MC_1.18-1.18.1.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/drippyloadingscreen_fabric_1.6.3_MC_1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DrippyLoadingScreen_1.0.zip
 
     - name: Blur
@@ -326,27 +355,27 @@ modGroups:
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
       desc: Customizes game menus
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.6.4_MC_1.18.2.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.7.2_MC_1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenu_1.0.zip
     
     - name: Reese's Sodium Options
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://github.com/FlashyReese/reeses-sodium-options/releases/download/mc1.18.2-1.4.2/reeses_sodium_options-mc1.18.2-1.4.2.jar
+      url: https://github.com/FlashyReese/reeses-sodium-options/releases/download/mc1.19-1.4.3/reeses_sodium_options-1.4.3+mc1.19-build.43.jar
 
-  Misc Enhancements:     
+  Misc Enhancements:
     - name: Sodium Extra
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
       url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.19-0.4.5/sodium-extra-0.4.5+mc1.19-build.43.jar
 
-    - name: OK Zoomer
+    - name: Logical Zoom
       license: MIT
-      homepage: https://modrinth.com/mod/ok-zoomer
-      desc: Lets you zoom in by pressing a button
-      url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.6%2B1.18.2/okzoomer-5.0.0-beta.6+1.18.2.jar
+      homepage: https://modrinth.com/mod/logical-zoom
+      desc: Adds a configurable zoom key.
+      url: https://github.com/LogicalGeekBoy/logical_zoom/releases/download/v0.0.15/logical_zoom-0.0.15.jar
 
     - name: Fabrishot
       license: MIT
@@ -406,12 +435,18 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/MovementVisionConfig_1.0.zip
 
   Outdated/Disabled:
+    - name: OK Zoomer
+        license: MIT
+        homepage: https://modrinth.com/mod/ok-zoomer
+        desc: Lets you zoom in by pressing a button
+        url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.6%2B1.18.2/okzoomer-5.0.0-beta.6+1.18.2.jar
+
     - name: InvMove
       license: LGPL-3
       homepage: https://modrinth.com/mod/invmove-fabric
       desc: Allows you to walk around while in your inventory
       url: https://github.com/PieKing1215/InvMove/releases/download/v0.6.1/InvMove-1.18-0.6.1-Fabric.jar
-    
+
     - name: Dashloader
       license: LGPL-3
       homepage: https://modrinth.com/mod/dashloader
