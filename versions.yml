@@ -136,6 +136,12 @@ modGroups:
       desc: Interpolates armor stands for smoother ModelEngine animations
       url: https://github.com/HibiscusMC/armor-stand-interpolation/releases/download/1.1/armor-stand-interpolation-1.1.jar
 
+    - name: FabricKotlinLanguage
+      license: APACHE
+      homepage: https://modrinth.com/mod/fabric-language-kotlin
+      desc: Language Dependency for some mods
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/1.8.0+kotlin.1.7.0/fabric-language-kotlin-1.8.0%2Bkotlin.1.7.0.jar
+
   Performance:
     - name: Starlight
       license: LGPL-3
