@@ -197,6 +197,13 @@ modGroups:
       desc: Removes light-update when unloading chunks to fix lag spikes
       url: https://github.com/mjwells2002/ForgetMeChunk/releases/download/1.0.4/forgetmechunk-1.0.4-1.18.X-1.19.X.jar
 
+    - name: Enhanced Block Entities
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/ebe
+      desc: Makes blocks like chests render faster and nicer
+      url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.7+1.19/enhancedblockentities-0.7%2B1.19.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.zip
+
   Visual Enhancements:
     - name: Iris shaders
       license: LGPL-3
@@ -468,13 +475,6 @@ modGroups:
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/featuredservers-1.19-1.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FeaturedServerConfig1.zip
       forceConfigDownload: true
-
-    - name: Enhanced Block Entities
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/ebe
-      desc: Makes blocks like chests render faster and nicer
-      url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.6+1.18.2/enhancedblockentities-0.6%2B1.18.2.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.zip
 
     - name: Sound Physics Remastered
       license: GPL-3
