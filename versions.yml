@@ -367,11 +367,11 @@ modGroups:
       desc: Extra features not available in Sodium
       url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.19-0.4.5/sodium-extra-0.4.5+mc1.19-build.43.jar
 
-    - name: Logical Zoom
-      license: MIT
-      homepage: https://modrinth.com/mod/logical-zoom
+    - name: Zoomify
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/zoomify
       desc: Adds a configurable zoom key.
-      url: https://github.com/LogicalGeekBoy/logical_zoom/releases/download/v0.0.15/logical_zoom-0.0.15.jar
+      url: https://github.com/isXander/Zoomify/releases/download/1.7.0/Zoomify-1.7.0.jar
 
     - name: Fabrishot
       license: MIT
