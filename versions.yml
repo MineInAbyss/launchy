@@ -5,12 +5,14 @@ groups:
     forceEnabled: true
   - name: Performance
     enabledByDefault: true
+  - name: Voice Chat
   - name: Visual Enhancements
   - name: Audio Enhancements
   - name: HUD & Menu Enhancements
   - name: Misc Enhancements
   - name: MineInAbyss Enhancements
     enabledByDefault: false
+  - name: Developer Tools
   - name: Outdated/Disabled
     forceDisabled: true
 modGroups:
@@ -149,17 +151,23 @@ modGroups:
       desc: Rewrites light engine to reduces chunk load stuttering
       url: https://cdn.modrinth.com/data/H8CaAYZC/versions/1.1.1+1.19/starlight-1.1.1%2Bfabric.ae22326.jar
 
+    - name: Lithium
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/lithium
+      desc: General-purpose performance enhancements
+      url: https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.19-0.8.0/lithium-fabric-mc1.19-0.8.0.jar
+
     - name: LazyDFU
       license: MIT
       homepage: https://modrinth.com/mod/lazydfu
       desc: Makes the game start more quickly
       url: https://github.com/astei/lazydfu/releases/download/v0.1.3/lazydfu-0.1.3.jar
 
-    - name: Lithium
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/lithium
-      desc: General-purpose performance enhancements
-      url: https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.19-0.8.0/lithium-fabric-mc1.19-0.8.0.jar
+    - name: Smooth Boot
+      license: MIT
+      desc: Improves boot CPU usage and times
+      homepage: https://modrinth.com/mod/smoothboot-fabric
+      url: https://cdn.modrinth.com/data/FWumhS4T/versions/1.19-1.7.1/smoothboot-fabric-1.19-1.7.1.jar
 
     - name: Krypton
       license: LGPL-3
@@ -173,17 +181,36 @@ modGroups:
       desc: Optimizes memory usage
       url: https://cdn.modrinth.com/data/uXXizFIs/versions/5.0.0-fabric/ferritecore-5.0.0-fabric.jar
 
+    - name: Memory Leak Fix
+      license: LGPL-2.1
+      homepage: https://modrinth.com/mod/memoryleakfix
+      desc: Fixes random memory leaks
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.4.1/memoryleakfix-1.19-0.4.1.jar
+
     - name: Entity Culling
       license: MIT
       homepage: https://github.com/tr7zw/EntityCulling
       desc: Skips rendering Tiles/Entities that are not visible.
       url: https://cdn.modrinth.com/data/NNAgCjsB/versions/1.5.2-fabric-1.19/entityculling-fabric-1.5.2-mc1.19.jar
 
-    - name: Cull Leaves
-      license: MIT
-      homepage: https://modrinth.com/mod/cull-leaves
-      desc: Adds culling to leaf blocks
-      url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.4/cullleaves-2.3.4.jar
+    - name: Cull Less Leaves
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/cull-less-leaves
+      desc: Cull leaves while looking hot!
+      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.2/CullLessLeaves-1.0.2.jar
+
+    - name: Enhanced Block Entities
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/ebe
+      desc: Makes blocks like chests render faster and nicer
+      url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.7.1+1.19/enhancedblockentities-0.7.1%2B1.19.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.zip
+
+    - name: ForgetMeChunk
+      license: No License
+      homepage: https://modrinth.com/mod/forgetmechunk
+      desc: Removes light-update when unloading chunks to fix lag spikes
+      url: https://github.com/mjwells2002/ForgetMeChunk/releases/download/1.0.4/forgetmechunk-1.0.4-1.18.X-1.19.X.jar
 
     - name: C2ME
       license: MIT
@@ -197,18 +224,18 @@ modGroups:
       desc: Improves loading times when changing worlds
       url: https://github.com/kennytv/kennytvs-epic-force-close-loading-screen-mod-for-fabric/releases/download/1.1.1/forcecloseloadingscreen-1.1.1.jar
 
-    - name: ForgetMeChunk
-      license: No License
-      homepage: https://modrinth.com/mod/forgetmechunk
-      desc: Removes light-update when unloading chunks to fix lag spikes
-      url: https://github.com/mjwells2002/ForgetMeChunk/releases/download/1.0.4/forgetmechunk-1.0.4-1.18.X-1.19.X.jar
+    - name: Language Reload
+      license: MIT
+      desc: Reduces load times and adds fallbacks for languages
+      homepage: https://modrinth.com/mod/language-reload
+      url: https://cdn.modrinth.com/data/uLbm7CG6/versions/1.3.1/language-reload-1.3.1.jar
 
-    - name: Enhanced Block Entities
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/ebe
-      desc: Makes blocks like chests render faster and nicer
-      url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.7.1+1.19/enhancedblockentities-0.7.1%2B1.19.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.zip
+  Voice Chat:    
+    - name: Simple Voice Chat
+      license: ARR
+      homepage: https://modrinth.com/mod/simple-voice-chat
+      desc: Adds proximity voice chat to the server
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.46/voicechat-fabric-1.19-2.2.46.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -284,12 +311,6 @@ modGroups:
       url: https://minecraftphysicsmod.com/s/physics-mod-281-mc-119-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
-    - name: First Person Models
-      license: MIT
-      homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
-      desc: Enables the third-person model in first-person, making for a more realistic experience
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/firstperson-fabric-2.1.0-mc1.19.jar
-
   Audio Enhancements:
     - name: Sound Physics Remastered
       license: GPL-3
@@ -302,12 +323,6 @@ modGroups:
       homepage: https://modrinth.com/mod/presence-footsteps
       desc: Improved stepping sound effects
       url: https://cdn.modrinth.com/data/rcTfTZr3/versions/1.6.0/PresenceFootsteps-1.6.0.jar
-
-    - name: Simple Voice Chat
-      license: ARR
-      homepage: https://modrinth.com/mod/simple-voice-chat
-      desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.46/voicechat-fabric-1.19-2.2.46.jar
 
     - name: ExtraSounds
       license: CC0
@@ -361,6 +376,12 @@ modGroups:
       url: https://github.com/FlashyReese/reeses-sodium-options/releases/download/mc1.19-1.4.3/reeses_sodium_options-1.4.3+mc1.19-build.43.jar
 
   Misc Enhancements:
+    - name: First Person Models
+      license: MIT
+      homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
+      desc: Enables the third-person model in first-person, making for a more realistic experience
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/firstperson-fabric-2.1.0-mc1.19.jar
+
     - name: Boat Item View
       license: LGPL-3
       homepage: https://modrinth.com/mod/boat-item-view
@@ -372,12 +393,6 @@ modGroups:
       homepage: https://modrinth.com/mod/blur-fabric
       desc: Adds immersive blur to GUI backgrounds
       url: https://github.com/Motschen/Blur/releases/download/v2.5.0/blur-2.5.0.jar
-
-    - name: NBTToolTips
-      license: MIT
-      homepage: https://modrinth.com/mod/nbttooltips
-      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
-      url: https://cdn.modrinth.com/data/FZcOyh3v/versions/0.1.2/nbttooltips-0.1.2-1.19.jar
 
     - name: Sodium Extra
       license: LGPL-3
@@ -434,6 +449,19 @@ modGroups:
       desc: Prevents chat-history from being cleared on leaving a server
       url: https://cdn.modrinth.com/data/sUbMm93i/versions/2.0+1.17/DCCH-2.0+1.17.jar
   
+  Developer Tools:    
+    - name: NBTToolTips
+      license: MIT
+      homepage: https://modrinth.com/mod/nbttooltips
+      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
+      url: https://cdn.modrinth.com/data/FZcOyh3v/versions/0.1.2/nbttooltips-0.1.2-1.19.jar
+    
+    - name: IBE Editor
+      license: MIT
+      homepage: https://modrinth.com/mod/ibe-editor
+      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
+      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/2.1.1+1.19-fabric/IBEEditor-1.19-2.1.1-fabric.jar
+
   #MineInAbyss Enhancements:
 
   Outdated/Disabled:
@@ -487,3 +515,9 @@ modGroups:
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/featuredservers-1.19-1.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FeaturedServerConfig1.zip
       forceConfigDownload: true
+
+    - name: Cull Leaves
+      license: MIT
+      homepage: https://modrinth.com/mod/cull-leaves
+      desc: Adds culling to leaf blocks
+      url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.4/cullleaves-2.3.4.jar
