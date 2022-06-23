@@ -204,7 +204,7 @@ modGroups:
       homepage: https://modrinth.com/mod/ebe
       desc: Makes blocks like chests render faster and nicer
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/0.7.1+1.19/enhancedblockentities-0.7.1%2B1.19.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.0.zip
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
     - name: ForgetMeChunk
       license: No License
@@ -223,12 +223,6 @@ modGroups:
       homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
       desc: Improves loading times when changing worlds
       url: https://github.com/kennytv/kennytvs-epic-force-close-loading-screen-mod-for-fabric/releases/download/1.1.1/forcecloseloadingscreen-1.1.1.jar
-
-    - name: Language Reload
-      license: MIT
-      desc: Reduces load times and adds fallbacks for languages
-      homepage: https://modrinth.com/mod/language-reload
-      url: https://cdn.modrinth.com/data/uLbm7CG6/versions/1.3.1/language-reload-1.3.1.jar
 
   Voice Chat:    
     - name: Simple Voice Chat
