@@ -122,8 +122,13 @@ class LaunchyState(
             }
         for (mod in queuedDeletions) {
             launch(Dispatchers.IO) {
-                mod.file.deleteIfExists()
-                _deleted++
+                try {
+                    mod.file.deleteIfExists()
+                } catch (e: FileSystemException) {
+                    return@launch
+                } finally {
+                    _deleted++
+                }
             }
         }
     }
