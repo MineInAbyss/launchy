@@ -129,7 +129,7 @@ modGroups:
       homepage: https://modrinth.com/mod/desired-servers
       desc: Ship servers without modifying servers.dat
       url: https://cdn.modrinth.com/data/GDpe4LHD/versions/1.19-1.0.1/desiredservers-1.19-1.0.1.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig.zip
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
       forceConfigDownload: true
 
     - name: ArmorStand Interpolation
