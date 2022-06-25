@@ -13,6 +13,8 @@ groups:
   - name: MineInAbyss Enhancements
     enabledByDefault: false
   - name: Developer Tools
+  - name: Dependencies
+    forceEnabled: true
   - name: Outdated/Disabled
     forceDisabled: true
 modGroups:
@@ -21,7 +23,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://github.com/FabricMC/fabric/releases/download/0.56.1%2B1.19/fabric-api-0.56.1+1.19.jar
+      url: https://github.com/FabricMC/fabric/releases/download/0.56.3%2B1.19/fabric-api-0.56.3+1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/GenericStuff_1.0.zip
       forceConfigDownload: true
 
@@ -30,12 +32,6 @@ modGroups:
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
       url: https://github.com/CaffeineMC/sodium-fabric/releases/download/mc1.19-0.4.2/sodium-fabric-mc1.19-0.4.2+build.16.jar
-
-    - name: Cloth config
-      license: LGPL-3
-      homepage: https://github.com/shedaniel/cloth-config/
-      desc: A config API used by many mods
-      url: https://cdn.modrinth.com/data/9s6osm5g/versions/7.0.69/cloth-config-7.0.69-fabric.jar
 
     - name: Mod menu
       license: MIT
@@ -56,32 +52,6 @@ modGroups:
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.8.0-1_MC_1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
-
-    - name: FancyMenu AudioExtension
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/audio-extension-for-fancymenu-fabric
-      desc: Audio Extension for FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fm_audio_extension_fabric_1.1.0_MC_1.19.jar
-
-    - name: Load My Resources
-      license: Special Permission
-      homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
-      desc: Pre-loads the resourcepack and other assets on launch.
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1_MC_1.19.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LoadMyResources_1.0.zip
-      forceConfigDownload: true
-
-    - name: Konkrete
-      license: GPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
-      desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.3_MC_1.19.jar
-
-    - name: Auudio
-      license: GPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/auudio-fabric
-      desc: Library dependency for DrippyLoadingScreen
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auudio_fabric_1.0.3_MC_1.19.jar
 
     - name: Resclone
       license: MIT
@@ -112,12 +82,6 @@ modGroups:
       desc: Client-side mod allowing for plugins to register custom keybinds
       url: https://github.com/ASangarin/MythicKeys/releases/download/1.19-1.2.2/mythickeys-1.2.2-1.19.jar
 
-    - name: Satin
-      license: LGPL-3
-      homepage: https://github.com/Ladysnake/Satin/
-      desc: Dependency for Movement Vision
-      url: https://cdn.modrinth.com/data/fRbqPLg4/versions/1.8.0/satin-1.8.0.jar
-
     - name: NoRpErrorMsg
       license: MIT
       homepage: https://modrinth.com/mod/no-resource-pack-warnings
@@ -137,12 +101,6 @@ modGroups:
       homepage: https://github.com/HibiscusMC/armor-stand-interpolation
       desc: Interpolates armor stands for smoother ModelEngine animations
       url: https://github.com/HibiscusMC/armor-stand-interpolation/releases/download/1.1/armor-stand-interpolation-1.1.jar
-
-    - name: FabricKotlinLanguage
-      license: APACHE
-      homepage: https://modrinth.com/mod/fabric-language-kotlin
-      desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/1.8.0+kotlin.1.7.0/fabric-language-kotlin-1.8.0%2Bkotlin.1.7.0.jar
 
   Performance:
     - name: Starlight
@@ -455,9 +413,66 @@ modGroups:
       homepage: https://modrinth.com/mod/ibe-editor
       desc: Simple GUI Mod to edit an item, a block or an entity in your current world
       url: https://cdn.modrinth.com/data/E9sX1ncV/versions/2.1.1+1.19-fabric/IBEEditor-1.19-2.1.1-fabric.jar
+    
+    - name: RoughlyEnoughItems
+      license: MIT
+      homepage: https://modrinth.com/mod/roughly-enough-items
+      desc: Alternative to Just Enough Items
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.0.493+fabric/RoughlyEnoughItems-9.0.493.jar
 
   #MineInAbyss Enhancements:
 
+  Dependencies:
+    - name: ArchitecturyAPI
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/architectury-api
+      desc: Dependency for RoughlyEnoughItems
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/5.7.28+fabric/architectury-5.7.28-fabric.jar
+    
+    - name: FancyMenu AudioExtension
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/audio-extension-for-fancymenu-fabric
+      desc: Audio Extension for FancyMenu
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fm_audio_extension_fabric_1.1.0_MC_1.19.jar
+
+    - name: Load My Resources
+      license: Special Permission
+      homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
+      desc: Pre-loads the resourcepack and other assets on launch.
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.1_MC_1.19.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LoadMyResources_1.0.zip
+      forceConfigDownload: true
+
+    - name: Konkrete
+      license: GPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
+      desc: Library dependency for LoadMyResources and FancyMenu
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.3.3_MC_1.19.jar
+
+    - name: Auudio
+      license: GPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/auudio-fabric
+      desc: Library dependency for DrippyLoadingScreen
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auudio_fabric_1.0.3_MC_1.19.jar
+    
+    - name: FabricKotlinLanguage
+      license: APACHE
+      homepage: https://modrinth.com/mod/fabric-language-kotlin
+      desc: Language Dependency for some mods
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/1.8.0+kotlin.1.7.0/fabric-language-kotlin-1.8.0%2Bkotlin.1.7.0.jar
+    
+    - name: Satin
+      license: LGPL-3
+      homepage: https://github.com/Ladysnake/Satin/
+      desc: Dependency for Movement Vision
+      url: https://cdn.modrinth.com/data/fRbqPLg4/versions/1.8.0/satin-1.8.0.jar
+    
+    - name: Cloth config
+      license: LGPL-3
+      homepage: https://github.com/shedaniel/cloth-config/
+      desc: A config API used by many mods
+      url: https://cdn.modrinth.com/data/9s6osm5g/versions/7.0.69/cloth-config-7.0.69-fabric.jar
+  
   Outdated/Disabled:
     - name: Movement Vision
       license: LPGL-3
