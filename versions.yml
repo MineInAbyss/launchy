@@ -242,7 +242,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fabricskyboxes
       desc: Adds custom skybox support to Fabric
-      url: https://github.com/AMereBagatelle/fabricskyboxes/releases/download/0.5.6/fabricskyboxes-1.19-0.5.6.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fabricskyboxes-tempfix.jar
 
     - name: ClearSkies
       license: LGPL-3
@@ -418,7 +418,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.500+fabric/RoughlyEnoughItems-9.1.500.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.503+fabric/RoughlyEnoughItems-9.1.503.jar
 
   #MineInAbyss Enhancements:
 
