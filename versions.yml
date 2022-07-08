@@ -187,7 +187,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.48/voicechat-fabric-1.19-2.2.48.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.49/voicechat-fabric-1.19-2.2.49.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -427,7 +427,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/5.7.28+fabric/architectury-5.7.28-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/5.8.29+fabric/architectury-5.8.29-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
