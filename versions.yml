@@ -113,7 +113,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/lithium
       desc: General-purpose performance enhancements
-      url: https://github.com/CaffeineMC/lithium-fabric/releases/download/mc1.19-0.8.0/lithium-fabric-mc1.19-0.8.0.jar
+      url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/mc1.19-0.8.1/lithium-fabric-mc1.19-0.8.1.jar
 
     - name: LazyDFU
       license: MIT
@@ -155,7 +155,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/cull-less-leaves
       desc: Cull leaves while looking hot!
-      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.2/CullLessLeaves-1.0.2.jar
+      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.4/CullLessLeaves-1.0.4.jar
 
     - name: Enhanced Block Entities
       license: LGPL-3
@@ -352,12 +352,6 @@ modGroups:
       desc: Extra features not available in Sodium
       url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.19-0.4.5/sodium-extra-0.4.5+mc1.19-build.43.jar
 
-    - name: OK Zoomer
-      license: MIT
-      homepage: https://modrinth.com/mod/ok-zoomer
-      desc: Lets you zoom in by pressing a button
-      url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.8%2B1.19/ok_zoomer-5.0.0-beta.8+1.19.jar
-
     - name: Fabrishot
       license: MIT
       homepage: https://modrinth.com/mod/fabrishot
@@ -400,6 +394,12 @@ modGroups:
       homepage: https://modrinth.com/mod/dcch
       desc: Prevents chat-history from being cleared on leaving a server
       url: https://cdn.modrinth.com/data/sUbMm93i/versions/2.0+1.17/DCCH-2.0+1.17.jar
+
+    - name: ToolTipFix
+      license: MIT
+      homepage: https://modrinth.com/mod/tooltipfix
+      desc: Stops tooltips that are too large to fit on the screen from running off the screen
+      url: https://cdn.modrinth.com/data/2RKFTmiB/versions/1.0.5-1.19/tooltipfix-1.0.5-1.19.jar
   
   Developer Tools:    
     - name: NBTToolTips
@@ -418,7 +418,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.503+fabric/RoughlyEnoughItems-9.1.503.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.504+fabric/RoughlyEnoughItems-9.1.504.jar
 
   #MineInAbyss Enhancements:
 
@@ -465,7 +465,7 @@ modGroups:
       license: LGPL-3
       homepage: https://github.com/Ladysnake/Satin/
       desc: Dependency for Movement Vision
-      url: https://cdn.modrinth.com/data/fRbqPLg4/versions/1.8.0/satin-1.8.0.jar
+      url: https://cdn.modrinth.com/data/fRbqPLg4/versions/1.9.0/satin-1.9.0.jar
     
     - name: Cloth config
       license: LGPL-3
@@ -530,3 +530,10 @@ modGroups:
       homepage: https://modrinth.com/mod/cull-leaves
       desc: Adds culling to leaf blocks
       url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.4/cullleaves-2.3.4.jar
+
+    - name: OK Zoomer
+      license: MIT
+      homepage: https://modrinth.com/mod/ok-zoomer
+      desc: Lets you zoom in by pressing a button
+      url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.8%2B1.19/ok_zoomer-5.0.0-beta.8+1.19.jar
+
