@@ -37,7 +37,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://github.com/TerraformersMC/ModMenu/releases/download/v4.0.0/modmenu-4.0.0.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/4.0.3/modmenu-4.0.3.jar
 
     - name: Indium
       license: APACHE
@@ -49,7 +49,7 @@ modGroups:
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
       desc: Customizes game menus
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.8.0-1_MC_1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.10.1_MC_1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -187,7 +187,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.49/voicechat-fabric-1.19-2.2.49.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.51/voicechat-fabric-1.19-2.2.51.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -401,24 +401,30 @@ modGroups:
       desc: Stops tooltips that are too large to fit on the screen from running off the screen
       url: https://cdn.modrinth.com/data/2RKFTmiB/versions/1.0.5-1.19/tooltipfix-1.0.5-1.19.jar
   
-  Developer Tools:    
+  Developer Tools:
     - name: NBTToolTips
       license: MIT
       homepage: https://modrinth.com/mod/nbttooltips
       desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
       url: https://cdn.modrinth.com/data/FZcOyh3v/versions/0.1.2/nbttooltips-0.1.2-1.19.jar
-    
+
     - name: IBE Editor
       license: MIT
       homepage: https://modrinth.com/mod/ibe-editor
       desc: Simple GUI Mod to edit an item, a block or an entity in your current world
       url: https://cdn.modrinth.com/data/E9sX1ncV/versions/2.1.1+1.19-fabric/IBEEditor-1.19-2.1.1-fabric.jar
-    
+
     - name: RoughlyEnoughItems
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.504+fabric/RoughlyEnoughItems-9.1.504.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.511+fabric/RoughlyEnoughItems-9.1.511.jar
+
+    - name: VisibleBarriers
+      license: ARR
+      homepage: https://modrinth.com/mod/visible-barriers
+      desc: Allows you to see barriers and other, normally invisible blocks, in the world
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.2/visible-barriers-1.5.2%2B1.19.jar
 
   #MineInAbyss Enhancements:
 
@@ -427,13 +433,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/5.8.29+fabric/architectury-5.8.29-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/5.9.30+fabric/architectury-5.9.30-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/audio-extension-for-fancymenu-fabric
       desc: Audio Extension for FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fm_audio_extension_fabric_1.1.0_MC_1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fm_audio_extension_fabric_1.1.1_MC_1.19.jar
 
     - name: Load My Resources
       license: Special Permission
@@ -471,7 +477,7 @@ modGroups:
       license: LGPL-3
       homepage: https://github.com/shedaniel/cloth-config/
       desc: A config API used by many mods
-      url: https://cdn.modrinth.com/data/9s6osm5g/versions/7.0.69/cloth-config-7.0.69-fabric.jar
+      url: https://cdn.modrinth.com/data/9s6osm5g/versions/7.0.73+fabric/cloth-config-7.0.73-fabric.jar
   
   Outdated/Disabled:
     - name: Movement Vision
