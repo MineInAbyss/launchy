@@ -264,6 +264,12 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Audio Enhancements:
+    - name: Auditory
+      license: MIT
+      homepage: https://modrinth.com/mod/auditory
+      desc: Expands and improves block sounds, item sounds and more
+      url: https://cdn.modrinth.com/data/1LjfkWOR/versions/0.0.2/auditory-0.0.2-1.19.jar
+
     - name: Sound Physics Remastered
       license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered
