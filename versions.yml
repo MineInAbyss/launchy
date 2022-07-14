@@ -289,6 +289,18 @@ modGroups:
       url: https://cdn.modrinth.com/data/uPWCQrVL/versions/2.3.1/extrasounds-2.3.1%2B1.19.jar
 
   HUD & Menu Enhancements:
+    - name: Xaeros Worldmap
+      license: ARR
+      homepage: https://chocolateminecraft.com/worldmap.php
+      desc: Adds a worldmap to the game
+      url: https://chocolateminecraft.com/mods2/worldmap/XaerosWorldMap_1.25.1_Fabric_1.19.jar
+
+    - name: Xaero Minimap
+      license: ARR
+      homepage: https://chocolateminecraft.com/minimap2.php
+      desc: Adds a minimap in the corner of the game
+      url: https://chocolateminecraft.com/mods2/minimapfair/Xaeros_Minimap_FP22.9.3_Fabric_1.19.jar
+
     - name: Status Effect Timer
       license: LGPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/status-effect-timer
