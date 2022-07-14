@@ -293,13 +293,13 @@ modGroups:
       license: ARR
       homepage: https://chocolateminecraft.com/worldmap.php
       desc: Adds a worldmap to the game
-      url: https://chocolateminecraft.com/mods2/worldmap/XaerosWorldMap_1.25.1_Fabric_1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/XaerosWorldMap_1.25.1_Fabric_1.19.jar
 
     - name: Xaero Minimap
       license: ARR
       homepage: https://chocolateminecraft.com/minimap2.php
       desc: Adds a minimap in the corner of the game
-      url: https://chocolateminecraft.com/mods2/minimapfair/Xaeros_Minimap_FP22.9.3_Fabric_1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_FP22.9.3_Fabric_1.19.jar
 
     - name: Status Effect Timer
       license: LGPL-3
