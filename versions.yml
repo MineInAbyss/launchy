@@ -13,7 +13,9 @@ groups:
   - name: MineInAbyss Enhancements
     enabledByDefault: false
   - name: Builder Tools
+    enabledByDefault: false
   - name: Developer Tools
+    enabledByDefault: false
   - name: Dependencies
     forceEnabled: true
   - name: Outdated/Disabled
