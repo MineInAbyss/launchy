@@ -426,12 +426,13 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
       desc: Mod to render schematics and other stuff in-game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19-0.11.3.jar
-    - namme: Scroll for WorldEdit
+
+    - name: Scroll for WorldEdit
       license: MIT
       homepage: https://modrinth.com/mod/scroll-for-worldedit
       desc: Ability to move selection WorldEdit selection with mouse-wheel
       url: https://cdn.modrinth.com/data/2Agd6VfX/versions/1.0.0/scroll-for-worldedit-1.0.0.jar
-    
+
     - name: VisibleBarriers
       license: ARR
       homepage: https://modrinth.com/mod/visible-barriers
