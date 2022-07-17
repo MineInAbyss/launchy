@@ -49,7 +49,7 @@ fun main() {
         ) {
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
-            val scheme = rememberMIAColorScheme()
+            val scheme = rememberMIAColorScheme(0.02f)
             MaterialTheme(colorScheme = scheme) {
                 CompositionLocalProvider(TopBarProvider provides topBarState) {
                     Scaffold {
