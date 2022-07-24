@@ -245,7 +245,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fabricskyboxes
       desc: Adds custom skybox support to Fabric
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fabricskyboxes-tempfix.jar
+      url: https://cdn.modrinth.com/data/YBz7DOs8/versions/0.5.7/fabricskyboxes-1.19-0.5.7.jar
 
     - name: ClearSkies
       license: LGPL-3
@@ -303,6 +303,12 @@ modGroups:
       homepage: https://chocolateminecraft.com/minimap2.php
       desc: Adds a minimap in the corner of the game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_FP22.9.3_Fabric_1.19.jar
+
+    - name: MapInSlot
+      license: MIT
+      homepage: https://modrinth.com/mod/map-in-slot
+      desc: Render filled map in the hotbar/inventory slotsr
+      url: https://cdn.modrinth.com/data/EpKz6cxj/versions/1.0.2/map-in-slot-1.0.2.jar
 
     - name: Status Effect Timer
       license: LGPL-3
@@ -371,7 +377,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://github.com/FlashyReese/sodium-extra-fabric/releases/download/mc1.19-0.4.5/sodium-extra-0.4.5+mc1.19-build.43.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/mc1.19-0.4.6/sodium-extra-0.4.6%2Bmc1.19-build.47.jar
 
     - name: Fabrishot
       license: MIT
@@ -439,7 +445,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/visible-barriers
       desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.2/visible-barriers-1.5.2%2B1.19.jar
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3/visible-barriers-1.5.3%2B1.19.jar
   
   Developer Tools:
     - name: NBTToolTips
