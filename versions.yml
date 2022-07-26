@@ -197,7 +197,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://github.com/IrisShaders/Iris/releases/download/1.19.x-v1.2.5/iris-mc1.19-1.2.5.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/1.19.x-v1.2.6/iris-mc1.19.1-1.2.6.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
 
     - name: Distant Horizons
@@ -263,7 +263,7 @@ modGroups:
       license: AAR
       homepage: https://minecraftphysicsmod.com/
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://minecraftphysicsmod.com/s/physics-mod-281-mc-119-fabric.jar
+      url: https://minecraftphysicsmod.com/s/physics-mod-282-mc-119-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Audio Enhancements:
@@ -355,6 +355,17 @@ modGroups:
       url: https://cdn.modrinth.com/data/Bh37bMuy/versions/mc1.19-1.4.4/reeses_sodium_options-1.4.4%2Bmc1.19-build.47.jar
 
   Misc Enhancements:
+    - name: ColoredAxolotlBuckets
+      license: MIT
+      homepage: https://modrinth.com/mod/colored-axolotl-buckets
+      desc: Allows axolotls in buckets to have their own icon depending on their color and age
+      url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0+1.19/axolotlbuckets-1.1.0%2B1.19.jar
+    - name: EatingAnimation
+      license: MIT
+      homepage: https://modrinth.com/mod/eating-animation
+      desc: Adds eating animations to vanilla foods
+      url: https://cdn.modrinth.com/data/rUgZvGzi/versions/1.9/eating-animation-1.9.jar
+
     - name: First Person Models
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
