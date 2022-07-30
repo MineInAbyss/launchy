@@ -40,7 +40,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/4.0.4/modmenu-4.0.4.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/4.0.5/modmenu-4.0.5.jar
 
     - name: Indium
       license: APACHE
@@ -60,7 +60,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/resclone
       desc: Downloads and updates resourcepacks automatically
-      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.9.0/resclone-1.9.0.jar
+      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/1.9.1/resclone-1.9.1.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_1.0.zip
       forceConfigDownload: true
 
@@ -116,7 +116,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/lithium
       desc: General-purpose performance enhancements
-      url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/mc1.19-0.8.1/lithium-fabric-mc1.19-0.8.1.jar
+      url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/mc1.19.1-0.8.3/lithium-fabric-mc1.19.1-0.8.3.jar
 
     - name: LazyDFU
       license: MIT
@@ -146,7 +146,7 @@ modGroups:
       license: LGPL-2.1
       homepage: https://modrinth.com/mod/memoryleakfix
       desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.5.4/memoryleakfix-1.19-0.5.4.jar
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.6.0/memoryleakfix-1.19.1-0.6.0.jar
 
     - name: Entity Culling
       license: MIT
@@ -177,7 +177,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.8.2+1.19/c2me-fabric-mc1.19-0.2.0%2Balpha.8.2.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.8.33+1.19.1/c2me-fabric-mc1.19.1-0.2.0%2Balpha.8.33.jar
     
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -190,7 +190,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19-2.2.52/voicechat-fabric-1.19-2.2.52.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19.1-2.3.0/voicechat-fabric-1.19.1-2.3.0.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -235,7 +235,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/visuality/versions
       desc: Adds a bunch of new particles
-      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/0.5.0/visuality-0.5.0.jar
+      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/0.5.1/visuality-0.5.1.jar
 
     - name: Effective
       desc: Cool splash effects for lava, water and waterfalls.
@@ -406,7 +406,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/shulkerboxtooltip
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/2M01OLQq/versions/3.0.10+1.19/shulkerboxtooltip-3.0.10%2B1.19.jar
+      url: https://cdn.modrinth.com/data/2M01OLQq/versions/3.1.0+1.19/shulkerboxtooltip-3.1.0%2B1.19.jar
 
     - name: Not Enough Crashes
       license: MIT
@@ -475,7 +475,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.517+fabric/RoughlyEnoughItems-9.1.517.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/8.3.519+fabric/RoughlyEnoughItems-8.3.519.jar
 
   #MineInAbyss Enhancements:
 
@@ -490,7 +490,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/5.10.32+fabric/architectury-5.10.32-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/6.0.34+fabric/architectury-6.0.34-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
@@ -534,7 +534,7 @@ modGroups:
       license: LGPL-3
       homepage: https://github.com/shedaniel/cloth-config/
       desc: A config API used by many mods
-      url: https://cdn.modrinth.com/data/9s6osm5g/versions/7.0.73+fabric/cloth-config-7.0.73-fabric.jar
+      url: https://cdn.modrinth.com/data/9s6osm5g/versions/8.0.75+fabric/cloth-config-8.0.75-fabric.jar
   
   Outdated/Disabled:
     - name: Movement Vision
