@@ -204,7 +204,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.5a-1.19/DistantHorizons-1.6.5a-1.19.jar
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.8a-1.19.1/DistantHorizons-1.6.8a-1.19.1.jar
 
     - name: Falling leaves
       license: MIT
@@ -406,7 +406,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/shulkerboxtooltip
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/2M01OLQq/versions/3.1.0+1.19/shulkerboxtooltip-3.1.0%2B1.19.jar
+      url: https://cdn.modrinth.com/data/2M01OLQq/versions/3.1.1+1.19-fabric/shulkerboxtooltip-3.1.1%2B1.19.jar
 
     - name: Not Enough Crashes
       license: MIT
@@ -490,7 +490,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/6.0.34+fabric/architectury-6.0.34-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/6.0.35+fabric/architectury-6.0.35-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
