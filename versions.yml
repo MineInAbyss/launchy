@@ -134,7 +134,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/krypton
       desc: Optimizes Minecrafts networking stack
-      url: https://github.com/astei/krypton/releases/download/v0.2.0/krypton-0.2.0.jar
+      url: https://cdn.modrinth.com/data/fQEb0iXm/versions/0.2.1/krypton-0.2.1.jar
 
     - name: FerriteCore
       license: MIT
@@ -146,7 +146,7 @@ modGroups:
       license: LGPL-2.1
       homepage: https://modrinth.com/mod/memoryleakfix
       desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.6.0/memoryleakfix-1.19.1-0.6.0.jar
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.7.0/memoryleakfix-1.19.1-0.7.0.jar
 
     - name: Entity Culling
       license: MIT
@@ -400,7 +400,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/clickthrough
       desc: Click through signs and item frames to chests
-      url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/1.19-fabric0.53.3-0.4/clickthrough-1.19-fabric0.53.3-0.4.jar
+      url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/1.19.1-fabric0.58.5-0.4/clickthrough-1.19.1-fabric0.58.5-0.4.jar
 
     - name: Show Backpack Content
       license: MIT
