@@ -34,7 +34,6 @@ fun SettingsScreen() {
                 ) {
                     val lazyListState = rememberLazyListState()
                     LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), lazyListState) {
-
                         items(state.versions.modGroups.toList()) { (group, mods) ->
                             ModGroup(group, mods)
                         }

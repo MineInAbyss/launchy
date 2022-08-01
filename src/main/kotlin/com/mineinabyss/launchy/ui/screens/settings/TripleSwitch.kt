@@ -31,7 +31,7 @@ fun ToggleButtons(
     val offColor = Color.Transparent
     val offTextColor = MaterialTheme.colorScheme.surface
     val forced = group.forceEnabled || group.forceDisabled
-    Surface {
+    Surface(shape = RoundedCornerShape(20.0.dp)) {
         Surface(
             color = MaterialTheme.colorScheme.background,
             shape = RoundedCornerShape(20.0.dp),
