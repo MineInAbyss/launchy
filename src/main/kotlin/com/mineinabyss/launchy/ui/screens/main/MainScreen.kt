@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens
+package com.mineinabyss.launchy.ui.screens.main
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -32,8 +32,11 @@ import androidx.compose.ui.zIndex
 import com.mineinabyss.launchy.AppTopBar
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.TopBar
+import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
+import kotlin.io.path.copyTo
+import kotlin.io.path.div
 
 sealed class Screen(val transparentTopBar: Boolean = false) {
     object Default : Screen(transparentTopBar = true)
@@ -61,7 +64,8 @@ fun Content() {
         TopBar,
         screen.transparentTopBar,
         showBackButton = screen != Screen.Default,
-        onBackButtonClicked = { screen = Screen.Default })
+        onBackButtonClicked = { screen = Screen.Default }
+    )
 }
 
 
@@ -128,17 +132,20 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         Color.Transparent,
         MaterialTheme.colorScheme.background,
     )
+    val state = LocalLaunchyState
+
     Box {
         windowScope.WindowDraggableArea {
             Image(
                 painter = painterResource("mia_render.jpg"),
                 contentDescription = "Main render",
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
             )
         }
+
         Column(
+            modifier =
             Modifier.align(Alignment.Center)
                 .heightIn(0.dp, 500.dp)
                 .fillMaxSize()
@@ -149,32 +156,29 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
             Image(
                 painter = painterResource("mia_profile_icon.png"),
                 contentDescription = "Mine in Abyss logo",
-                modifier = Modifier
-                    .widthIn(0.dp, 500.dp)
-                    .fillMaxSize()
-                    .weight(3f),
+                modifier = Modifier.widthIn(0.dp, 500.dp).fillMaxSize().weight(3f),
                 contentScale = ContentScale.FillWidth
             )
             Row(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Top,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
+                modifier = Modifier.fillMaxWidth().weight(1f),
             ) {
                 val state = LocalLaunchyState
-                InstallButton()
+                InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
                 Spacer(Modifier.width(10.dp))
                 var toggled by remember { mutableStateOf(false) }
                 AnimatedVisibility(state.operationsQueued) {
-                    Button(onClick = { toggled = !toggled }) {
+                    Button(
+                        onClick = { toggled = !toggled })
+                    {
                         Column() {
                             Row {
                                 Icon(Icons.Rounded.Update, contentDescription = "Updates")
                                 Text("${state.queuedDownloads.size + state.queuedDeletions.size} Updates")
                             }
 
-                            androidx.compose.animation.AnimatedVisibility(
+                            AnimatedVisibility(
                                 toggled,
                                 enter = expandIn(tween(200)) + fadeIn(tween(200, 100)),
                                 exit = fadeOut() + shrinkOut(tween(200, 100))
@@ -211,7 +215,9 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                 Spacer(Modifier.width(10.dp))
 //                NewsButton(hasUpdates = true)
 //                Spacer(Modifier.width(10.dp))
-                Button(onClick = onSettings) {
+                Button(
+                    onClick = onSettings
+                ) {
                     Icon(Icons.Rounded.Settings, contentDescription = "Settings")
                     Text("Settings")
                 }
@@ -226,6 +232,24 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                     .fillMaxWidth()
                     .height(maxHeight / 2)
                     .background(Brush.verticalGradient(colors))
+            )
+        }
+
+
+        AnimatedVisibility(
+            !state.handledImportOptions,
+            enter = fadeIn(), exit = fadeOut(),
+            modifier = Modifier.zIndex(5f),
+        ) {
+            ImportSettingsDialog(
+                windowScope,
+                onAccept = {
+                    (Dirs.minecraft / "options.txt").copyTo(Dirs.mineinabyss / "options.txt")
+                    state.handledImportOptions = true
+                },
+                onDecline = {
+                    state.handledImportOptions = true
+                }
             )
         }
     }
@@ -263,11 +287,11 @@ fun ActionButton(shown: Boolean, icon: ImageVector, desc: String, extra: String 
 }
 
 @Composable
-fun InstallButton() {
+fun InstallButton(enabled: Boolean) {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
     Button(
-        enabled = !state.isDownloading && state.operationsQueued && state.minecraftValid,
+        enabled = enabled,
         onClick = {
             coroutineScope.launch { state.install() }
         },
@@ -307,7 +331,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(6.dp)
         ) {
-            InstallButton()
+            InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
             Spacer(Modifier.width(10.dp))
 
             ActionButton(
