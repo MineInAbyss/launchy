@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens
+package com.mineinabyss.launchy.ui.screens.main
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
@@ -36,8 +35,8 @@ import com.mineinabyss.launchy.TopBar
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.ui.ModGroup
 import kotlinx.coroutines.launch
+import kotlin.io.path.copyTo
 import kotlin.io.path.div
-import kotlin.io.path.exists
 
 sealed class Screen(val transparentTopBar: Boolean = false) {
     object Default : Screen(transparentTopBar = true)
@@ -133,13 +132,10 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         Color.Transparent,
         MaterialTheme.colorScheme.background,
     )
-    val options = (Dirs.mineinabyss / "options.txt").toFile()
-    val askOptionsMigration = remember {
-        mutableStateOf(!options.exists() && Dirs.minecraft.exists())
-    }
     var showPopup by remember {
         mutableStateOf(true)
     }
+    val state = LocalLaunchyState
 
     Box {
         windowScope.WindowDraggableArea {
@@ -244,53 +240,21 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
             )
         }
 
+
         AnimatedVisibility(
-            showPopup,
-            enter = fadeIn(),
-            exit = fadeOut(),
+            !state.handledImportOptions,
+            enter = fadeIn(), exit = fadeOut(),
             modifier = Modifier.zIndex(5f),
         ) {
-            Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize())
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                Surface(
-                    shape = RoundedCornerShape(28.dp),
-                    modifier = Modifier.widthIn(280.dp, 560.dp)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(24.dp)
-                    ) {
-                        Text(
-                            text = "Import Settings",
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-                        Spacer(Modifier.height(16.dp))
-                        Text(
-                            text = "This will import the options.txt file from your .minecraft directory.",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Spacer(Modifier.height(24.dp))
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.align(Alignment.End)
-                        ) {
-                            TextButton(
-                                onClick = {
-                                    (Dirs.minecraft / "options.txt").toFile().copyTo(options)
-                                    showPopup = !showPopup
-                                }
-                            ) {
-                                Text("Import")
-                            }
-                            TextButton(
-                                onClick = { showPopup = !showPopup }
-                            ) {
-                                Text("Dont Import")
-                            }
-                        }
-                    }
+            ImportSettingsDialog(
+                onAccept = {
+                    (Dirs.minecraft / "options.txt").copyTo(Dirs.mineinabyss / "options.txt")
+                    state.handledImportOptions = true
+                },
+                onDecline = {
+                    state.handledImportOptions = true
                 }
-
-            }
+            )
         }
     }
 }

@@ -20,7 +20,7 @@ import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
-import com.mineinabyss.launchy.ui.screens.Content
+import com.mineinabyss.launchy.ui.screens.main.Content
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 val LocalLaunchyState: LaunchyState

@@ -18,7 +18,8 @@ data class Config(
     val downloads: Map<ModName, DownloadURL> = mapOf(),
     val seenGroups: Set<GroupName> = setOf(),
     val installedFabricVersion: String? = null,
-    val downloadUpdates: Boolean = true
+    val downloadUpdates: Boolean = true,
+    val handledImportOptions: Boolean = false,
 ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))
