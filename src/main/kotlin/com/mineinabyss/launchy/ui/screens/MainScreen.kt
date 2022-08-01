@@ -20,14 +20,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.ExperimentalUnitApi
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.zIndex
 import com.mineinabyss.launchy.AppTopBar
@@ -65,7 +65,8 @@ fun Content() {
         TopBar,
         screen.transparentTopBar,
         showBackButton = screen != Screen.Default,
-        onBackButtonClicked = { screen = Screen.Default })
+        onBackButtonClicked = { screen = Screen.Default }
+    )
 }
 
 
@@ -125,7 +126,6 @@ fun InfoText(shown: Boolean, icon: ImageVector, desc: String, extra: String = ""
     }
 }
 
-@OptIn(ExperimentalUnitApi::class)
 @Preview
 @Composable
 fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
@@ -134,8 +134,11 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         MaterialTheme.colorScheme.background,
     )
     val options = (Dirs.mineinabyss / "options.txt").toFile()
-    var showPopup by remember {
+    val askOptionsMigration = remember {
         mutableStateOf(!options.exists() && Dirs.minecraft.exists())
+    }
+    var showPopup by remember {
+        mutableStateOf(true)
     }
 
     Box {
@@ -144,61 +147,8 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                 painter = painterResource("mia_render.jpg"),
                 contentDescription = "Main render",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize().then(
-                    if (showPopup) {
-                        Modifier.blur(10.dp)
-                    } else Modifier
-                )
+                modifier = Modifier.fillMaxSize()
             )
-        }
-
-        if (showPopup) {
-
-            Surface(
-
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier.align(Alignment.Center).height(180.dp).width(400.dp).zIndex(5f),
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top,
-                ) {
-                    Text(
-                        text = "Import Settings",
-                        color = Color.LightGray,
-                        textAlign = TextAlign.Start,
-                        fontSize = TextUnit(24f, TextUnitType.Sp),
-                        lineHeight = TextUnit(60f, TextUnitType.Sp)
-                    )
-                    Spacer(Modifier.height(10.dp))
-                    Text(
-                        text = "This will import the options.txt file from your .minecraft directory.",
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        fontSize = TextUnit(16f, TextUnitType.Sp),
-                        lineHeight = TextUnit(20f, TextUnitType.Sp)
-                    )
-                    Spacer(Modifier.height(20.dp))
-                    Row(
-                        verticalAlignment = Alignment.Bottom,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        TextButton(
-                            onClick = {
-                                (Dirs.minecraft / "options.txt").toFile().copyTo(options)
-                                showPopup = !showPopup
-                            }
-                        ) {
-                            Text("Import")
-                        }
-                        TextButton(
-                            onClick = { showPopup = !showPopup }
-                        ) {
-                            Text("Dont Import")
-                        }
-                    }
-                }
-            }
         }
 
         Column(
@@ -206,10 +156,7 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
             Modifier.align(Alignment.Center)
                 .heightIn(0.dp, 500.dp)
                 .fillMaxSize()
-                .zIndex(4f).then(
-                    if (showPopup) Modifier.blur(10.dp)
-                    else Modifier
-                ),
+                .zIndex(4f),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -295,6 +242,55 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                     .height(maxHeight / 2)
                     .background(Brush.verticalGradient(colors))
             )
+        }
+
+        AnimatedVisibility(
+            showPopup,
+            enter = fadeIn(),
+            exit = fadeOut(),
+            modifier = Modifier.zIndex(5f),
+        ) {
+            Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize())
+            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                Surface(
+                    shape = RoundedCornerShape(28.dp),
+                    modifier = Modifier.widthIn(280.dp, 560.dp)
+                ) {
+                    Column(
+                        modifier = Modifier.padding(24.dp)
+                    ) {
+                        Text(
+                            text = "Import Settings",
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                        Spacer(Modifier.height(16.dp))
+                        Text(
+                            text = "This will import the options.txt file from your .minecraft directory.",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Spacer(Modifier.height(24.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier.align(Alignment.End)
+                        ) {
+                            TextButton(
+                                onClick = {
+                                    (Dirs.minecraft / "options.txt").toFile().copyTo(options)
+                                    showPopup = !showPopup
+                                }
+                            ) {
+                                Text("Import")
+                            }
+                            TextButton(
+                                onClick = { showPopup = !showPopup }
+                            ) {
+                                Text("Dont Import")
+                            }
+                        }
+                    }
+                }
+
+            }
         }
     }
 }
