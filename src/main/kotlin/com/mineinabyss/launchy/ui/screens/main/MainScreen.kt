@@ -132,9 +132,6 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
         Color.Transparent,
         MaterialTheme.colorScheme.background,
     )
-    var showPopup by remember {
-        mutableStateOf(true)
-    }
     val state = LocalLaunchyState
 
     Box {
@@ -168,12 +165,11 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
                 modifier = Modifier.fillMaxWidth().weight(1f),
             ) {
                 val state = LocalLaunchyState
-                InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid && !showPopup)
+                InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
                 Spacer(Modifier.width(10.dp))
                 var toggled by remember { mutableStateOf(false) }
                 AnimatedVisibility(state.operationsQueued) {
                     Button(
-                        enabled = !showPopup,
                         onClick = { toggled = !toggled })
                     {
                         Column() {
@@ -220,7 +216,6 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
 //                NewsButton(hasUpdates = true)
 //                Spacer(Modifier.width(10.dp))
                 Button(
-                    enabled = !showPopup,
                     onClick = onSettings
                 ) {
                     Icon(Icons.Rounded.Settings, contentDescription = "Settings")
@@ -247,6 +242,7 @@ fun MainScreen(windowScope: WindowScope, onSettings: () -> Unit) {
             modifier = Modifier.zIndex(5f),
         ) {
             ImportSettingsDialog(
+                windowScope,
                 onAccept = {
                     (Dirs.minecraft / "options.txt").copyTo(Dirs.mineinabyss / "options.txt")
                     state.handledImportOptions = true
