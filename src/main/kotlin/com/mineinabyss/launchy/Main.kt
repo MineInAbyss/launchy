@@ -20,7 +20,10 @@ import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
-import com.mineinabyss.launchy.ui.screens.main.Content
+import com.mineinabyss.launchy.ui.rememberMIAColorScheme
+import com.mineinabyss.launchy.ui.screens.Screens
+import com.mineinabyss.launchy.ui.state.TopBarProvider
+import com.mineinabyss.launchy.ui.state.TopBarState
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 val LocalLaunchyState: LaunchyState
@@ -63,7 +66,7 @@ fun main() {
                                 LaunchyStateProvider provides launchyState!!,
                             ) {
                                 Dirs.createDirs()
-                                Content()
+                                Screens()
                             }
                         }
                     }

@@ -1,7 +1,9 @@
 package com.mineinabyss.launchy.ui.screens.main
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.window.WindowDraggableArea
@@ -14,6 +16,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
+import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Dirs
+import kotlin.io.path.copyTo
+import kotlin.io.path.div
+
+@Composable
+fun HandleImportSettings(windowScope: WindowScope) {
+    val state = LocalLaunchyState
+    AnimatedVisibility(
+        !state.handledImportOptions,
+        enter = fadeIn(), exit = fadeOut(),
+    ) {
+        ImportSettingsDialog(
+            windowScope,
+            onAccept = {
+                (Dirs.minecraft / "options.txt").copyTo(Dirs.mineinabyss / "options.txt")
+                state.handledImportOptions = true
+            },
+            onDecline = {
+                state.handledImportOptions = true
+            }
+        )
+    }
+}
 
 @Composable
 fun ImportSettingsDialog(

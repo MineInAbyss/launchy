@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui
+package com.mineinabyss.launchy.ui.screens.settings
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
