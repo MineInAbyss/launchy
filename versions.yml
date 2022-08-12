@@ -1,5 +1,5 @@
-fabricVersion: 0.14.8
-minecraftVersion: 1.19
+fabricVersion: 0.14.9
+minecraftVersion: 1.19.2
 groups:
   - name: Core
     forceEnabled: true
