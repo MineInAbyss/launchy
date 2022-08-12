@@ -1,12 +1,10 @@
-package com.mineinabyss.launchy
+package com.mineinabyss.launchy.ui.state
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
-import com.mineinabyss.launchy.logic.LaunchyState
 
 val TopBarProvider = compositionLocalOf<TopBarState> { error("No top bar provided") }
 val TopBar: TopBarState

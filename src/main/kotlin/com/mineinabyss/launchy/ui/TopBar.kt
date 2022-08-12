@@ -1,9 +1,6 @@
-package com.mineinabyss.launchy
+package com.mineinabyss.launchy.ui
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
@@ -22,6 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.ui.state.TopBarState
 
 @Composable
 fun WindowButton(icon: ImageVector, onClick: () -> Unit) {
@@ -41,9 +39,7 @@ fun AppTopBar(
     transparent: Boolean,
     showBackButton: Boolean,
     onBackButtonClicked: (() -> Unit),
-) = state.windowScope.WindowDraggableArea(
-//    Modifier.combinedClickable(onDoubleClick = { toggleMaximized(state) }, onClick = {})
-) {
+) = state.windowScope.WindowDraggableArea {
     Box(
         Modifier.fillMaxWidth().height(40.dp)
     ) {

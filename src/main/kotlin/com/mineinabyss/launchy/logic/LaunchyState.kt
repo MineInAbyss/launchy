@@ -100,6 +100,13 @@ class LaunchyState(
     val minecraftValid = Dirs.minecraft.exists()
     val operationsQueued by derivedStateOf { updatesQueued || installsQueued || deletionsQueued || !fabricUpToDate }
 
+    // If any state is true, we consider import handled and move on
+    var handledImportOptions by mutableStateOf(
+        config.handledImportOptions ||
+                (Dirs.mineinabyss / "options.txt").exists() ||
+                !Dirs.minecraft.exists()
+    )
+
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) enabledMods += mod
         else enabledMods -= mod
@@ -181,7 +188,8 @@ class LaunchyState(
             toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name },
             downloads = downloadURLs.mapKeys { it.key.name },
             seenGroups = versions.groups.map { it.name }.toSet(),
-            installedFabricVersion = installedFabricVersion
+            installedFabricVersion = installedFabricVersion,
+            handledImportOptions = handledImportOptions,
         ).save()
     }
 

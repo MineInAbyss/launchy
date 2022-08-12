@@ -1,13 +1,15 @@
-package com.mineinabyss.launchy.ui
+package com.mineinabyss.launchy.ui.screens.settings
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
+import androidx.compose.material.icons.rounded.ChangeCircle
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,6 +18,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
@@ -28,10 +32,12 @@ fun ModGroup(group: Group, mods: Collection<Mod>) {
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
     val state = LocalLaunchyState
 
+    val modsChanged = mods.any { it in state.queuedDeletions || it in state.queuedDownloads }
+
     Surface(
         tonalElevation = 1.dp,
         shape = RoundedCornerShape(20.dp),
-        modifier = Modifier.padding(2.dp).fillMaxWidth().clickable { expanded = !expanded }
+        modifier = Modifier.padding(2.dp).fillMaxWidth().clickable { expanded = !expanded },
     ) {
         Column {
             Row(
@@ -58,6 +64,10 @@ fun ModGroup(group: Group, mods: Collection<Mod>) {
                     group.name, Modifier.weight(1f),
                     style = MaterialTheme.typography.bodyLarge,
                 )
+                AnimatedVisibility(modsChanged) {
+                    Icon(Icons.Rounded.ChangeCircle, "Updated")
+                }
+                Spacer(Modifier.width(10.dp))
                 Icon(Icons.Rounded.ArrowDropDown, "Show mods", Modifier.rotate(arrowRotationState))
                 Spacer(Modifier.width(10.dp))
             }
