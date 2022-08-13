@@ -27,8 +27,6 @@ modGroups:
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
       url: https://cdn.modrinth.com/data/P7dR8mSH/versions/0.59.0+1.19.2/fabric-api-0.59.0%2B1.19.2.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/GenericStuff_1.0.zip
-      forceConfigDownload: true
 
     - name: Sodium
       license: LGPL-3
@@ -79,11 +77,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/otVJckYQ/versions/1.1.1+1.19/CITResewn-1.1.1%2B1.19.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
-    - name: Mythic Keys
-      license: None
-      homepage: https://github.com/ASangarin/MythicKeys
-      desc: Client-side mod allowing for plugins to register custom keybinds
-      url: https://github.com/ASangarin/MythicKeys/releases/download/1.19-1.2.2/mythickeys-1.2.2-1.19.jar
+    #- name: Mythic Keys
+    #  license: None
+    #  homepage: https://github.com/ASangarin/MythicKeys
+    #  desc: Client-side mod allowing for plugins to register custom keybinds
+    #  url: https://github.com/ASangarin/MythicKeys/releases/download/1.19-1.2.2/mythickeys-1.2.2-1.19.jar
 
     - name: NoRpErrorMsg
       license: MIT
@@ -142,11 +140,11 @@ modGroups:
       desc: Optimizes memory usage
       url: https://cdn.modrinth.com/data/uXXizFIs/versions/5.0.0-fabric/ferritecore-5.0.0-fabric.jar
 
-    - name: Memory Leak Fix
-      license: LGPL-2.1
-      homepage: https://modrinth.com/mod/memoryleakfix
-      desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.7.0-1.19/memoryleakfix-1.19-0.7.0.jar
+    #- name: Memory Leak Fix
+    #  license: LGPL-2.1
+    #  homepage: https://modrinth.com/mod/memoryleakfix
+    #  desc: Fixes random memory leaks
+    #  url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.7.0-1.19/memoryleakfix-1.19-0.7.0.jar
 
     - name: Entity Culling
       license: MIT
@@ -154,11 +152,11 @@ modGroups:
       desc: Skips rendering Tiles/Entities that are not visible.
       url: https://cdn.modrinth.com/data/NNAgCjsB/versions/1.5.2-fabric-1.19/entityculling-fabric-1.5.2-mc1.19.jar
 
-    - name: Cull Less Leaves
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/cull-less-leaves
-      desc: Cull leaves while looking hot!
-      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.4/CullLessLeaves-1.0.4.jar
+    #- name: Cull Less Leaves
+    #  license: LGPL-3
+    #  homepage: https://modrinth.com/mod/cull-less-leaves
+    #  desc: Cull leaves while looking hot!
+    #  url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.4/CullLessLeaves-1.0.4.jar
 
     - name: Enhanced Block Entities
       license: LGPL-3
@@ -277,7 +275,7 @@ modGroups:
       license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/soundphysics-fabric-1.19-1.0.6.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/soundphysics-fabric-1.19.2-1.0.12.jar
 
     - name: Presence Footseps
       license: MIT
@@ -295,7 +293,7 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/extrasounds
       desc: Adds more sounds to Minecraft
-      url: https://cdn.modrinth.com/data/uPWCQrVL/versions/2.3.1/extrasounds-2.3.1%2B1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/extrasounds-2.3.1+1.19-patched-cfca9a0.jar
 
   HUD & Menu Enhancements:
     - name: Xaeros Worldmap
@@ -308,7 +306,7 @@ modGroups:
       license: ARR
       homepage: https://chocolateminecraft.com/minimap2.php
       desc: Adds a minimap in the corner of the game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_FP22.9.3_Fabric_1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_22.13.0_Fabric_1.19.1.jar
 
     - name: MapInSlot
       license: MIT
@@ -321,12 +319,6 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/status-effect-timer
       desc: Adds status effect information to the hud
       url: https://github.com/magicus/statuseffecttimer/releases/download/v1.1.1%2B1.19/statuseffecttimer-1.1.1+1.19.jar
-
-    - name: ToolTipTweaks
-      license: MIT
-      homepage: https://modrinth.com/mod/tooltiptweaks
-      desc: Adds new tooltips and improves existing tooltips
-      url: https://github.com/bunten2005/tooltiptweaks-mod/releases/download/v1.1.0/tooltiptweaks-1.1.0.jar
 
     - name: Detailed Armor Bar
       license: MIT
@@ -449,7 +441,7 @@ modGroups:
       license: LGPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
       desc: Mod to render schematics and other stuff in-game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19-0.11.3.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.2-0.12.4.jar
 
     - name: Scroll for WorldEdit
       license: MIT
@@ -489,7 +481,7 @@ modGroups:
       license: LGPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
       desc: Dependency for LiteMatica
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19-0.12.1.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.2-0.13.0.jar
       
     - name: ArchitecturyAPI
       license: LGPL-3
@@ -542,6 +534,22 @@ modGroups:
       url: https://cdn.modrinth.com/data/9s6osm5g/versions/8.0.75+fabric/cloth-config-8.0.75-fabric.jar
   
   Outdated/Disabled:
+    - name: Mythic Keys
+      license: None
+      homepage: https://github.com/ASangarin/MythicKeys
+      desc: Client-side mod allowing for plugins to register custom keybinds
+      url: https://github.com/ASangarin/MythicKeys/releases/download/1.19-1.2.2/mythickeys-1.2.2-1.19.jar
+
+    - name: Memory Leak Fix
+      license: LGPL-2.1
+      homepage: https://modrinth.com/mod/memoryleakfix
+      desc: Fixes random memory leaks
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/v0.7.0-1.19/memoryleakfix-1.19-0.7.0.jar
+
+
+
+
+
     - name: Movement Vision
       license: LPGL-3
       homepage: https://modrinth.com/mod/movement-vision
