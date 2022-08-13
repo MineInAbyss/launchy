@@ -358,7 +358,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/mc1.19.2-1.4.5/reeses_sodium_options-1.4.5%2Bmc1.19.2-build.51.jar
+      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/mc1.19.2-1.4.6/reeses_sodium_options-1.4.6%2Bmc1.19.2-build.55.jar
 
   Misc Enhancements:
     - name: CameraUtils
@@ -429,7 +429,7 @@ modGroups:
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/craftpresence
       desc: Displays server info in your Discord Rich Presence
-      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/v1.8.9_1.19.2-fabric_release/CraftPresence-Fabric-1.19.2-Release-1.8.9.jar
+      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/v1.8.10_1.19.2-fabric_release/CraftPresence-Fabric-1.19.2-Release-1.8.10.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
 
     - name: BetterPingDisplay
