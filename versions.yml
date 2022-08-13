@@ -443,12 +443,6 @@ modGroups:
       homepage: https://modrinth.com/mod/dcch
       desc: Prevents chat-history from being cleared on leaving a server
       url: https://cdn.modrinth.com/data/sUbMm93i/versions/2.0+1.17/DCCH-2.0+1.17.jar
-
-    - name: ToolTipFix
-      license: MIT
-      homepage: https://modrinth.com/mod/tooltipfix
-      desc: Stops tooltips that are too large to fit on the screen from running off the screen
-      url: https://cdn.modrinth.com/data/2RKFTmiB/versions/1.0.5-1.19/tooltipfix-1.0.5-1.19.jar
   
   Builder Tools:
     - name: Litematica
@@ -604,4 +598,10 @@ modGroups:
       homepage: https://modrinth.com/mod/ok-zoomer
       desc: Lets you zoom in by pressing a button
       url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.8%2B1.19/ok_zoomer-5.0.0-beta.8+1.19.jar
+    
+    - name: ToolTipFix
+      license: MIT
+      homepage: https://modrinth.com/mod/tooltipfix
+      desc: Stops tooltips that are too large to fit on the screen from running off the screen
+      url: https://cdn.modrinth.com/data/2RKFTmiB/versions/1.0.5-1.19/tooltipfix-1.0.5-1.19.jar
 
