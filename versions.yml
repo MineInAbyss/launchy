@@ -353,6 +353,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/Bh37bMuy/versions/mc1.19.2-1.4.6/reeses_sodium_options-1.4.6%2Bmc1.19.2-build.55.jar
 
   Misc Enhancements:
+    - name: NoInsecureChatToast
+      license: CC0
+      homepage: https://modrinth.com/mod/disableinsecurechattoast
+      desc: Prevents insecure chat toast from appearing
+      url: https://cdn.modrinth.com/data/i090SePT/versions/1.1.0/DisableInsecureChatToast-mc1.19.1-1.1.0.jar
+
     - name: CameraUtils
       license: ARR
       homepage: https://modrinth.com/mod/camerautils
