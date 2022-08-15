@@ -358,16 +358,12 @@ modGroups:
       homepage: https://modrinth.com/mod/camerautils
       desc: Adds convenient features related to the players camera
       url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/fabric-1.19.2-1.0.2/camerautils-1.19.2-1.0.2.jar
+
     - name: ColoredAxolotlBuckets
       license: MIT
       homepage: https://modrinth.com/mod/colored-axolotl-buckets
       desc: Allows axolotls in buckets to have their own icon depending on their color and age
       url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0+1.19/axolotlbuckets-1.1.0%2B1.19.jar
-    - name: EatingAnimation
-      license: MIT
-      homepage: https://modrinth.com/mod/eating-animation
-      desc: Adds eating animations to vanilla foods
-      url: https://cdn.modrinth.com/data/rUgZvGzi/versions/1.9/eating-animation-1.9.jar
 
     - name: First Person Models
       license: MIT
@@ -613,3 +609,8 @@ modGroups:
       desc: Stops tooltips that are too large to fit on the screen from running off the screen
       url: https://cdn.modrinth.com/data/2RKFTmiB/versions/1.0.5-1.19/tooltipfix-1.0.5-1.19.jar
 
+    - name: EatingAnimation
+      license: MIT
+      homepage: https://modrinth.com/mod/eating-animation
+      desc: Adds eating animations to vanilla foods
+      url: https://cdn.modrinth.com/data/rUgZvGzi/versions/1.9/eating-animation-1.9.jar
