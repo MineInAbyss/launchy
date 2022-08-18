@@ -152,11 +152,11 @@ modGroups:
       desc: Skips rendering Tiles/Entities that are not visible.
       url: https://cdn.modrinth.com/data/NNAgCjsB/versions/1.5.2-fabric-1.19/entityculling-fabric-1.5.2-mc1.19.jar
 
-    #- name: Cull Less Leaves
-    #  license: LGPL-3
-    #  homepage: https://modrinth.com/mod/cull-less-leaves
-    #  desc: Cull leaves while looking hot!
-    #  url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.4/CullLessLeaves-1.0.4.jar
+    - name: Cull Less Leaves
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/cull-less-leaves
+      desc: Cull leaves while looking hot!
+      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.5/CullLessLeaves-1.0.5.jar
 
     - name: Enhanced Block Entities
       license: LGPL-3
@@ -188,7 +188,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19.2-2.3.5/voicechat-fabric-1.19.2-2.3.5.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/fabric-1.19.2-2.3.6/voicechat-fabric-1.19.2-2.3.6.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -411,7 +411,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/shulkerboxtooltip
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/2M01OLQq/versions/3.1.1+1.19-fabric/shulkerboxtooltip-3.1.1%2B1.19.jar
+      url: https://cdn.modrinth.com/data/2M01OLQq/versions/amfXOcfe/shulkerboxtooltip-fabric-3.1.2%2B1.19.2.jar
 
     - name: Not Enough Crashes
       license: MIT
@@ -474,7 +474,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.528+fabric/RoughlyEnoughItems-9.1.528.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.530+fabric/RoughlyEnoughItems-9.1.530.jar
 
   #MineInAbyss Enhancements:
 
