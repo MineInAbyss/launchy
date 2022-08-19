@@ -364,6 +364,7 @@ modGroups:
       homepage: https://modrinth.com/mod/camerautils
       desc: Adds convenient features related to the players camera
       url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/fabric-1.19.2-1.0.2/camerautils-1.19.2-1.0.2.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
 
     - name: ColoredAxolotlBuckets
       license: MIT
