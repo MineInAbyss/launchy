@@ -353,6 +353,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/Bh37bMuy/versions/mc1.19.2-1.4.6/reeses_sodium_options-1.4.6%2Bmc1.19.2-build.55.jar
 
   Misc Enhancements:
+    - name: Zoomify
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/zoomify
+      desc: Adds zoom functionality to the game
+      url: https://cdn.modrinth.com/data/w7ThoJFB/versions/ClfJLhWu/Zoomify-2.3.0.jar
+
     - name: NoInsecureChatToast
       license: CC0
       homepage: https://modrinth.com/mod/disableinsecurechattoast
@@ -458,6 +464,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
   
   Developer Tools:
+    - name: BetterCommandBlockUI
+      license: CC0
+      homepage: https://modrinth.com/mod/bettercommandblockui
+      desc: Entirely overhauls the commandblock UI
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/0.1.0/bettercommandblockui-0.1.0-1.19.2.jar
+
     - name: NBTToolTips
       license: MIT
       homepage: https://modrinth.com/mod/nbttooltips
@@ -570,12 +582,6 @@ modGroups:
       homepage: https://modrinth.com/mod/pinglist
       desc: Makes the tablist ping display in numbers
       url: https://cdn.modrinth.com/data/GzmTgzUV/versions/1.3.3/pinglist-1.3.3.jar
-    
-    - name: Zoomify
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/zoomify
-      desc: Adds a configurable zoom key.
-      url: https://github.com/isXander/Zoomify/releases/download/1.7.0/Zoomify-1.7.0.jar
 
     - name: InvMove
       license: LGPL-3
