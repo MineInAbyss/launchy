@@ -496,7 +496,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/JCUL4KKt/architectury-5.12.44-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/6.2.43+fabric/architectury-6.2.43-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
