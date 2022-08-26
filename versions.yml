@@ -188,7 +188,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/cG4us59N/voicechat-fabric-1.19.2-2.3.7.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/LeXgP9NY/voicechat-fabric-1.19.2-2.3.8.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -261,7 +261,7 @@ modGroups:
       license: AAR
       homepage: https://minecraftphysicsmod.com/
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://minecraftphysicsmod.com/s/physics-mod-289-mc-119-fabric.jar
+      url: https://minecraftphysicsmod.com/s/physics-mod-2810-mc-119-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Audio Enhancements:
@@ -376,7 +376,7 @@ modGroups:
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
       desc: Enables the third-person model in first-person, making for a more realistic experience
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/firstperson-fabric-2.1.0-mc1.19.jar
+      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/aGStLGPi/firstperson-fabric-2.1.2-mc1.19.1.jar
 
     - name: Boat Item View
       license: LGPL-3
@@ -424,7 +424,7 @@ modGroups:
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/craftpresence
       desc: Displays server info in your Discord Rich Presence
-      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/VNjYPQbG/CraftPresence-1.19.2-Release-1.8.10-universal.jar
+      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/OaBGTXLQ/CraftPresence-1.19.2-Release-1.8.11-universal.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
 
     - name: BetterPingDisplay
@@ -528,7 +528,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/fabric-language-kotlin
       desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/1.8.2+kotlin.1.7.10/fabric-language-kotlin-1.8.2%2Bkotlin.1.7.10.jar
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/MrMwCJlh/fabric-language-kotlin-1.8.3%2Bkotlin.1.7.10.jar
     
     - name: Satin
       license: LGPL-3
