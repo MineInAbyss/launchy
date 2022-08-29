@@ -32,7 +32,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/F79MzDJD/sodium-fabric-mc1.19.2-0.4.3%2Bbuild.17.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/rAfhHfow/sodium-fabric-mc1.19.2-0.4.4%2Bbuild.18.jar
 
     - name: Mod menu
       license: MIT
@@ -195,7 +195,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/oubLAbu3/iris-mc1.19.2-1.2.7.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/Si7uxNXL/iris-mc1.19.2-1.2.8.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
 
     - name: Distant Horizons
