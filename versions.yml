@@ -188,7 +188,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/LeXgP9NY/voicechat-fabric-1.19.2-2.3.8.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/gK22RPE7/voicechat-fabric-1.19.2-2.3.9.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -269,7 +269,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/auditory
       desc: Expands and improves block sounds, item sounds and more
-      url: https://cdn.modrinth.com/data/1LjfkWOR/versions/0.0.2/auditory-0.0.2-1.19.jar
+      url: https://cdn.modrinth.com/data/1LjfkWOR/versions/mAdTntVd/auditory-0.0.3-1.19.x.jar
 
     - name: Sound Physics Remastered
       license: GPL-3
@@ -394,7 +394,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/tXEG62IN/sodium-extra-0.4.9%2Bmc1.19.2-build.60.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/uy3WEIvn/sodium-extra-0.4.10%2Bmc1.19.2-build.64.jar
 
     - name: Fabrishot
       license: MIT
@@ -540,7 +540,7 @@ modGroups:
       license: LGPL-3
       homepage: https://github.com/shedaniel/cloth-config/
       desc: A config API used by many mods
-      url: https://cdn.modrinth.com/data/9s6osm5g/versions/8.0.75+fabric/cloth-config-8.0.75-fabric.jar
+      url: https://cdn.modrinth.com/data/9s6osm5g/versions/EXrxCjl6/cloth-config-8.2.88-fabric.jar
   
   Outdated/Disabled:
     - name: Mythic Keys
@@ -594,7 +594,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/dashloader
       desc: Improves asset loading times greatly
-      url: https://cdn.modrinth.com/data/ZfQ3kTvR/versions/3.1.1+1.18/dashloader-def-3.1.1%2B1.18.jar
+      url: https://cdn.modrinth.com/data/ZfQ3kTvR/versions/DsPMHgmj/dashloader-4.1.3%2B1.19.jar
 
     - name: FeaturedServers
       license: MIT
