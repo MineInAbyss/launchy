@@ -78,13 +78,11 @@ class LaunchyState(
         configUpdateNotPresent()
     }
 
-    val enabledConfigs = mutableStateSetOf<Mod>().apply {
+    val enabledConfigs: MutableSet<Mod> = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledConfigs.mapNotNull { it.toMod() })
-        //removeAll(versions.nameToMod.values.toSet() - disabledMods)
-
     }
 
-    val downloading = mutableStateMapOf<Mod, Long>()
+    private val downloading = mutableStateMapOf<Mod, Long>()
     val isDownloading by derivedStateOf { downloading.isNotEmpty() }
 
     var installingProfile by mutableStateOf(false)
@@ -114,8 +112,8 @@ class LaunchyState(
     }
 
     fun setModConfigEnabled(mod: Mod, enabled: Boolean) {
-        if (enabled) enabledConfigs += mod
-        else enabledConfigs -= mod
+        if (mod.configUrl.isNotBlank() && enabled) enabledConfigs.add(mod)
+        else enabledConfigs.remove(mod)
     }
 
     suspend fun install() = coroutineScope {
@@ -163,7 +161,7 @@ class LaunchyState(
             downloadURLs[mod] = mod.url
             save()
 
-            if (mod.configUrl != null && enabledConfigs.contains(mod)) {
+            if (mod.configUrl.isNotBlank() && (mod in enabledConfigs)) {
                 Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
                 downloadConfigURLs[mod] = mod.configUrl
                 unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
@@ -185,7 +183,7 @@ class LaunchyState(
                 .filter { enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
             toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
-            toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name },
+            toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name } + enabledMods.filter { it.forceConfigDownload }.mapTo(mutableSetOf()) { it.name },
             downloads = downloadURLs.mapKeys { it.key.name },
             seenGroups = versions.groups.map { it.name }.toSet(),
             installedFabricVersion = installedFabricVersion,

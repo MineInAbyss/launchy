@@ -63,7 +63,7 @@ fun ModInfo(group: Group, mod: Mod) {
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.alpha(0.5f)
                 )
-                if (mod.homepage != null)
+                if (mod.homepage.isNotBlank())
                     IconButton(
                         modifier = Modifier.alpha(0.5f),
                         onClick = { BrowserLauncher().openURLinBrowser(mod.homepage) }
@@ -73,7 +73,7 @@ fun ModInfo(group: Group, mod: Mod) {
                             contentDescription = "URL"
                         )
                     }
-                if (mod.configUrl != null) {
+                if (mod.configUrl.isNotBlank()) {
                     IconButton(
                         modifier = Modifier.alpha(0.5f).rotate(configTabState),
                         onClick = { configExpanded = !configExpanded }
