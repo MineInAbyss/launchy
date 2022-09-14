@@ -26,7 +26,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/0.60.0+1.19.2/fabric-api-0.60.0%2B1.19.2.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/XV9QDCar/fabric-api-0.61.0%2B1.19.2.jar
 
     - name: Sodium
       license: LGPL-3
@@ -195,7 +195,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/WwSkfJxS/iris-mc1.19.2-1.3.0.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/r8IxC3aO/iris-mc1.19.2-1.3.1.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
 
     - name: Distant Horizons
@@ -481,7 +481,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/9.1.530+fabric/RoughlyEnoughItems-9.1.530.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/bP9R8SHp/RoughlyEnoughItems-9.1.537.jar
 
   #MineInAbyss Enhancements:
 
@@ -496,7 +496,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/6.2.43+fabric/architectury-6.2.43-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/xjWpId6m/architectury-6.2.46-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
