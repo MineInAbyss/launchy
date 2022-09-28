@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 data class Mod(
     val name: String,
     val license: String = "Unknown",
-    val homepage: String? = null,
+    val homepage: String = "",
     val desc: String,
     val url: String,
-    val configUrl: String? = null,
+    val configUrl: String = "",
     val forceConfigDownload: Boolean = false,
 )
