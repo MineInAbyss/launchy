@@ -26,7 +26,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/XV9QDCar/fabric-api-0.61.0%2B1.19.2.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/uLpYu4FP/fabric-api-0.62.0%2B1.19.2.jar
 
     - name: Sodium
       license: LGPL-3
@@ -156,7 +156,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/cull-less-leaves
       desc: Cull leaves while looking hot!
-      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/1.0.5/CullLessLeaves-1.0.5.jar
+      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/H9oZ7N6p/CullLessLeaves-1.0.6.jar
 
     - name: Enhanced Block Entities
       license: LGPL-3
@@ -175,7 +175,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/0.2.0+alpha.8.37+1.19.2/c2me-fabric-mc1.19.2-0.2.0%2Balpha.8.37.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/YaQCrYHB/c2me-fabric-mc1.19.2-0.2.0%2Balpha.9.0.jar
     
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -188,7 +188,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/gK22RPE7/voicechat-fabric-1.19.2-2.3.9.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/jb6aYgp4/voicechat-fabric-1.19.2-2.3.10.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -249,7 +249,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/clear-skies
       desc: Removes the banding at the horizon of Vanilla Minecraft
-      url: https://cdn.modrinth.com/data/xNK6XfRv/versions/fabric-mc119-2.0.94/clear-skies-fabric-mc119-2.0.94.jar
+      url: https://cdn.modrinth.com/data/xNK6XfRv/versions/rRNj4MRj/clear-skies-fabric-mc119-2.0.95.jar
 
     - name: NotEnoughAnimations
       license: MIT
@@ -343,7 +343,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/betterf3
       desc: Makes the F3-menu customizable and cleaner
-      url: https://github.com/cominixo/BetterF3/releases/download/v1.3.2/BetterF3-1.3.2-Fabric-1.19.jar
+      url: https://cdn.modrinth.com/data/8shC1gFX/versions/YkAPYBjH/BetterF3-1.4.0-Fabric-1.19.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/BetterF3_1.0.zip
     
     - name: Reese's Sodium Options
@@ -353,6 +353,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/Bh37bMuy/versions/Iusxhlyd/reeses_sodium_options-1.4.7%2Bmc1.19.2-build.59.jar
 
   Misc Enhancements:
+    - name: Debugify
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/debugify
+      desc: Fixes a bunch of bugs Mojang doesn't want to
+      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/pYAlD9TK/Debugify-2.7.1.jar
     - name: NoInsecureChatToast
       license: CC0
       homepage: https://modrinth.com/mod/disableinsecurechattoast
@@ -376,7 +381,7 @@ modGroups:
       license: MIT
       homepage: https://www.curseforge.com/minecraft/mc-mods/first-person-model
       desc: Enables the third-person model in first-person, making for a more realistic experience
-      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/aGStLGPi/firstperson-fabric-2.1.2-mc1.19.1.jar
+      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/Leq9L11S/firstperson-fabric-2.2.0-mc1.19.2.jar
 
     - name: Boat Item View
       license: LGPL-3
@@ -394,13 +399,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/uy3WEIvn/sodium-extra-0.4.10%2Bmc1.19.2-build.64.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/xJ8SShUa/sodium-extra-0.4.11%2Bmc1.19.2-build.68.jar
 
     - name: Fabrishot
       license: MIT
       homepage: https://modrinth.com/mod/fabrishot
       desc: Take screenshots at insanely large resolutions, because why not
-      url: https://cdn.modrinth.com/data/3qsfQtE9/versions/1.8.0/fabrishot-1.8.0.jar
+      url: https://cdn.modrinth.com/data/3qsfQtE9/versions/Fq42foYA/fabrishot-1.9.1.jar
 
     - name: ClickThrough
       license: MIT
@@ -412,7 +417,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/shulkerboxtooltip
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/2M01OLQq/versions/amfXOcfe/shulkerboxtooltip-fabric-3.1.2%2B1.19.2.jar
+      url: https://cdn.modrinth.com/data/2M01OLQq/versions/K5IR07m0/shulkerboxtooltip-fabric-3.1.3%2B1.19.2.jar
 
     - name: Not Enough Crashes
       license: MIT
@@ -431,7 +436,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/better-ping-display-fabric
       desc: Makes the tablist ping display in numbers
-      url: https://cdn.modrinth.com/data/MS1ZMyR7/versions/1.19-1.1.1/BetterPingDisplay-Fabric-1.19-1.1.1.jar
+      url: https://cdn.modrinth.com/data/MS1ZMyR7/versions/DCWtLDt7/BetterPingDisplay-Fabric-1.19.2-1.1.1.jar
 
     - name: Dont Clear Chat History
       license: CC0
@@ -481,7 +486,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/bP9R8SHp/RoughlyEnoughItems-9.1.537.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/8T2JUPB8/RoughlyEnoughItems-9.1.550.jar
 
   #MineInAbyss Enhancements:
 
@@ -528,7 +533,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/fabric-language-kotlin
       desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/MrMwCJlh/fabric-language-kotlin-1.8.3%2Bkotlin.1.7.10.jar
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/allNCj2E/fabric-language-kotlin-1.8.4%2Bkotlin.1.7.20.jar
     
     - name: Satin
       license: LGPL-3
