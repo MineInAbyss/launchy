@@ -308,6 +308,12 @@ modGroups:
       desc: Adds a minimap in the corner of the game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_22.13.2_Fabric_1.19.1.jar
 
+    - name: Legendary Tooltips
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/legendary-tooltips
+      desc: Makes tooltips categoried and look cool
+      url: https://cdn.modrinth.com/data/atHH8NyV/versions/QqAHVnpI/LegendaryTooltips-1.19.2-fabric-1.3.3.jar
+
     - name: MapInSlot
       license: MIT
       homepage: https://modrinth.com/mod/map-in-slot
@@ -528,6 +534,23 @@ modGroups:
   #MineInAbyss Enhancements:
 
   Dependencies:
+    - name: Iceberg
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/iceberg
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/qC0waeNX/Iceberg-1.19.1-fabric-1.0.46.jar
+
+    - name: Prism
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/prism-lib
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/IZHmnX6H/Prism-1.19.2-fabric-1.0.3.jar
+    - name: ForgeConfigAPIPort
+      license: MPL-2
+      homepage: https://modrinth.com/mod/forge-config-api-port
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/ohNO6lps/versions/fI5AsaV4/ForgeConfigAPIPort-v4.2.7-1.19.2-Fabric.jar
+
     - name: YetAnotherConfigLib
       license: LGPL-3
       homepage: https://modrinth.com/mod/yetanotherconfiglib
