@@ -50,7 +50,7 @@ modGroups:
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/fancymenu-fabric
       desc: Customizes game menus
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_fabric_2.12.9_MC_1.19-1.19.2.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/EUgXpARN/fancymenu_fabric_2.12.9_MC_1.19-1.19.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -544,13 +544,13 @@ modGroups:
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/audio-extension-for-fancymenu-fabric
       desc: Audio Extension for FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fm_audio_extension_fabric_1.1.1_MC_1.19.jar
+      url: https://cdn.modrinth.com/data/pFgXNvCD/versions/2FmGcf8p/fm_audio_extension_fabric_1.1.1_MC_1.19-1.19.2.jar
 
     - name: Load My Resources
       license: Special Permission
       homepage: https://www.curseforge.com/minecraft/mc-mods/load-my-resources-fabric
       desc: Pre-loads the resourcepack and other assets on launch.
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/loadmyresources_fabric_1.0.3_MC_1.19-1.19.2.jar
+      url: https://cdn.modrinth.com/data/TqCKvqjC/versions/ErYeBTin/loadmyresources_fabric_1.0.4_MC_1.19-1.19.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LoadMyResources_1.0.zip
       forceConfigDownload: true
 
@@ -558,13 +558,13 @@ modGroups:
       license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/konkrete-fabric
       desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/konkrete_fabric_1.5.3_MC_1.19.1-1.19.2.jar
+      url: https://cdn.modrinth.com/data/J81TRJWm/versions/CV2NDI4d/konkrete_fabric_1.5.3_MC_1.19.1-1.19.2.jar
 
     - name: Auudio
       license: GPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/auudio-fabric
       desc: Library dependency for DrippyLoadingScreen
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auudio_fabric_1.0.3_MC_1.19.jar
+      url: https://cdn.modrinth.com/data/FCr31KmZ/versions/RFyT1Wl2/auudio_fabric_1.0.3_MC_1.19-1.19.2.jar
     
     - name: FabricKotlinLanguage
       license: APACHE
