@@ -195,7 +195,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/vujluWvJ/iris-mc1.19.2-1.4.2.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/5Ox2LQ1C/iris-mc1.19.2-1.4.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
 
     - name: Distant Horizons
@@ -261,7 +261,7 @@ modGroups:
       license: AAR
       homepage: https://minecraftphysicsmod.com/
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/physics-mod-2.9.2-mc-1.19.x-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/UqiPFyNf/physics-mod-2.9.2-mc-1.19.x-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Audio Enhancements:
@@ -350,7 +350,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/Iusxhlyd/reeses_sodium_options-1.4.7%2Bmc1.19.2-build.59.jar
+      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/hkSQ9RqT/reeses_sodium_options-1.4.9%2Bmc1.19.2-build.67.jar
 
   Misc Enhancements:
     - name: AriKeys
@@ -412,7 +412,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/Z9F12IDt/sodium-extra-0.4.13%2Bmc1.19.2-build.76.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/1ha6EuaV/sodium-extra-0.4.14%2Bmc1.19.2-build.80.jar
 
     - name: Fabrishot
       license: MIT
@@ -458,6 +458,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/sUbMm93i/versions/2.0+1.17/DCCH-2.0+1.17.jar
   
   Builder Tools:
+    - name: AccurateBlockPlacement
+      license: MIT
+      homepage: https://modrinth.com/mod/accurate-block-placement
+      desc: Allows you to place blocks faster by holding down RMB
+      url: https://cdn.modrinth.com/data/yx5ls8Zc/versions/Xm5BWEiU/accurate-block-placement-1.0.15.jar
+
     - name: MoreCreativeTabs
       license: MIT
       homepage: https://modrinth.com/mod/morecreativetabs
@@ -486,7 +492,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/itemswapper
       desc: Adds an item switch interface triggered by pressing a hotkey
-      url: https://cdn.modrinth.com/data/RPOSBQgq/versions/Ri0QCixj/itemswapper-fabric-0.2.0-mc1.19.2.jar
+      url: https://cdn.modrinth.com/data/RPOSBQgq/versions/QmIKzS7b/itemswapper-fabric-0.3.1-mc1.19.2.jar
   
   Developer Tools:
     - name: BetterCommandBlockUI
