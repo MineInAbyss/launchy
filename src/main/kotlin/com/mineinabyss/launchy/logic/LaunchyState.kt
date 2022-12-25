@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
+import java.util.concurrent.CancellationException
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.div
 import kotlin.io.path.exists
@@ -42,14 +43,15 @@ class LaunchyState(
         )
     }
 
-    val downloadConfigURLs = mutableStateMapOf<Mod, DownloadURL>().apply {
-        putAll(config.downloads
+    val downloadConfigURLs = mutableStateMapOf<Mod, ConfigURL>().apply {
+        putAll(config.configs
             .mapNotNull { it.key.toMod()?.to(it.value) }
             .toMap()
         )
     }
 
     var installedFabricVersion by mutableStateOf(config.installedFabricVersion)
+    var installedMinecraftVersion by mutableStateOf(config.installedMinecraftVersion)
 
     var notPresentDownloads by mutableStateOf(setOf<Mod>())
         private set
@@ -58,11 +60,19 @@ class LaunchyState(
         updateNotPresent()
     }
 
-    val upToDate: Set<Mod> by derivedStateOf {
-        (downloadURLs - notPresentDownloads).filter { (mod, url) -> mod.url == url }.keys
+    val upToDateMods by derivedStateOf {
+        enabledMods.filter { it in downloadURLs && downloadURLs[it] == it.url && it !in notPresentDownloads }
     }
 
-    val queuedDownloads by derivedStateOf { enabledMods - upToDate }
+    val upToDateConfigs by derivedStateOf {
+        enabledMods.filter { it in downloadConfigURLs && downloadConfigURLs[it] == it.configUrl }
+    }
+
+    val enabledModsWithConfig by derivedStateOf {
+        enabledMods.filter { it.configUrl != "" }
+    }
+
+    val queuedDownloads by derivedStateOf { (enabledMods - upToDateMods.toSet()) + (enabledModsWithConfig - upToDateConfigs.toSet()) }
     val queuedUpdates by derivedStateOf { queuedDownloads.filter { it.isDownloaded }.toSet() }
     val queuedInstalls by derivedStateOf { queuedDownloads - queuedUpdates }
     private var _deleted by mutableStateOf(0)
@@ -71,23 +81,33 @@ class LaunchyState(
         disabledMods.filter { it.isDownloaded }.also { if (it.isEmpty()) updateNotPresent() }
     }
 
-    var notPresentConfigDownloads by mutableStateOf(setOf<Mod>())
-        private set
-
-    init {
-        configUpdateNotPresent()
-    }
-
     val enabledConfigs: MutableSet<Mod> = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledConfigs.mapNotNull { it.toMod() })
     }
 
-    private val downloading = mutableStateMapOf<Mod, Long>()
-    val isDownloading by derivedStateOf { downloading.isNotEmpty() }
+    init {
+        // trigger update incase we have dependencies
+        enabledMods.forEach { setModEnabled(it, true) }
+    }
+
+    val downloading = mutableStateMapOf<Mod, Progress>()
+    val downloadingConfigs = mutableStateMapOf<Mod, Progress>()
+    val isDownloading by derivedStateOf { downloading.isNotEmpty() || downloadingConfigs.isNotEmpty() }
+    val failedDownloads = mutableStateSetOf<Mod>()
+
+    // Caclculate the speed of the download
+    val downloadSpeed by derivedStateOf {
+        val total = downloading.values.sumOf { it.bytesDownloaded }
+        val time = downloading.values.sumOf { it.timeElapsed }
+        if (time == 0L) 0 else total / time
+    }
+
+    fun isDownloading(mod: Mod) = downloading[mod] != null || downloadingConfigs[mod] != null
 
     var installingProfile by mutableStateOf(false)
     val fabricUpToDate by derivedStateOf {
-        installedFabricVersion == versions.fabricVersion && FabricInstaller.isProfileInstalled(
+        installedMinecraftVersion == versions.minecraftVersion &&
+                installedFabricVersion == versions.fabricVersion && FabricInstaller.isProfileInstalled(
             Dirs.minecraft,
             "Mine in Abyss"
         )
@@ -105,9 +125,25 @@ class LaunchyState(
                 !Dirs.minecraft.exists()
     )
 
+    var handledFirstLaunch by mutableStateOf(config.handledFirstLaunch)
+
     fun setModEnabled(mod: Mod, enabled: Boolean) {
-        if (enabled) enabledMods += mod
-        else enabledMods -= mod
+        if (enabled) {
+            enabledMods += mod
+            enabledMods.filter { it.name in mod.incompatibleWith || it.incompatibleWith.contains(mod.name) }.forEach { setModEnabled(it, false) }
+            disabledMods.filter { it.name in mod.requires }.forEach { setModEnabled(it, true) }
+        } else {
+            enabledMods -= mod
+            // if a mod is disabled, disable all mods that depend on it
+            enabledMods.filter { it.requires.contains(mod.name) }.forEach { setModEnabled(it, false) }
+            // if a mod is disabled, and the dependency is only used by this mod, disable the dependency too, unless it's not marked as a dependency
+            enabledMods.filter { dep ->
+                mod.requires.contains(dep.name)  // if the mod depends on this dependency
+                        && dep.dependency // if the dependency is marked as a dependency
+                        && enabledMods.none { it.requires.contains(dep.name) }  // and no other mod depends on this dependency
+//                        && !versions.modGroups.filterValues { it.contains(dep) }.keys.any { it.forceEnabled } // and the group the dependency is in is not force enabled
+            }.forEach { setModEnabled(it, false) }
+        }
         setModConfigEnabled(mod, enabled)
     }
 
@@ -151,23 +187,61 @@ class LaunchyState(
         installingProfile = false
         installedFabricVersion = "Installing..."
         installedFabricVersion = versions.fabricVersion
+        installedMinecraftVersion = "Installing..."
+        installedMinecraftVersion = versions.minecraftVersion
     }
 
     suspend fun download(mod: Mod) {
         runCatching {
-            downloading[mod] = 0 //TODO download progress?
-            Downloader.download(url = mod.url, writeTo = mod.file)
-            downloading -= mod
-            downloadURLs[mod] = mod.url
-            save()
+            if (mod !in upToDateMods) {
+                try {
+                    println("Starting download of ${mod.name}")
+                    downloading[mod] = Progress(0, 0, 0) // set progress to 0
+                    Downloader.download(url = mod.url, writeTo = mod.file) progress@{
+                        downloading[mod] = it
+                    }
+                    downloadURLs[mod] = mod.url
+                    save()
+                    println("Successfully downloaded ${mod.name}")
+                } catch (ex: CancellationException) {
+                    throw ex // Must let the CancellationException propagate
+                } catch (e: Exception) {
+                    println("Failed to download ${mod.name}")
+                    e.printStackTrace()
+                    failedDownloads += mod
+                } finally {
+                    println("Finished download of ${mod.name}")
+                    downloading -= mod
+                }
+            }
 
-            if (mod.configUrl.isNotBlank() && (mod in enabledConfigs)) {
-                Downloader.download(url = mod.configUrl, writeTo = Dirs.configZip)
-                downloadConfigURLs[mod] = mod.configUrl
-                unzip((Dirs.configZip).toFile(), Dirs.mineinabyss.toString())
-                (Dirs.configZip).toFile().delete()
+            if (mod.configUrl.isNotBlank() && (mod in enabledConfigs) && mod !in upToDateConfigs) {
+                try {
+                    println("Starting download of ${mod.name} config")
+                    downloadingConfigs[mod] = Progress(0, 0, 0) // set progress to 0
+                    Downloader.download(url = mod.configUrl, writeTo = mod.config) progress@{
+                        downloadingConfigs[mod] = it
+                    }
+                    downloadConfigURLs[mod] = mod.configUrl
+                    unzip(mod.config.toFile(), Dirs.mineinabyss.toString())
+                    mod.config.toFile().delete()
+                    save()
+                    println("Successfully downloaded ${mod.name} config")
+                } catch (ex: CancellationException) {
+                    throw ex // Must let the CancellationException propagate
+                } catch (e: Exception) {
+                    println("Failed to download ${mod.name} config")
+                    failedDownloads += mod
+                    e.printStackTrace()
+                } finally {
+                    println("Finished download of ${mod.name} config")
+                    downloadingConfigs -= mod
+                }
             }
         }.onFailure {
+            if (it !is CancellationException) {
+                it.printStackTrace()
+            }
 //            Badge {
 //                Text("Failed to download ${mod.name}: ${it.localizedMessage}!"/*, "OK"*/)
 //            }
@@ -185,9 +259,12 @@ class LaunchyState(
             toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
             toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name } + enabledMods.filter { it.forceConfigDownload }.mapTo(mutableSetOf()) { it.name },
             downloads = downloadURLs.mapKeys { it.key.name },
+            configs = downloadConfigURLs.mapKeys { it.key.name },
             seenGroups = versions.groups.map { it.name }.toSet(),
             installedFabricVersion = installedFabricVersion,
+            installedMinecraftVersion = installedMinecraftVersion,
             handledImportOptions = handledImportOptions,
+            handledFirstLaunch = handledFirstLaunch,
         ).save()
     }
 
@@ -195,14 +272,16 @@ class LaunchyState(
     fun GroupName.toGroup(): Group? = versions.nameToGroup[this]
 
     val Mod.file get() = Dirs.mods / "${name}.jar"
+    val Mod.config get() = Dirs.tmp / "${name}-config.zip"
     val Mod.isDownloaded get() = file.exists()
 
     private fun updateNotPresent(): Set<Mod> {
         return downloadURLs.filter { !it.key.isDownloaded }.keys.also { notPresentDownloads = it }
     }
 
-    private fun configUpdateNotPresent(): Set<Mod> {
-        return downloadConfigURLs.filter { !it.key.isDownloaded }.keys.also { notPresentConfigDownloads = it }
+
+    fun launch() {
+        TODO()
     }
 }
 
