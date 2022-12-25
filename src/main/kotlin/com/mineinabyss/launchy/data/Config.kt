@@ -1,5 +1,6 @@
 package com.mineinabyss.launchy.data
 
+import com.mineinabyss.launchy.ui.screens.settings.ClientSettings
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.io.*
@@ -11,6 +12,7 @@ import kotlin.io.path.writeText
 @Serializable
 data class Config(
     val minecraftDir: String? = null,
+    val clientSettings: ClientSettings = ClientSettings(2),
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val fullDisabledGroups: Set<GroupName> = setOf(),
     val toggledMods: Set<ModName> = setOf(),

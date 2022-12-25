@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.screens.main.MainScreen
-import com.mineinabyss.launchy.ui.screens.settings.SettingsScreen
+import com.mineinabyss.launchy.ui.screens.settings.AccountScreen
+import com.mineinabyss.launchy.ui.screens.settings.ModsScreen
 import com.mineinabyss.launchy.ui.state.TopBar
 
 sealed class Screen(val transparentTopBar: Boolean = false) {
     object Default : Screen(transparentTopBar = true)
-    object Settings : Screen()
+    object Mods : Screen()
+    object Account : Screen()
 }
 
 var screen: Screen by mutableStateOf(Screen.Default)
@@ -31,8 +33,14 @@ fun Screens() {
     }
 
     TranslucentTopBar(screen) {
-        TransitionSlideUp(screen == Screen.Settings) {
-            SettingsScreen()
+        TransitionSlideUp(screen == Screen.Mods) {
+            ModsScreen()
+        }
+    }
+
+    TranslucentTopBar(screen) {
+        TransitionSlideUp(screen == Screen.Account) {
+            AccountScreen()
         }
     }
 

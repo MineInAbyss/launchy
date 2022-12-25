@@ -18,7 +18,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 
 @Composable
 @Preview
-fun SettingsScreen() {
+fun ModsScreen() {
     val state = LocalLaunchyState
     Scaffold(
         bottomBar = { InfoBar() },
