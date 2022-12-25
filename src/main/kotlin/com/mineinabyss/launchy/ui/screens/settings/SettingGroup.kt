@@ -55,7 +55,7 @@ fun SettingGroup() {
                     ) {
                         Spacer(Modifier.width(10.dp))
                         //TODO Slider for RAM Selection
-                        val ram = SliderSwitch(label = "Dedicated RAM:").roundToInt()
+                        val ram = SliderSwitch(label = "Dedicated RAM:", valueRange = 1..6).roundToInt()
                         state.clientSettings = ClientSettings(ram)
                     }
                 }
