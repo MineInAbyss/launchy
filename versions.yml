@@ -7,6 +7,7 @@ groups:
     enabledByDefault: true
   - name: Voice Chat
   - name: Visual Enhancements
+  - name: Camera Enhancements
   - name: Audio Enhancements
   - name: HUD & Menu Enhancements
   - name: Misc Enhancements
@@ -151,6 +152,7 @@ modGroups:
       homepage: https://modrinth.com/mod/cull-less-leaves
       desc: Cull leaves while looking hot!
       url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/BxA1B1tp/CullLessLeaves-1.1.0.jar
+      requires: [ Yet Another Config Lib ]
 
     #- name: Enhanced Block Entities
     #  license: LGPL-3
@@ -191,12 +193,15 @@ modGroups:
       desc: Shaders for fabric
       url: https://cdn.modrinth.com/data/YL57xq9U/versions/py8Wa69O/iris-mc1.19.3-1.4.6.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
+      configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
+      incompatibleWith: [ Distant Horizons ]
 
     - name: Distant Horizons
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
       url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.9a-1.19.2/DistantHorizons-1.6.9a-1.19.2.jar
+      incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
       license: MIT
@@ -204,6 +209,7 @@ modGroups:
       desc: Adds falling leaf particles to trees
       url: https://cdn.modrinth.com/data/WhbRG4iK/versions/n7dcLucW/fallingleaves-1.14.2%2B1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
+      requires: [ Cloth Config ]
 
     #- name: Continuity
     #  license: LGPL-3
@@ -260,12 +266,26 @@ modGroups:
       url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/VA4GbM79/physics-mod-2.9.4-mc-1.19.3-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
+  Camera Enhancements:
+    - name: CameraUtils
+      license: ARR
+      homepage: https://modrinth.com/mod/camera-utils
+      desc: Adds convenient features related to the players camera
+      url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/dFHhHcm8/camerautils-1.19.3-1.0.3.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
+
   Audio Enhancements:
     #- name: Auditory
     #  license: MIT
     #  homepage: https://modrinth.com/mod/auditory
     #  desc: Expands and improves block sounds, item sounds and more
     #  url: https://cdn.modrinth.com/data/1LjfkWOR/versions/Sz9YgtT5/auditory-0.0.4-1.19.x.jar
+
+    - name: Dynamic Sound filters
+      license: APACHE
+      homepage: https://modrinth.com/mod/dynamic-sound-filters
+      desc: Adds sound filters depending on your current location
+      url: https://cdn.modrinth.com/data/JV2wFevs/versions/7vbxpOS0/DynamicSoundFilters-1.3.0%2B1.19.3.jar
 
     - name: Sound Physics Remastered
       license: GPL-3
@@ -284,6 +304,7 @@ modGroups:
       homepage: https://modrinth.com/mod/dripsounds-fabric
       desc: Adds sounds for drip particles landing
       url: https://cdn.modrinth.com/data/T8MMXTpr/versions/hYDZaVYh/DripSounds-1.19-0.3.1.jar
+      requires: [ Cloth Config ]
 
     - name: ExtraSounds
       license: CC0
@@ -353,6 +374,7 @@ modGroups:
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
       url: https://cdn.modrinth.com/data/Bh37bMuy/versions/hkSQ9RqT/reeses_sodium_options-1.4.9%2Bmc1.19.2-build.67.jar
+      requires: [ Sodium ]
 
   Misc Enhancements:
     - name: No Telemetry
@@ -385,13 +407,6 @@ modGroups:
       desc: Prevents insecure chat toast from appearing
       url: https://cdn.modrinth.com/data/i090SePT/versions/1.1.0/DisableInsecureChatToast-mc1.19.1-1.1.0.jar
 
-    - name: CameraUtils
-      license: ARR
-      homepage: https://modrinth.com/mod/camera-utils
-      desc: Adds convenient features related to the players camera
-      url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/dFHhHcm8/camerautils-1.19.3-1.0.3.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
-
     - name: ColoredAxolotlBuckets
       license: MIT
       homepage: https://modrinth.com/mod/roundaround-axolotl-buckets
@@ -421,6 +436,7 @@ modGroups:
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
       url: https://cdn.modrinth.com/data/PtjYWJkn/versions/r5w0P2Aa/sodium-extra-0.4.15%2Bmc1.19.3-build.86.jar
+      requires: [ Sodium ]
 
     - name: Fabrishot
       license: MIT
@@ -538,6 +554,7 @@ modGroups:
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
       url: https://cdn.modrinth.com/data/nfn13YXA/versions/V02yYRWs/RoughlyEnoughItems-10.0.581.jar
+      requires: [ ArchitecturyAPI ]
 
     - name: ToolTipFix
       license: MIT
