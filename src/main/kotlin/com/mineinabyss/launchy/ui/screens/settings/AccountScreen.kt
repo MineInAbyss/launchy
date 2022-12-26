@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.ui.screens.main.buttons.LoginMicrosoftButton
 
 @Composable
 @Preview
@@ -46,6 +47,8 @@ fun AccountScreen() {
                     val lazyListState = rememberLazyListState()
                     LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), lazyListState) {
                         item("settings") {
+
+                            LoginMicrosoftButton(true)
                             TextField(
                                 "Account Name",
                                 "Enter Player Name",
