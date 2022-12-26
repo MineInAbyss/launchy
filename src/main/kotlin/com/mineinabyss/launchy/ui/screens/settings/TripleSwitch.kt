@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.ComposableFun
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
 import com.mineinabyss.launchy.util.Option
@@ -101,7 +102,7 @@ fun TripleSwitchButton(
     onSwitch: (Option) -> Unit,
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
+    content: ComposableFun,
 ) {
     Button(
         enabled = enabled,

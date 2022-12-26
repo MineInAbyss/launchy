@@ -11,15 +11,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.data.ComposableFun
 import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.screens.main.MainScreen
 import com.mineinabyss.launchy.ui.screens.settings.AccountScreen
+import com.mineinabyss.launchy.ui.screens.settings.JavaScreen
 import com.mineinabyss.launchy.ui.screens.settings.ModsScreen
 import com.mineinabyss.launchy.ui.screens.settings.Tabs
 import com.mineinabyss.launchy.ui.state.TopBar
 
 sealed class Screen(val transparentTopBar: Boolean = false) {
     object Default : Screen(transparentTopBar = true)
+    object Java : Screen()
     object Mods : Screen()
     object Account : Screen()
     object Settings : Screen()
@@ -35,14 +38,13 @@ fun Screens() {
     }
 
     TranslucentTopBar(screen) {
-        TransitionSlideUp(screen == Screen.Mods) {
-            ModsScreen()
-        }
-    }
-
-    TranslucentTopBar(screen) {
-        TransitionSlideUp(screen == Screen.Account) {
-            AccountScreen()
+        TransitionSlideUp(screen != Screen.Default) {
+            when (screen) {
+                Screen.Account -> AccountScreen()
+                Screen.Java -> JavaScreen()
+                Screen.Mods -> ModsScreen()
+                else -> {}
+            }
             Tabs()
         }
     }
@@ -56,7 +58,7 @@ fun Screens() {
 }
 
 @Composable
-fun TranslucentTopBar(currentScreen: Screen, content: @Composable () -> Unit) {
+fun TranslucentTopBar(currentScreen: Screen, content: ComposableFun) {
     Column {
         AnimatedVisibility(!currentScreen.transparentTopBar, enter = fadeIn(), exit = fadeOut()) {
             Spacer(Modifier.height(40.dp))
@@ -66,14 +68,14 @@ fun TranslucentTopBar(currentScreen: Screen, content: @Composable () -> Unit) {
 }
 
 @Composable
-fun TransitionFade(enabled: Boolean, content: @Composable () -> Unit) {
+fun TransitionFade(enabled: Boolean, content: ComposableFun) {
     AnimatedVisibility(enabled, enter = fadeIn(), exit = fadeOut()) {
         content()
     }
 }
 
 @Composable
-fun TransitionSlideUp(enabled: Boolean, content: @Composable () -> Unit) {
+fun TransitionSlideUp(enabled: Boolean, content: ComposableFun) {
     AnimatedVisibility(
         enabled,
         enter = fadeIn() + slideIn(initialOffset = { IntOffset(0, 100) }),

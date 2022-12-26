@@ -10,10 +10,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.ui.screens.main.buttons.AccountButton
 import com.mineinabyss.launchy.ui.screens.main.buttons.InstallButton
-import com.mineinabyss.launchy.ui.screens.main.buttons.ModsButton
 import com.mineinabyss.launchy.ui.screens.main.buttons.PlayButton
+import com.mineinabyss.launchy.ui.screens.main.buttons.SettingsButton
 import com.mineinabyss.launchy.ui.state.windowScope
 
 val showComingSoonDialog = mutableStateOf(false)
@@ -49,11 +48,7 @@ fun MainScreen() {
                     UpdateInfoButton()
                 }
                 Spacer(Modifier.width(10.dp))
-//                NewsButton(hasUpdates = true)
-//                Spacer(Modifier.width(10.dp))
-                ModsButton()
-                Spacer(Modifier.width(10.dp))
-                AccountButton()
+                SettingsButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
             }
         }
 

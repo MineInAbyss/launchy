@@ -22,43 +22,24 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.ui.screens.main.buttons.LoginMicrosoftButton
 
 @Composable
 @Preview
 fun AccountScreen() {
-    val state = LocalLaunchyState
-    Scaffold(
-        bottomBar = { InfoBar() },
-    ) { paddingValues ->
+    Scaffold { paddingValues ->
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Surface(
                 shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
                 modifier = Modifier.padding(5.dp)
             ) {
                 Box(
-                    Modifier.padding(paddingValues).padding(start = 10.dp, top = 5.dp)
+                    Modifier.padding(paddingValues).padding(start = 10.dp, top = 40.dp)
                 ) {
                     val lazyListState = rememberLazyListState()
                     LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), lazyListState) {
-                        item("settings") {
-
+                        item("account settings") {
                             LoginMicrosoftButton(true)
-                            /*TextField(
-                                "Account Name",
-                                "Enter Player Name",
-                                icon = Icons.Rounded.SupervisorAccount
-                            )
-                            TextField(
-                                "Password",
-                                "Enter Password",
-                                KeyboardOptions(keyboardType = KeyboardType.Password),
-                                Icons.Rounded.Password
-                            )*/
-
-                            Spacer(Modifier.height(10.dp))
-                            SettingGroup()
                         }
 
                     }

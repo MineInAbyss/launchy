@@ -6,7 +6,13 @@ import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.outlined.ManageAccounts
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.SettingsApplications
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.CropSquare
+import androidx.compose.material.icons.rounded.Minimize
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -66,13 +72,11 @@ fun TabIconBar(
             Row(
                 Modifier.weight(1f),
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
             ) {
-//                TabIconButton("Accounts", Icons.Rounded.ManageAccounts) {
-//                    Screen.Account
-//                }
-
-                TabIconButton("Mods", Icons.Rounded.Settings) { screen = Screen.Mods }
-
+                TabIconButton("Accounts", Icons.Outlined.ManageAccounts) { screen = Screen.Account }
+                TabIconButton("Java", Icons.Outlined.SettingsApplications) { screen = Screen.Java }
+                TabIconButton("Mods", Icons.Outlined.Settings) { screen = Screen.Mods }
             }
             Row {
 

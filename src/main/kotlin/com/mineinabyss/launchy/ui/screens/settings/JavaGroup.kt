@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import kotlin.math.roundToInt
 
 @Composable
-fun SettingGroup() {
+fun JavaGroup() {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
     val state = LocalLaunchyState
@@ -40,7 +40,7 @@ fun SettingGroup() {
                 Spacer(Modifier.width(10.dp))
                 Text("Settings", Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge,)
                 Spacer(Modifier.width(10.dp))
-                Icon(Icons.Rounded.ArrowDropDown, "Show settings", Modifier.rotate(arrowRotationState))
+                Icon(Icons.Rounded.ArrowDropDown, "Show Java Settings", Modifier.rotate(arrowRotationState))
                 Spacer(Modifier.width(10.dp))
             }
             AnimatedVisibility(expanded) {
