@@ -15,12 +15,14 @@ import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.screens.main.MainScreen
 import com.mineinabyss.launchy.ui.screens.settings.AccountScreen
 import com.mineinabyss.launchy.ui.screens.settings.ModsScreen
+import com.mineinabyss.launchy.ui.screens.settings.Tabs
 import com.mineinabyss.launchy.ui.state.TopBar
 
 sealed class Screen(val transparentTopBar: Boolean = false) {
     object Default : Screen(transparentTopBar = true)
     object Mods : Screen()
     object Account : Screen()
+    object Settings : Screen()
 }
 
 var screen: Screen by mutableStateOf(Screen.Default)
@@ -41,6 +43,7 @@ fun Screens() {
     TranslucentTopBar(screen) {
         TransitionSlideUp(screen == Screen.Account) {
             AccountScreen()
+            Tabs()
         }
     }
 
