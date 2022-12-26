@@ -38,10 +38,7 @@ fun SettingGroup() {
                 modifier = Modifier.height(40.dp)
             ) {
                 Spacer(Modifier.width(10.dp))
-                Text(
-                    "Settings", Modifier.weight(1f),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
+                Text("Settings", Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge,)
                 Spacer(Modifier.width(10.dp))
                 Icon(Icons.Rounded.ArrowDropDown, "Show settings", Modifier.rotate(arrowRotationState))
                 Spacer(Modifier.width(10.dp))
@@ -54,9 +51,10 @@ fun SettingGroup() {
                         modifier = Modifier.height(40.dp)
                     ) {
                         Spacer(Modifier.width(10.dp))
-                        //TODO Slider for RAM Selection
-                        val ram = SliderSwitch(label = "Dedicated RAM:", valueRange = 1..6).roundToInt()
-                        state.clientSettings = ClientSettings(ram)
+                        val minRam = SliderSwitch(label = "Minimum RAM", valueRange = 1..12).roundToInt()
+                        val maxRam = SliderSwitch(label = "Maximum RAM:", valueRange = 1..12).roundToInt()
+                        // Figure out way to handle this, probably storing via state or something
+                        state.clientSettings = ClientSettings(state.clientSettings.minecraft, JavaSettings(minRam, maxRam))
                     }
                 }
             }
@@ -65,4 +63,8 @@ fun SettingGroup() {
 }
 
 @Serializable
-data class ClientSettings(val ramAmount: Int)
+data class ClientSettings(val minecraft: MinecraftSettings, val java: JavaSettings)
+@Serializable
+data class MinecraftSettings(val resWidth: Int = 1280, val resHeight: Int = 720, val fullscreenLaunch: Boolean = false)
+@Serializable
+data class JavaSettings(val minRamAmount: Int = 2, val maxRamAmount: Int = 2)

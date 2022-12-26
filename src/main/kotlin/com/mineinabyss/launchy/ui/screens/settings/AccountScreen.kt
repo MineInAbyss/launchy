@@ -12,9 +12,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Password
-import androidx.compose.material.icons.rounded.SupervisorAccount
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -23,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
@@ -49,7 +45,7 @@ fun AccountScreen() {
                         item("settings") {
 
                             LoginMicrosoftButton(true)
-                            TextField(
+                            /*TextField(
                                 "Account Name",
                                 "Enter Player Name",
                                 icon = Icons.Rounded.SupervisorAccount
@@ -59,7 +55,7 @@ fun AccountScreen() {
                                 "Enter Password",
                                 KeyboardOptions(keyboardType = KeyboardType.Password),
                                 Icons.Rounded.Password
-                            )
+                            )*/
 
                             Spacer(Modifier.height(10.dp))
                             SettingGroup()

@@ -79,7 +79,13 @@ object FabricInstaller {
         launcherType: LauncherType,
         launchyState: LaunchyState
     ) {
-        val jsonObject = getProfile(mcDir, launcherType) ?: return
+        val launcherProfiles: Path = mcDir.resolve(launcherType.profileJsonName)
+        if (!Files.exists(launcherProfiles)) {
+            println("Could not find launcher_profiles")
+            return
+        }
+
+        val jsonObject = JSONObject(Utils.readString(launcherProfiles))
         println("Creating profile")
         val profiles: JSONObject = jsonObject.getJSONObject("profiles")
         var foundProfileName: String? = profileName
@@ -94,7 +100,7 @@ object FabricInstaller {
                 foundProfileName = key
             }
         }
-
+        val javaSettings = launchyState.clientSettings.java
         // If the profile already exists, use it instead of making a new one so that user's settings are kept (e.g icon)
         val profile: JSONObject =
             if (profiles.has(foundProfileName))
@@ -103,20 +109,10 @@ object FabricInstaller {
         profile.put("name", profileName)
         profile.put("lastUsed", Utils.ISO_8601.format(Date())) // Update timestamp to bring to top of profile list
         profile.put("lastVersionId", versionId)
-        profile.put("javaArgs", "-Xmx${launchyState.clientSettings.ramAmount}G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M")
+        profile.put("javaArgs", "-Xmx${javaSettings.maxRamAmount}G -Xms${javaSettings.minRamAmount}G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M")
         profiles.put(foundProfileName, profile)
         jsonObject.put("profiles", profiles)
         Utils.writeToFile(mcDir.resolve(launcherType.profileJsonName), jsonObject.toString())
-    }
-
-    fun getProfile(mcDir: Path, launcherType: LauncherType): JSONObject? {
-        val launcherProfiles: Path = mcDir.resolve(launcherType.profileJsonName)
-        if (!Files.exists(launcherProfiles)) {
-            println("Could not find launcher_profiles")
-            return null
-        }
-
-        return JSONObject(Utils.readString(launcherProfiles))
     }
 
     private fun createProfile(name: String, instanceDir: Path, versionId: String): JSONObject {
