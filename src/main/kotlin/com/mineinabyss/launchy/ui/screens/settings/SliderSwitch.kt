@@ -1,7 +1,10 @@
 package com.mineinabyss.launchy.ui.screens.settings
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.Slider
+import androidx.compose.material.SliderDefaults
+import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -10,12 +13,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToLong
 
-@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun RamSlider(
+    label: String = "",
+    modifier: Modifier = Modifier,
+    valueRange: IntRange = 1..16,
+    minRam: Int? = null
+) {
+    SliderSwitch(label, modifier, valueRange)
+    return
+}
+
 @Composable
 fun SliderSwitch(
     label: String = "",
     modifier: Modifier = Modifier,
     valueRange: IntRange = 1..16,
+    minRam: Float? = null
 ): Float {
     var sliderPosition by remember { mutableStateOf(2f) }
     var sliderPos by remember { mutableStateOf(sliderPosition.toString()) }
@@ -27,7 +41,7 @@ fun SliderSwitch(
         modifier = modifier.width(100.dp),
         onValueChange = {
             println("$sliderPos $sliderPosition")
-            sliderPosition = sliderPos.toFloatOrNull() ?: sliderPosition
+            sliderPosition = minRam?.let { maxOf(it, (sliderPos.toFloatOrNull() ?: sliderPosition)) } ?: (sliderPos.toFloatOrNull() ?: sliderPosition)
         }
     )
     // This is called too often, and should only be called when textfield triggers onValueChange but cant? not sure

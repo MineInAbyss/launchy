@@ -48,7 +48,7 @@ fun MainScreen() {
                     UpdateInfoButton()
                 }
                 Spacer(Modifier.width(10.dp))
-                SettingsButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
+                SettingsButton()
             }
         }
 

@@ -10,8 +10,8 @@ import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.screen
 
 @Composable
-fun SettingsButton(enabled: Boolean) {
-    Button(enabled = enabled, onClick = { screen = Screen.Settings }) {
+fun SettingsButton() {
+    Button(onClick = { screen = Screen.Settings }) {
         Icon(Icons.Rounded.Settings, contentDescription = "Settings")
         Text("Settings")
     }

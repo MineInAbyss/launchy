@@ -52,7 +52,7 @@ fun JavaGroup() {
                     ) {
                         Spacer(Modifier.width(10.dp))
                         val minRam = SliderSwitch(label = "Minimum RAM", valueRange = 1..12).roundToInt()
-                        val maxRam = SliderSwitch(label = "Maximum RAM:", valueRange = 1..12).roundToInt()
+                        val maxRam = maxOf(minRam, SliderSwitch(label = "Maximum RAM:", valueRange = 1..12).roundToInt())
                         // Figure out way to handle this, probably storing via state or something
                         state.clientSettings = ClientSettings(state.clientSettings.minecraft, JavaSettings(minRam, maxRam))
                     }

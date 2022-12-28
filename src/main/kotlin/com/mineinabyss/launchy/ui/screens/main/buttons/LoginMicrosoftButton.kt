@@ -15,7 +15,7 @@ fun LoginMicrosoftButton(enabled: Boolean) {
 
     Button(
         enabled = enabled,
-        onClick = { /*TODO Login with Microsoft*/},
+        onClick = { startMicrosoftLoginProcess() },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.primary
@@ -29,4 +29,12 @@ fun LoginMicrosoftButton(enabled: Boolean) {
             Text("Login with Microsoft")
         }
     }
+}
+
+private fun startMicrosoftLoginProcess() {
+
+}
+
+private fun microsoftOAuth2Flow() {
+
 }
