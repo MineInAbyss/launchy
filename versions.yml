@@ -27,13 +27,13 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/MtLQsb99/fabric-api-0.70.0%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/rcnGIuHL/fabric-api-0.71.0%2B1.19.3.jar
 
     - name: Sodium
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/Nr39FOaS/sodium-fabric-mc1.19.3-0.4.6%2Bbuild.20.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/oYfJQ6lR/sodium-fabric-mc1.19.3-0.4.8%2Bbuild.22.jar
 
     - name: Mod menu
       license: MIT
@@ -45,13 +45,13 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/BoAba4K3/indium-1.0.10%2Bmc1.19.3.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/85NvAOjQ/indium-1.0.12%2Bmc1.19.3.jar
 
     - name: FancyMenu
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/i7PptwHV/fancymenu_fabric_2.13.1-1_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/dakpIPYB/fancymenu_forge_2.13.2_MC_1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -71,12 +71,12 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
       forceConfigDownload: true
 
-    #- name: CIT Resewn
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/cit-resewn
-    #  desc: Makes custom armor work with shaders
-    #  url: https://cdn.modrinth.com/data/otVJckYQ/versions/lYmW1wnD/CITResewn-1.1.2%2B1.19.2.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
+    - name: CIT Resewn
+      license: MIT
+      homepage: https://modrinth.com/mod/cit-resewn
+      desc: Makes custom armor work with shaders
+      url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
     - name: NoRpErrorMsg
       license: MIT
@@ -92,11 +92,11 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
       forceConfigDownload: true
 
-    #- name: ArmorStand Interpolation
-    #  license: LGPL-3
-    #  homepage: https://github.com/HibiscusMC/armor-stand-interpolation
-    #  desc: Interpolates armor stands for smoother ModelEngine animations
-    #  url: https://github.com/HibiscusMC/armor-stand-interpolation/releases/download/1.1/armor-stand-interpolation-1.1.jar
+    - name: ArmorStand Interpolation
+      license: LGPL-3
+      homepage: https://github.com/HibiscusMC/armor-stand-interpolation
+      desc: Interpolates armor stands for smoother ModelEngine animations
+      url: https://repo.mineinabyss.com/releases/com/launchy/mods/armor-stand-interpolation-1.2.jar
 
   Performance:
     - name: Starlight
@@ -184,14 +184,14 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/aWSzugT7/voicechat-fabric-1.19.3-2.3.24.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/FjGaPqwu/voicechat-fabric-1.19.3-2.3.26.jar
 
   Visual Enhancements:
     - name: Iris shaders
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/py8Wa69O/iris-mc1.19.3-1.4.6.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/Sg0JZGHa/iris-mc1.19.3-1.5.1.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Shaderpacks_1.0.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
@@ -200,14 +200,14 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://cdn.modrinth.com/data/uCdwusMi/versions/1.6.9a-1.19.2/DistantHorizons-1.6.9a-1.19.2.jar
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/P4psgCf3/DistantHorizons-1.6.10a-1.19.3.jar
       incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/n7dcLucW/fallingleaves-1.14.2%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/bSrG4Fxf/fallingleaves-1.14.3%2B1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
       requires: [ Cloth Config ]
 
@@ -263,7 +263,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/VA4GbM79/physics-mod-2.9.4-mc-1.19.3-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/WBlO0qcQ/physics-mod-2.9.5-mc-1.19.3-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -366,7 +366,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/betterf3
       desc: Makes the F3-menu customizable and cleaner
-      url: https://cdn.modrinth.com/data/8shC1gFX/versions/C3hGuqnK/BetterF3-5.0.0-Fabric-1.19.3-pre2.jar
+      url: https://cdn.modrinth.com/data/8shC1gFX/versions/nuKBXZDI/BetterF3-5.1.0-Fabric-1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/BetterF3_1.0.zip
     
     - name: Reese's Sodium Options
@@ -435,7 +435,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/r5w0P2Aa/sodium-extra-0.4.15%2Bmc1.19.3-build.86.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/8DeIhGTv/sodium-extra-0.4.16%2Bmc1.19.3-build.91.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -516,7 +516,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/scroll-for-worldedit
       desc: Ability to move selection WorldEdit selection with mouse-wheel
-      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/1.1.0/scroll-for-worldedit-1.1.0.jar
+      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/wfQCWS9C/scroll-for-worldedit-1.1.1.jar
 
     - name: VisibleBarriers
       license: ARR
@@ -631,7 +631,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/fabric-language-kotlin
       desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/yLIAMDzv/fabric-language-kotlin-1.8.7%2Bkotlin.1.7.22.jar
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/esSFbyFg/fabric-language-kotlin-1.9.0%2Bkotlin.1.8.0.jar
     
     - name: Satin
       license: LGPL-3
@@ -652,24 +652,11 @@ modGroups:
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/yM94ont6/versions/f3lqB3uY/notenoughcrashes-4.2.0%2B1.19.3-fabric.jar
 
-    - name: ArmorStand Interpolation
-      license: LGPL-3
-      homepage: https://github.com/HibiscusMC/armor-stand-interpolation
-      desc: Interpolates armor stands for smoother ModelEngine animations
-      url: https://github.com/HibiscusMC/armor-stand-interpolation/releases/download/1.1/armor-stand-interpolation-1.1.jar
-
     - name: Auditory
       license: MIT
       homepage: https://modrinth.com/mod/auditory
       desc: Expands and improves block sounds, item sounds and more
       url: https://cdn.modrinth.com/data/1LjfkWOR/versions/Sz9YgtT5/auditory-0.0.4-1.19.x.jar
-
-    - name: CIT Resewn
-      license: MIT
-      homepage: https://modrinth.com/mod/cit-resewn
-      desc: Makes custom armor work with shaders
-      url: https://cdn.modrinth.com/data/otVJckYQ/versions/lYmW1wnD/CITResewn-1.1.2%2B1.19.2.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
     - name: Continuity
       license: LGPL-3
