@@ -51,7 +51,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/dakpIPYB/fancymenu_forge_2.13.2_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/CMyh90qB/fancymenu_fabric_2.13.2_MC_1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
