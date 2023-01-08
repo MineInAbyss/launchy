@@ -9,19 +9,7 @@ plugins {
     id("com.mineinabyss.conventions.kotlin")
     id("org.jetbrains.compose") version "1.1.1"
     kotlin("plugin.serialization")
-//    id("com.github.johnrengelman.shadow") version "7.1.1"
-//    id("proguard") version "7.1.0"
-
 }
-
-/*buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("com.guardsquare:proguard-gradle:7.1.0")
-    }
-}*/
 
 repositories {
     google()
@@ -38,6 +26,7 @@ dependencies {
     }
     @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.material3)
+    implementation(compose.material)
     implementation(compose.materialIconsExtended)
     implementation(Deps.kotlinx.serialization.json)
     implementation(Deps.kotlinx.serialization.kaml)
@@ -51,7 +40,11 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.freeCompilerArgs = listOf("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
+    kotlinOptions.freeCompilerArgs = listOf(
+        "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+        "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+        "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
+    )
 }
 
 val appName = "MineInAbyss_Launcher-" + when {
@@ -79,8 +72,12 @@ compose.desktop {
             }
             windows {
                 menu = true
+                menuGroup = appName
+                shortcut = true
                 upgradeUuid = "b627d78b-947c-4f5c-9f3b-ae02bfa97d08"
                 iconFile.set(iconsRoot.resolve("icon.ico"))
+                dirChooser = false
+                perUserInstall = false
             }
             linux {
                 iconFile.set(iconsRoot.resolve("icon.png"))
@@ -149,29 +146,5 @@ tasks {
             Os.isFamily(Os.FAMILY_MAC) -> dependsOn(dmgRelease)
             else -> dependsOn(executeAppImageBuilder)
         }
-    }
-}
-
-/*
-tasks {
-    shadowJar {
-        mergeServiceFiles()
-        minimize {
-            exclude(dependency("org.jetbrains.compose.desktop:desktop-jvm.*:.*"))
-            exclude(dependency("io.ktor:ktor-client.*:.*"))
-            exclude(dependency(("org.jetbrains.compose.material:material-icons.*:.*")))
-            exclude("androidx/compose/material/icons/filled/**")
-            exclude("androidx/compose/material/icons/outlined/**")
-            exclude("androidx/compose/material/icons/sharp/**")
-            exclude("androidx/compose/material/icons/twotone/**")
-        }
-
-        manifest {
-            attributes(mapOf("Main-Class" to "com.mineinabyss.launchy.MainKt"))
-        }
-    }
-
-    build {
-        dependsOn(shadowJar)
     }
 }

@@ -17,7 +17,7 @@ object Dirs {
         OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
     }
     val mods = mineinabyss / "mods"
-    val configZip = mineinabyss / "configs.zip"
+    val tmp = mineinabyss / ".tmp"
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))
@@ -31,6 +31,8 @@ object Dirs {
     fun createDirs() {
         config.createDirectories()
         mineinabyss.createDirectories()
+        mods.createDirectories()
+        tmp.createDirectories()
     }
 
     fun createConfigFiles() {
