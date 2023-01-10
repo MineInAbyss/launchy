@@ -92,11 +92,11 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
       forceConfigDownload: true
 
-    - name: ArmorStand Interpolation
-      license: LGPL-3
-      homepage: https://github.com/HibiscusMC/armor-stand-interpolation
-      desc: Interpolates armor stands for smoother ModelEngine animations
-      url: https://repo.mineinabyss.com/releases/com/launchy/mods/armor-stand-interpolation-1.2.jar
+    #- name: ArmorStand Interpolation
+    #  license: LGPL-3
+    #  homepage: https://github.com/HibiscusMC/armor-stand-interpolation
+    #  desc: Interpolates armor stands for smoother ModelEngine animations
+    #  url: https://repo.mineinabyss.com/releases/com/launchy/mods/armor-stand-interpolation-1.2.jar
 
   Performance:
     - name: Starlight
@@ -646,6 +646,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/9s6osm5g/versions/M3yxljrZ/cloth-config-9.0.94-fabric.jar
   
   Outdated/Disabled:
+    - name: ArmorStand Interpolation
+      license: LGPL-3
+      homepage: https://github.com/HibiscusMC/armor-stand-interpolation
+      desc: Interpolates armor stands for smoother ModelEngine animations
+      url: https://repo.mineinabyss.com/releases/com/launchy/mods/armor-stand-interpolation-1.2.jar
+
     - name: Not Enough Crashes
       license: MIT
       homepage: https://modrinth.com/mod/notenoughcrashes
