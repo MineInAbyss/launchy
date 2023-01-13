@@ -306,11 +306,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/T8MMXTpr/versions/hYDZaVYh/DripSounds-1.19-0.3.1.jar
       requires: [ Cloth Config ]
 
-    - name: ExtraSounds
-      license: CC0
-      homepage: https://modrinth.com/mod/extrasounds
-      desc: Adds more sounds to Minecraft
-      url: https://cdn.modrinth.com/data/uPWCQrVL/versions/yV1SwVzK/extrasounds-2.3.1%2B1.19.2-1.19.1.jar
+    #- name: ExtraSounds
+    #  license: CC0
+    #  homepage: https://modrinth.com/mod/extrasounds
+    #  desc: Adds more sounds to Minecraft
+    #  url: https://cdn.modrinth.com/data/uPWCQrVL/versions/yV1SwVzK/extrasounds-2.3.1%2B1.19.2-1.19.1.jar
 
   HUD & Menu Enhancements:
     - name: Xaeros Worldmap
@@ -518,11 +518,11 @@ modGroups:
       desc: Ability to move selection WorldEdit selection with mouse-wheel
       url: https://cdn.modrinth.com/data/2Agd6VfX/versions/wfQCWS9C/scroll-for-worldedit-1.1.1.jar
 
-    - name: VisibleBarriers
-      license: ARR
-      homepage: https://modrinth.com/mod/visible-barriers
-      desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
+    #- name: VisibleBarriers
+    #  license: ARR
+    #  homepage: https://modrinth.com/mod/visible-barriers
+    #  desc: Allows you to see barriers and other, normally invisible blocks, in the world
+    #  url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -547,7 +547,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/ibe-editor
       desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/2.1.1+1.19-fabric/IBEEditor-1.19-2.1.1-fabric.jar
+      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
 
     - name: RoughlyEnoughItems
       license: MIT
@@ -576,6 +576,12 @@ modGroups:
     #  homepage: https://modrinth.com/mod/prism-lib
     #  desc: Library dependency for Legendary Tooltips
     #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/IZHmnX6H/Prism-1.19.2-fabric-1.0.3.jar
+
+    - name: VisibleBarriers
+      license: ARR
+      homepage: https://modrinth.com/mod/visible-barriers
+      desc: Allows you to see barriers and other, normally invisible blocks, in the world
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
 
     - name: ForgeConfigAPIPort
       license: MPL-2
@@ -646,6 +652,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/9s6osm5g/versions/M3yxljrZ/cloth-config-9.0.94-fabric.jar
   
   Outdated/Disabled:
+    - name: ExtraSounds
+      license: CC0
+      homepage: https://modrinth.com/mod/extrasounds
+      desc: Adds more sounds to Minecraft
+      url: https://cdn.modrinth.com/data/uPWCQrVL/versions/yV1SwVzK/extrasounds-2.3.1%2B1.19.2-1.19.1.jar
+
     - name: ArmorStand Interpolation
       license: LGPL-3
       homepage: https://github.com/HibiscusMC/armor-stand-interpolation
