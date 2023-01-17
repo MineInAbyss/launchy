@@ -27,7 +27,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/rcnGIuHL/fabric-api-0.71.0%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/vWbvdIxT/fabric-api-0.72.0%2B1.19.3.jar
 
     - name: Sodium
       license: LGPL-3
@@ -51,7 +51,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/CMyh90qB/fancymenu_fabric_2.13.2_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/RvLufEqq/fancymenu_fabric_2.13.3_MC_1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -171,7 +171,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/kakddk9k/c2me-fabric-mc1.19.3-0.2.0%2Balpha.9.12.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/FpgVeSQK/c2me-fabric-mc1.19.3-0.2.0%2Balpha.10.0.jar
     
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -184,7 +184,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/FjGaPqwu/voicechat-fabric-1.19.3-2.3.26.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/l29Co1Hm/voicechat-fabric-1.19.3-2.3.27.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -263,7 +263,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/WBlO0qcQ/physics-mod-2.9.5-mc-1.19.3-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/4SD0ZDdn/physics-mod-2.9.7-mc-1.19.3-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -325,11 +325,11 @@ modGroups:
       desc: Adds a minimap in the corner of the game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_22.16.3_Fabric_1.19.3.jar
 
-    #- name: Legendary Tooltips
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/legendary-tooltips
-    #  desc: Makes tooltips categoried and look cool
-    #  url: https://cdn.modrinth.com/data/atHH8NyV/versions/QqAHVnpI/LegendaryTooltips-1.19.2-fabric-1.3.3.jar
+    - name: Legendary Tooltips
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/legendary-tooltips
+      desc: Makes tooltips categoried and look cool
+      url: https://cdn.modrinth.com/data/atHH8NyV/versions/yiXNxlzi/LegendaryTooltips-1.19.3-fabric-1.4.1.jar
 
     - name: MapInSlot
       license: MIT
@@ -417,7 +417,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/first-person-model
       desc: Enables the third-person model in first-person, making for a more realistic experience
-      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/bpEtdlup/firstperson-fabric-2.2.0-mc1.19.3.jar
+      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/CCXpyT4U/firstperson-fabric-2.2.2-mc1.19.3.jar
 
     - name: Boat Item View
       license: LGPL-3
@@ -479,7 +479,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/better-ping-display-fabric
       desc: Makes the tablist ping display in numbers
-      url: https://cdn.modrinth.com/data/XLd8Sh64/versions/5qPiJBza/numeralping-1.1.1.jar
+      url: https://cdn.modrinth.com/data/MS1ZMyR7/versions/UCr9wrly/BetterPingDisplay-Fabric-1.19.3-1.1.1.jar
 
     - name: Dont Clear Chat History
       license: CC0
@@ -535,7 +535,7 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/bettercommandblockui
       desc: Entirely overhauls the commandblock UI
-      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/HFxmGYK7/bettercommandblockui-0.2.0-1.19.2.jar
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/wzKMKt1N/bettercommandblockui-0.3.1-1.19.3.jar
 
     - name: NBTToolTips
       license: MIT
@@ -565,23 +565,23 @@ modGroups:
   #MineInAbyss Enhancements:
 
   Dependencies:
-    #- name: Iceberg
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/iceberg
-    #  desc: Library dependency for Legendary Tooltips
-    #  url: https://cdn.modrinth.com/data/5faXoLqX/versions/qC0waeNX/Iceberg-1.19.1-fabric-1.0.46.jar
+    - name: Iceberg
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/iceberg
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/VoOBBJRg/Iceberg-1.19.3-fabric-1.1.4.jar
 
-    #- name: Prism
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/prism-lib
-    #  desc: Library dependency for Legendary Tooltips
-    #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/IZHmnX6H/Prism-1.19.2-fabric-1.0.3.jar
+    - name: Prism
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/prism-lib
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
 
     - name: ForgeConfigAPIPort
       license: MPL-2
       homepage: https://modrinth.com/mod/forge-config-api-port
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/ohNO6lps/versions/tlNCwMwZ/ForgeConfigAPIPort-v5.0.3-1.19.3-Fabric.jar
+      url: https://cdn.modrinth.com/data/ohNO6lps/versions/alqrny5V/ForgeConfigAPIPort-v5.0.6-1.19.3-Fabric.jar
 
     - name: YetAnotherConfigLib
       license: LGPL-3
@@ -689,11 +689,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/fZx04xgT/enhancedblockentities-0.7.2%2B1.19.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
-    - name: Iceberg
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/iceberg
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/qC0waeNX/Iceberg-1.19.1-fabric-1.0.46.jar
+    #- name: Iceberg
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/iceberg
+    #  desc: Library dependency for Legendary Tooltips
+    #  url: https://cdn.modrinth.com/data/5faXoLqX/versions/qC0waeNX/Iceberg-1.19.1-fabric-1.0.46.jar
 
     - name: LambdaBetterGrass
       license: MIT
@@ -701,11 +701,11 @@ modGroups:
       desc: Adds better grass and snow to the game
       url: https://github.com/LambdAurora/LambdaBetterGrass/releases/download/v1.3.0%2B1.19/lambdabettergrass-1.3.0+1.19.jar
 
-    - name: Legendary Tooltips
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/legendary-tooltips
-      desc: Makes tooltips categoried and look cool
-      url: https://cdn.modrinth.com/data/atHH8NyV/versions/QqAHVnpI/LegendaryTooltips-1.19.2-fabric-1.3.3.jar
+    #- name: Legendary Tooltips
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/legendary-tooltips
+    #  desc: Makes tooltips categoried and look cool
+    #  url: https://cdn.modrinth.com/data/atHH8NyV/versions/QqAHVnpI/LegendaryTooltips-1.19.2-fabric-1.3.3.jar
 
     - name: MoreCreativeTabs
       license: MIT
@@ -713,11 +713,11 @@ modGroups:
       desc: Adds more creative tabs, specifically for Blocky Blocks
       url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/6cP1sK25/MoreCreativeTabs-fabric-1.19-1.2.0.jar
 
-    - name: Prism
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/prism-lib
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/IZHmnX6H/Prism-1.19.2-fabric-1.0.3.jar
+    #- name: Prism
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/prism-lib
+    #  desc: Library dependency for Legendary Tooltips
+    #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/IZHmnX6H/Prism-1.19.2-fabric-1.0.3.jar
 
     #- name: Malilib
     #  license: LGPL-3
