@@ -387,7 +387,7 @@ modGroups:
       license: MIT
       homepage: https://github.com/ASangarin/AriKeys
       desc: Adds option to use shortcut Keybinds configured on a server
-      url: https://github.com/ASangarin/AriKeys/releases/download/v2.1/arikeys-fabric-2.1-1.19.2.jar
+      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
 
     - name: Smooth Swapping
       license: LGPL-3
