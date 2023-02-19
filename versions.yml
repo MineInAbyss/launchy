@@ -39,7 +39,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/eIrlBn1Z/modmenu-5.0.2.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/RtaGQNyd/modmenu-5.1.0-beta.4.jar
 
     - name: Indium
       license: APACHE
@@ -145,7 +145,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/entityculling
       desc: Skips rendering Tiles/Entities that are not visible.
-      url: https://cdn.modrinth.com/data/NNAgCjsB/versions/bRBO9ZzX/entityculling-fabric-1.5.2-mc1.19.3.jar
+      url: https://cdn.modrinth.com/data/NNAgCjsB/versions/reIgRPky/entityculling-fabric-1.6.0-mc1.19.3.jar
 
     - name: Cull Less Leaves
       license: LGPL-3
@@ -177,7 +177,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
       desc: Improves loading times when changing worlds
-      url: https://github.com/kennytv/kennytvs-epic-force-close-loading-screen-mod-for-fabric/releases/download/1.1.1/forcecloseloadingscreen-1.1.1.jar
+      url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
 
   Voice Chat:    
     - name: Simple Voice Chat
@@ -207,7 +207,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/ZMbS4EYg/fallingleaves-1.14.4%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/XYq90g2b/fallingleaves-1.14.5%2B1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
       requires: [ Cloth Config ]
 
@@ -518,11 +518,11 @@ modGroups:
       desc: Ability to move selection WorldEdit selection with mouse-wheel
       url: https://cdn.modrinth.com/data/2Agd6VfX/versions/wfQCWS9C/scroll-for-worldedit-1.1.1.jar
 
-    #- name: VisibleBarriers
-    #  license: ARR
-    #  homepage: https://modrinth.com/mod/visible-barriers
-    #  desc: Allows you to see barriers and other, normally invisible blocks, in the world
-    #  url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
+    - name: VisibleBarriers
+      license: ARR
+      homepage: https://modrinth.com/mod/visible-barriers
+      desc: Allows you to see barriers and other, normally invisible blocks, in the world
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/tT04dvKV/visible-barriers-1.7.0.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -553,7 +553,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/Sdo3y9uD/RoughlyEnoughItems-10.0.586.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/M4c5N1Oo/RoughlyEnoughItems-10.0.592.jar
       requires: [ ArchitecturyAPI ]
 
     - name: ToolTipFix
@@ -646,11 +646,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/9s6osm5g/versions/M3yxljrZ/cloth-config-9.0.94-fabric.jar
   
   Outdated/Disabled:
-    - name: VisibleBarriers
-      license: ARR
-      homepage: https://modrinth.com/mod/visible-barriers
-      desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
+    #- name: VisibleBarriers
+    #  license: ARR
+    #  homepage: https://modrinth.com/mod/visible-barriers
+    #  desc: Allows you to see barriers and other, normally invisible blocks, in the world
+    #  url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
 
     - name: ExtraSounds
       license: CC0
