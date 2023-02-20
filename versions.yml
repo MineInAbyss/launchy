@@ -500,11 +500,11 @@ modGroups:
       desc: Allows you to place blocks faster by holding down RMB
       url: https://cdn.modrinth.com/data/yx5ls8Zc/versions/YqswvLcn/accurate-block-placement-1.0.16.jar
 
-    #- name: MoreCreativeTabs
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/morecreativetabs
-    #  desc: Adds more creative tabs, specifically for Blocky Blocks
-    #  url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/6cP1sK25/MoreCreativeTabs-fabric-1.19-1.2.0.jar
+    - name: MoreCreativeTabs
+      license: MIT
+      homepage: https://modrinth.com/mod/morecreativetabs
+      desc: Adds more creative tabs, specifically for Blocky Blocks
+      url: https://ci.firstdarkdev.xyz/job/MoreCreativeTabs/job/Forge-Fabric%201.19.3/lastSuccessfulBuild/artifact/artifacts/MoreCreativeTabs-fabric-1.19.3-1.2.2d.jar
 
     - name: Litematica
       license: LGPL-3
@@ -646,11 +646,6 @@ modGroups:
       url: https://cdn.modrinth.com/data/9s6osm5g/versions/M3yxljrZ/cloth-config-9.0.94-fabric.jar
   
   Outdated/Disabled:
-    #- name: VisibleBarriers
-    #  license: ARR
-    #  homepage: https://modrinth.com/mod/visible-barriers
-    #  desc: Allows you to see barriers and other, normally invisible blocks, in the world
-    #  url: https://cdn.modrinth.com/data/ajdfGxGU/versions/1.5.3+1.19.x/visible-barriers-1.5.3%2B1.19.x.jar
 
     - name: ExtraSounds
       license: CC0
@@ -689,47 +684,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/fZx04xgT/enhancedblockentities-0.7.2%2B1.19.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
-    #- name: Iceberg
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/iceberg
-    #  desc: Library dependency for Legendary Tooltips
-    #  url: https://cdn.modrinth.com/data/5faXoLqX/versions/qC0waeNX/Iceberg-1.19.1-fabric-1.0.46.jar
-
     - name: LambdaBetterGrass
       license: MIT
       homepage: https://modrinth.com/mod/lambdabettergrass
       desc: Adds better grass and snow to the game
       url: https://github.com/LambdAurora/LambdaBetterGrass/releases/download/v1.3.0%2B1.19/lambdabettergrass-1.3.0+1.19.jar
-
-    #- name: Legendary Tooltips
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/legendary-tooltips
-    #  desc: Makes tooltips categoried and look cool
-    #  url: https://cdn.modrinth.com/data/atHH8NyV/versions/QqAHVnpI/LegendaryTooltips-1.19.2-fabric-1.3.3.jar
-
-    - name: MoreCreativeTabs
-      license: MIT
-      homepage: https://modrinth.com/mod/morecreativetabs
-      desc: Adds more creative tabs, specifically for Blocky Blocks
-      url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/6cP1sK25/MoreCreativeTabs-fabric-1.19-1.2.0.jar
-
-    #- name: Prism
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/prism-lib
-    #  desc: Library dependency for Legendary Tooltips
-    #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/IZHmnX6H/Prism-1.19.2-fabric-1.0.3.jar
-
-    #- name: Malilib
-    #  license: LGPL-3
-    #  homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
-    #  desc: Dependency for LiteMatica
-    #  url: https://beta.curseforge.com/minecraft/mc-mods/malilib/download?fileId=4147598
-
-    #- name: Litematica
-    #  license: LGPL-3
-    #  homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
-    #  desc: Mod to render schematics and other stuff in-game
-    #  url: https://www.curseforge.com/minecraft/mc-mods/details/download/4162847/file
 
     - name: Mythic Keys
       license: None
