@@ -112,6 +112,10 @@ class LaunchyState(
             "Mine in Abyss"
         )
     }
+    val settingsUpToDate by derivedStateOf {
+        clientSettings == config.clientSettings
+    }
+
     val updatesQueued by derivedStateOf { queuedUpdates.isNotEmpty() }
     val installsQueued by derivedStateOf { queuedInstalls.isNotEmpty() }
     val deletionsQueued by derivedStateOf { queuedDeletions.isNotEmpty() }
@@ -126,6 +130,7 @@ class LaunchyState(
     )
 
     var handledFirstLaunch by mutableStateOf(config.handledFirstLaunch)
+    var clientSettings by mutableStateOf(config.clientSettings)
 
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) {
@@ -175,6 +180,14 @@ class LaunchyState(
     }
 
     fun installFabric() {
+        installProfile()
+        installedFabricVersion = "Installing..."
+        installedFabricVersion = versions.fabricVersion
+        installedMinecraftVersion = "Installing..."
+        installedMinecraftVersion = versions.minecraftVersion
+    }
+
+    fun installProfile() {
         installingProfile = true
         FabricInstaller.installToLauncher(
             Dirs.minecraft,
@@ -183,12 +196,9 @@ class LaunchyState(
             versions.minecraftVersion,
             "fabric-loader",
             versions.fabricVersion,
+            this
         )
         installingProfile = false
-        installedFabricVersion = "Installing..."
-        installedFabricVersion = versions.fabricVersion
-        installedMinecraftVersion = "Installing..."
-        installedMinecraftVersion = versions.minecraftVersion
     }
 
     suspend fun download(mod: Mod) {
@@ -265,6 +275,7 @@ class LaunchyState(
             installedMinecraftVersion = installedMinecraftVersion,
             handledImportOptions = handledImportOptions,
             handledFirstLaunch = handledFirstLaunch,
+            clientSettings = clientSettings
         ).save()
     }
 

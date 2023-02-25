@@ -48,8 +48,6 @@ fun MainScreen() {
                     UpdateInfoButton()
                 }
                 Spacer(Modifier.width(10.dp))
-//                NewsButton(hasUpdates = true)
-//                Spacer(Modifier.width(10.dp))
                 SettingsButton()
             }
         }

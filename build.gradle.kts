@@ -86,7 +86,7 @@ compose.desktop {
     }
 }
 
-val linuxAppDir = project.file("packaging/appimage/Mine in Abyss.AppDir")
+val linuxAppDir = project.file("packaging/appimage/Wynntils.AppDir")
 val appImageTool = project.file("deps/appimagetool.AppImage")
 val composePackageDir = "$buildDir/compose/binaries/main/${
     when {

@@ -40,11 +40,11 @@ fun HandleImportSettings() {
                     // TODO: Show error message
                     e.printStackTrace()
                 }
-                screen = Screen.Settings
+                screen = Screen.Mods
                 state.handledImportOptions = true
             },
             onDecline = {
-                screen = Screen.Settings
+                screen = Screen.Mods
                 state.handledImportOptions = true
             }
         )
@@ -71,7 +71,7 @@ fun ImportSettingsDialog(
                 modifier = Modifier.padding(24.dp)
             ) {
                 Text(
-                    text = "Import Settings",
+                    text = "Import Mods",
                     style = MaterialTheme.typography.headlineSmall
                 )
                 Spacer(Modifier.height(16.dp))

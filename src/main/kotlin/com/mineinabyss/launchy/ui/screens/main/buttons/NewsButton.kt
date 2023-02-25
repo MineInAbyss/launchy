@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 fun NewsButton(hasUpdates: Boolean) {
     Box {
         Button(onClick = {}) {
-            Icon(Icons.Rounded.Feed, contentDescription = "Settings")
+            Icon(Icons.Rounded.Feed, contentDescription = "Mods")
             Text("News")
         }
         if (hasUpdates) Surface(

@@ -8,7 +8,7 @@ package com.mineinabyss.launchy.logic
 
 import mjson.Json
 import mjson.Json.read
-import net.fabricmc.installer.client.ProfileInstaller
+import net.fabricmc.installer.client.ProfileInstaller.LauncherType
 import net.fabricmc.installer.util.Reference
 import net.fabricmc.installer.util.Utils
 import org.json.JSONObject
@@ -36,13 +36,13 @@ object FabricInstaller {
         gameVersion: String,
         loaderName: String,
         loaderVersion: String,
+        launchyState: LaunchyState
     ): Boolean {
         val versionId = String.format("%s-%s-%s", loaderName, loaderVersion, gameVersion)
-        val launcherType: ProfileInstaller.LauncherType = (if (System.getProperty("os.name")
-                .contains("Windows")
-        ) getLauncherType(vanillaGameDir) else  /* Return standalone if we aren't on Windows.*/ ProfileInstaller.LauncherType.WIN32)
+        val launcherType: LauncherType = (if ("Windows" in System.getProperty("os.name"))
+            getLauncherType(vanillaGameDir) else  /* Return standalone if we aren't on Windows.*/ LauncherType.WIN32)
         installVersion(vanillaGameDir, gameVersion, loaderName, loaderVersion, launcherType)
-        installProfile(vanillaGameDir, instanceDir, profileName, versionId, launcherType)
+        installProfile(vanillaGameDir, instanceDir, profileName, versionId, launcherType, launchyState)
         return true
     }
 
@@ -51,7 +51,7 @@ object FabricInstaller {
         gameVersion: String,
         loaderName: String,
         loaderVersion: String,
-        launcherType: ProfileInstaller.LauncherType
+        launcherType: LauncherType
     ) {
         println("Installing $gameVersion with fabric $loaderVersion to launcher $launcherType")
         val versionId = "$loaderName-$loaderVersion-$gameVersion"
@@ -71,20 +71,22 @@ object FabricInstaller {
         Utils.writeToFile(profileJsonPath, profileJson.toString())
     }
 
-    private fun installProfile(
+    fun installProfile(
         mcDir: Path,
         instanceDir: Path,
         profileName: String,
         versionId: String,
-        launcherType: ProfileInstaller.LauncherType
+        launcherType: LauncherType,
+        launchyState: LaunchyState
     ) {
         val launcherProfiles: Path = mcDir.resolve(launcherType.profileJsonName)
         if (!Files.exists(launcherProfiles)) {
             println("Could not find launcher_profiles")
             return
         }
-        println("Creating profile")
+
         val jsonObject = JSONObject(Utils.readString(launcherProfiles))
+        println("Creating profile")
         val profiles: JSONObject = jsonObject.getJSONObject("profiles")
         var foundProfileName: String? = profileName
         val it: Iterator<String> = profiles.keys()
@@ -98,20 +100,19 @@ object FabricInstaller {
                 foundProfileName = key
             }
         }
-
+        val javaSettings = launchyState.clientSettings.java
         // If the profile already exists, use it instead of making a new one so that user's settings are kept (e.g icon)
         val profile: JSONObject =
-            if (profiles.has(foundProfileName)) profiles.getJSONObject(foundProfileName) else createProfile(
-                profileName,
-                instanceDir,
-                versionId,
-            )
+            if (profiles.has(foundProfileName))
+                profiles.getJSONObject(foundProfileName)
+            else createProfile(profileName, instanceDir, versionId)
         profile.put("name", profileName)
         profile.put("lastUsed", Utils.ISO_8601.format(Date())) // Update timestamp to bring to top of profile list
         profile.put("lastVersionId", versionId)
+        profile.put("javaArgs", "-Xmx${javaSettings.maxRamAmount}G -Xms${javaSettings.minRamAmount}G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M")
         profiles.put(foundProfileName, profile)
         jsonObject.put("profiles", profiles)
-        Utils.writeToFile(launcherProfiles, jsonObject.toString())
+        Utils.writeToFile(mcDir.resolve(launcherType.profileJsonName), jsonObject.toString())
     }
 
     private fun createProfile(name: String, instanceDir: Path, versionId: String): JSONObject {
@@ -157,7 +158,7 @@ object FabricInstaller {
         }
     }
 
-    private fun showLauncherTypeSelection(): ProfileInstaller.LauncherType? {
+    private fun showLauncherTypeSelection(): LauncherType? {
         val options = arrayOf<String>(
             Utils.BUNDLE.getString("prompt.launcher.type.xbox"),
             Utils.BUNDLE.getString("prompt.launcher.type.win32")
@@ -175,17 +176,17 @@ object FabricInstaller {
         return if (result == JOptionPane.CLOSED_OPTION) {
             null
         } else {
-            if (result == JOptionPane.YES_OPTION) ProfileInstaller.LauncherType.MICROSOFT_STORE else ProfileInstaller.LauncherType.WIN32
+            if (result == JOptionPane.YES_OPTION) LauncherType.MICROSOFT_STORE else LauncherType.WIN32
         }
     }
 
-    fun getLauncherType(vanillaGameDir: Path): ProfileInstaller.LauncherType {
-        var launcherType: ProfileInstaller.LauncherType?
-        val types: List<ProfileInstaller.LauncherType> = getInstalledLauncherTypes(vanillaGameDir)
+    fun getLauncherType(vanillaGameDir: Path): LauncherType {
+        var launcherType: LauncherType?
+        val types: List<LauncherType> = getInstalledLauncherTypes(vanillaGameDir)
         if (types.size == 0) {
             // Default to WIN32, since nothing will happen anyway
             println("No launchers found, profile installation will not take place!")
-            launcherType = ProfileInstaller.LauncherType.WIN32
+            launcherType = LauncherType.WIN32
         } else if (types.size == 1) {
             println("Found only one launcher (" + types[0] + "), will proceed with that!")
             launcherType = types[0]
@@ -194,14 +195,14 @@ object FabricInstaller {
             launcherType = showLauncherTypeSelection()
             if (launcherType == null) {
                 System.out.println(Utils.BUNDLE.getString("prompt.ready.install"))
-                launcherType = ProfileInstaller.LauncherType.WIN32
+                launcherType = LauncherType.WIN32
             }
         }
         return launcherType
     }
 
-    fun getInstalledLauncherTypes(mcDir: Path): List<ProfileInstaller.LauncherType> {
-        return Arrays.stream(ProfileInstaller.LauncherType.values()).filter { launcherType ->
+    fun getInstalledLauncherTypes(mcDir: Path): List<LauncherType> {
+        return Arrays.stream(LauncherType.values()).filter { launcherType ->
             Files.exists(
                 mcDir.resolve(
                     launcherType.profileJsonName
