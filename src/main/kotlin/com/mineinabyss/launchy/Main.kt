@@ -24,6 +24,7 @@ import com.mineinabyss.launchy.ui.rememberMIAColorScheme
 import com.mineinabyss.launchy.ui.screens.Screens
 import com.mineinabyss.launchy.ui.state.TopBarProvider
 import com.mineinabyss.launchy.ui.state.TopBarState
+import com.mineinabyss.launchy.util.OS
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 val LocalLaunchyState: LaunchyState
@@ -49,6 +50,7 @@ fun main() {
             icon = icon,
             onCloseRequest = onClose,
             undecorated = true,
+            transparent = OS.get() == OS.WINDOWS, // Windows 11 shows a white bar on the bottom without this
         ) {
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null

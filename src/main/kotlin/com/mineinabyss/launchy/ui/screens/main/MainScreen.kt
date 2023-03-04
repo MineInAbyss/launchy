@@ -46,8 +46,8 @@ fun MainScreen() {
                 Spacer(Modifier.width(10.dp))
                 AnimatedVisibility(state.operationsQueued) {
                     UpdateInfoButton()
+                    Spacer(Modifier.width(10.dp))
                 }
-                Spacer(Modifier.width(10.dp))
 //                NewsButton(hasUpdates = true)
 //                Spacer(Modifier.width(10.dp))
                 SettingsButton()

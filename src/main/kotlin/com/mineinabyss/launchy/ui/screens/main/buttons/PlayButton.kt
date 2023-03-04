@@ -5,17 +5,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.ui.screens.main.showComingSoonDialog
 
 @Composable
 fun PlayButton(enabled: Boolean) {
     val state = LocalLaunchyState
-    val coroutineScope = rememberCoroutineScope()
 
     Button(
-        enabled = enabled,
+        enabled = Constants.ENABLE_PLAY_BUTTON && enabled,
         onClick = {
             showComingSoonDialog.value = true
         },

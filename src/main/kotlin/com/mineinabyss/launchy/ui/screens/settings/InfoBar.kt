@@ -29,7 +29,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             val totalBytesDownloaded =
                 state.downloading.values.sumOf { it.bytesDownloaded } + state.downloadingConfigs.values.sumOf { it.bytesDownloaded }
             LinearProgressIndicator(
-                progress = totalBytesDownloaded.toFloat() / totalBytesToDownload.toFloat(),
+                progress = if (totalBytesToDownload == 0L) 0f else totalBytesDownloaded.toFloat() / totalBytesToDownload,
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colorScheme.primaryContainer
             )
