@@ -330,6 +330,7 @@ modGroups:
       homepage: https://modrinth.com/mod/legendary-tooltips
       desc: Makes tooltips categoried and look cool
       url: https://cdn.modrinth.com/data/atHH8NyV/versions/yiXNxlzi/LegendaryTooltips-1.19.3-fabric-1.4.1.jar
+      incompatibleWith: [ Sodium ]
 
     - name: MapInSlot
       license: MIT
