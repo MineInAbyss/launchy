@@ -60,7 +60,7 @@ fun ModInfo(group: Group, mod: Mod) {
             val total = ((state.downloading[mod]?.totalBytes ?: 0L) + (state.downloadingConfigs[mod]?.totalBytes
                 ?: 0L)).toFloat()
             LinearProgressIndicator(
-                progress = downloaded / total,
+                progress = if (total == 0f) 0f else downloaded / total,
                 color = MaterialTheme.colorScheme.primaryContainer
             )
         }
