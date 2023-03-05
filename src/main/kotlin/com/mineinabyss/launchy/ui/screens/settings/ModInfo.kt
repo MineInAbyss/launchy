@@ -4,13 +4,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.TooltipArea
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Link
 import androidx.compose.material.icons.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
@@ -24,14 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
-import edu.stanford.ejalbert.BrowserLauncher
-import java.awt.Desktop
-import java.net.URI
-
-object Browser {
-    val desktop = Desktop.getDesktop()
-    fun browse(url: String) = synchronized(desktop) { desktop.browse(URI.create(url)) }
-}
+import com.mineinabyss.launchy.ui.elements.Tooltip
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -44,14 +35,14 @@ fun ModInfo(group: Group, mod: Mod) {
 
     Surface(
         modifier = Modifier
-            .fillMaxWidth()
-            .clickable { if (!group.forceEnabled && !group.forceDisabled) state.setModEnabled(mod, !modEnabled) },
+            .fillMaxWidth(),
         color = when (mod) {
             in state.failedDownloads -> MaterialTheme.colorScheme.error
             in state.queuedDeletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
             in state.queuedInstalls -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)//Color(105, 240, 174, alpha = 25)
             else -> MaterialTheme.colorScheme.surface
-        }
+        },
+        onClick = { if (!group.forceEnabled && !group.forceDisabled) state.setModEnabled(mod, !modEnabled) }
     ) {
         if (state.downloading.containsKey(mod) || state.downloadingConfigs.containsKey(mod)) {
             val downloaded =
@@ -64,7 +55,7 @@ fun ModInfo(group: Group, mod: Mod) {
                 color = MaterialTheme.colorScheme.primaryContainer
             )
         }
-        Column(Modifier.padding(2.dp)) {
+        Column {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -85,18 +76,16 @@ fun ModInfo(group: Group, mod: Mod) {
                         TooltipArea(
                             modifier = Modifier.alpha(0.5f),
                             tooltip = {
-                                Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+                                Tooltip {
                                     if (mod.requires.isNotEmpty()) {
                                         Text(
                                             text = "Requires: ${mod.requires.joinToString()}",
-                                            modifier = Modifier.padding(4.dp),
                                             style = MaterialTheme.typography.labelMedium
                                         )
                                     }
                                     if (incompatibleMods.isNotEmpty()) {
                                         Text(
                                             text = "Incompatible with: ${incompatibleMods.joinToString()}",
-                                            modifier = Modifier.padding(4.dp),
                                             style = MaterialTheme.typography.labelMedium
                                         )
                                     }
@@ -116,50 +105,34 @@ fun ModInfo(group: Group, mod: Mod) {
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.alpha(0.5f)
                 )
-                if (mod.homepage.isNotBlank())
-                    IconButton(
-                        modifier = Modifier.alpha(0.5f),
-                        onClick = { BrowserLauncher().openURLinBrowser(mod.homepage) }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Link,
-                            contentDescription = "URL"
-                        )
-                    }
+
                 if (mod.configUrl.isNotEmpty()) {
                     TooltipArea(
                         modifier = Modifier.alpha(0.5f),
-                        tooltip = {
-                            Text(
-                                text = "Config",
-                                style = MaterialTheme.typography.bodySmall
+                        tooltip = { Tooltip("Config") }
+                    ) {
+                        IconButton(onClick = { configExpanded = !configExpanded }) {
+                            Icon(
+                                imageVector = Icons.Rounded.Settings,
+                                contentDescription = "ConfigTab",
+                                modifier = Modifier.rotate(configTabState)
                             )
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Settings,
-                            contentDescription = "ConfigTab",
-                            modifier = Modifier
-                                .scale(0.75f)
-                                .rotate(configTabState)
-                                .clickable { configExpanded = !configExpanded }
-                        )
                     }
                 }
                 if (mod.homepage.isNotEmpty()) {
                     TooltipArea(
                         modifier = Modifier.alpha(0.5f),
                         tooltip = {
-                            Text(
-                                text = "Open homepage",
-                                style = MaterialTheme.typography.bodySmall
-                            )
+                            Tooltip {
+                                Text(
+                                    text = "Open homepage",
+                                    style = MaterialTheme.typography.labelMedium
+                                )
+                            }
                         }
                     ) {
-                        IconButton(
-                            modifier = Modifier.alpha(0.5f),
-                            onClick = { Browser.browse(mod.homepage) }
-                        ) {
+                        IconButton(onClick = { Browser.browse(mod.homepage) }) {
                             Icon(
                                 imageVector = Icons.Rounded.OpenInNew,
                                 contentDescription = "Homepage"
@@ -171,9 +144,9 @@ fun ModInfo(group: Group, mod: Mod) {
             AnimatedVisibility(configExpanded) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable {
-                        if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled)
-                    }.fillMaxWidth()
+                    modifier = Modifier
+                        .clickable { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }
+                        .fillMaxWidth()
                 ) {
                     Spacer(Modifier.width(20.dp))
                     Checkbox(

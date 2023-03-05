@@ -20,6 +20,7 @@ import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
+import com.mineinabyss.launchy.ui.LaunchyTypography
 import com.mineinabyss.launchy.ui.rememberMIAColorScheme
 import com.mineinabyss.launchy.ui.screens.Screens
 import com.mineinabyss.launchy.ui.state.TopBarProvider
@@ -55,7 +56,7 @@ fun main() {
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
             val scheme = rememberMIAColorScheme(0.02f)
-            MaterialTheme(colorScheme = scheme) {
+            MaterialTheme(colorScheme = scheme, typography = LaunchyTypography) {
                 CompositionLocalProvider(TopBarProvider provides topBarState) {
                     Scaffold {
                         AnimatedVisibility(!ready, exit = fadeOut()) {

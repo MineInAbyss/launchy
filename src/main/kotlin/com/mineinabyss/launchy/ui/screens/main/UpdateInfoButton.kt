@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Download
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.rounded.HistoryEdu
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -24,7 +26,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 fun UpdateInfoButton() {
     val state = LocalLaunchyState
     var toggled by remember { mutableStateOf(false) }
-    Button(onClick = { toggled = !toggled }) {
+    Button(onClick = { toggled = !toggled }, shape = RoundedCornerShape(20.dp)) {
         Column {
             Row {
                 Icon(Icons.Rounded.Update, contentDescription = "Updates")

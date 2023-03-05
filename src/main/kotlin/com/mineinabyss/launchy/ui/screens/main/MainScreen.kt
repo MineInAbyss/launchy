@@ -36,17 +36,14 @@ fun MainScreen() {
         ) {
             LogoLarge(Modifier.weight(3f))
             Row(
-                horizontalArrangement = Arrangement.Center,
+                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth().weight(1f),
             ) {
                 PlayButton(!state.isDownloading && !state.operationsQueued && state.minecraftValid)
-                Spacer(Modifier.width(10.dp))
                 InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
-                Spacer(Modifier.width(10.dp))
                 AnimatedVisibility(state.operationsQueued) {
                     UpdateInfoButton()
-                    Spacer(Modifier.width(10.dp))
                 }
 //                NewsButton(hasUpdates = true)
 //                Spacer(Modifier.width(10.dp))
