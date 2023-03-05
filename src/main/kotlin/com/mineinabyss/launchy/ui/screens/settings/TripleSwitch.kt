@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.data.Group
 import com.mineinabyss.launchy.data.Mod
 import com.mineinabyss.launchy.util.Option
@@ -40,7 +41,7 @@ fun ToggleButtons(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.width(140.dp)/*.padding(2.dp)*/
+                modifier = Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             ) {
                 val fullEnable = state.enabledMods.containsAll(mods)
                 val fullDisable = mods.none { it in state.enabledMods }

@@ -1,20 +1,27 @@
 package com.mineinabyss.launchy.ui.screens.settings
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.*
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Constants
+import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
+import com.mineinabyss.launchy.ui.elements.Tooltip
 import com.mineinabyss.launchy.ui.screens.main.buttons.InstallButton
 
 @Composable
@@ -22,7 +29,7 @@ fun InfoBar() {
     val state = LocalLaunchyState
     Surface(
         tonalElevation = 2.dp,
-        shadowElevation = 2.dp,
+        shadowElevation = 0.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -39,17 +46,19 @@ fun InfoBar() {
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(6.dp)
+            modifier = Modifier
+                .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp)
         ) {
-            InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid, Modifier.widthIn(min =  140.dp))
-            Spacer(Modifier.width(10.dp))
-
+            InstallButton(
+                !state.isDownloading && state.operationsQueued && state.minecraftValid,
+                Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
+            )
+            Spacer(Modifier.width(12.dp))
             ActionButton(
                 shown = !state.minecraftValid,
                 icon = Icons.Rounded.Error,
                 desc = "No minecraft installation found",
             )
-
             ActionButton(
                 shown = !state.fabricUpToDate,
                 icon = Icons.Rounded.HistoryEdu,
@@ -58,23 +67,21 @@ fun InfoBar() {
             ActionButton(
                 shown = state.updatesQueued,
                 icon = Icons.Rounded.Update,
-                desc = "Will update",
-                extra = state.queuedUpdates.size.toString()
+                desc = "Queued updates",
+                count = state.queuedUpdates.size
             )
             ActionButton(
                 shown = state.installsQueued,
                 icon = Icons.Rounded.Download,
-                desc = "Will download",
-                extra = state.queuedInstalls.size.toString()
+                desc = "Queued downloads for new mods",
+                count = state.queuedInstalls.size
             )
             ActionButton(
                 shown = state.deletionsQueued,
                 icon = Icons.Rounded.Delete,
-                desc = "Will remove",
-                extra = state.queuedDeletions.size.toString()
+                desc = "Queued mod deletions",
+                count = state.queuedDeletions.size
             )
-
-            Spacer(Modifier.width(10.dp).weight(1f))
 
             if (state.isDownloading) {
                 // Show download progress
@@ -89,39 +96,33 @@ fun InfoBar() {
             }
 
             if (state.failedDownloads.isNotEmpty()) {
-                // Show failed downloads
                 Text(
                     text = "Failed downloads: ${state.failedDownloads.size}",
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-
-//                var path by remember { mutableStateOf("") }
-//                Button(onClick = {
-//                    path = FileDialog(ComposeWindow()).apply {
-////                        setFilenameFilter { dir, name -> name.endsWith(".minecraft") }
-//                        isVisible = true
-//                    }.directory
-//                }) {
-//                    Text("File Picker")
-//                }
-//                Text(path)
         }
     }
 }
 
 @Composable
-fun ActionButton(shown: Boolean, icon: ImageVector, desc: String, extra: String = "") {
-    AnimatedVisibility(shown, enter = fadeIn(), exit = fadeOut()) {
-        var toggled by remember { mutableStateOf(false) }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = { toggled = !toggled }) {
-                Icon(icon, desc)
+fun ActionButton(shown: Boolean, icon: ImageVector, desc: String, count: Int? = null) {
+    AnimatedVisibility(
+        shown,
+        enter = fadeIn() + expandHorizontally(expandFrom = Alignment.Start),
+        exit = fadeOut() + shrinkHorizontally(shrinkTowards = Alignment.Start)
+    ) {
+        Row {
+            TooltipArea(tooltip = { Tooltip(desc) }) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(icon, desc, modifier = Modifier.padding(end = 4.dp).alignByBaseline())
+                    if (count != null) {
+                        val animatedCount by animateIntAsState(targetValue = count)
+                        Text(animatedCount.toString(), modifier = Modifier.alignByBaseline())
+                    }
+                }
             }
-            AnimatedVisibility(toggled) {
-                Text(desc, Modifier.padding(end = 5.dp))
-            }
-            Text(extra)
+            Spacer(Modifier.width(12.dp))
         }
     }
 }

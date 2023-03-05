@@ -34,7 +34,7 @@ fun ModGroup(group: Group, mods: Collection<Mod>) {
 
     val modsChanged = mods.any { it in state.queuedDeletions || it in state.queuedDownloads }
 
-    val tonalElevation by animateDpAsState(if (expanded) 1.5.dp else 1.dp)
+    val tonalElevation by animateDpAsState(if (expanded) 1.6.dp else 1.dp)
     Column {
         Surface(
             tonalElevation = tonalElevation,
@@ -81,8 +81,8 @@ fun ModGroup(group: Group, mods: Collection<Mod>) {
         AnimatedVisibility(expanded) {
             Surface(
                 tonalElevation = 0.2.dp,
-                shape = RoundedCornerShape(15.dp),
-                modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp, start = 10.dp)
             ) {
                 Column {
                     for (mod in mods) ModInfo(group, mod)

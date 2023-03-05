@@ -19,7 +19,7 @@ fun Tooltip(text: String) {
 @Composable
 fun Tooltip(content: @Composable () -> Unit) {
     Surface(
-        color = Color.Black.copy(alpha = 0.3f),
+        color = Color.Black.copy(alpha = 0.75f),
         shape = RoundedCornerShape(4.dp),
     ) {
         Box(Modifier.padding(4.dp)) {

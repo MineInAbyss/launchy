@@ -48,7 +48,7 @@ fun AppTopBar(
             enter = slideIn(initialOffset = { IntOffset(0, -40) }),
             exit = slideOut(targetOffset = { IntOffset(0, -40) })
         ) {
-            Surface(tonalElevation = 1.dp, modifier = Modifier.fillMaxSize()) {}
+            Surface(tonalElevation = 2.dp, modifier = Modifier.fillMaxSize()) {}
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
