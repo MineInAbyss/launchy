@@ -1,6 +1,8 @@
 package com.mineinabyss.launchy.ui.screens.settings
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
@@ -16,10 +18,11 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.ui.screens.main.buttons.InstallButton
 
 @Composable
-fun InfoBar(modifier: Modifier = Modifier) {
+fun InfoBar() {
     val state = LocalLaunchyState
     Surface(
         tonalElevation = 2.dp,
+        shadowElevation = 2.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -38,7 +41,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(6.dp)
         ) {
-            InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid)
+            InstallButton(!state.isDownloading && state.operationsQueued && state.minecraftValid, Modifier.widthIn(min =  140.dp))
             Spacer(Modifier.width(10.dp))
 
             ActionButton(
@@ -109,7 +112,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun ActionButton(shown: Boolean, icon: ImageVector, desc: String, extra: String = "") {
-    AnimatedVisibility(shown) {
+    AnimatedVisibility(shown, enter = fadeIn(), exit = fadeOut()) {
         var toggled by remember { mutableStateOf(false) }
         Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = { toggled = !toggled }) {
