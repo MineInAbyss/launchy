@@ -1,5 +1,5 @@
-fabricVersion: 0.14.12
-minecraftVersion: 1.19.3
+fabricVersion: 0.14.17
+minecraftVersion: 1.19.4
 groups:
   - name: Core
     forceEnabled: true
@@ -27,31 +27,31 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/1ld37x4U/fabric-api-0.74.0%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/Pz1hLqTB/fabric-api-0.76.0%2B1.19.4.jar
 
     - name: Sodium
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/idtcaIVT/sodium-fabric-mc1.19.3-0.4.9%2Bbuild.23.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/b4hTi3mo/sodium-fabric-mc1.19.4-0.4.10%2Bbuild.24.jar
 
     - name: Mod menu
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/RtaGQNyd/modmenu-5.1.0-beta.4.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/5e62j63G/modmenu-6.1.0-rc.4.jar
 
     - name: Indium
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/U94NcDpV/indium-1.0.14%2Bmc1.19.3.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/qqiFL8NF/indium-1.0.15%2Bmc1.19.4.jar
 
     - name: FancyMenu
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/RvLufEqq/fancymenu_fabric_2.13.3_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/QsmigEls/fancymenu_fabric_2.13.3_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -59,7 +59,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/resclone
       desc: Downloads and updates resourcepacks automatically
-      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/RMUYUbRe/resclone-1.10.2.jar
+      url: https://cdn.modrinth.com/data/kVAQyCLX/versions/7XiJOr6R/resclone-1.11.0.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_1.2.zip
       forceConfigDownload: true
 
@@ -109,7 +109,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/lithium
       desc: General-purpose performance enhancements
-      url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/XS6vJwop/lithium-fabric-mc1.19.3-0.10.4.jar
+      url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/14hWYkog/lithium-fabric-mc1.19.4-0.11.1.jar
 
     - name: LazyDFU
       license: MIT
@@ -121,31 +121,31 @@ modGroups:
       license: MIT
       desc: Improves boot CPU usage and times
       homepage: https://modrinth.com/mod/smoothboot-fabric
-      url: https://cdn.modrinth.com/data/FWumhS4T/versions/1.19-1.7.1/smoothboot-fabric-1.19-1.7.1.jar
+      url: https://cdn.modrinth.com/data/FWumhS4T/versions/I9TkHxLI/smoothboot-fabric-1.19.4-1.7.0.jar
 
     - name: Krypton
       license: LGPL-3
       homepage: https://modrinth.com/mod/krypton
       desc: Optimizes Minecrafts networking stack
-      url: https://cdn.modrinth.com/data/fQEb0iXm/versions/0.2.1/krypton-0.2.1.jar
+      url: https://cdn.modrinth.com/data/fQEb0iXm/versions/Tncui9tU/krypton-0.2.2.jar
 
     - name: FerriteCore
       license: MIT
       homepage: https://modrinth.com/mod/ferrite-core
       desc: Optimizes memory usage
-      url: https://cdn.modrinth.com/data/uXXizFIs/versions/GHcKib6J/ferritecore-5.1.0-fabric.jar
+      url: https://cdn.modrinth.com/data/uXXizFIs/versions/RbR7EG8T/ferritecore-5.2.0-fabric.jar
 
     - name: Memory Leak Fix
       license: LGPL-2.1
       homepage: https://modrinth.com/mod/memoryleakfix
       desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/YtNQP5gX/memoryleakfix-1.19.3-0.7.0.jar
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/xn2d7ltf/memoryleakfix-1.19.3-0.8.0.jar
 
     - name: Entity Culling
       license: MIT
       homepage: https://modrinth.com/mod/entityculling
       desc: Skips rendering Tiles/Entities that are not visible.
-      url: https://cdn.modrinth.com/data/NNAgCjsB/versions/reIgRPky/entityculling-fabric-1.6.0-mc1.19.3.jar
+      url: https://cdn.modrinth.com/data/NNAgCjsB/versions/UvJN5Cy4/entityculling-fabric-1.6.2-mc1.19.4.jar
 
     - name: Cull Less Leaves
       license: LGPL-3
@@ -154,12 +154,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/BxA1B1tp/CullLessLeaves-1.1.0.jar
       requires: [ Yet Another Config Lib ]
 
-    #- name: Enhanced Block Entities
-    #  license: LGPL-3
-    #  homepage: https://modrinth.com/mod/ebe
-    #  desc: Makes blocks like chests render faster and nicer
-    #  url: https://cdn.modrinth.com/data/OVuFYfre/versions/fZx04xgT/enhancedblockentities-0.7.2%2B1.19.2.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
+    - name: Enhanced Block Entities
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/ebe
+      desc: Makes blocks like chests render faster and nicer
+      url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
     - name: ForgetMeChunk
       license: No License
@@ -171,7 +171,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/FpgVeSQK/c2me-fabric-mc1.19.3-0.2.0%2Balpha.10.0.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/kHF4y8Qv/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.28.jar
     
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -184,14 +184,14 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/l29Co1Hm/voicechat-fabric-1.19.3-2.3.27.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/pBGz0fqU/voicechat-fabric-1.19.4-2.3.28.jar
 
   Visual Enhancements:
     - name: Iris shaders
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/ExtC2pRY/iris-mc1.19.3-1.5.2.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/mVGu4Ze2/iris-mc1.19.4-1.5.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/shaderpacks.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
@@ -207,15 +207,15 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/XYq90g2b/fallingleaves-1.14.5%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/OSEfdzSy/fallingleaves-1.15.0%2B1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
       requires: [ Cloth Config ]
 
-    #- name: Continuity
-    #  license: LGPL-3
-    #  homepage: https://modrinth.com/mod/continuity
-    #  desc: Provides default connected textures
-    #  url: https://cdn.modrinth.com/data/1IjD5062/versions/2.0.1+1.19/continuity-2.0.1%2B1.19.jar
+    - name: Continuity
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/continuity
+      desc: Provides default connected textures
+      url: https://cdn.modrinth.com/data/1IjD5062/versions/Ql3Ho9eR/continuity-2.0.2%2B1.19.jar
 
     #- name: LambdaBetterGrass
     #  license: MIT
@@ -233,19 +233,13 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/visuality/versions
       desc: Adds a bunch of new particles
-      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/DWVuJ6To/visuality-0.6.0.jar
-
-    - name: Effective
-      homepage: https://github.com/Ladysnake/Effective
-      license: ARR
-      desc: Cool splash effects for lava, water and waterfalls.
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/effective-1.6+1.19.2.jar
+      url: https://cdn.modrinth.com/data/rI0hvYcd/versions/8YMUO06d/visuality-0.7.0.jar
 
     - name: FabricSkyBoxes
       license: MIT
       homepage: https://modrinth.com/mod/fabricskyboxes
       desc: Adds custom skybox support to Fabric
-      url: https://cdn.modrinth.com/data/YBz7DOs8/versions/Rg1IX2YB/fabricskyboxes-0.6.2%2Bmc1.19.3.jar
+      url: https://cdn.modrinth.com/data/YBz7DOs8/versions/836K5lNR/fabricskyboxes-0.6.5%2Bmc1.19.4.jar
 
     - name: ClearSkies
       license: LGPL-3
@@ -257,13 +251,13 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/not-enough-animations
       desc: Adds missing animations from third-person to first-person
-      url: https://cdn.modrinth.com/data/MPCX6s5C/versions/C4uW6hHV/notenoughanimations-fabric-1.6.2-mc1.19.3.jar
+      url: https://cdn.modrinth.com/data/MPCX6s5C/versions/2TKqy76Z/notenoughanimations-fabric-1.6.3-mc1.19.4.jar
 
     - name: Physics Mod
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/6s6h2umO/physics-mod-2.10.2a-mc-1.19.3-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/W1Qug2Xt/physics-mod-2.11.8a-mc-1.19.4-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -271,27 +265,27 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/camera-utils
       desc: Adds convenient features related to the players camera
-      url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/dFHhHcm8/camerautils-1.19.3-1.0.3.jar
+      url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/zJdJhRKt/camerautils-1.19.4-1.0.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
 
   Audio Enhancements:
-    #- name: Auditory
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/auditory
-    #  desc: Expands and improves block sounds, item sounds and more
-    #  url: https://cdn.modrinth.com/data/1LjfkWOR/versions/Sz9YgtT5/auditory-0.0.4-1.19.x.jar
+    - name: Auditory
+      license: MIT
+      homepage: https://modrinth.com/mod/auditory
+      desc: Expands and improves block sounds, item sounds and more
+      url: https://cdn.modrinth.com/data/1LjfkWOR/versions/XWyC0Mbo/auditory-0.0.5-1.19.3.jar
 
     - name: Dynamic Sound filters
       license: APACHE
       homepage: https://modrinth.com/mod/dynamic-sound-filters
       desc: Adds sound filters depending on your current location
-      url: https://cdn.modrinth.com/data/JV2wFevs/versions/7vbxpOS0/DynamicSoundFilters-1.3.0%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/JV2wFevs/versions/cPnstDbE/DynamicSoundFilters-1.4.0%2B1.19.4.jar
 
     - name: Sound Physics Remastered
       license: GPL-3
       homepage: https://modrinth.com/mod/sound-physics-remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/5kLP4E16/soundphysics-fabric-1.19.3-1.0.17.jar
+      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/b6C2l51o/soundphysics-fabric-1.19.4-1.1.0.jar
 
     - name: Presence Footseps
       license: MIT
@@ -303,7 +297,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/dripsounds-fabric
       desc: Adds sounds for drip particles landing
-      url: https://cdn.modrinth.com/data/T8MMXTpr/versions/hYDZaVYh/DripSounds-1.19-0.3.1.jar
+      url: https://cdn.modrinth.com/data/T8MMXTpr/versions/7GB1hLrr/DripSounds-1.19.4-0.3.2.jar
       requires: [ Cloth Config ]
 
     #- name: ExtraSounds
@@ -317,13 +311,13 @@ modGroups:
       license: ARR
       homepage: https://chocolateminecraft.com/worldmap.php
       desc: Adds a worldmap to the game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/XaerosWorldMap_1.28.4_Fabric_1.19.3.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/XaerosWorldMap_1.29.2_Fabric_1.19.4.jar
 
     - name: Xaero Minimap
       license: ARR
       homepage: https://chocolateminecraft.com/minimap2.php
       desc: Adds a minimap in the corner of the game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_22.16.3_Fabric_1.19.3.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_23.3.1_Fabric_1.19.4.jar
 
     - name: Legendary Tooltips
       license: CUSTOM
@@ -348,33 +342,33 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/detail-armor-bar/
       desc: Adds more detailed information to the armor bar
-      url: https://cdn.modrinth.com/data/hAt6ty93/versions/RSYgIMTl/DetailArmorBar-2.6.3%2B1.19.3-fabric.jar
+      url: https://cdn.modrinth.com/data/hAt6ty93/versions/UbAQOuDI/DetailArmorBar-2.6.3%2B1.19.4-fabric.jar
 
     - name: AppleSkin
       license: The Unlicense
       homepage: https://modrinth.com/mod/appleskin
       desc: Improvements to food/hunger related HUD elements
-      url: https://cdn.modrinth.com/data/EsAfCjCV/versions/ntsDU1AP/appleskin-fabric-mc1.19.3-2.4.2.jar
+      url: https://cdn.modrinth.com/data/EsAfCjCV/versions/sLboyqjL/appleskin-fabric-mc1.19.4-2.4.3.jar
 
     - name: Drippy Loading Screen
       license: Special Permission
       homepage: https://modrinth.com/mod/drippy-loading-screen
       desc: Lets you customize Minecrafts loading screen
-      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/ktDr83XR/drippyloadingscreen_fabric_1.6.6_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/SRF2JSmg/drippyloadingscreen_fabric_2.1.1_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DrippyLoadingScreen_1.0.zip
 
     - name: BetterF3
       license: MIT
       homepage: https://modrinth.com/mod/betterf3
       desc: Makes the F3-menu customizable and cleaner
-      url: https://cdn.modrinth.com/data/8shC1gFX/versions/nuKBXZDI/BetterF3-5.1.0-Fabric-1.19.3.jar
+      url: https://cdn.modrinth.com/data/8shC1gFX/versions/jFVjbyGK/BetterF3-6.0.0-Fabric-1.19.4-pre3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/BetterF3_1.0.zip
     
     - name: Reese's Sodium Options
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/hkSQ9RqT/reeses_sodium_options-1.4.9%2Bmc1.19.2-build.67.jar
+      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/aO0hSGlL/reeses_sodium_options-1.5.0%2Bmc1.19.4-build.72.jar
       requires: [ Sodium ]
 
   Misc Enhancements:
@@ -400,7 +394,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/debugify
       desc: Fixes a bunch of bugs Mojang doesn't want to
-      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/l8A2i9nV/Debugify-1.19.3%2B1.0.jar
+      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/GtD9tAHh/Debugify-1.19.4%2B1.0.jar
 
     - name: NoInsecureChatToast
       license: CC0
@@ -408,17 +402,11 @@ modGroups:
       desc: Prevents insecure chat toast from appearing
       url: https://cdn.modrinth.com/data/i090SePT/versions/1.1.0/DisableInsecureChatToast-mc1.19.1-1.1.0.jar
 
-    - name: ColoredAxolotlBuckets
-      license: MIT
-      homepage: https://modrinth.com/mod/roundaround-axolotl-buckets
-      desc: Allows axolotls in buckets to have their own icon depending on their color and age
-      url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0%2B1.19/axolotlbuckets-1.1.0%2B1.19.jar
-
     - name: First Person Models
       license: MIT
       homepage: https://modrinth.com/mod/first-person-model
       desc: Enables the third-person model in first-person, making for a more realistic experience
-      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/CCXpyT4U/firstperson-fabric-2.2.2-mc1.19.3.jar
+      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/rTyvi7fK/firstperson-fabric-2.2.3-mc1.19.3.jar
 
     - name: Boat Item View
       license: LGPL-3
@@ -436,7 +424,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/8DeIhGTv/sodium-extra-0.4.16%2Bmc1.19.3-build.91.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/YknbqkHe/sodium-extra-0.4.18%2Bmc1.19.4-build.100.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -473,7 +461,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/craftpresence
       desc: Displays server info in your Discord Rich Presence
-      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/m9KxhplA/CraftPresence-2.0.0-alpha.2%2B1.19.3-universal.jar
+      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/jMsoy7eq/CraftPresence-2.0.0-beta.3%2B1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
 
     - name: BetterPingDisplay
@@ -492,7 +480,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/fix-alt-gr
       desc: Fixes a bug related to Alt Gr key sometimes locking shift state
-      url: https://cdn.modrinth.com/data/36kLTHWB/versions/lR4gxQSY/fix-alt-gr-2.0.2%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/36kLTHWB/versions/90UQXrVr/fix-alt-gr-2.0.3%2B1.19.3.jar
   
   Builder Tools:
     - name: AccurateBlockPlacement
@@ -505,7 +493,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/morecreativetabs
       desc: Adds more creative tabs, specifically for Blocky Blocks
-      url: https://ci.firstdarkdev.xyz/job/MoreCreativeTabs/job/Forge-Fabric%201.19.3/lastSuccessfulBuild/artifact/artifacts/MoreCreativeTabs-fabric-1.19.3-1.2.2d.jar
+      url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
 
     - name: Litematica
       license: LGPL-3
@@ -536,7 +524,7 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/bettercommandblockui
       desc: Entirely overhauls the commandblock UI
-      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/wzKMKt1N/bettercommandblockui-0.3.1-1.19.3.jar
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/iH8httP8/bettercommandblockui-0.3.1-1.19.4.jar
 
     - name: NBTToolTips
       license: MIT
@@ -554,7 +542,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/roughly-enough-items
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/M4c5N1Oo/RoughlyEnoughItems-10.0.592.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/BrnPgqv6/RoughlyEnoughItems-11.0.597.jar
       requires: [ ArchitecturyAPI ]
 
     - name: ToolTipFix
@@ -582,13 +570,13 @@ modGroups:
       license: MPL-2
       homepage: https://modrinth.com/mod/forge-config-api-port
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/ohNO6lps/versions/cjmImt9R/ForgeConfigAPIPort-v5.0.7-1.19.3-Fabric.jar
+      url: https://cdn.modrinth.com/data/ohNO6lps/versions/ou26o2qg/ForgeConfigAPIPort-v6.0.1-1.19.4-Fabric.jar
 
     - name: YetAnotherConfigLib
       license: LGPL-3
       homepage: https://modrinth.com/mod/yacl
       desc: Library for config files
-      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/GkKQsCJ6/YetAnotherConfigLib-2.1.1.jar
+      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/RmZvIqeu/YetAnotherConfigLib-2.3.0.jar
 
     - name: Malilib
       license: LGPL-3
@@ -600,13 +588,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/VwpnDGLt/architectury-7.1.70-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/9VVWBhOe/architectury-8.1.73-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
       homepage: https://modrinth.com/mod/audio-extension-for-fancymenu
       desc: Audio Extension for FancyMenu
-      url: https://cdn.modrinth.com/data/pFgXNvCD/versions/jCJCsnaw/fm_audio_extension_fabric_1.1.1_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/pFgXNvCD/versions/5SYL927C/fm_audio_extension_fabric_1.1.1_MC_1.19.4.jar
 
     - name: Load My Resources
       license: Special Permission
@@ -620,7 +608,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/konkrete
       desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://cdn.modrinth.com/data/J81TRJWm/versions/OdyUMgZC/konkrete_fabric_1.6.0-1_MC_1.19.3.jar
+      url: https://cdn.modrinth.com/data/J81TRJWm/versions/hGJFSkMw/konkrete_fabric_1.6.0_MC_1.19.4.jar
 
     - name: Auudio
       license: GPL-3
@@ -632,7 +620,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/fabric-language-kotlin
       desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/esSFbyFg/fabric-language-kotlin-1.9.0%2Bkotlin.1.8.0.jar
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/Ibros2FW/fabric-language-kotlin-1.9.2%2Bkotlin.1.8.10.jar
     
     - name: Satin
       license: LGPL-3
@@ -644,7 +632,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/cloth-config
       desc: A config API used by many mods
-      url: https://cdn.modrinth.com/data/9s6osm5g/versions/M3yxljrZ/cloth-config-9.0.94-fabric.jar
+      url: https://cdn.modrinth.com/data/9s6osm5g/versions/6XGTNEII/cloth-config-10.0.96-fabric.jar
   
   Outdated/Disabled:
 
@@ -666,24 +654,24 @@ modGroups:
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/yM94ont6/versions/f3lqB3uY/notenoughcrashes-4.2.0%2B1.19.3-fabric.jar
 
-    - name: Auditory
-      license: MIT
-      homepage: https://modrinth.com/mod/auditory
-      desc: Expands and improves block sounds, item sounds and more
-      url: https://cdn.modrinth.com/data/1LjfkWOR/versions/Sz9YgtT5/auditory-0.0.4-1.19.x.jar
+    #- name: Auditory
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/auditory
+    #  desc: Expands and improves block sounds, item sounds and more
+    #  url: https://cdn.modrinth.com/data/1LjfkWOR/versions/XWyC0Mbo/auditory-0.0.5-1.19.3.jar
 
-    - name: Continuity
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/continuity
-      desc: Provides default connected textures
-      url: https://cdn.modrinth.com/data/1IjD5062/versions/2.0.1+1.19/continuity-2.0.1%2B1.19.jar
+    #- name: Continuity
+    #  license: LGPL-3
+    #  homepage: https://modrinth.com/mod/continuity
+    #  desc: Provides default connected textures
+    #  url: https://cdn.modrinth.com/data/1IjD5062/versions/Ql3Ho9eR/continuity-2.0.2%2B1.19.jar
 
-    - name: Enhanced Block Entities
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/ebe
-      desc: Makes blocks like chests render faster and nicer
-      url: https://cdn.modrinth.com/data/OVuFYfre/versions/fZx04xgT/enhancedblockentities-0.7.2%2B1.19.2.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
+    #- name: Enhanced Block Entities
+    #  license: LGPL-3
+    #  homepage: https://modrinth.com/mod/ebe
+    #  desc: Makes blocks like chests render faster and nicer
+    #  url: https://cdn.modrinth.com/data/OVuFYfre/versions/fZx04xgT/enhancedblockentities-0.7.2%2B1.19.2.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
     - name: LambdaBetterGrass
       license: MIT
@@ -759,3 +747,15 @@ modGroups:
       homepage: https://modrinth.com/mod/eating-animation
       desc: Adds eating animations to vanilla foods
       url: https://cdn.modrinth.com/data/rUgZvGzi/versions/1.9/eating-animation-1.9.jar
+
+    - name: Effective
+      homepage: https://github.com/Ladysnake/Effective
+      license: ARR
+      desc: Cool splash effects for lava, water and waterfalls.
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/effective-1.6+1.19.2.jar
+
+    - name: ColoredAxolotlBuckets
+      license: MIT
+      homepage: https://modrinth.com/mod/roundaround-axolotl-buckets
+      desc: Allows axolotls in buckets to have their own icon depending on their color and age
+      url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0%2B1.19/axolotlbuckets-1.1.0%2B1.19.jar
