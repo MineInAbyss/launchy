@@ -12,9 +12,9 @@ object Dirs {
     }
 
     val mineinabyss = when (OS.get()) {
-        OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".mineinabyss"
-        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss"
-        OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
+        OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".mineinabyss_1_19_4"
+        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss_1_19_4"
+        OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss_1_19_4"
     }
     val mods = mineinabyss / "mods"
     val tmp = mineinabyss / ".tmp"
@@ -25,8 +25,8 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
-    val configFile = config / "mia-launcher.yml"
-    val versionsFile = config / "mia-versions.yml"
+    val configFile = config / "mia-launcher_1_19_4.yml"
+    val versionsFile = config / "mia-versions_1_19_4.yml"
 
     fun createDirs() {
         config.createDirectories()
