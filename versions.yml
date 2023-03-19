@@ -51,7 +51,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/QsmigEls/fancymenu_fabric_2.13.3_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/tJi2x2yi/fancymenu_fabric_2.13.3-3_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -171,7 +171,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/kHF4y8Qv/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.28.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/GtUrsjth/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.30.jar
     
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -200,7 +200,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://cdn.modrinth.com/data/uCdwusMi/versions/P4psgCf3/DistantHorizons-1.6.10a-1.19.3.jar
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/xBHpiuwg/DistantHorizons-1.6.11a-1.19.4.jar
       incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
@@ -257,7 +257,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/W1Qug2Xt/physics-mod-2.11.8a-mc-1.19.4-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/sClnJyJe/physics-mod-2.11.9-mc-1.19.4-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -406,7 +406,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/first-person-model
       desc: Enables the third-person model in first-person, making for a more realistic experience
-      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/rTyvi7fK/firstperson-fabric-2.2.3-mc1.19.3.jar
+      url: https://cdn.modrinth.com/data/H5XMjpHi/versions/VIJi4c8W/firstperson-fabric-2.2.3-mc1.19.4.jar
 
     - name: Boat Item View
       license: LGPL-3
@@ -487,7 +487,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/accurate-block-placement
       desc: Allows you to place blocks faster by holding down RMB
-      url: https://cdn.modrinth.com/data/yx5ls8Zc/versions/YqswvLcn/accurate-block-placement-1.0.16.jar
+      url: https://cdn.modrinth.com/data/yx5ls8Zc/versions/ykoMH6NT/accurate-block-placement-1.0.17.jar
 
     - name: MoreCreativeTabs
       license: MIT
@@ -511,7 +511,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/visible-barriers
       desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/tT04dvKV/visible-barriers-1.7.0.jar
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/w4NbLNE2/visible-barriers-2.0.1.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -626,7 +626,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/satin-api
       desc: Dependency for Movement Vision
-      url: https://cdn.modrinth.com/data/fRbqPLg4/versions/9eCMshML/satin-1.10.0.jar
+      url: https://cdn.modrinth.com/data/fRbqPLg4/versions/gxrSlnX7/satin-1.11.0.jar
     
     - name: Cloth config
       license: LGPL-3
