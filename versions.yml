@@ -71,12 +71,12 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
       forceConfigDownload: true
 
-    - name: CIT Resewn
-      license: MIT
-      homepage: https://modrinth.com/mod/cit-resewn
-      desc: Makes custom armor work with shaders
-      url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
+    #- name: CIT Resewn
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/cit-resewn
+    #  desc: Makes custom armor work with shaders
+    #  url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
     - name: NoRpErrorMsg
       license: MIT
@@ -135,11 +135,11 @@ modGroups:
       desc: Optimizes memory usage
       url: https://cdn.modrinth.com/data/uXXizFIs/versions/RbR7EG8T/ferritecore-5.2.0-fabric.jar
 
-    - name: Memory Leak Fix
-      license: LGPL-2.1
-      homepage: https://modrinth.com/mod/memoryleakfix
-      desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/xn2d7ltf/memoryleakfix-1.19.3-0.8.0.jar
+    #- name: Memory Leak Fix
+    #  license: LGPL-2.1
+    #  homepage: https://modrinth.com/mod/memoryleakfix
+    #  desc: Fixes random memory leaks
+    #  url: https://cdn.modrinth.com/data/NRjRiSSD/versions/xn2d7ltf/memoryleakfix-1.19.3-0.8.0.jar
 
     - name: Entity Culling
       license: MIT
@@ -154,12 +154,12 @@ modGroups:
       url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/BxA1B1tp/CullLessLeaves-1.1.0.jar
       requires: [ Yet Another Config Lib ]
 
-    - name: Enhanced Block Entities
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/ebe
-      desc: Makes blocks like chests render faster and nicer
-      url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
+    #- name: Enhanced Block Entities
+    #  license: LGPL-3
+    #  homepage: https://modrinth.com/mod/ebe
+    #  desc: Makes blocks like chests render faster and nicer
+    #  url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
     - name: ForgetMeChunk
       license: No License
@@ -215,7 +215,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/continuity
       desc: Provides default connected textures
-      url: https://cdn.modrinth.com/data/1IjD5062/versions/Ql3Ho9eR/continuity-2.0.2%2B1.19.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/continuity-3.0.0-beta.21.19.3.jar
 
     #- name: LambdaBetterGrass
     #  license: MIT
@@ -326,12 +326,6 @@ modGroups:
       url: https://cdn.modrinth.com/data/atHH8NyV/versions/yiXNxlzi/LegendaryTooltips-1.19.3-fabric-1.4.1.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
 
-    - name: MapInSlot
-      license: MIT
-      homepage: https://modrinth.com/mod/map-in-slot
-      desc: Render filled map in the hotbar/inventory slotsr
-      url: https://cdn.modrinth.com/data/EpKz6cxj/versions/1.0.2/map-in-slot-1.0.2.jar
-
     - name: Status Effect Timer
       license: LGPL-3
       homepage: https://modrinth.com/mod/statuseffecttimer
@@ -388,7 +382,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/smooth-swapping/
       desc: Moves items in inventories smoothly instead of letting them appear instantly
-      url: https://cdn.modrinth.com/data/ydZic5r4/versions/jNKdgPB9/Smooth%20Swapping%200.6.1%20%281.19.3%29-0.6.1.jar
+      url: https://cdn.modrinth.com/data/ydZic5r4/versions/on9rbbxB/Smooth%20Swapping%200.8%20%281.19.4%29-0.8.jar
 
     - name: Debugify
       license: LGPL-3
@@ -414,11 +408,11 @@ modGroups:
       desc: Lets you see the held items whilst in a moving boat
       url: https://cdn.modrinth.com/data/BdKIyOLe/versions/ggcaKnQr/Boat-Item-View-Fabric-1.19.3-0.0.4.jar
 
-    - name: Blur
-      license: MIT
-      homepage: https://modrinth.com/mod/blur-fabric
-      desc: Adds immersive blur to GUI backgrounds
-      url: https://cdn.modrinth.com/data/NK39zBp2/versions/bEtdkEbI/blur-2.6.1.jar
+    #- name: Blur
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/blur-fabric
+    #  desc: Adds immersive blur to GUI backgrounds
+    #  url: https://cdn.modrinth.com/data/NK39zBp2/versions/bEtdkEbI/blur-2.6.1.jar
 
     - name: Sodium Extra
       license: LGPL-3
@@ -439,17 +433,23 @@ modGroups:
       desc: Click through signs and item frames to chests
       url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/ZMcunEOm/clickthrough-1.19.3-fabric0.68.1-0.4.jar
 
+    #- name: Show Backpack Content
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/shulkerboxtooltip
+    #  desc: Shows what is inside your backpack/shulkerbox
+    #  url: https://cdn.modrinth.com/data/2M01OLQq/versions/qmDMHcFL/shulkerboxtooltip-fabric-3.2.4%2B1.19.3.jar
+
     - name: Show Backpack Content
-      license: MIT
-      homepage: https://modrinth.com/mod/shulkerboxtooltip
+      license: ARR
+      homepage: https://modrinth.com/mod/peek/
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/2M01OLQq/versions/qmDMHcFL/shulkerboxtooltip-fabric-3.2.4%2B1.19.3.jar
+      url: https://cdn.modrinth.com/data/TnOXNf5e/versions/i4vMBKhE/peek-1.19.4-1.0.4.jar
 
     - name: MixinTrace
       license: MIT
-      homepage: https://beta.curseforge.com/minecraft/mc-mods/mixintrace
+      homepage: https://modrinth.com/mod/mixintrace/
       desc: Sends you to title screen instead of crashing your game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/mixintrace-1.1.1+1.17.jar
+      url: https://cdn.modrinth.com/data/sGmHWmeL/versions/1.1.1%2B1.17/mixintrace-1.1.1%2B1.17.jar
 
     #- name: Not Enough Crashes
     #  license: MIT
@@ -654,24 +654,11 @@ modGroups:
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/yM94ont6/versions/f3lqB3uY/notenoughcrashes-4.2.0%2B1.19.3-fabric.jar
 
-    #- name: Auditory
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/auditory
-    #  desc: Expands and improves block sounds, item sounds and more
-    #  url: https://cdn.modrinth.com/data/1LjfkWOR/versions/XWyC0Mbo/auditory-0.0.5-1.19.3.jar
-
-    #- name: Continuity
-    #  license: LGPL-3
-    #  homepage: https://modrinth.com/mod/continuity
-    #  desc: Provides default connected textures
-    #  url: https://cdn.modrinth.com/data/1IjD5062/versions/Ql3Ho9eR/continuity-2.0.2%2B1.19.jar
-
-    #- name: Enhanced Block Entities
-    #  license: LGPL-3
-    #  homepage: https://modrinth.com/mod/ebe
-    #  desc: Makes blocks like chests render faster and nicer
-    #  url: https://cdn.modrinth.com/data/OVuFYfre/versions/fZx04xgT/enhancedblockentities-0.7.2%2B1.19.2.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
+    - name: MapInSlot
+      license: MIT
+      homepage: https://modrinth.com/mod/map-in-slot
+      desc: Render filled map in the hotbar/inventory slotsr
+      url: https://cdn.modrinth.com/data/EpKz6cxj/versions/1.0.2/map-in-slot-1.0.2.jar
 
     - name: LambdaBetterGrass
       license: MIT
@@ -777,3 +764,29 @@ modGroups:
       homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
       desc: Mod to render schematics and other stuff in-game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.3-0.13.0.jar
+
+    - name: CIT Resewn
+      license: MIT
+      homepage: https://modrinth.com/mod/cit-resewn
+      desc: Makes custom armor work with shaders
+      url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
+
+    - name: Memory Leak Fix
+      license: LGPL-2.1
+      homepage: https://modrinth.com/mod/memoryleakfix
+      desc: Fixes random memory leaks
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/xn2d7ltf/memoryleakfix-1.19.3-0.8.0.jar
+
+    - name: Enhanced Block Entities
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/ebe
+      desc: Makes blocks like chests render faster and nicer
+      url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
+
+    - name: Blur
+      license: MIT
+      homepage: https://modrinth.com/mod/blur-fabric
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://cdn.modrinth.com/data/NK39zBp2/versions/bEtdkEbI/blur-2.6.1.jar
