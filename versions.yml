@@ -78,11 +78,11 @@ modGroups:
     #  url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
     #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
-    - name: NoRpErrorMsg
-      license: MIT
-      homepage: https://modrinth.com/mod/no-resource-pack-warnings
-      desc: Get rid of the scary red borders around outdated resource packs
-      url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
+    #- name: NoRpErrorMsg
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/no-resource-pack-warnings
+    #  desc: Get rid of the scary red borders around outdated resource packs
+    #  url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
 
     - name: DesiredServers
       license: MIT
@@ -820,3 +820,9 @@ modGroups:
       homepage: https://github.com/ASangarin/AriKeys
       desc: Adds option to use shortcut Keybinds configured on a server
       url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
+
+    - name: NoRpErrorMsg
+      license: MIT
+      homepage: https://modrinth.com/mod/no-resource-pack-warnings
+      desc: Get rid of the scary red borders around outdated resource packs
+      url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
