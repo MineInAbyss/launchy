@@ -60,7 +60,7 @@ modGroups:
       homepage: https://modrinth.com/mod/resclone
       desc: Downloads and updates resourcepacks automatically
       url: https://cdn.modrinth.com/data/kVAQyCLX/versions/7XiJOr6R/resclone-1.11.0.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_1.2.zip
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_config.zip
       forceConfigDownload: true
 
     - name: Skip Resourcepack Prompt
@@ -319,12 +319,12 @@ modGroups:
       desc: Adds a minimap in the corner of the game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_23.3.1_Fabric_1.19.4.jar
 
-    - name: Legendary Tooltips
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/legendary-tooltips
-      desc: Makes tooltips categoried and look cool
-      url: https://cdn.modrinth.com/data/atHH8NyV/versions/yiXNxlzi/LegendaryTooltips-1.19.3-fabric-1.4.1.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
+    #- name: Legendary Tooltips
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/legendary-tooltips
+    #  desc: Makes tooltips categoried and look cool
+    #  url: https://cdn.modrinth.com/data/atHH8NyV/versions/yiXNxlzi/LegendaryTooltips-1.19.3-fabric-1.4.1.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
 
     - name: Status Effect Timer
       license: LGPL-3
@@ -532,11 +532,11 @@ modGroups:
       desc: Entirely overhauls the commandblock UI
       url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/iH8httP8/bettercommandblockui-0.3.1-1.19.4.jar
 
-    - name: NBTToolTips
-      license: MIT
-      homepage: https://modrinth.com/mod/nbttooltips
-      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
-      url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
+    #- name: NBTToolTips
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/nbttooltips
+    #  desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
+    #  url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
 
     #- name: IBE Editor
     #  license: MIT
@@ -560,17 +560,17 @@ modGroups:
   #MineInAbyss Enhancements:
 
   Dependencies:
-    - name: Iceberg
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/iceberg
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/VoOBBJRg/Iceberg-1.19.3-fabric-1.1.4.jar
+    #- name: Iceberg
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/iceberg
+    #  desc: Library dependency for Legendary Tooltips
+    #  url: https://cdn.modrinth.com/data/5faXoLqX/versions/VoOBBJRg/Iceberg-1.19.3-fabric-1.1.4.jar
 
-    - name: Prism
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/prism-lib
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
+    #- name: Prism
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/prism-lib
+    #  desc: Library dependency for Legendary Tooltips
+    #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
 
     - name: ForgeConfigAPIPort
       license: MPL-2
@@ -639,6 +639,12 @@ modGroups:
       homepage: https://modrinth.com/mod/cloth-config
       desc: A config API used by many mods
       url: https://cdn.modrinth.com/data/9s6osm5g/versions/6XGTNEII/cloth-config-10.0.96-fabric.jar
+
+    - name: LibJF
+      license: MIT
+      homepage: https://modrinth.com/mod/libjf
+      desc: Library dependency for Resclone
+      url: https://cdn.modrinth.com/data/WKwQAwke/versions/LHQo2fEp/libjf-3.7.0.jar
   
   Outdated/Disabled:
 
@@ -826,3 +832,28 @@ modGroups:
       homepage: https://modrinth.com/mod/no-resource-pack-warnings
       desc: Get rid of the scary red borders around outdated resource packs
       url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
+
+    - name: Legendary Tooltips
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/legendary-tooltips
+      desc: Makes tooltips categoried and look cool
+      url: https://cdn.modrinth.com/data/atHH8NyV/versions/yiXNxlzi/LegendaryTooltips-1.19.3-fabric-1.4.1.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
+
+    - name: Iceberg
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/iceberg
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/VoOBBJRg/Iceberg-1.19.3-fabric-1.1.4.jar
+
+    - name: Prism
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/prism-lib
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
+
+    - name: NBTToolTips
+      license: MIT
+      homepage: https://modrinth.com/mod/nbttooltips
+      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
+      url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
