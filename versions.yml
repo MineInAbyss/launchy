@@ -173,11 +173,11 @@ modGroups:
       desc: Improves chunk performance of Minecraft
       url: https://cdn.modrinth.com/data/VSNURh3q/versions/GtUrsjth/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.30.jar
     
-    - name: KennyTVsEpicForceCloseLoadingScreenMod
-      license: MIT
-      homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
-      desc: Improves loading times when changing worlds
-      url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
+    #- name: KennyTVsEpicForceCloseLoadingScreenMod
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
+    #  desc: Improves loading times when changing worlds
+    #  url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
 
   Voice Chat:    
     - name: Simple Voice Chat
@@ -257,7 +257,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/sClnJyJe/physics-mod-2.11.9-mc-1.19.4-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/URYViye0/physics-mod-2.11.9a-mc-1.19.4-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -287,11 +287,11 @@ modGroups:
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
       url: https://cdn.modrinth.com/data/qyVF9oeo/versions/b6C2l51o/soundphysics-fabric-1.19.4-1.1.0.jar
 
-    - name: Presence Footseps
-      license: MIT
-      homepage: https://modrinth.com/mod/presence-footsteps
-      desc: Improved stepping sound effects
-      url: https://cdn.modrinth.com/data/rcTfTZr3/versions/GExGOzbi/PresenceFootsteps-1.7.1.jar
+    #- name: Presence Footseps
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/presence-footsteps
+    #  desc: Improved stepping sound effects
+    #  url: https://cdn.modrinth.com/data/rcTfTZr3/versions/GExGOzbi/PresenceFootsteps-1.7.1.jar
 
     - name: Drip Sounds
       license: LGPL-3
@@ -370,13 +370,13 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/no-telemetry
       desc: Disable the telemetry data from being sent to Microsoft
-      url: https://cdn.modrinth.com/data/hg77g4Pw/versions/WY3tHfDe/no-telemetry-1.6.0.jar
+      url: https://cdn.modrinth.com/data/hg77g4Pw/versions/l9SfLZDA/no-telemetry-1.7.0.jar
 
-    - name: AriKeys
-      license: MIT
-      homepage: https://github.com/ASangarin/AriKeys
-      desc: Adds option to use shortcut Keybinds configured on a server
-      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
+    #- name: AriKeys
+    #  license: MIT
+    #  homepage: https://github.com/ASangarin/AriKeys
+    #  desc: Adds option to use shortcut Keybinds configured on a server
+    #  url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
 
     - name: Smooth Swapping
       license: LGPL-3
@@ -433,17 +433,17 @@ modGroups:
       desc: Click through signs and item frames to chests
       url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/ZMcunEOm/clickthrough-1.19.3-fabric0.68.1-0.4.jar
 
-    #- name: Show Backpack Content
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/shulkerboxtooltip
-    #  desc: Shows what is inside your backpack/shulkerbox
-    #  url: https://cdn.modrinth.com/data/2M01OLQq/versions/qmDMHcFL/shulkerboxtooltip-fabric-3.2.4%2B1.19.3.jar
-
     - name: Show Backpack Content
-      license: ARR
-      homepage: https://modrinth.com/mod/peek/
+      license: MIT
+      homepage: https://modrinth.com/mod/shulkerboxtooltip
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/TnOXNf5e/versions/i4vMBKhE/peek-1.19.4-1.0.4.jar
+      url: https://cdn.modrinth.com/data/2M01OLQq/versions/XeZEGwBe/shulkerboxtooltip-fabric-3.2.5%2B1.19.4.jar
+
+    #- name: Show Backpack Content
+    #  license: ARR
+    #  homepage: https://modrinth.com/mod/peek/
+    #  desc: Shows what is inside your backpack/shulkerbox
+    #  url: https://cdn.modrinth.com/data/TnOXNf5e/versions/i4vMBKhE/peek-1.19.4-1.0.4.jar
 
     - name: MixinTrace
       license: MIT
@@ -481,6 +481,12 @@ modGroups:
       homepage: https://modrinth.com/mod/fix-alt-gr
       desc: Fixes a bug related to Alt Gr key sometimes locking shift state
       url: https://cdn.modrinth.com/data/36kLTHWB/versions/90UQXrVr/fix-alt-gr-2.0.3%2B1.19.3.jar
+
+    - name: RemoveReloadingScreen
+      license: AGPL-3
+      homepage: https://modrinth.com/mod/rrls
+      desc: Removes the reloading screen from resourcepack
+      url: https://cdn.modrinth.com/data/ZP7xHXtw/versions/5zJC6AJW/Rrls-1.5.0-fabric.jar
   
   Builder Tools:
     - name: AccurateBlockPlacement
@@ -532,11 +538,11 @@ modGroups:
       desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
       url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
 
-    - name: IBE Editor
-      license: MIT
-      homepage: https://modrinth.com/mod/ibe-editor
-      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
+    #- name: IBE Editor
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/ibe-editor
+    #  desc: Simple GUI Mod to edit an item, a block or an entity in your current world
+    #  url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
 
     - name: RoughlyEnoughItems
       license: MIT
@@ -570,7 +576,7 @@ modGroups:
       license: MPL-2
       homepage: https://modrinth.com/mod/forge-config-api-port
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/ohNO6lps/versions/ou26o2qg/ForgeConfigAPIPort-v6.0.1-1.19.4-Fabric.jar
+      url: https://cdn.modrinth.com/data/ohNO6lps/versions/2TybfFU8/ForgeConfigAPIPort-v6.0.2-1.19.4-Fabric.jar
 
     - name: YetAnotherConfigLib
       license: LGPL-3
@@ -608,7 +614,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/konkrete
       desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://cdn.modrinth.com/data/J81TRJWm/versions/hGJFSkMw/konkrete_fabric_1.6.0_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/J81TRJWm/versions/kiAIoQnV/konkrete_fabric_1.6.0-2_MC_1.19.4.jar
 
     - name: Auudio
       license: GPL-3
@@ -790,3 +796,27 @@ modGroups:
       homepage: https://modrinth.com/mod/blur-fabric
       desc: Adds immersive blur to GUI backgrounds
       url: https://cdn.modrinth.com/data/NK39zBp2/versions/bEtdkEbI/blur-2.6.1.jar
+
+    - name: KennyTVsEpicForceCloseLoadingScreenMod
+      license: MIT
+      homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
+      desc: Improves loading times when changing worlds
+      url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
+
+    - name: Presence Footseps
+      license: MIT
+      homepage: https://modrinth.com/mod/presence-footsteps
+      desc: Improved stepping sound effects
+      url: https://cdn.modrinth.com/data/rcTfTZr3/versions/GExGOzbi/PresenceFootsteps-1.7.1.jar
+
+    - name: IBE Editor
+      license: MIT
+      homepage: https://modrinth.com/mod/ibe-editor
+      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
+      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
+
+    - name: AriKeys
+      license: MIT
+      homepage: https://github.com/ASangarin/AriKeys
+      desc: Adds option to use shortcut Keybinds configured on a server
+      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
