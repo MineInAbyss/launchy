@@ -71,12 +71,12 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
       forceConfigDownload: true
 
-    #- name: CIT Resewn
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/cit-resewn
-    #  desc: Makes custom armor work with shaders
-    #  url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
+    - name: CIT Resewn
+      license: MIT
+      homepage: https://modrinth.com/mod/cit-resewn
+      desc: Makes custom armor work with shaders
+      url: https://cdn.modrinth.com/data/otVJckYQ/versions/8oMEcc2E/CITResewn-1.1.3%2B1.19.4.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
     #- name: NoRpErrorMsg
     #  license: MIT
@@ -135,11 +135,11 @@ modGroups:
       desc: Optimizes memory usage
       url: https://cdn.modrinth.com/data/uXXizFIs/versions/RbR7EG8T/ferritecore-5.2.0-fabric.jar
 
-    #- name: Memory Leak Fix
-    #  license: LGPL-2.1
-    #  homepage: https://modrinth.com/mod/memoryleakfix
-    #  desc: Fixes random memory leaks
-    #  url: https://cdn.modrinth.com/data/NRjRiSSD/versions/xn2d7ltf/memoryleakfix-1.19.3-0.8.0.jar
+    - name: Memory Leak Fix
+      license: LGPL-2.1
+      homepage: https://modrinth.com/mod/memoryleakfix
+      desc: Fixes random memory leaks
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/n1K6OWh0/memoryleakfix-fabric-1.17%2B-1.0.0-beta.4.jar
 
     - name: Entity Culling
       license: MIT
@@ -171,7 +171,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/GtUrsjth/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.30.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/pH7xYFcg/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.31.jar
     
     #- name: KennyTVsEpicForceCloseLoadingScreenMod
     #  license: MIT
@@ -215,13 +215,13 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/continuity
       desc: Provides default connected textures
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/continuity-3.0.0-beta.21.19.3.jar
+      url: https://cdn.modrinth.com/data/1IjD5062/versions/4h5IIa7B/continuity-3.0.0-beta.2%2B1.19.3.jar
 
-    #- name: LambdaBetterGrass
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/lambdabettergrass
-    #  desc: Adds better grass and snow to the game
-    #  url: https://cdn.modrinth.com/data/2Uev7LdA/versions/lshdVWEE/lambdabettergrass-1.4.0%2B1.19.3.jar
+    - name: LambdaBetterGrass
+      license: MIT
+      homepage: https://modrinth.com/mod/lambdabettergrass
+      desc: Adds better grass and snow to the game
+      url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
 
     #- name: Lamb Dynamic Lights
     #  license: MIT
@@ -257,7 +257,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/URYViye0/physics-mod-2.11.9a-mc-1.19.4-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/nDrt1rNH/physics-mod-2.11.10a-mc-1.19.4-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -408,11 +408,11 @@ modGroups:
       desc: Lets you see the held items whilst in a moving boat
       url: https://cdn.modrinth.com/data/BdKIyOLe/versions/ggcaKnQr/Boat-Item-View-Fabric-1.19.3-0.0.4.jar
 
-    #- name: Blur
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/blur-fabric
-    #  desc: Adds immersive blur to GUI backgrounds
-    #  url: https://cdn.modrinth.com/data/NK39zBp2/versions/bEtdkEbI/blur-2.6.1.jar
+    - name: Blur
+      license: MIT
+      homepage: https://modrinth.com/mod/blur-fabric
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://cdn.modrinth.com/data/NK39zBp2/versions/u9BWuXwU/blur-3.0.0.jar
 
     - name: Sodium Extra
       license: LGPL-3
@@ -594,7 +594,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/9VVWBhOe/architectury-8.1.73-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/OrdDd9xt/architectury-8.1.75-fabric.jar
     
     - name: FancyMenu AudioExtension
       license: Special Permission
@@ -671,12 +671,6 @@ modGroups:
       homepage: https://modrinth.com/mod/map-in-slot
       desc: Render filled map in the hotbar/inventory slotsr
       url: https://cdn.modrinth.com/data/EpKz6cxj/versions/1.0.2/map-in-slot-1.0.2.jar
-
-    - name: LambdaBetterGrass
-      license: MIT
-      homepage: https://modrinth.com/mod/lambdabettergrass
-      desc: Adds better grass and snow to the game
-      url: https://github.com/LambdAurora/LambdaBetterGrass/releases/download/v1.3.0%2B1.19/lambdabettergrass-1.3.0+1.19.jar
 
     - name: Mythic Keys
       license: None
@@ -777,31 +771,12 @@ modGroups:
       desc: Mod to render schematics and other stuff in-game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.3-0.13.0.jar
 
-    - name: CIT Resewn
-      license: MIT
-      homepage: https://modrinth.com/mod/cit-resewn
-      desc: Makes custom armor work with shaders
-      url: https://cdn.modrinth.com/data/otVJckYQ/versions/hGatm5K8/CITResewn-1.1.3%2B1.19.3.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
-
-    - name: Memory Leak Fix
-      license: LGPL-2.1
-      homepage: https://modrinth.com/mod/memoryleakfix
-      desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/xn2d7ltf/memoryleakfix-1.19.3-0.8.0.jar
-
     - name: Enhanced Block Entities
       license: LGPL-3
       homepage: https://modrinth.com/mod/ebe
       desc: Makes blocks like chests render faster and nicer
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
-
-    - name: Blur
-      license: MIT
-      homepage: https://modrinth.com/mod/blur-fabric
-      desc: Adds immersive blur to GUI backgrounds
-      url: https://cdn.modrinth.com/data/NK39zBp2/versions/bEtdkEbI/blur-2.6.1.jar
 
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
