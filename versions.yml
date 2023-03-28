@@ -217,11 +217,11 @@ modGroups:
       desc: Provides default connected textures
       url: https://cdn.modrinth.com/data/1IjD5062/versions/4h5IIa7B/continuity-3.0.0-beta.2%2B1.19.3.jar
 
-    - name: LambdaBetterGrass
-      license: MIT
-      homepage: https://modrinth.com/mod/lambdabettergrass
-      desc: Adds better grass and snow to the game
-      url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
+    #- name: LambdaBetterGrass
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/lambdabettergrass
+    #  desc: Adds better grass and snow to the game
+    #  url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
 
     #- name: Lamb Dynamic Lights
     #  license: MIT
@@ -832,3 +832,10 @@ modGroups:
       homepage: https://modrinth.com/mod/nbttooltips
       desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
       url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
+
+    #Quilt-only after 1.19.2
+    - name: LambdaBetterGrass
+      license: MIT
+      homepage: https://modrinth.com/mod/lambdabettergrass
+      desc: Adds better grass and snow to the game
+      url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
