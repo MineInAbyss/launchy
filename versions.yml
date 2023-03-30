@@ -139,7 +139,7 @@ modGroups:
       license: LGPL-2.1
       homepage: https://modrinth.com/mod/memoryleakfix
       desc: Fixes random memory leaks
-      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/qg92ypPl/memoryleakfix-fabric-1.17%2B-1.0.0-beta.7.jar
+      url: https://cdn.modrinth.com/data/NRjRiSSD/versions/PtXTwQt6/memoryleakfix-fabric-1.17%2B-1.0.0.jar
 
     - name: Entity Culling
       license: MIT
@@ -171,7 +171,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/pH7xYFcg/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.31.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/mbcVXjye/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.41.jar
     
     #- name: KennyTVsEpicForceCloseLoadingScreenMod
     #  license: MIT
@@ -223,11 +223,11 @@ modGroups:
     #  desc: Adds better grass and snow to the game
     #  url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
 
-    #- name: Lamb Dynamic Lights
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/lambdynamiclights
-    #  desc: Holding a torch will light up your surroundings
-    #  url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
+    - name: Lamb Dynamic Lights
+      license: MIT
+      homepage: https://modrinth.com/mod/lambdynamiclights
+      desc: Holding a torch will light up your surroundings
+      url: https://cdn.modrinth.com/data/yBW8D80W/versions/7Cx8p05b/lambdynamiclights-2.3.0%2B1.19.4.jar
 
     - name: Visuality
       license: MIT
@@ -538,11 +538,11 @@ modGroups:
     #  desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
     #  url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
 
-    #- name: IBE Editor
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/ibe-editor
-    #  desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-    #  url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
+    - name: IBE Editor
+      license: MIT
+      homepage: https://modrinth.com/mod/ibe-editor
+      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
+      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/aAcdR2Mn/IBEEditor-1.19.4-2.2.2-fabric.jar
 
     - name: RoughlyEnoughItems
       license: MIT
@@ -753,11 +753,11 @@ modGroups:
       desc: Allows axolotls in buckets to have their own icon depending on their color and age
       url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0%2B1.19/axolotlbuckets-1.1.0%2B1.19.jar
 
-    - name: Lamb Dynamic Lights
-      license: MIT
-      homepage: https://modrinth.com/mod/lambdynamiclights
-      desc: Holding a torch will light up your surroundings
-      url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
+    #- name: Lamb Dynamic Lights
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/lambdynamiclights
+    #  desc: Holding a torch will light up your surroundings
+    #  url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
 
     - name: Auditory
       license: MIT
@@ -790,11 +790,11 @@ modGroups:
       desc: Improved stepping sound effects
       url: https://cdn.modrinth.com/data/rcTfTZr3/versions/GExGOzbi/PresenceFootsteps-1.7.1.jar
 
-    - name: IBE Editor
-      license: MIT
-      homepage: https://modrinth.com/mod/ibe-editor
-      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
+    #- name: IBE Editor
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/ibe-editor
+    #  desc: Simple GUI Mod to edit an item, a block or an entity in your current world
+    #  url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
 
     - name: AriKeys
       license: MIT
