@@ -372,11 +372,11 @@ modGroups:
       desc: Disable the telemetry data from being sent to Microsoft
       url: https://cdn.modrinth.com/data/hg77g4Pw/versions/l9SfLZDA/no-telemetry-1.7.0.jar
 
-    #- name: AriKeys
-    #  license: MIT
-    #  homepage: https://github.com/ASangarin/AriKeys
-    #  desc: Adds option to use shortcut Keybinds configured on a server
-    #  url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
+    - name: AriKeys
+      license: MIT
+      homepage: https://github.com/ASangarin/AriKeys
+      desc: Adds option to use shortcut Keybinds configured on a server
+      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2-1.19.4/arikeys-fabric-2.2-1.19.4.jar
 
     - name: Smooth Swapping
       license: LGPL-3
@@ -566,11 +566,11 @@ modGroups:
       desc: Library dependency for Legendary Tooltips
       url: https://cdn.modrinth.com/data/5faXoLqX/versions/9KXcgYGq/Iceberg-1.19.4-fabric-1.1.8.jar
 
-    #- name: Prism
-    #  license: CUSTOM
-    #  homepage: https://modrinth.com/mod/prism-lib
-    #  desc: Library dependency for Legendary Tooltips
-    #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
+    - name: Prism
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/prism-lib
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
 
     - name: ForgeConfigAPIPort
       license: MPL-2
@@ -784,35 +784,17 @@ modGroups:
       desc: Improves loading times when changing worlds
       url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
 
-    - name: Presence Footseps
-      license: MIT
-      homepage: https://modrinth.com/mod/presence-footsteps
-      desc: Improved stepping sound effects
-      url: https://cdn.modrinth.com/data/rcTfTZr3/versions/M7mmrOFn/PresenceFootsteps-1.8.0.jar
-
     #- name: IBE Editor
     #  license: MIT
     #  homepage: https://modrinth.com/mod/ibe-editor
     #  desc: Simple GUI Mod to edit an item, a block or an entity in your current world
     #  url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
 
-    - name: AriKeys
-      license: MIT
-      homepage: https://github.com/ASangarin/AriKeys
-      desc: Adds option to use shortcut Keybinds configured on a server
-      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2/arikeys-fabric-2.2-1.19.3.jar
-
     - name: NoRpErrorMsg
       license: MIT
       homepage: https://modrinth.com/mod/no-resource-pack-warnings
       desc: Get rid of the scary red borders around outdated resource packs
       url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
-
-    - name: Prism
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/prism-lib
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
 
     - name: NBTToolTips
       license: MIT
