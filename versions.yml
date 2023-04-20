@@ -92,11 +92,11 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
       forceConfigDownload: true
 
-    #- name: ArmorStand Interpolation
-    #  license: LGPL-3
-    #  homepage: https://github.com/HibiscusMC/armor-stand-interpolation
-    #  desc: Interpolates armor stands for smoother ModelEngine animations
-    #  url: https://repo.mineinabyss.com/releases/com/launchy/mods/armor-stand-interpolation-1.2.jar
+    - name: ArmorStand Interpolation
+      license: LGPL-3
+      homepage: https://github.com/HibiscusMC/armor-stand-interpolation
+      desc: Interpolates armor stands for smoother ModelEngine animations
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/armor-stands-interpolation-1.1.jar
 
   Performance:
     - name: Starlight
@@ -451,11 +451,12 @@ modGroups:
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/sGmHWmeL/versions/1.1.1%2B1.17/mixintrace-1.1.1%2B1.17.jar
 
-    - name: Not Enough Crashes
-      license: MIT
-      homepage: https://modrinth.com/mod/notenoughcrashes
-      desc: Sends you to title screen instead of crashing your game
-      url: https://cdn.modrinth.com/data/yM94ont6/versions/mQZHQn2N/notenoughcrashes-4.4.0%2B1.19.4-fabric.jar
+    # Disable per Iris-recommendation
+    #- name: Not Enough Crashes
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/notenoughcrashes
+    #  desc: Sends you to title screen instead of crashing your game
+    #  url: https://cdn.modrinth.com/data/yM94ont6/versions/mQZHQn2N/notenoughcrashes-4.4.0%2B1.19.4-fabric.jar
 
     - name: Craft Presence
       license: MIT
@@ -654,17 +655,11 @@ modGroups:
       desc: Adds more sounds to Minecraft
       url: https://cdn.modrinth.com/data/uPWCQrVL/versions/yV1SwVzK/extrasounds-2.3.1%2B1.19.2-1.19.1.jar
 
-    - name: ArmorStand Interpolation
-      license: LGPL-3
-      homepage: https://github.com/HibiscusMC/armor-stand-interpolation
-      desc: Interpolates armor stands for smoother ModelEngine animations
-      url: https://repo.mineinabyss.com/releases/com/launchy/mods/armor-stand-interpolation-1.2.jar
-
-    #- name: Not Enough Crashes
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/notenoughcrashes
-    #  desc: Sends you to title screen instead of crashing your game
-    # url: https://cdn.modrinth.com/data/yM94ont6/versions/f3lqB3uY/notenoughcrashes-4.2.0%2B1.19.3-fabric.jar
+    - name: Not Enough Crashes
+      license: MIT
+      homepage: https://modrinth.com/mod/notenoughcrashes
+      desc: Sends you to title screen instead of crashing your game
+      url: https://cdn.modrinth.com/data/yM94ont6/versions/f3lqB3uY/notenoughcrashes-4.2.0%2B1.19.3-fabric.jar
 
     - name: MapInSlot
       license: MIT
