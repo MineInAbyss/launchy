@@ -51,7 +51,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/MyATYwCN/fancymenu_fabric_2.14.3_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/g8GOblsm/fancymenu_fabric_2.14.4_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -78,11 +78,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/otVJckYQ/versions/8oMEcc2E/CITResewn-1.1.3%2B1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CITResewn_1.0.zip
 
-    #- name: NoRpErrorMsg
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/no-resource-pack-warnings
-    #  desc: Get rid of the scary red borders around outdated resource packs
-    #  url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
+    - name: NoRpErrorMsg
+      license: MIT
+      homepage: https://modrinth.com/mod/no-resource-pack-warnings
+      desc: Get rid of the scary red borders around outdated resource packs
+      url: https://cdn.modrinth.com/data/6xKUDQcB/versions/V53LD9OG/no-resource-pack-warnings-1.2.0.jar
 
     - name: DesiredServers
       license: MIT
@@ -110,12 +110,6 @@ modGroups:
       homepage: https://modrinth.com/mod/lithium
       desc: General-purpose performance enhancements
       url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/14hWYkog/lithium-fabric-mc1.19.4-0.11.1.jar
-
-    - name: LazyDFU
-      license: MIT
-      homepage: https://modrinth.com/mod/lazydfu
-      desc: Makes the game start more quickly
-      url: https://github.com/astei/lazydfu/releases/download/v0.1.3/lazydfu-0.1.3.jar
 
     - name: Smooth Boot
       license: MIT
@@ -161,6 +155,7 @@ modGroups:
     #  url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
     #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
+    # Remove for 1.20 due to core issue being fixed
     - name: ForgetMeChunk
       license: No License
       homepage: https://modrinth.com/mod/forgetmechunk
@@ -257,7 +252,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/CtkgyDWg/physics-mod-2.12.0-mc-1.19.4-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/WSh7czmA/physics-mod-2.12.1-mc-1.19.4-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -269,11 +264,11 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
 
   Audio Enhancements:
-    #- name: Auditory
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/auditory
-    #  desc: Expands and improves block sounds, item sounds and more
-    #  url: https://cdn.modrinth.com/data/1LjfkWOR/versions/XWyC0Mbo/auditory-0.0.5-1.19.3.jar
+    - name: Auditory
+      license: MIT
+      homepage: https://modrinth.com/mod/auditory
+      desc: Expands and improves block sounds, item sounds and more
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auditory-0.0.6-1.19.4.jar
 
     - name: Dynamic Sound filters
       license: APACHE
@@ -348,7 +343,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/drippy-loading-screen
       desc: Lets you customize Minecrafts loading screen
-      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/ytGOj4Ks/drippyloadingscreen_fabric_2.1.4_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/bLP1v9Z3/drippyloadingscreen_fabric_2.2.0_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DrippyLoadingScreen_1.0.zip
 
     - name: BetterF3
@@ -388,7 +383,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/debugify
       desc: Fixes a bunch of bugs Mojang doesn't want to
-      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/CQP9o8LS/Debugify-1.19.4%2B2.0.jar
+      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/oevI3RPR/Debugify-1.19.4%2B2.1.jar
 
     - name: NoInsecureChatToast
       license: CC0
@@ -502,11 +497,11 @@ modGroups:
       desc: Adds more creative tabs, specifically for Blocky Blocks
       url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
 
-    #- name: Litematica
-    #  license: LGPL-3
-    #  homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
-    #  desc: Mod to render schematics and other stuff in-game
-    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.3-0.13.0.jar
+    - name: Litematica
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
+      desc: Mod to render schematics and other stuff in-game
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.4-0.14.3.jar
 
     - name: Scroll for WorldEdit
       license: MIT
@@ -589,7 +584,7 @@ modGroups:
       license: LGPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
       desc: Dependency for LiteMatica
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.2.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
 
     - name: ArchitecturyAPI
       license: LGPL-3
@@ -754,18 +749,6 @@ modGroups:
     #  desc: Holding a torch will light up your surroundings
     #  url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
 
-    - name: Auditory
-      license: MIT
-      homepage: https://modrinth.com/mod/auditory
-      desc: Expands and improves block sounds, item sounds and more
-      url: https://cdn.modrinth.com/data/1LjfkWOR/versions/XWyC0Mbo/auditory-0.0.5-1.19.3.jar
-
-    - name: Litematica
-      license: LGPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
-      desc: Mod to render schematics and other stuff in-game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.3-0.13.0.jar
-
     - name: Enhanced Block Entities
       license: LGPL-3
       homepage: https://modrinth.com/mod/ebe
@@ -779,18 +762,6 @@ modGroups:
       desc: Improves loading times when changing worlds
       url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
 
-    #- name: IBE Editor
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/ibe-editor
-    #  desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-    #  url: https://cdn.modrinth.com/data/E9sX1ncV/versions/EyxIvtLu/IBEEditor-1.19.3-2.2.2-fabric.jar
-
-    - name: NoRpErrorMsg
-      license: MIT
-      homepage: https://modrinth.com/mod/no-resource-pack-warnings
-      desc: Get rid of the scary red borders around outdated resource packs
-      url: https://cdn.modrinth.com/data/6xKUDQcB/versions/1.0.0/no-resource-pack-warnings-1.0.0.jar
-
     - name: NBTToolTips
       license: MIT
       homepage: https://modrinth.com/mod/nbttooltips
@@ -803,3 +774,10 @@ modGroups:
       homepage: https://modrinth.com/mod/lambdabettergrass
       desc: Adds better grass and snow to the game
       url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
+
+    # Unnecessary as of 1.19.4
+    - name: LazyDFU
+      license: MIT
+      homepage: https://modrinth.com/mod/lazydfu
+      desc: Makes the game start more quickly
+      url: https://github.com/astei/lazydfu/releases/download/v0.1.3/lazydfu-0.1.3.jar
