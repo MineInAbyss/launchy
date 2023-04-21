@@ -39,7 +39,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/aMxXwo9x/modmenu-6.2.0.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/yjjsLqbS/modmenu-6.2.1.jar
 
     - name: Indium
       license: APACHE
@@ -51,7 +51,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/g8GOblsm/fancymenu_fabric_2.14.4_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/gx0x34Gl/fancymenu_fabric_2.14.5_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -166,20 +166,20 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/BPP2C04n/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.50.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/2LxKBERD/c2me-fabric-mc1.19.4-0.2.0%2Balpha.10.51.jar
     
-    #- name: KennyTVsEpicForceCloseLoadingScreenMod
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
-    #  desc: Improves loading times when changing worlds
-    #  url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
+    - name: KennyTVsEpicForceCloseLoadingScreenMod
+      license: MIT
+      homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
+      desc: Improves loading times when changing worlds
+      url: https://cdn.modrinth.com/data/blWBX5n1/versions/jp1gzmGo/forcecloseloadingscreen-2.0.0.jar
 
   Voice Chat:
     - name: Simple Voice Chat
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/sckft84h/voicechat-fabric-1.19.4-2.4.4.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/EOgv8FZ1/voicechat-fabric-1.19.4-2.4.5.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -252,7 +252,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/WSh7czmA/physics-mod-2.12.1-mc-1.19.4-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/BpGqaxHo/physics-mod-2.12.3-mc-1.19.4-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -383,7 +383,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/debugify
       desc: Fixes a bunch of bugs Mojang doesn't want to
-      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/oevI3RPR/Debugify-1.19.4%2B2.1.jar
+      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/jskCDMsk/Debugify-1.19.4%2B2.2.jar
 
     - name: NoInsecureChatToast
       license: CC0
@@ -755,12 +755,6 @@ modGroups:
       desc: Makes blocks like chests render faster and nicer
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
-
-    - name: KennyTVsEpicForceCloseLoadingScreenMod
-      license: MIT
-      homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
-      desc: Improves loading times when changing worlds
-      url: https://cdn.modrinth.com/data/blWBX5n1/versions/5DTExYfy/forcecloseloadingscreen-1.2.0.jar
 
     - name: NBTToolTips
       license: MIT
