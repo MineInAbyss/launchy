@@ -507,7 +507,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/scroll-for-worldedit
       desc: Ability to move selection WorldEdit selection with mouse-wheel
-      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/wfQCWS9C/scroll-for-worldedit-1.1.1.jar
+      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/SqDLuwjG/scroll-for-worldedit-1.1.2.jar
 
     - name: VisibleBarriers
       license: ARR
