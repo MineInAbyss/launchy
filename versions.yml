@@ -27,7 +27,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/unERf4ZJ/fabric-api-0.78.0%2B1.19.4.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/qvrUMd9Z/fabric-api-0.79.0%2B1.19.4.jar
 
     - name: Sodium
       license: LGPL-3
@@ -51,7 +51,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
-      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/gx0x34Gl/fancymenu_fabric_2.14.5_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/nhxeF5h5/fancymenu_fabric_2.14.6_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
       forceConfigDownload: true
 
@@ -172,7 +172,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/forcecloseworldloadingscreen
       desc: Improves loading times when changing worlds
-      url: https://cdn.modrinth.com/data/blWBX5n1/versions/jp1gzmGo/forcecloseloadingscreen-2.0.0.jar
+      url: https://cdn.modrinth.com/data/blWBX5n1/versions/Ql2mxFsU/forcecloseloadingscreen-2.1.0.jar
 
   Voice Chat:
     - name: Simple Voice Chat
@@ -420,7 +420,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fabrishot
       desc: Take screenshots at insanely large resolutions, because why not
-      url: https://cdn.modrinth.com/data/3qsfQtE9/versions/Fq42foYA/fabrishot-1.9.1.jar
+      url: https://cdn.modrinth.com/data/3qsfQtE9/versions/IkbywOGy/fabrishot-1.9.2.jar
 
     - name: ClickThrough
       license: MIT
@@ -526,7 +526,7 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/bettercommandblockui
       desc: Entirely overhauls the commandblock UI
-      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/iH8httP8/bettercommandblockui-0.3.1-1.19.4.jar
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/8X505DyN/bettercommandblockui-0.4.1-1.19.4.jar
 
     #- name: NBTToolTips
     #  license: MIT
@@ -578,7 +578,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/yacl
       desc: Library for config files
-      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/RmZvIqeu/YetAnotherConfigLib-2.3.0.jar
+      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/NZpUvhBc/yet-another-config-lib-fabric-2.5.0%2B1.19.4.jar
 
     - name: Malilib
       license: LGPL-3
@@ -622,7 +622,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/fabric-language-kotlin
       desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/MkcO8aQ0/fabric-language-kotlin-1.9.3%2Bkotlin.1.8.20.jar
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/qgTQJrUS/fabric-language-kotlin-1.9.4%2Bkotlin.1.8.21.jar
 
     - name: Satin
       license: LGPL-3
