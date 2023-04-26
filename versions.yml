@@ -1,4 +1,4 @@
-fabricVersion: 0.14.17
+fabricVersion: 0.14.19
 minecraftVersion: 1.19.4
 groups:
   - name: Core
