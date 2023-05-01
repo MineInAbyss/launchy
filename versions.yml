@@ -27,25 +27,25 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/qvrUMd9Z/fabric-api-0.79.0%2B1.19.4.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/s5UrEfIY/fabric-api-0.80.0%2B1.19.4.jar
 
     - name: Sodium
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/b4hTi3mo/sodium-fabric-mc1.19.4-0.4.10%2Bbuild.24.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/ugiIczl5/sodium-fabric-mc1.19.4-0.4.11%2Bbuild.26.jar
 
     - name: Mod menu
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/yjjsLqbS/modmenu-6.2.1.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/iZRiOnnj/modmenu-6.2.2.jar
 
     - name: Indium
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/qqiFL8NF/indium-1.0.15%2Bmc1.19.4.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/PkJ3S58z/indium-1.0.17%2Bmc1.19.4.jar
 
     - name: FancyMenu
       license: Special Permission
@@ -174,6 +174,12 @@ modGroups:
       desc: Improves loading times when changing worlds
       url: https://cdn.modrinth.com/data/blWBX5n1/versions/Ql2mxFsU/forcecloseloadingscreen-2.1.0.jar
 
+    - name: LazyDFU
+      license: MIT
+      homepage: https://modrinth.com/mod/lazydfu
+      desc: Makes the game start more quickly
+      url: https://github.com/astei/lazydfu/releases/download/v0.1.3/lazydfu-0.1.3.jar
+
   Voice Chat:
     - name: Simple Voice Chat
       license: ARR
@@ -186,7 +192,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/347HlKZS/iris-mc1.19.4-1.6.1.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/bSH9O0rj/iris-mc1.19.4-1.6.2.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/shaderpacks.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
@@ -318,7 +324,7 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/legendary-tooltips
       desc: Makes tooltips categoried and look cool
-      url: https://cdn.modrinth.com/data/atHH8NyV/versions/U8v4WrrK/LegendaryTooltips-1.19.4-fabric-1.4.2.jar
+      url: https://cdn.modrinth.com/data/atHH8NyV/versions/UOVPhZoi/LegendaryTooltips-1.19.4-fabric-1.4.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
 
     - name: Status Effect Timer
@@ -343,14 +349,14 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/drippy-loading-screen
       desc: Lets you customize Minecrafts loading screen
-      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/bLP1v9Z3/drippyloadingscreen_fabric_2.2.0_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/eYN7YRo8/drippyloadingscreen_fabric_2.2.1_MC_1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DrippyLoadingScreen_1.0.zip
 
     - name: BetterF3
       license: MIT
       homepage: https://modrinth.com/mod/betterf3
       desc: Makes the F3-menu customizable and cleaner
-      url: https://cdn.modrinth.com/data/8shC1gFX/versions/jFVjbyGK/BetterF3-6.0.0-Fabric-1.19.4-pre3.jar
+      url: https://cdn.modrinth.com/data/8shC1gFX/versions/vZ9QjDs5/BetterF3-6.0.1-Fabric-1.19.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/BetterF3_1.0.zip
 
     - name: Reese's Sodium Options
@@ -377,7 +383,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/smooth-swapping/
       desc: Moves items in inventories smoothly instead of letting them appear instantly
-      url: https://cdn.modrinth.com/data/ydZic5r4/versions/2LjLJCd0/Smooth%20Swapping%200.8.1%20%281.19.4%29-0.8.1.jar
+      url: https://cdn.modrinth.com/data/ydZic5r4/versions/FAmPKq0b/smoothswapping-0.9.jar
 
     - name: Debugify
       license: LGPL-3
@@ -413,7 +419,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/YknbqkHe/sodium-extra-0.4.18%2Bmc1.19.4-build.100.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/O3qmYo1o/sodium-extra-0.4.19%2Bmc1.19.3-build.101.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -526,7 +532,7 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/bettercommandblockui
       desc: Entirely overhauls the commandblock UI
-      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/8X505DyN/bettercommandblockui-0.4.1-1.19.4.jar
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/vpmFHm3M/bettercommandblockui-0.4.2-1.19.4.jar
 
     #- name: NBTToolTips
     #  license: MIT
@@ -560,7 +566,7 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/iceberg
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/9KXcgYGq/Iceberg-1.19.4-fabric-1.1.8.jar
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/R1qpVWOz/Iceberg-1.19.4-fabric-1.1.10.jar
 
     - name: Prism
       license: CUSTOM
@@ -610,7 +616,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/konkrete
       desc: Library dependency for LoadMyResources and FancyMenu
-      url: https://cdn.modrinth.com/data/J81TRJWm/versions/kiAIoQnV/konkrete_fabric_1.6.0-2_MC_1.19.4.jar
+      url: https://cdn.modrinth.com/data/J81TRJWm/versions/njrUss7i/konkrete_fabric_1.6.1_MC_1.19.4.jar
 
     - name: Auudio
       license: GPL-3
@@ -768,10 +774,3 @@ modGroups:
       homepage: https://modrinth.com/mod/lambdabettergrass
       desc: Adds better grass and snow to the game
       url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
-
-    # Unnecessary as of 1.19.4
-    - name: LazyDFU
-      license: MIT
-      homepage: https://modrinth.com/mod/lazydfu
-      desc: Makes the game start more quickly
-      url: https://github.com/astei/lazydfu/releases/download/v0.1.3/lazydfu-0.1.3.jar
