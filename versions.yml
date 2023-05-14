@@ -63,13 +63,13 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/resclone_config.zip
       forceConfigDownload: true
 
-    - name: Skip Resourcepack Prompt
-      license: Personal Mod
-      homepage: https://github.com/Keksuccino/miarpskip
-      desc: Skips the RP Prompt as this modpack already has it installed
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/miarpskip-1.1.0.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
-      forceConfigDownload: true
+    #- name: Skip Resourcepack Prompt
+    #  license: Personal Mod
+    #  homepage: https://github.com/Keksuccino/miarpskip
+    #  desc: Skips the RP Prompt as this modpack already has it installed
+    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/miarpskip-1.1.0.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
+    #  forceConfigDownload: true
 
     - name: CIT Resewn
       license: MIT
@@ -774,3 +774,12 @@ modGroups:
       homepage: https://modrinth.com/mod/lambdabettergrass
       desc: Adds better grass and snow to the game
       url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
+
+    # Issue with some field causing errors sometimes
+    - name: Skip Resourcepack Prompt
+      license: Personal Mod
+      homepage: https://github.com/Keksuccino/miarpskip
+      desc: Skips the RP Prompt as this modpack already has it installed
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/miarpskip-1.1.0.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/ResourcepackPromptSkip_1.0.zip
+      forceConfigDownload: true
