@@ -27,7 +27,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/Xru23QG1/fabric-api-0.81.0%2B1.19.4.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/qMk5NmAs/fabric-api-0.81.1%2B1.19.4.jar
 
     - name: Sodium
       license: LGPL-3
@@ -185,7 +185,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/5Zjrtwhl/voicechat-fabric-1.19.4-2.4.7.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/h0edb0O5/voicechat-fabric-1.19.4-2.4.8.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -286,13 +286,13 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/sound-physics-remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/b6C2l51o/soundphysics-fabric-1.19.4-1.1.0.jar
+      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/vCR4KOzC/soundphysics-fabric-1.19.4-1.1.1.jar
 
     - name: Presence Footseps
       license: MIT
       homepage: https://modrinth.com/mod/presence-footsteps
       desc: Improved stepping sound effects
-      url: https://cdn.modrinth.com/data/rcTfTZr3/versions/M7mmrOFn/PresenceFootsteps-1.8.0.jar
+      url: https://cdn.modrinth.com/data/rcTfTZr3/versions/jxsFtML2/PresenceFootsteps-1.8.2.jar
 
     - name: Drip Sounds
       license: LGPL-3
@@ -470,7 +470,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/better-ping-display-fabric
       desc: Makes the tablist ping display in numbers
-      url: https://github.com/Razuuu/better-ping-display-fabric/releases/download/v2.0.2/BetterPingDisplay-Fabric-2.0.2.jar
+      url: https://cdn.modrinth.com/data/MS1ZMyR7/versions/sy7XW3XS/BetterPingDisplay-Fabric-1.19.4-1.1.1.jar
 
     - name: Dont Clear Chat History
       license: CC0
