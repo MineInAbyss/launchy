@@ -105,6 +105,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/PiuygVWJ/versions/R2CGXkyy/spu-1.6.jar
 
   Performance:
+    - name: ImmediatlyFast
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/immediatelyfast
+      desc: Speed up immediate mode rendering in Minecraft
+      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/4IDo27OL/ImmediatelyFast-1.1.15%2B1.20.1.jar
 
     - name: Lithium
       license: LGPL-3
