@@ -508,6 +508,12 @@ modGroups:
       desc: Stops tooltips that are too large to fit on the screen from running off the screen
       url: https://cdn.modrinth.com/data/2RKFTmiB/versions/B2L4LeMV/tooltipfix-1.1.1-1.20.jar
 
+    - name: NBTtooltips
+      license: MIT
+      homepage: https://modrinth.com/mod/nbttooltips
+      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/nbttooltips-0.1.5-1.20.x.jar
+
   #MineInAbyss Enhancements:
 
   Dependencies:
