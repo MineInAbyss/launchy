@@ -52,7 +52,7 @@ modGroups:
       homepage: https://modrinth.com/mod/fancymenu
       desc: Customizes game menus
       url: https://cdn.modrinth.com/data/Wq5SjeWM/versions/c6U1TsBw/fancymenu_fabric_2.14.7-3_MC_1.20.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FancyMenuConfig_1.1.zip
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/fancymenu_1_20.zip
       forceConfigDownload: true
 
     - name: Resclone
@@ -84,13 +84,13 @@ modGroups:
       desc: Get rid of the scary red borders around outdated resource packs
       url: https://cdn.modrinth.com/data/6xKUDQcB/versions/V53LD9OG/no-resource-pack-warnings-1.2.0.jar
 
-    - name: DesiredServers
-      license: MIT
-      homepage: https://modrinth.com/mod/desired-servers
-      desc: Ship servers without modifying servers.dat
-      url: https://cdn.modrinth.com/data/GDpe4LHD/versions/1.19-1.0.1/desiredservers-1.19-1.0.1.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
-      forceConfigDownload: true
+    #- name: DesiredServers
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/desired-servers
+    #  desc: Ship servers without modifying servers.dat
+    #  url: https://cdn.modrinth.com/data/GDpe4LHD/versions/1.19-1.0.1/desiredservers-1.19-1.0.1.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
+    #  forceConfigDownload: true
 
     - name: ArmorStand Interpolation
       license: LGPL-3
@@ -98,24 +98,19 @@ modGroups:
       desc: Interpolates armor stands for smoother ModelEngine animations
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/armor-stands-interpolation-1.1.jar
 
+    - name: ResourcepackUnlocker
+      license: No License
+      homepage: https://modrinth.com/mod/server-pack-unlocker
+      desc: Allows resourcepacks provided by servers to be overridden and moved in the resource pack menu
+      url: https://cdn.modrinth.com/data/PiuygVWJ/versions/R2CGXkyy/spu-1.6.jar
+
   Performance:
-    - name: Starlight
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/starlight
-      desc: Rewrites light engine to reduces chunk load stuttering
-      url: https://cdn.modrinth.com/data/H8CaAYZC/versions/XGIsoVGT/starlight-1.1.2%2Bfabric.dbc156f.jar
 
     - name: Lithium
       license: LGPL-3
       homepage: https://modrinth.com/mod/lithium
       desc: General-purpose performance enhancements
       url: https://cdn.modrinth.com/data/gvQqBUqZ/versions/ZSNsJrPI/lithium-fabric-mc1.20.1-0.11.2.jar
-
-    #- name: Smooth Boot
-    #  license: MIT
-    #  desc: Improves boot CPU usage and times
-    #  homepage: https://modrinth.com/mod/smoothboot-fabric
-    #  url: https://cdn.modrinth.com/data/FWumhS4T/versions/I9TkHxLI/smoothboot-fabric-1.19.4-1.7.0.jar
 
     - name: Krypton
       license: LGPL-3
@@ -147,13 +142,6 @@ modGroups:
       desc: Cull leaves while looking hot!
       url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/mafk58Fm/CullLessLeaves-1.2.0.jar
       requires: [ Yet Another Config Lib ]
-
-    #- name: Enhanced Block Entities
-    #  license: LGPL-3
-    #  homepage: https://modrinth.com/mod/ebe
-    #  desc: Makes blocks like chests render faster and nicer
-    #  url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
     - name: C2ME
       license: MIT
@@ -211,17 +199,11 @@ modGroups:
       desc: Provides default connected textures
       url: https://cdn.modrinth.com/data/1IjD5062/versions/ImUFj5Gl/continuity-3.0.0-beta.2%2B1.20.jar
 
-    #- name: LambdaBetterGrass
+    #- name: Lamb Dynamic Lights
     #  license: MIT
-    #  homepage: https://modrinth.com/mod/lambdabettergrass
-    #  desc: Adds better grass and snow to the game
-    #  url: https://cdn.modrinth.com/data/2Uev7LdA/versions/s8ush6EH/lambdabettergrass-1.5.0%2B1.19.4.jar
-
-    - name: Lamb Dynamic Lights
-      license: MIT
-      homepage: https://modrinth.com/mod/lambdynamiclights
-      desc: Holding a torch will light up your surroundings
-      url: https://cdn.modrinth.com/data/yBW8D80W/versions/7Cx8p05b/lambdynamiclights-2.3.0%2B1.19.4.jar
+    #  homepage: https://modrinth.com/mod/lambdynamiclights
+    #  desc: Holding a torch will light up your surroundings
+    #  url: https://cdn.modrinth.com/data/yBW8D80W/versions/7Cx8p05b/lambdynamiclights-2.3.0%2B1.19.4.jar
 
     - name: Visuality
       license: MIT
@@ -263,17 +245,17 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
 
   Audio Enhancements:
-    - name: Auditory
-      license: MIT
-      homepage: https://modrinth.com/mod/auditory
-      desc: Expands and improves block sounds, item sounds and more
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auditory-0.0.6-1.19.4.jar
+    #- name: Auditory
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/auditory
+    #  desc: Expands and improves block sounds, item sounds and more
+    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auditory-0.0.6-1.19.4.jar
 
-    - name: Dynamic Sound filters
-      license: APACHE
-      homepage: https://modrinth.com/mod/dynamic-sound-filters
-      desc: Adds sound filters depending on your current location
-      url: https://cdn.modrinth.com/data/JV2wFevs/versions/cPnstDbE/DynamicSoundFilters-1.4.0%2B1.19.4.jar
+    #- name: Dynamic Sound filters
+    #  license: APACHE
+    #  homepage: https://modrinth.com/mod/dynamic-sound-filters
+    #  desc: Adds sound filters depending on your current location
+    #  url: https://cdn.modrinth.com/data/JV2wFevs/versions/cPnstDbE/DynamicSoundFilters-1.4.0%2B1.19.4.jar
 
     - name: Sound Physics Remastered
       license: GPL-3
@@ -294,12 +276,6 @@ modGroups:
       url: https://cdn.modrinth.com/data/T8MMXTpr/versions/7GB1hLrr/DripSounds-1.19.4-0.3.2.jar
       requires: [ Cloth Config ]
 
-    #- name: ExtraSounds
-    #  license: CC0
-    #  homepage: https://modrinth.com/mod/extrasounds
-    #  desc: Adds more sounds to Minecraft
-    #  url: https://cdn.modrinth.com/data/uPWCQrVL/versions/yV1SwVzK/extrasounds-2.3.1%2B1.19.2-1.19.1.jar
-
   HUD & Menu Enhancements:
     - name: Xaeros Worldmap
       license: ARR
@@ -313,18 +289,18 @@ modGroups:
       desc: Adds a minimap in the corner of the game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/Xaeros_Minimap_23.4.4_Fabric_1.20.jar
 
-    - name: Legendary Tooltips
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/legendary-tooltips
-      desc: Makes tooltips categoried and look cool
-      url: https://cdn.modrinth.com/data/atHH8NyV/versions/UOVPhZoi/LegendaryTooltips-1.19.4-fabric-1.4.3.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
+    #- name: Legendary Tooltips
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/legendary-tooltips
+    #  desc: Makes tooltips categoried and look cool
+    #  url: https://cdn.modrinth.com/data/atHH8NyV/versions/UOVPhZoi/LegendaryTooltips-1.19.4-fabric-1.4.3.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
 
     - name: Status Effect Timer
       license: LGPL-3
-      homepage: https://modrinth.com/mod/statuseffecttimer
+      homepage: https://modrinth.com/mod/status-effect-bars
       desc: Adds status effect information to the hud
-      url: https://github.com/magicus/statuseffecttimer/releases/download/v1.1.1%2B1.19/statuseffecttimer-1.1.1+1.19.jar
+      url: https://cdn.modrinth.com/data/x02cBj9Y/versions/mTjPtAMK/status-effect-bars-1.0.3.jar
 
     - name: Detailed Armor Bar
       license: MIT
@@ -388,7 +364,7 @@ modGroups:
       license: CC0
       homepage: https://modrinth.com/mod/disableinsecurechattoast
       desc: Prevents insecure chat toast from appearing
-      url: https://cdn.modrinth.com/data/i090SePT/versions/1.1.0/DisableInsecureChatToast-mc1.19.1-1.1.0.jar
+      url: https://cdn.modrinth.com/data/i090SePT/versions/UGKpfpZ6/DisableInsecureChatToast-mc1.20-1.1.0.jar
 
     - name: First Person Models
       license: MIT
@@ -402,11 +378,11 @@ modGroups:
       desc: Lets you see the held items whilst in a moving boat
       url: https://cdn.modrinth.com/data/BdKIyOLe/versions/Q3Z6GESL/Boat-Item-View-Fabric-1.20.1-0.0.5.jar
 
-    - name: Blur
-      license: MIT
-      homepage: https://modrinth.com/mod/blur-fabric
-      desc: Adds immersive blur to GUI backgrounds
-      url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
+    #- name: Blur
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/blur-fabric
+    #  desc: Adds immersive blur to GUI backgrounds
+    #  url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
 
     - name: Sodium Extra
       license: LGPL-3
@@ -433,31 +409,18 @@ modGroups:
       desc: Shows what is inside your backpack/shulkerbox
       url: https://cdn.modrinth.com/data/2M01OLQq/versions/Ah2mQcI5/shulkerboxtooltip-fabric-4.0.3%2B1.20.jar
 
-    #- name: Show Backpack Content
-    #  license: ARR
-    #  homepage: https://modrinth.com/mod/peek/
-    #  desc: Shows what is inside your backpack/shulkerbox
-    #  url: https://cdn.modrinth.com/data/TnOXNf5e/versions/i4vMBKhE/peek-1.19.4-1.0.4.jar
-
     - name: MixinTrace
       license: MIT
       homepage: https://modrinth.com/mod/mixintrace/
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/sGmHWmeL/versions/1.1.1%2B1.17/mixintrace-1.1.1%2B1.17.jar
 
-    # Disable per Iris-recommendation
-    #- name: Not Enough Crashes
+    #- name: Craft Presence
     #  license: MIT
-    #  homepage: https://modrinth.com/mod/notenoughcrashes
-    #  desc: Sends you to title screen instead of crashing your game
-    #  url: https://cdn.modrinth.com/data/yM94ont6/versions/mQZHQn2N/notenoughcrashes-4.4.0%2B1.19.4-fabric.jar
-
-    - name: Craft Presence
-      license: MIT
-      homepage: https://modrinth.com/mod/craftpresence
-      desc: Displays server info in your Discord Rich Presence
-      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/wKvydm3x/CraftPresence-2.0.7%2B1.20.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
+    #  homepage: https://modrinth.com/mod/craftpresence
+    #  desc: Displays server info in your Discord Rich Presence
+    #  url: https://cdn.modrinth.com/data/DFqQfIBR/versions/wKvydm3x/CraftPresence-2.0.7%2B1.20.jar
+    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
 
     - name: BetterPingDisplay
       license: MIT
@@ -484,29 +447,29 @@ modGroups:
       url: https://cdn.modrinth.com/data/ZP7xHXtw/versions/5jATPwpP/Rrls-1.20-3.0.0-fabric.jar
 
   Builder Tools:
-    - name: MoreCreativeTabs
-      license: MIT
-      homepage: https://modrinth.com/mod/morecreativetabs
-      desc: Adds more creative tabs, specifically for Blocky Blocks
-      url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
+    #- name: MoreCreativeTabs
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/morecreativetabs
+    #  desc: Adds more creative tabs, specifically for Blocky Blocks
+    #  url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
 
-    - name: Litematica
-      license: LGPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
-      desc: Mod to render schematics and other stuff in-game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.4-0.14.3.jar
+    #- name: Litematica
+    #  license: LGPL-3
+    #  homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
+    #  desc: Mod to render schematics and other stuff in-game
+    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.4-0.14.3.jar
 
-    - name: Scroll for WorldEdit
-      license: MIT
-      homepage: https://modrinth.com/mod/scroll-for-worldedit
-      desc: Ability to move selection WorldEdit selection with mouse-wheel
-      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
+    #- name: Scroll for WorldEdit
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/scroll-for-worldedit
+    #  desc: Ability to move selection WorldEdit selection with mouse-wheel
+    #  url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
 
-    - name: VisibleBarriers
-      license: ARR
-      homepage: https://modrinth.com/mod/visible-barriers
-      desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/w4NbLNE2/visible-barriers-2.0.1.jar
+    #- name: VisibleBarriers
+    #  license: ARR
+    #  homepage: https://modrinth.com/mod/visiblebarriers
+    #  desc: Allows you to see barriers and other, normally invisible blocks, in the world
+    #  url: https://cdn.modrinth.com/data/ajdfGxGU/versions/w4NbLNE2/visible-barriers-2.0.1.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -515,23 +478,17 @@ modGroups:
       url: https://cdn.modrinth.com/data/RPOSBQgq/versions/sFclEion/itemswapper-fabric-0.4.0-mc1.20.jar
 
   Developer Tools:
-    - name: BetterCommandBlockUI
-      license: CC0
-      homepage: https://modrinth.com/mod/bettercommandblockui
-      desc: Entirely overhauls the commandblock UI
-      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/vpmFHm3M/bettercommandblockui-0.4.2-1.19.4.jar
+    #- name: BetterCommandBlockUI
+    #  license: CC0
+    #  homepage: https://modrinth.com/mod/bettercommandblockui
+    #  desc: Entirely overhauls the commandblock UI
+    #  url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/vpmFHm3M/bettercommandblockui-0.4.2-1.19.4.jar
 
     #- name: NBTToolTips
     #  license: MIT
     #  homepage: https://modrinth.com/mod/nbttooltips
     #  desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
     #  url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
-
-    - name: IBE Editor
-      license: MIT
-      homepage: https://modrinth.com/mod/ibe-editor
-      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/FlcRmy4g/IBEEditor-1.20-2.2.3-fabric.jar
 
     - name: RoughlyEnoughItems
       license: MIT
@@ -549,17 +506,17 @@ modGroups:
   #MineInAbyss Enhancements:
 
   Dependencies:
-    - name: Iceberg
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/iceberg
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/R1qpVWOz/Iceberg-1.19.4-fabric-1.1.10.jar
+    #- name: Iceberg
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/iceberg
+    #  desc: Library dependency for Legendary Tooltips
+    #  url: https://cdn.modrinth.com/data/5faXoLqX/versions/R1qpVWOz/Iceberg-1.19.4-fabric-1.1.10.jar
 
-    - name: Prism
-      license: CUSTOM
-      homepage: https://modrinth.com/mod/prism-lib
-      desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
+    #- name: Prism
+    #  license: CUSTOM
+    #  homepage: https://modrinth.com/mod/prism-lib
+    #  desc: Library dependency for Legendary Tooltips
+    #  url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
 
     - name: ForgeConfigAPIPort
       license: MPL-2
@@ -573,11 +530,11 @@ modGroups:
       desc: Library for config files
       url: https://cdn.modrinth.com/data/1eAoo2KR/versions/ZqWkEgYo/yet-another-config-lib-fabric-3.0.1%2B1.20.jar
 
-    - name: Malilib
-      license: LGPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
-      desc: Dependency for LiteMatica
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
+    #- name: Malilib
+    #  license: LGPL-3
+    #  homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
+    #  desc: Dependency for LiteMatica
+    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
 
     - name: ArchitecturyAPI
       license: LGPL-3
@@ -706,6 +663,12 @@ modGroups:
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FeaturedServerConfig1.zip
       forceConfigDownload: true
 
+    - name: IBE Editor
+      license: MIT
+      homepage: https://modrinth.com/mod/ibe-editor
+      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
+      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/FlcRmy4g/IBEEditor-1.20-2.2.3-fabric.jar
+
     - name: Cull Leaves
       license: MIT
       homepage: https://modrinth.com/mod/cull-leaves
@@ -735,12 +698,6 @@ modGroups:
       homepage: https://modrinth.com/mod/roundaround-axolotl-buckets
       desc: Allows axolotls in buckets to have their own icon depending on their color and age
       url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0%2B1.19/axolotlbuckets-1.1.0%2B1.19.jar
-
-    #- name: Lamb Dynamic Lights
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/lambdynamiclights
-    #  desc: Holding a torch will light up your surroundings
-    #  url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
 
     - name: Enhanced Block Entities
       license: LGPL-3
@@ -772,8 +729,100 @@ modGroups:
       forceConfigDownload: true
 
 
+      # Outdated due to 1.20
+    - name: Iceberg
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/iceberg
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/R1qpVWOz/Iceberg-1.19.4-fabric-1.1.10.jar
 
+    - name: Prism
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/prism-lib
+      desc: Library dependency for Legendary Tooltips
+      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
 
+    - name: Lamb Dynamic Lights
+      license: MIT
+      homepage: https://modrinth.com/mod/lambdynamiclights
+      desc: Holding a torch will light up your surroundings
+      url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
+
+    - name: Legendary Tooltips
+      license: CUSTOM
+      homepage: https://modrinth.com/mod/legendary-tooltips
+      desc: Makes tooltips categoried and look cool
+      url: https://cdn.modrinth.com/data/atHH8NyV/versions/UOVPhZoi/LegendaryTooltips-1.19.4-fabric-1.4.3.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
+
+    - name: Litematica
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
+      desc: Mod to render schematics and other stuff in-game
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.4-0.14.3.jar
+
+    - name: Malilib
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
+      desc: Dependency for LiteMatica
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
+
+    - name: DesiredServers
+      license: MIT
+      homepage: https://modrinth.com/mod/desired-servers
+      desc: Ship servers without modifying servers.dat
+      url: https://cdn.modrinth.com/data/GDpe4LHD/versions/1.19-1.0.1/desiredservers-1.19-1.0.1.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
+      forceConfigDownload: true
+
+    - name: Scroll for WorldEdit
+      license: MIT
+      homepage: https://modrinth.com/mod/scroll-for-worldedit
+      desc: Ability to move selection WorldEdit selection with mouse-wheel
+      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
+
+    - name: Auditory
+      license: MIT
+      homepage: https://modrinth.com/mod/auditory
+      desc: Expands and improves block sounds, item sounds and more
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/auditory-0.0.6-1.19.4.jar
+
+    - name: Dynamic Sound filters
+      license: APACHE
+      homepage: https://modrinth.com/mod/dynamic-sound-filters
+      desc: Adds sound filters depending on your current location
+      url: https://cdn.modrinth.com/data/JV2wFevs/versions/cPnstDbE/DynamicSoundFilters-1.4.0%2B1.19.4.jar
+
+    - name: Craft Presence
+      license: MIT
+      homepage: https://modrinth.com/mod/craftpresence
+      desc: Displays server info in your Discord Rich Presence
+      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/wKvydm3x/CraftPresence-2.0.7%2B1.20.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
+
+    - name: MoreCreativeTabs
+      license: MIT
+      homepage: https://modrinth.com/mod/morecreativetabs
+      desc: Adds more creative tabs, specifically for Blocky Blocks
+      url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
+
+    - name: VisibleBarriers
+      license: ARR
+      homepage: https://modrinth.com/mod/visiblebarriers
+      desc: Allows you to see barriers and other, normally invisible blocks, in the world
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/w4NbLNE2/visible-barriers-2.0.1.jar
+
+    - name: Blur
+      license: MIT
+      homepage: https://modrinth.com/mod/blur-fabric
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
+
+    - name: BetterCommandBlockUI
+      license: CC0
+      homepage: https://modrinth.com/mod/bettercommandblockui
+      desc: Entirely overhauls the commandblock UI
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/vpmFHm3M/bettercommandblockui-0.4.2-1.19.4.jar
 
     # Remove for 1.20 due to core issue being fixed
     - name: ForgetMeChunk
@@ -793,3 +842,9 @@ modGroups:
       homepage: https://modrinth.com/mod/accurate-block-placement
       desc: Allows you to place blocks faster by holding down RMB
       url: https://cdn.modrinth.com/data/yx5ls8Zc/versions/ykoMH6NT/accurate-block-placement-1.0.17.jar
+
+    - name: Starlight
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/starlight
+      desc: Rewrites light engine to reduces chunk load stuttering
+      url: https://cdn.modrinth.com/data/H8CaAYZC/versions/XGIsoVGT/starlight-1.1.2%2Bfabric.dbc156f.jar
