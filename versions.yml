@@ -201,7 +201,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/fallingleaves
       desc: Adds falling leaf particles to trees
-      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/OSEfdzSy/fallingleaves-1.15.0%2B1.19.4.jar
+      url: https://cdn.modrinth.com/data/WhbRG4iK/versions/HMfGMPn2/fallingleaves-1.15.1%2B1.20.1.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FallingLeaves_1.0.zip
       requires: [ Cloth Config ]
 
@@ -342,7 +342,7 @@ modGroups:
       license: Special Permission
       homepage: https://modrinth.com/mod/drippy-loading-screen
       desc: Lets you customize Minecrafts loading screen
-      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/pVag0Gdc/drippyloadingscreen_fabric_2.2.1_MC_1.20.jar
+      url: https://cdn.modrinth.com/data/v3CYg2V9/versions/naoDWUmF/drippyloadingscreen_fabric_2.2.2_MC_1.20-1.20.1.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DrippyLoadingScreen_1.0.zip
 
     - name: BetterF3
@@ -382,7 +382,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/debugify
       desc: Fixes a bunch of bugs Mojang doesn't want to
-      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/7SaNcvDx/Debugify-1.20%2B1.1.jar
+      url: https://cdn.modrinth.com/data/QwxR6Gcd/versions/GTuKuQLA/Debugify-1.20.1%2B1.1.jar
 
     - name: NoInsecureChatToast
       license: CC0
@@ -400,7 +400,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/boat-item-view
       desc: Lets you see the held items whilst in a moving boat
-      url: https://cdn.modrinth.com/data/BdKIyOLe/versions/ggcaKnQr/Boat-Item-View-Fabric-1.19.3-0.0.4.jar
+      url: https://cdn.modrinth.com/data/BdKIyOLe/versions/Q3Z6GESL/Boat-Item-View-Fabric-1.20.1-0.0.5.jar
 
     - name: Blur
       license: MIT
@@ -431,7 +431,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/shulkerboxtooltip
       desc: Shows what is inside your backpack/shulkerbox
-      url: https://cdn.modrinth.com/data/2M01OLQq/versions/ewmGUeMg/shulkerboxtooltip-fabric-4.0.2%2B1.20.jar
+      url: https://cdn.modrinth.com/data/2M01OLQq/versions/Ah2mQcI5/shulkerboxtooltip-fabric-4.0.3%2B1.20.jar
 
     #- name: Show Backpack Content
     #  license: ARR
@@ -500,7 +500,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/scroll-for-worldedit
       desc: Ability to move selection WorldEdit selection with mouse-wheel
-      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/SqDLuwjG/scroll-for-worldedit-1.1.2.jar
+      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
 
     - name: VisibleBarriers
       license: ARR
