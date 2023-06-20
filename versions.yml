@@ -39,7 +39,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/RTFDnTKf/modmenu-7.0.1.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/zv46i3PW/modmenu-7.1.0.jar
 
     - name: Indium
       license: APACHE
@@ -204,11 +204,11 @@ modGroups:
       desc: Provides default connected textures
       url: https://cdn.modrinth.com/data/1IjD5062/versions/ImUFj5Gl/continuity-3.0.0-beta.2%2B1.20.jar
 
-    #- name: Lamb Dynamic Lights
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/lambdynamiclights
-    #  desc: Holding a torch will light up your surroundings
-    #  url: https://cdn.modrinth.com/data/yBW8D80W/versions/7Cx8p05b/lambdynamiclights-2.3.0%2B1.19.4.jar
+    - name: Lamb Dynamic Lights
+      license: MIT
+      homepage: https://modrinth.com/mod/lambdynamiclights
+      desc: Holding a torch will light up your surroundings
+      url: https://cdn.modrinth.com/data/yBW8D80W/versions/Vsx4I8Np/lambdynamiclights-2.3.1%2B1.20.1.jar
 
     - name: Visuality
       license: MIT
@@ -470,11 +470,11 @@ modGroups:
     #  desc: Ability to move selection WorldEdit selection with mouse-wheel
     #  url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
 
-    #- name: VisibleBarriers
-    #  license: ARR
-    #  homepage: https://modrinth.com/mod/visiblebarriers
-    #  desc: Allows you to see barriers and other, normally invisible blocks, in the world
-    #  url: https://cdn.modrinth.com/data/ajdfGxGU/versions/w4NbLNE2/visible-barriers-2.0.1.jar
+    - name: VisibleBarriers
+      license: ARR
+      homepage: https://modrinth.com/mod/visiblebarriers
+      desc: Allows you to see barriers and other, normally invisible blocks, in the world
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/ro7MjqJm/visible-barriers-2.0.4.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -483,17 +483,17 @@ modGroups:
       url: https://cdn.modrinth.com/data/RPOSBQgq/versions/sFclEion/itemswapper-fabric-0.4.0-mc1.20.jar
 
   Developer Tools:
-    #- name: BetterCommandBlockUI
-    #  license: CC0
-    #  homepage: https://modrinth.com/mod/bettercommandblockui
-    #  desc: Entirely overhauls the commandblock UI
-    #  url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/vpmFHm3M/bettercommandblockui-0.4.2-1.19.4.jar
+    - name: BetterCommandBlockUI
+      license: CC0
+      homepage: https://modrinth.com/mod/bettercommandblockui
+      desc: Entirely overhauls the commandblock UI
+      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/nnxtRQSR/bettercommandblockui-0.4.2-1.20.jar
 
-    #- name: NBTToolTips
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/nbttooltips
-    #  desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
-    #  url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
+    - name: NBTToolTips
+      license: MIT
+      homepage: https://modrinth.com/mod/nbttooltips
+      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
+      url: https://cdn.modrinth.com/data/FZcOyh3v/versions/XEAWEIcJ/nbttooltips-0.1.4-1.20.x.jar
 
     - name: RoughlyEnoughItems
       license: MIT
@@ -507,12 +507,6 @@ modGroups:
       homepage: https://modrinth.com/mod/tooltipfix
       desc: Stops tooltips that are too large to fit on the screen from running off the screen
       url: https://cdn.modrinth.com/data/2RKFTmiB/versions/B2L4LeMV/tooltipfix-1.1.1-1.20.jar
-
-    - name: NBTtooltips
-      license: MIT
-      homepage: https://modrinth.com/mod/nbttooltips
-      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/nbttooltips-0.1.5-1.20.x.jar
 
   #MineInAbyss Enhancements:
 
@@ -539,7 +533,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/yacl
       desc: Library for config files
-      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/ZqWkEgYo/yet-another-config-lib-fabric-3.0.1%2B1.20.jar
+      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/zJ1Wh6pM/yet-another-config-lib-fabric-3.0.2%2B1.20.jar
 
     #- name: Malilib
     #  license: LGPL-3
@@ -717,12 +711,6 @@ modGroups:
       url: https://cdn.modrinth.com/data/OVuFYfre/versions/6NvQpIBY/enhancedblockentities-0.8%2B1.19.3.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/enhanced_bes_1.1.zip
 
-    - name: NBTToolTips
-      license: MIT
-      homepage: https://modrinth.com/mod/nbttooltips
-      desc: Allows you to see the NBT data of an item by hovering over it and holding the shift key
-      url: https://cdn.modrinth.com/data/FZcOyh3v/versions/2SdKGoet/nbttooltips-0.1.4-1.19.x.jar
-
     #Quilt-only after 1.19.2
     - name: LambdaBetterGrass
       license: MIT
@@ -752,12 +740,6 @@ modGroups:
       homepage: https://modrinth.com/mod/prism-lib
       desc: Library dependency for Legendary Tooltips
       url: https://cdn.modrinth.com/data/1OE8wbN0/versions/LLzsjiCn/Prism-1.19.3-fabric-1.0.4.jar
-
-    - name: Lamb Dynamic Lights
-      license: MIT
-      homepage: https://modrinth.com/mod/lambdynamiclights
-      desc: Holding a torch will light up your surroundings
-      url: https://cdn.modrinth.com/data/yBW8D80W/versions/9E1ECN95/lambdynamiclights-2.2.0%2B1.19.3.jar
 
     - name: Legendary Tooltips
       license: CUSTOM
@@ -817,23 +799,11 @@ modGroups:
       desc: Adds more creative tabs, specifically for Blocky Blocks
       url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
 
-    - name: VisibleBarriers
-      license: ARR
-      homepage: https://modrinth.com/mod/visiblebarriers
-      desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/w4NbLNE2/visible-barriers-2.0.1.jar
-
     - name: Blur
       license: MIT
       homepage: https://modrinth.com/mod/blur-fabric
       desc: Adds immersive blur to GUI backgrounds
       url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
-
-    - name: BetterCommandBlockUI
-      license: CC0
-      homepage: https://modrinth.com/mod/bettercommandblockui
-      desc: Entirely overhauls the commandblock UI
-      url: https://cdn.modrinth.com/data/8iQcgjQ2/versions/vpmFHm3M/bettercommandblockui-0.4.2-1.19.4.jar
 
     # Remove for 1.20 due to core issue being fixed
     - name: ForgetMeChunk
