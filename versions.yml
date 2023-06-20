@@ -183,12 +183,12 @@ modGroups:
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
 
-    - name: Distant Horizons
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/distanthorizons
-      desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://cdn.modrinth.com/data/uCdwusMi/versions/xBHpiuwg/DistantHorizons-1.6.11a-1.19.4.jar
-      incompatibleWith: [ Iris shaders ]
+    #- name: Distant Horizons
+    #  license: LGPL-3
+    #  homepage: https://modrinth.com/mod/distanthorizons
+    #  desc: Level-Of-Detail mod to allow for better performance and higher render-distance
+    #  url: https://cdn.modrinth.com/data/uCdwusMi/versions/xBHpiuwg/DistantHorizons-1.6.11a-1.19.4.jar
+    #  incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
       license: MIT
@@ -804,6 +804,13 @@ modGroups:
       homepage: https://modrinth.com/mod/blur-fabric
       desc: Adds immersive blur to GUI backgrounds
       url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
+
+    - name: Distant Horizons
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/distanthorizons
+      desc: Level-Of-Detail mod to allow for better performance and higher render-distance
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/xBHpiuwg/DistantHorizons-1.6.11a-1.19.4.jar
+      incompatibleWith: [ Iris shaders ]
 
     # Remove for 1.20 due to core issue being fixed
     - name: ForgetMeChunk
