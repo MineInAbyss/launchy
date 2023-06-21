@@ -402,11 +402,11 @@ modGroups:
       desc: Take screenshots at insanely large resolutions, because why not
       url: https://cdn.modrinth.com/data/3qsfQtE9/versions/IkbywOGy/fabrishot-1.9.2.jar
 
-    - name: ClickThrough
-      license: MIT
-      homepage: https://modrinth.com/mod/clickthrough
-      desc: Click through signs and item frames to chests
-      url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/ZMcunEOm/clickthrough-1.19.3-fabric0.68.1-0.4.jar
+    #- name: ClickThrough
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/clickthrough
+    #  desc: Click through signs and item frames to chests
+    #  url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/ZMcunEOm/clickthrough-1.19.3-fabric0.68.1-0.4.jar
 
     - name: Show Backpack Content
       license: MIT
@@ -811,6 +811,12 @@ modGroups:
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
       url: https://cdn.modrinth.com/data/uCdwusMi/versions/xBHpiuwg/DistantHorizons-1.6.11a-1.19.4.jar
       incompatibleWith: [ Iris shaders ]
+
+    - name: ClickThrough
+      license: MIT
+      homepage: https://modrinth.com/mod/clickthrough
+      desc: Click through signs and item frames to chests
+      url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/ZMcunEOm/clickthrough-1.19.3-fabric0.68.1-0.4.jar
 
     # Remove for 1.20 due to core issue being fixed
     - name: ForgetMeChunk
