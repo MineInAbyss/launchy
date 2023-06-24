@@ -347,12 +347,6 @@ modGroups:
       desc: Disable the telemetry data from being sent to Microsoft
       url: https://cdn.modrinth.com/data/hg77g4Pw/versions/l9SfLZDA/no-telemetry-1.7.0.jar
 
-    - name: AriKeys
-      license: MIT
-      homepage: https://github.com/ASangarin/AriKeys
-      desc: Adds option to use shortcut Keybinds configured on a server
-      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2-1.19.4/arikeys-fabric-2.2-1.19.4.jar
-
     - name: Smooth Swapping
       license: LGPL-3
       homepage: https://modrinth.com/mod/smooth-swapping/
@@ -817,6 +811,12 @@ modGroups:
       homepage: https://modrinth.com/mod/clickthrough
       desc: Click through signs and item frames to chests
       url: https://cdn.modrinth.com/data/Z5b0cAlD/versions/ZMcunEOm/clickthrough-1.19.3-fabric0.68.1-0.4.jar
+
+    - name: AriKeys
+      license: MIT
+      homepage: https://github.com/ASangarin/AriKeys
+      desc: Adds option to use shortcut Keybinds configured on a server
+      url: https://github.com/ASangarin/AriKeys/releases/download/v2.2-1.19.4/arikeys-fabric-2.2-1.19.4.jar
 
     # Remove for 1.20 due to core issue being fixed
     - name: ForgetMeChunk
