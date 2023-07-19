@@ -84,13 +84,13 @@ modGroups:
       desc: Get rid of the scary red borders around outdated resource packs
       url: https://cdn.modrinth.com/data/6xKUDQcB/versions/Cs4frYPf/no-resource-pack-warnings-1.3.0.jar
 
-    #- name: DesiredServers
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/desired-servers
-    #  desc: Ship servers without modifying servers.dat
-    #  url: https://cdn.modrinth.com/data/GDpe4LHD/versions/1.19-1.0.1/desiredservers-1.19-1.0.1.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
-    #  forceConfigDownload: true
+    - name: DesiredServers
+      license: MIT
+      homepage: https://modrinth.com/mod/desired-servers
+      desc: Ship servers without modifying servers.dat
+      url: https://cdn.modrinth.com/data/GDpe4LHD/versions/t6mxyGq9/desiredservers-fabric-1.20.1-1.2.0.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
+      forceConfigDownload: true
 
     - name: ArmorStand Interpolation
       license: LGPL-3
@@ -383,11 +383,11 @@ modGroups:
       desc: Lets you see the held items whilst in a moving boat
       url: https://cdn.modrinth.com/data/BdKIyOLe/versions/Q3Z6GESL/Boat-Item-View-Fabric-1.20.1-0.0.5.jar
 
-    #- name: Blur
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/blur-fabric
-    #  desc: Adds immersive blur to GUI backgrounds
-    #  url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
+    - name: Blur
+      license: MIT
+      homepage: https://modrinth.com/mod/blur-fabric
+      desc: Adds immersive blur to GUI backgrounds
+      url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
 
     - name: Sodium Extra
       license: LGPL-3
@@ -420,12 +420,12 @@ modGroups:
       desc: Sends you to title screen instead of crashing your game
       url: https://cdn.modrinth.com/data/sGmHWmeL/versions/1.1.1%2B1.17/mixintrace-1.1.1%2B1.17.jar
 
-    #- name: Craft Presence
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/craftpresence
-    #  desc: Displays server info in your Discord Rich Presence
-    #  url: https://cdn.modrinth.com/data/DFqQfIBR/versions/wKvydm3x/CraftPresence-2.0.7%2B1.20.jar
-    #  configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
+    - name: Craft Presence
+      license: MIT
+      homepage: https://modrinth.com/mod/craftpresence
+      desc: Displays server info in your Discord Rich Presence
+      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/KsrQjWtz/CraftPresence-2.1.2%2B1.20.1.jar
+      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
 
     - name: BetterPingDisplay
       license: MIT
@@ -452,17 +452,17 @@ modGroups:
       url: https://cdn.modrinth.com/data/ZP7xHXtw/versions/OVn6Trri/Rrls-1.20.1-3.1.0-fabric.jar
 
   Builder Tools:
-    #- name: MoreCreativeTabs
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/morecreativetabs
-    #  desc: Adds more creative tabs, specifically for Blocky Blocks
-    #  url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/ILEIm8F6/MoreCreativeTabs-combo-1.19.3-1.2.0.jar
+    - name: MoreCreativeTabs
+      license: MIT
+      homepage: https://modrinth.com/mod/morecreativetabs
+      desc: Adds more creative tabs, specifically for Blocky Blocks
+      url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/gbaKXRAB/MoreCreativeTabs-combo-1.20-1.2.1.jar
 
-    #- name: Litematica
-    #  license: LGPL-3
-    #  homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
-    #  desc: Mod to render schematics and other stuff in-game
-    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.4-0.14.3.jar
+    - name: Litematica
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
+      desc: Mod to render schematics and other stuff in-game
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.20.1-0.15.3.jar
 
     #- name: Scroll for WorldEdit
     #  license: MIT
@@ -535,11 +535,11 @@ modGroups:
       desc: Library for config files
       url: https://cdn.modrinth.com/data/1eAoo2KR/versions/g38uL3ti/yet-another-config-lib-fabric-3.0.3%2B1.20.jar
 
-    #- name: Malilib
-    #  license: LGPL-3
-    #  homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
-    #  desc: Dependency for LiteMatica
-    #  url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
+    - name: Malilib
+      license: LGPL-3
+      homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
+      desc: Dependency for LiteMatica
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
 
     - name: ArchitecturyAPI
       license: LGPL-3
@@ -722,25 +722,6 @@ modGroups:
 
 
       # Outdated due to 1.20
-    - name: Litematica
-      license: LGPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/litematica
-      desc: Mod to render schematics and other stuff in-game
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.19.4-0.14.3.jar
-
-    - name: Malilib
-      license: LGPL-3
-      homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
-      desc: Dependency for LiteMatica
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
-
-    - name: DesiredServers
-      license: MIT
-      homepage: https://modrinth.com/mod/desired-servers
-      desc: Ship servers without modifying servers.dat
-      url: https://cdn.modrinth.com/data/GDpe4LHD/versions/1.19-1.0.1/desiredservers-1.19-1.0.1.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/DesiredServerConfig2.zip
-      forceConfigDownload: true
 
     - name: Scroll for WorldEdit
       license: MIT
@@ -759,25 +740,6 @@ modGroups:
       homepage: https://modrinth.com/mod/dynamic-sound-filters
       desc: Adds sound filters depending on your current location
       url: https://cdn.modrinth.com/data/JV2wFevs/versions/cPnstDbE/DynamicSoundFilters-1.4.0%2B1.19.4.jar
-
-    - name: Craft Presence
-      license: MIT
-      homepage: https://modrinth.com/mod/craftpresence
-      desc: Displays server info in your Discord Rich Presence
-      url: https://cdn.modrinth.com/data/DFqQfIBR/versions/wKvydm3x/CraftPresence-2.0.7%2B1.20.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CraftPresence_1.0.zip
-
-    - name: MoreCreativeTabs
-      license: MIT
-      homepage: https://modrinth.com/mod/morecreativetabs
-      desc: Adds more creative tabs, specifically for Blocky Blocks
-      url: https://cdn.modrinth.com/data/nOiHJ1dx/versions/gbaKXRAB/MoreCreativeTabs-combo-1.20-1.2.1.jar
-
-    - name: Blur
-      license: MIT
-      homepage: https://modrinth.com/mod/blur-fabric
-      desc: Adds immersive blur to GUI backgrounds
-      url: https://cdn.modrinth.com/data/NK39zBp2/versions/dki8Ab2D/blur-3.1.0.jar
 
     - name: Distant Horizons
       license: LGPL-3
