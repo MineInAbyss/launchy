@@ -539,7 +539,7 @@ modGroups:
       license: LGPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
       desc: Dependency for LiteMatica
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.19.4-0.15.3.jar
+      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.20.1-0.16.1.jar
 
     - name: ArchitecturyAPI
       license: LGPL-3
