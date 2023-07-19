@@ -599,112 +599,13 @@ modGroups:
 
   Outdated/Disabled:
 
-    - name: ExtraSounds
-      license: CC0
-      homepage: https://modrinth.com/mod/extrasounds
-      desc: Adds more sounds to Minecraft
-      url: https://cdn.modrinth.com/data/uPWCQrVL/versions/yV1SwVzK/extrasounds-2.3.1%2B1.19.2-1.19.1.jar
-
-    - name: Not Enough Crashes
-      license: MIT
-      homepage: https://modrinth.com/mod/notenoughcrashes
-      desc: Sends you to title screen instead of crashing your game
-      url: https://cdn.modrinth.com/data/yM94ont6/versions/f3lqB3uY/notenoughcrashes-4.2.0%2B1.19.3-fabric.jar
-
-    - name: MapInSlot
-      license: MIT
-      homepage: https://modrinth.com/mod/map-in-slot
-      desc: Render filled map in the hotbar/inventory slotsr
-      url: https://cdn.modrinth.com/data/EpKz6cxj/versions/1.0.2/map-in-slot-1.0.2.jar
-
-    - name: Mythic Keys
-      license: None
-      homepage: https://github.com/ASangarin/MythicKeys
-      desc: Client-side mod allowing for plugins to register custom keybinds
-      url: https://github.com/ASangarin/MythicKeys/releases/download/1.19-1.2.2/mythickeys-1.2.2-1.19.jar
-
-    - name: Movement Vision
-      license: LPGL-3
-      homepage: https://modrinth.com/mod/movement-vision
-      desc: Alternative curse for Layer 5 Blindness
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/movement-vision-1.1.0.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/MovementVisionConfig_1.0.zip
-
-    - name: Plasmo Voice Chat
-      license: ARR
-      homepage: https://modrinth.com/mod/plasmo-voice
-      desc: Proximity Voice Chat for Minecraft
-      url: https://cdn.modrinth.com/data/1bZhdhsH/versions/fabric-1.19-1.2.14/plasmovoice-fabric-1.19-1.2.14.jar
-
-    - name: PingList
-      license: MPL
-      homepage: https://modrinth.com/mod/pinglist
-      desc: Makes the tablist ping display in numbers
-      url: https://cdn.modrinth.com/data/GzmTgzUV/versions/1.3.3/pinglist-1.3.3.jar
-
-    - name: Zoomify
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/zoomify
-      desc: Adds a configurable zoom key.
-      url: https://github.com/isXander/Zoomify/releases/download/1.7.0/Zoomify-1.7.0.jar
-
-    - name: InvMove
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/invmove-fabric
-      desc: Allows you to walk around while in your inventory
-      url: https://github.com/PieKing1215/InvMove/releases/download/v0.6.1/InvMove-1.18-0.6.1-Fabric.jar
-
-    - name: Dashloader
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/dashloader
-      desc: Improves asset loading times greatly
-      url: https://cdn.modrinth.com/data/ZfQ3kTvR/versions/DsPMHgmj/dashloader-4.1.3%2B1.19.jar
-
-    - name: FeaturedServers
-      license: MIT
-      homepage: https://modrinth.com/mod/featuredserversfabric
-      desc: Ship servers without modifying servers.dat
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/featuredservers-1.19-1.4.jar
-      configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/FeaturedServerConfig1.zip
-      forceConfigDownload: true
-
-    - name: IBE Editor
-      license: MIT
-      homepage: https://modrinth.com/mod/ibe-editor
-      desc: Simple GUI Mod to edit an item, a block or an entity in your current world
-      url: https://cdn.modrinth.com/data/E9sX1ncV/versions/FlcRmy4g/IBEEditor-1.20-2.2.3-fabric.jar
-
-    - name: Cull Leaves
-      license: MIT
-      homepage: https://modrinth.com/mod/cull-leaves
-      desc: Adds culling to leaf blocks
-      url: https://cdn.modrinth.com/data/GNxdLCoP/versions/2.3.4/cullleaves-2.3.4.jar
-
-    - name: OK Zoomer
-      license: MIT
-      homepage: https://modrinth.com/mod/ok-zoomer
-      desc: Lets you zoom in by pressing a button
-      url: https://github.com/EnnuiL/OkZoomer/releases/download/5.0.0-beta.8%2B1.19/ok_zoomer-5.0.0-beta.8+1.19.jar
-
-    - name: EatingAnimation
-      license: MIT
-      homepage: https://modrinth.com/mod/eating-animation
-      desc: Adds eating animations to vanilla foods
-      url: https://cdn.modrinth.com/data/rUgZvGzi/versions/1.9/eating-animation-1.9.jar
-
+    #Quilt-only after 1.19.2
     - name: Effective
       homepage: https://github.com/Ladysnake/Effective
       license: ARR
       desc: Cool splash effects for lava, water and waterfalls.
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/effective-1.6+1.19.2.jar
 
-    - name: ColoredAxolotlBuckets
-      license: MIT
-      homepage: https://modrinth.com/mod/roundaround-axolotl-buckets
-      desc: Allows axolotls in buckets to have their own icon depending on their color and age
-      url: https://cdn.modrinth.com/data/6tlhZmC5/versions/1.1.0%2B1.19/axolotlbuckets-1.1.0%2B1.19.jar
-
-    #Quilt-only after 1.19.2
     - name: LambdaBetterGrass
       license: MIT
       homepage: https://modrinth.com/mod/lambdabettergrass
@@ -722,7 +623,6 @@ modGroups:
 
 
       # Outdated due to 1.20
-
     - name: Scroll for WorldEdit
       license: MIT
       homepage: https://modrinth.com/mod/scroll-for-worldedit
