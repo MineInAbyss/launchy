@@ -27,7 +27,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/hFdJG9fY/fabric-api-0.85.0%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/P7fEfdSc/fabric-api-0.86.0%2B1.20.1.jar
 
     - name: Sodium
       license: LGPL-3
@@ -39,7 +39,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/modmenu
       desc: Adds a menu that allows configuration of mods
-      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/zv46i3PW/modmenu-7.1.0.jar
+      url: https://cdn.modrinth.com/data/mOgUt4GM/versions/eTCL1uh8/modmenu-7.2.1.jar
 
     - name: Indium
       license: APACHE
@@ -152,7 +152,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/t4juSkze/c2me-fabric-mc1.20.1-0.2.0%2Balpha.10.91.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/fIRoJeNG/c2me-fabric-mc1.20.1-0.2.0%2Balpha.10.94.jar
 
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -177,7 +177,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/NkZguN8n/voicechat-fabric-1.20.1-2.4.12.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/1OCJWb2P/voicechat-fabric-1.20.1-2.4.14.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -304,7 +304,7 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/legendary-tooltips
       desc: Makes tooltips categoried and look cool
-      url: https://cdn.modrinth.com/data/atHH8NyV/versions/msfSSDAn/LegendaryTooltips-1.20.1-fabric-1.4.3.jar
+      url: https://cdn.modrinth.com/data/atHH8NyV/versions/pKKg19XI/LegendaryTooltips-1.20.1-fabric-1.4.4.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/LegendaryTooltips.zip
 
     - name: Status Effect Timer
@@ -393,7 +393,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/kTxAMqAj/sodium-extra-0.4.20%2Bmc1.20-build.103.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/Tf56kC8G/sodium-extra-0.4.23%2Bmc1.20.1-build.106.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -474,7 +474,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/visiblebarriers
       desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/ro7MjqJm/visible-barriers-2.0.4.jar
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/bVz5DoKZ/visible-barriers-2.0.6.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -499,7 +499,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/rei
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/DcqGHHWy/RoughlyEnoughItems-12.0.625.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/yp38DYcK/RoughlyEnoughItems-12.0.634.jar
       requires: [ ArchitecturyAPI ]
 
     - name: ToolTipFix
@@ -515,13 +515,13 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/iceberg
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/nE38KiNU/Iceberg-1.20.1-fabric-1.1.10.jar
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/cqJP89n5/Iceberg-1.20.1-fabric-1.1.11.jar
 
     - name: Prism
       license: CUSTOM
       homepage: https://modrinth.com/mod/prism-lib
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/MMoP5rHI/Prism-1.20.1-fabric-1.0.4.jar
+      url: https://cdn.modrinth.com/data/1OE8wbN0/versions/Fmetb8IP/Prism-1.20.1-fabric-1.0.5.jar
 
     - name: ForgeConfigAPIPort
       license: MPL-2
