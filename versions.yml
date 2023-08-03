@@ -27,7 +27,7 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/P7fEfdSc/fabric-api-0.86.0%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/XheZ9iGK/fabric-api-0.86.1%2B1.20.1.jar
 
     - name: Sodium
       license: LGPL-3
@@ -101,7 +101,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/immediatelyfast
       desc: Speed up immediate mode rendering in Minecraft
-      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/aptjkgGB/ImmediatelyFast-1.1.16%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/1BSUFszc/ImmediatelyFast-1.1.24%2B1.20.1.jar
 
     - name: Lithium
       license: LGPL-3
@@ -144,7 +144,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/fIRoJeNG/c2me-fabric-mc1.20.1-0.2.0%2Balpha.10.94.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/iaC5daGO/c2me-fabric-mc1.20.1-0.2.0%2Balpha.10.96.jar
 
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -169,7 +169,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/mZfta0kq/voicechat-fabric-1.20.1-2.4.15.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/Wq1967bc/voicechat-fabric-1.20.1-2.4.16.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -200,7 +200,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/continuity
       desc: Provides default connected textures
-      url: https://cdn.modrinth.com/data/1IjD5062/versions/ImUFj5Gl/continuity-3.0.0-beta.2%2B1.20.jar
+      url: https://cdn.modrinth.com/data/1IjD5062/versions/xy2co4Rh/continuity-3.0.0-beta.3%2B1.20.1.jar
 
     - name: Lamb Dynamic Lights
       license: MIT
@@ -335,7 +335,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/SgSIhHQO/reeses_sodium_options-1.5.1%2Bmc1.20-build.74.jar
+      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/PCctWHcc/reeses_sodium_options-1.6.3%2Bmc1.20.1-build.92.jar
       requires: [ Sodium ]
 
   Misc Enhancements:
@@ -385,7 +385,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/Tf56kC8G/sodium-extra-0.4.23%2Bmc1.20.1-build.106.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/jy7D3eLo/sodium-extra-0.4.25%2Bmc1.20.1-build.108.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -456,17 +456,17 @@ modGroups:
       desc: Mod to render schematics and other stuff in-game
       url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/litematica-fabric-1.20.1-0.15.3.jar
 
-    #- name: Scroll for WorldEdit
-    #  license: MIT
-    #  homepage: https://modrinth.com/mod/scroll-for-worldedit
-    #  desc: Ability to move selection WorldEdit selection with mouse-wheel
-    #  url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
+    - name: Scroll for WorldEdit
+      license: MIT
+      homepage: https://modrinth.com/mod/scroll-for-worldedit
+      desc: Ability to move selection WorldEdit selection with mouse-wheel
+      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/xDztGmwH/scroll-for-worldedit-1.1.4.jar
 
     - name: VisibleBarriers
       license: ARR
       homepage: https://modrinth.com/mod/visiblebarriers
       desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/bVz5DoKZ/visible-barriers-2.0.6.jar
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/k4OS7IDF/visible-barriers-2.0.7.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -507,7 +507,7 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/iceberg
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/cqJP89n5/Iceberg-1.20.1-fabric-1.1.11.jar
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/iP294YId/Iceberg-1.20.1-fabric-1.1.13.jar
 
     - name: Prism
       license: CUSTOM
@@ -525,7 +525,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/yacl
       desc: Library for config files
-      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/g38uL3ti/yet-another-config-lib-fabric-3.0.3%2B1.20.jar
+      url: https://cdn.modrinth.com/data/1eAoo2KR/versions/CgwTUAR2/yet-another-config-lib-fabric-3.1.0%2B1.20.jar
 
     - name: Malilib
       license: LGPL-3
@@ -537,7 +537,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/architectury-api
       desc: Dependency for RoughlyEnoughItems
-      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/8tNf9Wq9/architectury-9.1.10-fabric.jar
+      url: https://cdn.modrinth.com/data/lhGA9TYQ/versions/Sbew3kXe/architectury-9.1.12-fabric.jar
 
     - name: FancyMenu AudioExtension
       license: Special Permission
@@ -623,11 +623,11 @@ modGroups:
 
 
       # Outdated due to 1.20
-    - name: Scroll for WorldEdit
-      license: MIT
-      homepage: https://modrinth.com/mod/scroll-for-worldedit
-      desc: Ability to move selection WorldEdit selection with mouse-wheel
-      url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
+    #- name: Scroll for WorldEdit
+    #  license: MIT
+    #  homepage: https://modrinth.com/mod/scroll-for-worldedit
+    #  desc: Ability to move selection WorldEdit selection with mouse-wheel
+    #  url: https://cdn.modrinth.com/data/2Agd6VfX/versions/g8RJk1bY/scroll-for-worldedit-1.1.3.jar
 
     - name: Auditory
       license: MIT
