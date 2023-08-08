@@ -33,7 +33,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/vgceLbdH/sodium-fabric-mc1.20-0.4.10%2Bbuild.27.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/hiO9bwqc/sodium-fabric-mc1.20.1-0.5.0.jar
 
     - name: Mod menu
       license: MIT
@@ -45,7 +45,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/yTh7W27h/indium-1.0.21%2Bmc1.20.1.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/HIQfyNd3/indium-1.0.23%2Bmc1.20.1.jar
 
     - name: FancyMenu
       license: Special Permission
@@ -101,7 +101,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/immediatelyfast
       desc: Speed up immediate mode rendering in Minecraft
-      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/1BSUFszc/ImmediatelyFast-1.1.24%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/h38wJYho/ImmediatelyFast-1.1.25%2B1.20.1.jar
 
     - name: Lithium
       license: LGPL-3
@@ -176,7 +176,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/URWeWMAt/iris-mc1.20-1.6.4.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/Sc0OZ0Ze/iris-mc1.20.1-1.6.5.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/shaderpacks.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
@@ -236,7 +236,7 @@ modGroups:
       license: AAR
       homepage: https://modrinth.com/mod/physicsmod
       desc: Adds more immersive physics to just about every aspect of the game
-      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/4xSgtf9P/physics-mod-3.0.5-mc-1.20-fabric.jar
+      url: https://cdn.modrinth.com/data/Xy8aRQKS/versions/lpVvmYpt/physics-mod-3.0.5a-mc-1.20-fabric.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/PhysicsModConfig_1.0.zip
 
   Camera Enhancements:
@@ -264,7 +264,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/sound-physics-remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/gAP9590c/soundphysics-fabric-1.20.1-1.1.1.jar
+      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/tFcSgMDe/soundphysics-fabric-1.20.1-1.1.2.jar
 
     - name: Presence Footseps
       license: MIT
@@ -335,7 +335,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/PCctWHcc/reeses_sodium_options-1.6.3%2Bmc1.20.1-build.92.jar
+      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/JB3vAAoX/reeses_sodium_options-1.6.4%2Bmc1.20.1-build.94.jar
       requires: [ Sodium ]
 
   Misc Enhancements:
@@ -385,7 +385,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/jy7D3eLo/sodium-extra-0.4.25%2Bmc1.20.1-build.108.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/5KCYvoSI/sodium-extra-0.5.0%2Bmc1.20.1-build.111.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -466,7 +466,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/visiblebarriers
       desc: Allows you to see barriers and other, normally invisible blocks, in the world
-      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/k4OS7IDF/visible-barriers-2.0.7.jar
+      url: https://cdn.modrinth.com/data/ajdfGxGU/versions/unjQAak5/visible-barriers-2.0.8.jar
 
     - name: ItemSwapper
       license: GPL-3
@@ -507,7 +507,7 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/iceberg
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/iP294YId/Iceberg-1.20.1-fabric-1.1.13.jar
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/Pp4dRoJ9/Iceberg-1.20.1-fabric-1.1.14.jar
 
     - name: Prism
       license: CUSTOM
