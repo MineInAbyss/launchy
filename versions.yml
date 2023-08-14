@@ -27,13 +27,13 @@ modGroups:
       license: Apache
       homepage: https://modrinth.com/mod/fabric-api
       desc: The core api used by fabric mods
-      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/XheZ9iGK/fabric-api-0.86.1%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/P7dR8mSH/versions/lcnQpW9C/fabric-api-0.87.0%2B1.20.1.jar
 
     - name: Sodium
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/hiO9bwqc/sodium-fabric-mc1.20.1-0.5.0.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/OkwCNtFH/sodium-fabric-mc1.20.1-0.5.1.jar
 
     - name: Mod menu
       license: MIT
@@ -45,7 +45,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/HIQfyNd3/indium-1.0.23%2Bmc1.20.1.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/hfBawPLH/indium-1.0.24%2Bmc1.20.1.jar
 
     - name: FancyMenu
       license: Special Permission
@@ -101,7 +101,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/immediatelyfast
       desc: Speed up immediate mode rendering in Minecraft
-      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/h38wJYho/ImmediatelyFast-1.1.25%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/hgQwRPhD/ImmediatelyFast-1.1.27%2B1.20.1.jar
 
     - name: Lithium
       license: LGPL-3
@@ -144,7 +144,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/c2me-fabric
       desc: Improves chunk performance of Minecraft
-      url: https://cdn.modrinth.com/data/VSNURh3q/versions/iaC5daGO/c2me-fabric-mc1.20.1-0.2.0%2Balpha.10.96.jar
+      url: https://cdn.modrinth.com/data/VSNURh3q/versions/5325hDXV/c2me-fabric-mc1.20.1-0.2.0%2Balpha.10.97.jar
 
     - name: KennyTVsEpicForceCloseLoadingScreenMod
       license: MIT
@@ -169,14 +169,14 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/Wq1967bc/voicechat-fabric-1.20.1-2.4.16.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/Lsrm7sW1/voicechat-fabric-1.20.1-2.4.18.jar
 
   Visual Enhancements:
     - name: Iris shaders
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/Sc0OZ0Ze/iris-mc1.20.1-1.6.5.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/MU0L4OZM/iris-mc1.20.1-1.6.7.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/shaderpacks.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
@@ -244,7 +244,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/camera-utils
       desc: Adds convenient features related to the players camera
-      url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/UDbaSacp/camerautils-1.20.1-1.0.4.jar
+      url: https://cdn.modrinth.com/data/rrwQMaWQ/versions/Hlt5l77f/camerautils-1.20.1-1.0.5.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/CameraUtilsConfig.zip
 
   Audio Enhancements:
@@ -385,7 +385,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium-extra
       desc: Extra features not available in Sodium
-      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/5KCYvoSI/sodium-extra-0.5.0%2Bmc1.20.1-build.111.jar
+      url: https://cdn.modrinth.com/data/PtjYWJkn/versions/80a0J5Cn/sodium-extra-0.5.1%2Bmc1.20.1-build.112.jar
       requires: [ Sodium ]
 
     - name: Fabrishot
@@ -441,7 +441,7 @@ modGroups:
       license: AGPL-3
       homepage: https://modrinth.com/mod/rrls
       desc: Removes the reloading screen from resourcepack
-      url: https://cdn.modrinth.com/data/ZP7xHXtw/versions/OVn6Trri/Rrls-1.20.1-3.1.0-fabric.jar
+      url: https://cdn.modrinth.com/data/ZP7xHXtw/versions/RnJ2aowM/Rrls-1.20.1-3.1.1-fabric.jar
 
   Builder Tools:
     - name: MoreCreativeTabs
@@ -491,7 +491,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/rei
       desc: Alternative to Just Enough Items
-      url: https://cdn.modrinth.com/data/nfn13YXA/versions/yp38DYcK/RoughlyEnoughItems-12.0.634.jar
+      url: https://cdn.modrinth.com/data/nfn13YXA/versions/kq4TOe4i/RoughlyEnoughItems-12.0.645.jar
       requires: [ ArchitecturyAPI ]
 
     - name: ToolTipFix
