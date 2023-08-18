@@ -33,7 +33,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/sodium
       desc: Greatly improves rendering performance
-      url: https://cdn.modrinth.com/data/AANobbMI/versions/OkwCNtFH/sodium-fabric-mc1.20.1-0.5.1.jar
+      url: https://cdn.modrinth.com/data/AANobbMI/versions/6SSPmLc9/sodium-fabric-mc1.20.1-0.5.2.jar
 
     - name: Mod menu
       license: MIT
@@ -45,7 +45,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/indium
       desc: Sodium addon providing support for Fabric Rendering API
-      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/hfBawPLH/indium-1.0.24%2Bmc1.20.1.jar
+      url: https://cdn.modrinth.com/data/Orvt0mRa/versions/6UQwWURe/indium-1.0.25%2Bmc1.20.1.jar
 
     - name: FancyMenu
       license: Special Permission
@@ -101,7 +101,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/immediatelyfast
       desc: Speed up immediate mode rendering in Minecraft
-      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/hgQwRPhD/ImmediatelyFast-1.1.27%2B1.20.1.jar
+      url: https://cdn.modrinth.com/data/5ZwdcRci/versions/EANGsMsP/ImmediatelyFast-1.1.28%2B1.20.1.jar
 
     - name: Lithium
       license: LGPL-3
@@ -137,7 +137,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/cull-less-leaves
       desc: Cull leaves while looking hot!
-      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/mafk58Fm/CullLessLeaves-1.2.0.jar
+      url: https://cdn.modrinth.com/data/iG6ZHsUV/versions/TFvkv8XK/CullLessLeaves-1.3.0.jar
       requires: [ Yet Another Config Lib ]
 
     - name: C2ME
@@ -176,7 +176,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/iris
       desc: Shaders for fabric
-      url: https://cdn.modrinth.com/data/YL57xq9U/versions/MU0L4OZM/iris-mc1.20.1-1.6.7.jar
+      url: https://cdn.modrinth.com/data/YL57xq9U/versions/pVNPPrMY/iris-mc1.20.1-1.6.8.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/shaderpacks.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
       incompatibleWith: [ Distant Horizons ]
@@ -264,7 +264,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/sound-physics-remastered
       desc: Provides realistic sound attenuation, reverberation, and absorption through blocks
-      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/tFcSgMDe/soundphysics-fabric-1.20.1-1.1.2.jar
+      url: https://cdn.modrinth.com/data/qyVF9oeo/versions/ZEMrXhx7/soundphysics-fabric-1.20.1-1.2.0.jar
 
     - name: Presence Footseps
       license: MIT
@@ -335,7 +335,7 @@ modGroups:
       license: MIT
       homepage: https://modrinth.com/mod/reeses-sodium-options
       desc: Alternative menu for Sodium
-      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/JB3vAAoX/reeses_sodium_options-1.6.4%2Bmc1.20.1-build.94.jar
+      url: https://cdn.modrinth.com/data/Bh37bMuy/versions/hCsMUZLa/reeses_sodium_options-1.6.5%2Bmc1.20.1-build.95.jar
       requires: [ Sodium ]
 
   Misc Enhancements:
@@ -472,7 +472,7 @@ modGroups:
       license: GPL-3
       homepage: https://modrinth.com/mod/itemswapper
       desc: Adds an item switch interface triggered by pressing a hotkey
-      url: https://cdn.modrinth.com/data/RPOSBQgq/versions/c02hnEPx/itemswapper-fabric-0.5.1-mc1.20.1.jar
+      url: https://cdn.modrinth.com/data/RPOSBQgq/versions/NEBVxulw/itemswapper-fabric-0.5.3-mc1.20.1.jar
 
   Developer Tools:
     - name: BetterCommandBlockUI
@@ -507,7 +507,7 @@ modGroups:
       license: CUSTOM
       homepage: https://modrinth.com/mod/iceberg
       desc: Library dependency for Legendary Tooltips
-      url: https://cdn.modrinth.com/data/5faXoLqX/versions/Pp4dRoJ9/Iceberg-1.20.1-fabric-1.1.14.jar
+      url: https://cdn.modrinth.com/data/5faXoLqX/versions/SLE7PvYD/Iceberg-1.20.1-fabric-1.1.15.jar
 
     - name: Prism
       license: CUSTOM
@@ -569,7 +569,7 @@ modGroups:
       license: APACHE
       homepage: https://modrinth.com/mod/fabric-language-kotlin
       desc: Language Dependency for some mods
-      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/s10JMAtS/fabric-language-kotlin-1.10.8%2Bkotlin.1.9.0.jar
+      url: https://cdn.modrinth.com/data/Ha28R6CL/versions/48ri5y9r/fabric-language-kotlin-1.10.10%2Bkotlin.1.9.10.jar
 
     - name: Satin
       license: LGPL-3
