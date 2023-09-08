@@ -345,12 +345,6 @@ modGroups:
       desc: Disable the telemetry data from being sent to Microsoft
       url: https://cdn.modrinth.com/data/hg77g4Pw/versions/l9SfLZDA/no-telemetry-1.7.0.jar
 
-    - name: Smooth Swapping
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/smooth-swapping/
-      desc: Moves items in inventories smoothly instead of letting them appear instantly
-      url: https://cdn.modrinth.com/data/ydZic5r4/versions/KOYMoQlX/smoothswapping-0.9.2-1.20-fabric.jar
-
     - name: Debugify
       license: LGPL-3
       homepage: https://modrinth.com/mod/debugify
@@ -474,6 +468,11 @@ modGroups:
       desc: Adds an item switch interface triggered by pressing a hotkey
       url: https://cdn.modrinth.com/data/RPOSBQgq/versions/NEBVxulw/itemswapper-fabric-0.5.3-mc1.20.1.jar
 
+    - name: BridgingMod
+      license: MIT
+      homepage: https://modrinth.com/mod/bridging-mod
+      desc: Allows for placing blocks in gaps in-front, above, or below blocks even if the necessary surface isn't visible
+      url: https://cdn.modrinth.com/data/lO3s8hjs/versions/Md1pABfm/BridgingMod-2.1.1%2B1.20.x.fabric.jar
   Developer Tools:
     - name: BetterCommandBlockUI
       license: CC0
@@ -590,6 +589,11 @@ modGroups:
       url: https://cdn.modrinth.com/data/WKwQAwke/versions/zaZal2SL/libjf-3.8.0.jar
 
   Outdated/Disabled:
+    - name: Smooth Swapping
+      license: LGPL-3
+      homepage: https://modrinth.com/mod/smooth-swapping/
+      desc: Moves items in inventories smoothly instead of letting them appear instantly
+      url: https://cdn.modrinth.com/data/ydZic5r4/versions/KOYMoQlX/smoothswapping-0.9.2-1.20-fabric.jar
 
     - name: DesiredServers
       license: MIT
