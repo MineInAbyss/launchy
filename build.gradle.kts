@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("org.jetbrains.compose") version "1.3.0"
+    id("org.jetbrains.compose") version "1.5.11"
     id("de.undercouch.download") version "5.3.1"
 }
 
@@ -32,7 +32,7 @@ dependencies {
     implementation("io.ktor:ktor-client-core:1.6.8")
     implementation("io.ktor:ktor-client-cio:1.6.8")
 
-    implementation("org.json:json:20220320")
+    implementation("org.json:json:20230227")
     implementation("net.fabricmc:fabric-installer:0.9.0")
     implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
 }
