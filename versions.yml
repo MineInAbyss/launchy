@@ -153,7 +153,7 @@ modGroups:
       license: ARR
       homepage: https://modrinth.com/mod/simple-voice-chat
       desc: Adds proximity voice chat to the server
-      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/9acId7S3/voicechat-fabric-1.20.2-2.4.29.jar
+      url: https://cdn.modrinth.com/data/9eGKb6K1/versions/x1vPewGY/voicechat-fabric-1.20.2-2.4.32.jar
 
   Visual Enhancements:
     - name: Iris shaders
@@ -169,7 +169,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://cdn.modrinth.com/data/uCdwusMi/versions/mjIVHovM/DistantHorizons-2.0.0-a-1.20.2.jar
+      url: https://github.com/kawashirov/distant-horizons/releases/download/2.0.1-a-kawa-1/DistantHorizons-2.0.1-a-kawa-1-1.20.2.jar
       incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
@@ -520,7 +520,7 @@ modGroups:
       license: LGPL-3
       homepage: https://www.curseforge.com/minecraft/mc-mods/malilib
       desc: Dependency for LiteMatica
-      url: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/malilib-fabric-1.20.2-0.17.0.jar
+      url: https://cdn.modrinth.com/data/GcWjdA9I/versions/wzI0QkCv/malilib-fabric-1.20.2-0.17.0.jar
 
     - name: ArchitecturyAPI
       license: LGPL-3
