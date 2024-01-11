@@ -169,7 +169,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://github.com/kawashirov/distant-horizons/releases/download/2.0.1-a-kawa-1/DistantHorizons-2.0.1-a-kawa-1-1.20.2.jar
+      url: https://github.com/kawashirov/distant-horizons/releases/download/2.0.1-a-kawa-2/DistantHorizons-2.0.1-a-kawa-2-1.20.2.jar
       incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
