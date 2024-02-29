@@ -4,9 +4,9 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.serialization")
-    id("org.jetbrains.compose") version "1.5.11"
+    alias(idofrontLibs.plugins.mia.kotlin.jvm)
+    alias(idofrontLibs.plugins.kotlinx.serialization)
+    alias(idofrontLibs.plugins.compose)
     id("de.undercouch.download") version "5.3.1"
 }
 
@@ -27,14 +27,18 @@ dependencies {
     implementation(compose.material3)
     implementation(compose.material)
     implementation(compose.materialIconsExtended)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.kotlinx.serialization.kaml)
+    implementation(idofrontLibs.kotlinx.serialization.json)
+    implementation(idofrontLibs.kotlinx.serialization.kaml)
     implementation("io.ktor:ktor-client-core:1.6.8")
     implementation("io.ktor:ktor-client-cio:1.6.8")
 
     implementation("org.json:json:20230227")
-    implementation("net.fabricmc:fabric-installer:0.9.0")
+//    implementation("net.fabricmc:fabric-installer:0.9.0")
     implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
+//    implementation("net.raphimc:MinecraftAuth:4.0.0")
+    implementation("dev.3-3:jmccc-mcdownloader:3.1.4")
+    implementation("dev.3-3:jmccc:3.1.4")
+    implementation("dev.3-3:jmccc-microsoft-authenticator:3.1.4")
 }
 
 tasks.withType<KotlinCompile> {

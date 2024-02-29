@@ -23,6 +23,7 @@ data class Config(
     val downloadUpdates: Boolean = true,
     val handledImportOptions: Boolean = false,
     val handledFirstLaunch: Boolean = false,
+    val currentProfileUUID: String? = null,
 
     ) {
     fun save() {

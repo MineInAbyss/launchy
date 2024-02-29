@@ -6,12 +6,6 @@ pluginManagement {
         maven("https://maven.hq.hydraulic.software")
         mavenLocal()
     }
-
-    plugins {
-        val kotlinVersion: String by settings
-        kotlin("jvm") version kotlinVersion
-        kotlin("plugin.serialization") version kotlinVersion
-    }
 }
 
 dependencyResolutionManagement {
@@ -22,7 +16,11 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        create("libs").from("com.mineinabyss:catalog:$idofrontVersion")
+        create("idofrontLibs") {
+            from("com.mineinabyss:catalog:$idofrontVersion")
+            version("kotlin", "1.9.22")
+            version("compose", "1.6.0")
+        }
     }
 }
 

@@ -1,15 +1,20 @@
 package com.mineinabyss.launchy.ui.screens.main.buttons
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.logic.Launcher
 import kotlinx.coroutines.launch
+import org.to2mbn.jmccc.option.MinecraftDirectory
 
 @Composable
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
@@ -18,7 +23,9 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     Button(
         enabled = enabled,
         onClick = {
-            coroutineScope.launch { state.install() }
+            coroutineScope.launch {
+                state.install()
+            }
         },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -26,19 +33,18 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
         ),
         modifier = modifier
     ) {
-        Icon(Icons.Rounded.Download, "Download")
-        AnimatedVisibility(!state.minecraftValid) {
-            Text("Invalid Minecraft")
-        }
-        AnimatedVisibility(state.minecraftValid, Modifier.animateContentSize()) {
-            InstallTextAnimatedVisibility(state.operationsQueued && !state.isDownloading) {
-                Text("Install")
-            }
-            InstallTextAnimatedVisibility(!state.operationsQueued && !state.isDownloading) {
-                Text("Installed")
-            }
-            InstallTextAnimatedVisibility(state.isDownloading) {
-                Text("Installing...")
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Rounded.Download, "Download")
+            AnimatedVisibility(true, Modifier.animateContentSize()) {
+                InstallTextAnimatedVisibility(state.operationsQueued && !state.isDownloading) {
+                    Text("Install")
+                }
+                InstallTextAnimatedVisibility(!state.operationsQueued && !state.isDownloading) {
+                    Text("Installed")
+                }
+                InstallTextAnimatedVisibility(state.isDownloading) {
+                    Text("Installing...")
+                }
             }
         }
     }

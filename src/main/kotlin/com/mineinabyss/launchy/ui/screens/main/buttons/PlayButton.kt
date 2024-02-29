@@ -1,21 +1,20 @@
 package com.mineinabyss.launchy.ui.screens.main.buttons
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.ui.screens.main.showComingSoonDialog
+import com.mineinabyss.launchy.logic.Launcher
 
 @Composable
 fun PlayButton(enabled: Boolean) {
     val state = LocalLaunchyState
 
     Button(
-        enabled = enabled,
+        enabled = state.currentSession != null && state.currentModpack != null,
         onClick = {
-            showComingSoonDialog.value = true
+            Launcher.launch(state)
         },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -23,11 +22,6 @@ fun PlayButton(enabled: Boolean) {
         )
     ) {
         Icon(Icons.Rounded.PlayArrow, "Play")
-        AnimatedVisibility(!state.minecraftValid) {
-            Text("Invalid Minecraft")
-        }
-        AnimatedVisibility(state.minecraftValid) {
-            Text("Play")
-        }
+        Text("Play")
     }
 }

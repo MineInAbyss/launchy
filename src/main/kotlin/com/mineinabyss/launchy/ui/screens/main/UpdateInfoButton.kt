@@ -40,11 +40,6 @@ fun UpdateInfoButton() {
             ) {
                 Column {
                     InfoText(
-                        shown = !state.fabricUpToDate,
-                        icon = Icons.Rounded.HistoryEdu,
-                        desc = "Install fabric",
-                    )
-                    InfoText(
                         shown = state.updatesQueued,
                         icon = Icons.Rounded.Update,
                         desc = "Update",

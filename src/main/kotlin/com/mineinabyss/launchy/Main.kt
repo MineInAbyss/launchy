@@ -5,7 +5,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -20,18 +19,19 @@ import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
 import com.mineinabyss.launchy.logic.LaunchyState
-import com.mineinabyss.launchy.ui.LaunchyTypography
-import com.mineinabyss.launchy.ui.rememberMIAColorScheme
+import com.mineinabyss.launchy.ui.colors.AppTheme
 import com.mineinabyss.launchy.ui.screens.Screens
 import com.mineinabyss.launchy.ui.state.TopBarProvider
 import com.mineinabyss.launchy.ui.state.TopBarState
 import com.mineinabyss.launchy.util.OS
+import kotlinx.serialization.ExperimentalSerializationApi
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 val LocalLaunchyState: LaunchyState
     @Composable
     get() = LaunchyStateProvider.current
 
+@OptIn(ExperimentalSerializationApi::class)
 fun main() {
     application {
         val windowState = rememberWindowState(placement = WindowPlacement.Floating)
@@ -45,6 +45,7 @@ fun main() {
             exitApplication()
             launchyState?.save()
         }
+
         Window(
             state = windowState,
             title = "Mine in Abyss - Launcher",
@@ -55,8 +56,7 @@ fun main() {
         ) {
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
-            val scheme = rememberMIAColorScheme(0.02f)
-            MaterialTheme(colorScheme = scheme, typography = LaunchyTypography) {
+            AppTheme {
                 CompositionLocalProvider(TopBarProvider provides topBarState) {
                     Scaffold {
                         AnimatedVisibility(!ready, exit = fadeOut()) {

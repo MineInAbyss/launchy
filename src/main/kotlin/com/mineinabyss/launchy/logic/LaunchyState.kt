@@ -2,9 +2,12 @@ package com.mineinabyss.launchy.logic
 
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.*
+import com.mineinabyss.launchy.data.modpacks.mrpack.ModrinthPack
+import jmccc.microsoft.MicrosoftAuthenticator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.to2mbn.jmccc.option.MinecraftDirectory
 import java.util.*
 import java.util.concurrent.CancellationException
 import kotlin.io.path.deleteIfExists
@@ -18,6 +21,19 @@ class LaunchyState(
     val versions: Versions,
 //    val scaffoldState: ScaffoldState
 ) {
+    val currentModpack: ModrinthPack? by mutableStateOf(
+        ModrinthPack(
+            ModrinthPack.Dependencies(
+                minecraft = "1.20.4",
+                fabricLoader = "0.15.6"
+            )
+        )
+    )
+    var currentSession: MicrosoftAuthenticator? by mutableStateOf(null)
+    val currentProfileUUID: String? by derivedStateOf {
+        currentSession?.auth()?.uuid?.toString() ?: config.currentProfileUUID
+    }
+
     val enabledMods = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledMods.mapNotNull { it.toMod() })
         val defaultEnabled = versions.groups
@@ -92,7 +108,7 @@ class LaunchyState(
 
     val downloading = mutableStateMapOf<Mod, Progress>()
     val downloadingConfigs = mutableStateMapOf<Mod, Progress>()
-    val isDownloading by derivedStateOf { downloading.isNotEmpty() || downloadingConfigs.isNotEmpty() }
+    val isDownloading by derivedStateOf { downloading.isNotEmpty() || downloadingConfigs.isNotEmpty() || installingProfile }
     val failedDownloads = mutableStateSetOf<Mod>()
 
     // Caclculate the speed of the download
@@ -105,18 +121,12 @@ class LaunchyState(
     fun isDownloading(mod: Mod) = downloading[mod] != null || downloadingConfigs[mod] != null
 
     var installingProfile by mutableStateOf(false)
-    val fabricUpToDate by derivedStateOf {
-        installedMinecraftVersion == versions.minecraftVersion &&
-                installedFabricVersion == versions.fabricVersion && FabricInstaller.isProfileInstalled(
-            Dirs.minecraft,
-            "Mine in Abyss"
-        )
-    }
+
     val updatesQueued by derivedStateOf { queuedUpdates.isNotEmpty() }
     val installsQueued by derivedStateOf { queuedInstalls.isNotEmpty() }
     val deletionsQueued by derivedStateOf { queuedDeletions.isNotEmpty() }
     val minecraftValid = Dirs.minecraft.exists()
-    val operationsQueued by derivedStateOf { updatesQueued || installsQueued || deletionsQueued || !fabricUpToDate }
+    val operationsQueued by derivedStateOf { updatesQueued || installsQueued || deletionsQueued }
 
     // If any state is true, we consider import handled and move on
     var handledImportOptions by mutableStateOf(
@@ -130,7 +140,8 @@ class LaunchyState(
     fun setModEnabled(mod: Mod, enabled: Boolean) {
         if (enabled) {
             enabledMods += mod
-            enabledMods.filter { it.name in mod.incompatibleWith || it.incompatibleWith.contains(mod.name) }.forEach { setModEnabled(it, false) }
+            enabledMods.filter { it.name in mod.incompatibleWith || it.incompatibleWith.contains(mod.name) }
+                .forEach { setModEnabled(it, false) }
             disabledMods.filter { it.name in mod.requires }.forEach { setModEnabled(it, true) }
         } else {
             enabledMods -= mod
@@ -152,10 +163,21 @@ class LaunchyState(
         else enabledConfigs.remove(mod)
     }
 
+    fun installMCAndModLoaders() {
+        installingProfile = true
+        Launcher.download(
+            currentModpack!!.dependencies,
+            MinecraftDirectory(Dirs.mineinabyss.toFile()),
+            finishedDownload = {
+                //TODO notifs
+            },
+        )
+        installingProfile = false
+    }
+
     suspend fun install() = coroutineScope {
+        installMCAndModLoaders()
         updateNotPresent()
-        if (!fabricUpToDate)
-            installFabric()
         for (mod in queuedDownloads)
             launch(Dispatchers.IO) {
                 download(mod)
@@ -172,23 +194,6 @@ class LaunchyState(
                 }
             }
         }
-    }
-
-    fun installFabric() {
-        installingProfile = true
-        FabricInstaller.installToLauncher(
-            Dirs.minecraft,
-            Dirs.mineinabyss,
-            "Mine in Abyss",
-            versions.minecraftVersion,
-            "fabric-loader",
-            versions.fabricVersion,
-        )
-        installingProfile = false
-        installedFabricVersion = "Installing..."
-        installedFabricVersion = versions.fabricVersion
-        installedMinecraftVersion = "Installing..."
-        installedMinecraftVersion = versions.minecraftVersion
     }
 
     suspend fun download(mod: Mod) {
@@ -257,7 +262,8 @@ class LaunchyState(
                 .filter { enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
             toggledMods = enabledMods.mapTo(mutableSetOf()) { it.name },
-            toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name } + enabledMods.filter { it.forceConfigDownload }.mapTo(mutableSetOf()) { it.name },
+            toggledConfigs = enabledConfigs.mapTo(mutableSetOf()) { it.name } + enabledMods.filter { it.forceConfigDownload }
+                .mapTo(mutableSetOf()) { it.name },
             downloads = downloadURLs.mapKeys { it.key.name },
             configs = downloadConfigURLs.mapKeys { it.key.name },
             seenGroups = versions.groups.map { it.name }.toSet(),
@@ -265,6 +271,7 @@ class LaunchyState(
             installedMinecraftVersion = installedMinecraftVersion,
             handledImportOptions = handledImportOptions,
             handledFirstLaunch = handledFirstLaunch,
+            currentProfileUUID = currentProfileUUID,
         ).save()
     }
 

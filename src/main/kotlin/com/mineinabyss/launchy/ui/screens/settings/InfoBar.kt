@@ -60,11 +60,6 @@ fun InfoBar() {
                 desc = "No minecraft installation found",
             )
             ActionButton(
-                shown = !state.fabricUpToDate,
-                icon = Icons.Rounded.HistoryEdu,
-                desc = "Will install fabric",
-            )
-            ActionButton(
                 shown = state.updatesQueued,
                 icon = Icons.Rounded.Update,
                 desc = "Queued updates",
