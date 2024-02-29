@@ -26,6 +26,7 @@ object Dirs {
     } / "mineinabyss"
 
     val accounts = config / "accounts"
+    val avatars = config / "avatars"
 
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"

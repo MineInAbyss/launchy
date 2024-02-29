@@ -1,6 +1,13 @@
 package com.mineinabyss.launchy.logic
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.loadImageBitmap
 import com.mineinabyss.launchy.data.*
 import com.mineinabyss.launchy.data.modpacks.mrpack.ModrinthPack
 import jmccc.microsoft.MicrosoftAuthenticator
@@ -29,6 +36,8 @@ class LaunchyState(
             )
         )
     )
+    var avatar: ImageBitmap? by mutableStateOf(null)
+
     var currentSession: MicrosoftAuthenticator? by mutableStateOf(null)
     val currentProfileUUID: String? by derivedStateOf {
         currentSession?.auth()?.uuid?.toString() ?: config.currentProfileUUID

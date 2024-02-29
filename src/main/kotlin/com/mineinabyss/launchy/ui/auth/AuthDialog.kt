@@ -1,25 +1,17 @@
 package com.mineinabyss.launchy.ui.auth
 
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.TextButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.Login
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.auth.SessionStorage
 import com.mineinabyss.launchy.logic.Auth
+import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
 import com.mineinabyss.launchy.ui.screens.settings.Browser
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
@@ -31,6 +23,7 @@ fun AuthDialog(
     val state = LocalLaunchyState
     // Start auth flow in coroutine
     var authMessage: String? by remember { mutableStateOf(null) }
+    val coroutineScope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             Auth.authFlow(
@@ -40,7 +33,9 @@ fun AuthDialog(
                     authMessage = it.message
                 },
                 onGetSession = {
-                    SessionStorage.save(it)
+                    coroutineScope.launch(Dispatchers.IO) {
+                        SessionStorage.save(state, it)
+                    }
                     state.currentSession = it
                     onComplete()
                 }

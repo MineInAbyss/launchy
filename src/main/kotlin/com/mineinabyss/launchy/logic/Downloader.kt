@@ -1,17 +1,22 @@
 package com.mineinabyss.launchy.logic
 
+import com.mineinabyss.launchy.data.Dirs
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import java.nio.file.Path
-import kotlin.io.path.createDirectories
-import kotlin.io.path.createFile
-import kotlin.io.path.exists
-import kotlin.io.path.writeBytes
+import java.util.UUID
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
+import kotlin.io.path.*
 
 object Downloader {
     val httpClient = HttpClient()
+
+    suspend fun downloadAvatar(uuid: UUID) {
+        download("https://crafatar.com/avatars/$uuid?size=128&overlay", Dirs.avatars / "$uuid.png")
+    }
 
     suspend fun download(
         url: String,

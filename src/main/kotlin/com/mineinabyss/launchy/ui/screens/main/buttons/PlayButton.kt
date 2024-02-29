@@ -8,7 +8,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Launcher
 
 @Composable
-fun PlayButton(enabled: Boolean) {
+fun PlayButton() {
     val state = LocalLaunchyState
 
     Button(
