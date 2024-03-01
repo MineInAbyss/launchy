@@ -42,6 +42,7 @@ class LaunchyState(
     val currentProfileUUID: String? by derivedStateOf {
         currentSession?.auth()?.uuid?.toString() ?: config.currentProfileUUID
     }
+    var currentLaunchProcess: Process? by mutableStateOf(null)
 
     val enabledMods = mutableStateSetOf<Mod>().apply {
         addAll(config.toggledMods.mapNotNull { it.toMod() })

@@ -18,7 +18,7 @@ object Launcher {
         val pack = state.currentModpack ?: return
         val dir = MinecraftDirectory(Dirs.mineinabyss.pathString)
         val launcher = LauncherBuilder.buildDefault()
-        launcher.launch(LaunchOption(pack.dependencies.fullVersionName, state.currentSession, dir))
+        state.currentLaunchProcess = launcher.launch(LaunchOption(pack.dependencies.fullVersionName, state.currentSession, dir))
     }
 
     fun download(

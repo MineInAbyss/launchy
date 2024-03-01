@@ -50,7 +50,7 @@ fun InfoBar() {
                 .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp)
         ) {
             InstallButton(
-                !state.isDownloading && state.operationsQueued && state.minecraftValid,
+                state.currentLaunchProcess == null && !state.isDownloading && state.operationsQueued && state.minecraftValid,
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
             Spacer(Modifier.width(12.dp))
