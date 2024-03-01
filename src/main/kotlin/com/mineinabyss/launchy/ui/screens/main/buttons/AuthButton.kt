@@ -22,7 +22,7 @@ fun AuthButton() {
             contentColor = MaterialTheme.colorScheme.primary
         )
     ) {
-        Icon(Icons.AutoMirrored.Rounded.Login, "Auth")
-        Text("Auth")
+        Icon(Icons.AutoMirrored.Rounded.Login, "Login")
+        Text("Login")
     }
 }
