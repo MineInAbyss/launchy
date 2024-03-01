@@ -18,4 +18,8 @@ object Auth {
             onGetMSA(it)
         })
     }
+
+    fun hasPreviousSession(state: LaunchyState): Boolean {
+        return state.currentProfileUUID?.let { SessionStorage.load(it) } != null
+    }
 }
