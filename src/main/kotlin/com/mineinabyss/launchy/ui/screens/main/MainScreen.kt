@@ -17,8 +17,12 @@ import androidx.compose.ui.res.loadImageBitmap
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.logic.Auth
 import com.mineinabyss.launchy.logic.Downloader
+import com.mineinabyss.launchy.ui.auth.AuthDialog
+import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.Progress
+import com.mineinabyss.launchy.ui.screens.dialog
 import com.mineinabyss.launchy.ui.screens.main.buttons.AuthButton
 import com.mineinabyss.launchy.ui.screens.main.buttons.PlayButton
 import com.mineinabyss.launchy.ui.screens.main.buttons.SettingsButton
@@ -77,6 +81,8 @@ fun MainScreen() {
 
             else -> {}
         }
+
+        if (Auth.hasPreviousSession(state)) AuthDialog(windowScope, { dialog = Dialog.None }, { dialog = Dialog.None })
         LaunchedEffect(state.currentSession) {
             val uuid = state.currentSession?.auth()?.uuid ?: return@LaunchedEffect
             val avatarPath = Dirs.avatars / "$uuid.png"
