@@ -82,7 +82,8 @@ fun MainScreen() {
             else -> {}
         }
 
-        if (Auth.hasPreviousSession(state)) AuthDialog(windowScope, { dialog = Dialog.None }, { dialog = Dialog.None })
+        if (state.currentSession == null && Auth.hasPreviousSession(state))
+            AuthDialog(windowScope, { dialog = Dialog.None }, { dialog = Dialog.None })
         LaunchedEffect(state.currentSession) {
             val uuid = state.currentSession?.auth()?.uuid ?: return@LaunchedEffect
             val avatarPath = Dirs.avatars / "$uuid.png"
