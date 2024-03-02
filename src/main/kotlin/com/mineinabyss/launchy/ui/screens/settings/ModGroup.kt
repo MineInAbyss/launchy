@@ -21,13 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.data.Group
-import com.mineinabyss.launchy.data.Mod
+import com.mineinabyss.launchy.data.modpacks.Group
+import com.mineinabyss.launchy.data.ModInfo
 import com.mineinabyss.launchy.ui.elements.Tooltip
 import com.mineinabyss.launchy.util.Option
 
 @Composable
-fun ModGroup(group: Group, mods: Collection<Mod>) {
+fun ModGroup(group: Group, mods: Collection<ModInfo>) {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
     val state = LocalLaunchyState

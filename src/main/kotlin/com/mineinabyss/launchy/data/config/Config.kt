@@ -1,5 +1,7 @@
-package com.mineinabyss.launchy.data
+package com.mineinabyss.launchy.data.config
 
+import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.data.Formats
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.io.*
@@ -10,19 +12,8 @@ import kotlin.io.path.writeText
 
 @Serializable
 data class Config(
-    val minecraftDir: String? = null,
-    val fullEnabledGroups: Set<GroupName> = setOf(),
-    val fullDisabledGroups: Set<GroupName> = setOf(),
-    val toggledMods: Set<ModName> = setOf(),
-    val toggledConfigs: Set<ModName> = setOf(),
-    val downloads: Map<ModName, DownloadURL> = mapOf(),
-    val configs: Map<ModName, ConfigURL> = mapOf(),
-    val seenGroups: Set<GroupName> = setOf(),
-    val installedFabricVersion: String? = null,
-    val installedMinecraftVersion: String? = "1.19.2", // default to 1.19.2
-    val downloadUpdates: Boolean = true,
     val handledImportOptions: Boolean = false,
-    val handledFirstLaunch: Boolean = false,
+    val onboardingComplete: Boolean = false,
     val currentProfileUUID: String? = null,
 
     ) {

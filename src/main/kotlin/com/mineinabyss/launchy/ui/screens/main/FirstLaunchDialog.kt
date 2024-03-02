@@ -14,20 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.ui.screens.settings.Browser
+import com.mineinabyss.launchy.logic.Browser
 import com.mineinabyss.launchy.ui.state.windowScope
 
 @Composable
 fun FirstLaunchDialog() {
     val state = LocalLaunchyState
-    if (!state.handledFirstLaunch) {
+    if (!state.onboardingComplete) {
         FirstLaunchDialog(
             windowScope,
             onAccept = {
-                state.handledFirstLaunch = true
+                state.onboardingComplete = true
             },
             onDecline = {
-                state.handledFirstLaunch = true
+                state.onboardingComplete = true
             }
         )
     }

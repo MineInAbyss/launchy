@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.settings
+package com.mineinabyss.launchy.logic
 
 import java.awt.Desktop
 import java.net.URI

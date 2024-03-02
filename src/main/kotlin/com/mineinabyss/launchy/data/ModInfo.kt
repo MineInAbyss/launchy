@@ -3,7 +3,7 @@ package com.mineinabyss.launchy.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Mod(
+data class ModInfo(
     val name: String,
     val license: String = "Unknown",
     val homepage: String = "",
@@ -14,5 +14,6 @@ data class Mod(
     val forceConfigDownload: Boolean = false,
     val dependency: Boolean = false,
     val incompatibleWith: List<String> = emptyList(),
+    val downloadPath: String? = null,
     val requires: List<String> = emptyList(),
 )

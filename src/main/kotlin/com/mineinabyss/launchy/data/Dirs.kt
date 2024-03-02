@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.data
 
 import com.mineinabyss.launchy.util.OS
+import java.util.UUID
 import kotlin.io.path.*
 
 object Dirs {
@@ -28,8 +29,13 @@ object Dirs {
     val accounts = config / "accounts"
     val avatars = config / "avatars"
 
+    fun avatar(uuid: UUID) = avatars / "$uuid.png"
+
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"
+
+    fun modpackDir(string: String) = mineinabyss / "modpacks" / string
+    fun modpackConfigDir(name: String) = config / "modpacks" / name
 
     fun createDirs() {
         config.createDirectories()

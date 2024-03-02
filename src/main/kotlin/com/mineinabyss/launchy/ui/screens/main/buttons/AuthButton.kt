@@ -15,7 +15,7 @@ fun AuthButton() {
     val state = LocalLaunchyState
 
     Button(
-        enabled = state.currentSession == null,
+        enabled = state.profile.currentSession != null,
         onClick = { dialog = Dialog.Auth },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,

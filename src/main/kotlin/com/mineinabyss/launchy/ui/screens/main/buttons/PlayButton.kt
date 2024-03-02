@@ -31,7 +31,7 @@ fun PlayButton() {
 
     buttonSize = Size(if (showDropdown) 200f else 120f, 0f)
     buttonIcon = when {
-        state.currentSession == null -> Icons.Rounded.PlayDisabled
+        state.profile.currentSession == null -> Icons.Rounded.PlayDisabled
         state.currentLaunchProcess == null -> Icons.Rounded.PlayArrow
         else -> Icons.Rounded.Stop
     }
@@ -55,7 +55,7 @@ fun PlayButton() {
 
         Button(
             modifier = Modifier.width(with(LocalDensity.current){buttonSize.width.toDp()}),
-            enabled =  state.currentSession != null && state.currentModpack != null && !state.isDownloading,
+            enabled =  state.profile.currentSession != null && state.modpackState != null && !state.isDownloading,
             onClick = {
                 if (state.currentLaunchProcess == null) {
                     if (state.queuedDownloads.isNotEmpty() || state.queuedDeletions.isNotEmpty()) showDropdown = !showDropdown

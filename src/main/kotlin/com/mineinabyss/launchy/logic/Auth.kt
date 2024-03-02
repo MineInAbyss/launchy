@@ -1,26 +1,30 @@
 package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.auth.SessionStorage
-import com.mineinabyss.launchy.state.LaunchyState
+import com.mineinabyss.launchy.state.ProfileState
+import com.mineinabyss.launchy.ui.screens.Dialog
+import com.mineinabyss.launchy.ui.screens.dialog
 import jmccc.microsoft.MicrosoftAuthenticator
 import jmccc.microsoft.entity.MicrosoftVerification
 
 
 object Auth {
-    fun authFlow(
-        state: LaunchyState,
-        onGetMSA: (MicrosoftVerification) -> Unit,
-        onGetSession: (MicrosoftAuthenticator) -> Unit,
-    ) {
-        val previousSession = state.currentProfileUUID?.let { SessionStorage.load(it) }
-        if (previousSession != null) onGetSession(MicrosoftAuthenticator.session(previousSession) {
-            onGetMSA(it)
-        }) else onGetSession(MicrosoftAuthenticator.login {
-            onGetMSA(it)
-        })
+    fun authOrShowDialog(state: ProfileState, onComlete: () -> Unit) {
+        authFlow(state,
+            onVerificationRequired = { dialog = Dialog.Auth },
+            onAuthenticate = { onComlete() })
     }
 
-    fun hasPreviousSession(state: LaunchyState): Boolean {
-        return state.currentProfileUUID?.let { SessionStorage.load(it) } != null
+    fun authFlow(
+        state: ProfileState,
+        onVerificationRequired: (MicrosoftVerification) -> Unit,
+        onAuthenticate: (MicrosoftAuthenticator) -> Unit,
+    ) {
+        val previousSession = state.currentProfileUUID?.let { SessionStorage.load(it) }
+        if (previousSession != null) onAuthenticate(MicrosoftAuthenticator.session(previousSession) {
+            onVerificationRequired(it)
+        }) else onAuthenticate(MicrosoftAuthenticator.login {
+            onVerificationRequired(it)
+        })
     }
 }

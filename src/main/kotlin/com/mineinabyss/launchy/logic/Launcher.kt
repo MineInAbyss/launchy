@@ -1,7 +1,6 @@
 package com.mineinabyss.launchy.logic
 
-import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.modpacks.mrpack.ModrinthPack
+import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import com.mineinabyss.launchy.state.LaunchyState
 import org.to2mbn.jmccc.launch.LauncherBuilder
 import org.to2mbn.jmccc.mcdownloader.MinecraftDownloaderBuilder
@@ -11,19 +10,29 @@ import org.to2mbn.jmccc.mcdownloader.provider.fabric.FabricDownloadProvider
 import org.to2mbn.jmccc.option.LaunchOption
 import org.to2mbn.jmccc.option.MinecraftDirectory
 import org.to2mbn.jmccc.version.Version
-import kotlin.io.path.pathString
 
 
 object Launcher {
     fun launch(state: LaunchyState) {
-        val pack = state.currentModpack ?: return
-        val dir = MinecraftDirectory(Dirs.mineinabyss.pathString)
+        val packState = state.modpackState ?: return
+        val dir = MinecraftDirectory(packState.modpackDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
-        state.currentLaunchProcess = launcher.launch(LaunchOption(pack.dependencies.fullVersionName, state.currentSession, dir))
+
+        // Auth or show dialog
+        when (val session = state.profile.currentSession) {
+            null -> Auth.authOrShowDialog(state.profile, onComlete = { launch(state) })
+            else -> state.currentLaunchProcess = launcher.launch(
+                LaunchOption(
+                    packState.modpack.dependencies.fullVersionName,
+                    session,
+                    dir
+                )
+            )
+        }
     }
 
     fun download(
-        deps: ModrinthPack.Dependencies,
+        deps: PackDependencies,
         dir: MinecraftDirectory,
         finishedDownload: (String) -> Unit
     ) {

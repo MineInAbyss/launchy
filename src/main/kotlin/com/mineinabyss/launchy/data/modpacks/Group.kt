@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.data
+package com.mineinabyss.launchy.data.modpacks
 
 import kotlinx.serialization.Serializable
 

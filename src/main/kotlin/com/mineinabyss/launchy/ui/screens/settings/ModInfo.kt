@@ -6,7 +6,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
@@ -21,13 +20,14 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.data.Group
-import com.mineinabyss.launchy.data.Mod
+import com.mineinabyss.launchy.data.modpacks.Group
+import com.mineinabyss.launchy.data.ModInfo
+import com.mineinabyss.launchy.logic.Browser
 import com.mineinabyss.launchy.ui.elements.Tooltip
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ModInfo(group: Group, mod: Mod) {
+fun ModInfo(group: Group, mod: ModInfo) {
     val state = LocalLaunchyState
     val modEnabled by derivedStateOf { mod in state.enabledMods }
     val configEnabled by derivedStateOf { mod in state.enabledConfigs }

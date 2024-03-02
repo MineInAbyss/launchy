@@ -7,9 +7,10 @@ import androidx.compose.ui.window.WindowScope
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.auth.SessionStorage
 import com.mineinabyss.launchy.logic.Auth
-import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
-import com.mineinabyss.launchy.ui.screens.settings.Browser
+import com.mineinabyss.launchy.ui.screens.Dialog
+import com.mineinabyss.launchy.ui.screens.dialog
+import com.mineinabyss.launchy.logic.Browser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,22 +28,23 @@ fun AuthDialog(
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
             Auth.authFlow(
-                state,
-                onGetMSA = {
+                state.profile,
+                onVerificationRequired = {
                     Browser.browse(it.verificationUri)
                     authMessage = it.message
                 },
-                onGetSession = {
+                onAuthenticate = {
                     coroutineScope.launch(Dispatchers.IO) {
                         SessionStorage.save(state, it)
                     }
-                    state.currentSession = it
+                    state.profile.currentSession = it
+                    dialog = Dialog.None
                     onComplete()
                 }
             )
         }
     }
-    LaunchyDialog(
+    if (authMessage == null) LaunchyDialog(
         title = {
             Text("Authenticate with Microsoft", style = LocalTextStyle.current)
         },
@@ -56,8 +58,8 @@ fun AuthDialog(
             }
         },
         windowScope,
-        onDismissRequest,
-        onDismissRequest,
+        { dialog = Dialog.None; onDismissRequest() },
+        { dialog = Dialog.None; onDismissRequest() },
         "Cancel",
         null,
     )

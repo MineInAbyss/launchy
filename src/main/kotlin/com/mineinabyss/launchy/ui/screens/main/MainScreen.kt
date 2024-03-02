@@ -17,18 +17,13 @@ import androidx.compose.ui.res.loadImageBitmap
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.logic.Auth
 import com.mineinabyss.launchy.logic.Downloader
-import com.mineinabyss.launchy.ui.auth.AuthDialog
-import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.Progress
-import com.mineinabyss.launchy.ui.screens.dialog
 import com.mineinabyss.launchy.ui.screens.main.buttons.AuthButton
 import com.mineinabyss.launchy.ui.screens.main.buttons.PlayButton
 import com.mineinabyss.launchy.ui.screens.main.buttons.SettingsButton
 import com.mineinabyss.launchy.ui.screens.progress
 import com.mineinabyss.launchy.ui.state.windowScope
-import kotlin.io.path.div
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
 
@@ -68,9 +63,11 @@ fun MainScreen() {
         FirstLaunchDialog()
         HandleImportSettings()
 
-        LaunchedEffect(state.isDownloading) {
-            progress = if (state.isDownloading) Progress.Animated else Progress.None
+        val isDownloading = state.modpackState?.downloads?.isDownloading == true
+        LaunchedEffect(isDownloading) {
+            progress = if (isDownloading) Progress.Animated else Progress.None
         }
+
         when (progress) {
             Progress.Animated -> {
                 LinearProgressIndicator(
@@ -82,12 +79,11 @@ fun MainScreen() {
             else -> {}
         }
 
-        if (Auth.hasPreviousSession(state)) AuthDialog(windowScope, { dialog = Dialog.None }, { dialog = Dialog.None })
-        LaunchedEffect(state.currentSession) {
-            val uuid = state.currentSession?.auth()?.uuid ?: return@LaunchedEffect
-            val avatarPath = Dirs.avatars / "$uuid.png"
+        LaunchedEffect(state.profile.currentSession) {
+            val uuid = state.profile.currentSession?.auth()?.uuid ?: return@LaunchedEffect
+            val avatarPath = Dirs.avatar(uuid)
             if (!avatarPath.exists()) Downloader.downloadAvatar(uuid)
-            state.avatar = loadImageBitmap(avatarPath.inputStream())
+            state.profile.avatar = loadImageBitmap(avatarPath.inputStream())
         }
         val fabSize = 64.dp
 
@@ -97,7 +93,7 @@ fun MainScreen() {
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.primary,
         ) {
-            state.avatar?.let {
+            state.profile.avatar?.let {
                 Image(
                     painter = BitmapPainter(it),
                     contentDescription = "Avatar",

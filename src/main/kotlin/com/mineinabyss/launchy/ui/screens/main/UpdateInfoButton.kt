@@ -28,9 +28,11 @@ fun UpdateInfoButton() {
     var toggled by remember { mutableStateOf(false) }
     Button(onClick = { toggled = !toggled }, shape = RoundedCornerShape(20.dp)) {
         Column {
+            val queued = state.modpackState?.queued ?: return@Column
+
             Row {
                 Icon(Icons.Rounded.Update, contentDescription = "Updates")
-                Text("${state.queuedDownloads.size + state.queuedDeletions.size} Updates")
+                Text("${queued.downloads.size + queued.deletions.size} Updates")
             }
 
             AnimatedVisibility(
@@ -40,22 +42,22 @@ fun UpdateInfoButton() {
             ) {
                 Column {
                     InfoText(
-                        shown = state.updatesQueued,
+                        shown = queued.areUpdatesQueued,
                         icon = Icons.Rounded.Update,
                         desc = "Update",
-                        extra = state.queuedUpdates.size.toString()
+                        extra = queued.updates.size.toString()
                     )
                     InfoText(
-                        shown = state.installsQueued,
+                        shown = queued.areInstallsQueued,
                         icon = Icons.Rounded.Download,
                         desc = "Download",
-                        extra = state.queuedInstalls.size.toString()
+                        extra = queued.installs.size.toString()
                     )
                     InfoText(
-                        shown = state.deletionsQueued,
+                        shown = queued.areDeletionsQueued,
                         icon = Icons.Rounded.Delete,
                         desc = "Remove",
-                        extra = state.queuedDeletions.size.toString()
+                        extra = queued.deletions.size.toString()
                     )
                 }
             }
