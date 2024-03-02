@@ -18,20 +18,18 @@ import androidx.compose.ui.window.rememberWindowState
 import com.mineinabyss.launchy.data.Config
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Versions
-import com.mineinabyss.launchy.logic.LaunchyState
+import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.ui.colors.AppTheme
 import com.mineinabyss.launchy.ui.screens.Screens
 import com.mineinabyss.launchy.ui.state.TopBarProvider
 import com.mineinabyss.launchy.ui.state.TopBarState
 import com.mineinabyss.launchy.util.OS
-import kotlinx.serialization.ExperimentalSerializationApi
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 val LocalLaunchyState: LaunchyState
     @Composable
     get() = LaunchyStateProvider.current
 
-@OptIn(ExperimentalSerializationApi::class)
 fun main() {
     application {
         val windowState = rememberWindowState(placement = WindowPlacement.Floating)

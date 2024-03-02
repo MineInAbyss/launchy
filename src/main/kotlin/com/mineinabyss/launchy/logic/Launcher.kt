@@ -2,6 +2,7 @@ package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.modpacks.mrpack.ModrinthPack
+import com.mineinabyss.launchy.state.LaunchyState
 import org.to2mbn.jmccc.launch.LauncherBuilder
 import org.to2mbn.jmccc.mcdownloader.MinecraftDownloaderBuilder
 import org.to2mbn.jmccc.mcdownloader.download.concurrent.CallbackAdapter

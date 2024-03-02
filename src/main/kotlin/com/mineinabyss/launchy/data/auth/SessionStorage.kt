@@ -1,25 +1,13 @@
 package com.mineinabyss.launchy.data.auth
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.loadImageBitmap
-import androidx.compose.ui.res.loadSvgPainter
-import androidx.compose.ui.res.painterResource
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.logic.Downloader
-import com.mineinabyss.launchy.logic.LaunchyState
+import com.mineinabyss.launchy.state.LaunchyState
 import jmccc.microsoft.MicrosoftAuthenticator
 import jmccc.microsoft.entity.MicrosoftSession
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.encodeToStream
-import java.io.InputStream
 import kotlin.io.path.*
 
 @Serializable

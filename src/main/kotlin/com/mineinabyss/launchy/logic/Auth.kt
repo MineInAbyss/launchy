@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.auth.SessionStorage
+import com.mineinabyss.launchy.state.LaunchyState
 import jmccc.microsoft.MicrosoftAuthenticator
 import jmccc.microsoft.entity.MicrosoftVerification
 
