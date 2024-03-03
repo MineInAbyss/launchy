@@ -20,13 +20,14 @@ import com.mineinabyss.launchy.ui.screens.LocalModpackState
 @Composable
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalModpackState
-    val painter by produceState<BitmapPainter?>(null) {
-        value =  BitmapPainter(pack.modpack.info.getOrDownloadBackground())
+    LaunchedEffect(pack) {
+        if(pack.background == null)
+            pack.background = BitmapPainter(pack.modpack.info.getOrDownloadBackground())
     }
-    if(painter == null) return
+    if(pack.background == null) return
     windowScope.WindowDraggableArea {
         Image(
-            painter = painter!!,
+            painter = pack.background!!,
             contentDescription = "Modpack background",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()

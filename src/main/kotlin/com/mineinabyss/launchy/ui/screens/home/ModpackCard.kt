@@ -68,6 +68,9 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
 ) {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
+    val background by produceState<BitmapPainter?>(null) {
+        value = BitmapPainter(pack.getOrDownloadBackground())
+    }
     Card(
         onClick = {
             coroutineScope.launch {
@@ -77,16 +80,15 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                     dialog = Dialog.Error("Failed to download modpack", "")
                     return@launch
                 }
-                state.modpackState = ModpackState(modpackDir, modpack, userConfig)
+                state.modpackState = ModpackState(modpackDir, modpack, userConfig).apply {
+                    this.background = background
+                }
                 currentHue = pack.hue
                 screen = Screen.Modpack
             }
         },
         modifier = Modifier.width(cardWidth).height(cardHeight)
     ) {
-        val background by produceState<BitmapPainter?>(null) {
-            value = BitmapPainter(pack.getOrDownloadBackground())
-        }
         Box {
             if (background != null) {
                 Image(

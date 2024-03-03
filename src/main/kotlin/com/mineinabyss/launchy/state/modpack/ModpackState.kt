@@ -3,17 +3,17 @@ package com.mineinabyss.launchy.state.modpack
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.mineinabyss.launchy.data.Dirs
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
 import java.nio.file.Path
-import kotlin.io.path.Path
 
 class ModpackState(
     val modpackDir: Path,
     val modpack: Modpack,
     private val userConfig: ModpackUserConfig
 ) {
+    var background: BitmapPainter? by mutableStateOf(null)
     var currentLaunchProcess: Process? by mutableStateOf(null)
 
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
