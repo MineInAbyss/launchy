@@ -47,7 +47,7 @@ fun HomeScreen() {
                     FloatingActionButton(
                         onClick = {
                             coroutineScope.launch {
-                                //if (profile == null) Auth.authOrShowDialog(state.profile)
+                                if (profile == null) Auth.authOrShowDialog(state.profile)
                             }
                         },
                         modifier = Modifier.size(fabSize).border(1.dp, MaterialTheme.colorScheme.secondary, FloatingActionButtonDefaults.shape),

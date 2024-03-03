@@ -102,12 +102,20 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                     Text(pack.desc, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(Modifier.weight(1f))
+
+                val (containerColor, contentColor) = (state.profile.currentProfile?.let {
+                    FloatingActionButtonDefaults.containerColor
+                } ?: MaterialTheme.colorScheme.background).let { it to contentColorFor(it) }
+
                 FloatingActionButton(
                     onClick = {
-                            coroutineScope.launch {
+                        coroutineScope.launch {
+                            if (state.profile.currentProfile != null)
                                 pack.createModpackState()?.let { Launcher.launch(it, state.profile) }
-                            }
+                        }
                     },
+                    containerColor = containerColor,
+                    contentColor = contentColor,
                     modifier = Modifier
                 ) {
                     Icon(Icons.Rounded.PlayArrow, contentDescription = "Play")
