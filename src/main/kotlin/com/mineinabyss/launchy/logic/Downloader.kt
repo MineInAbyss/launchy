@@ -20,7 +20,7 @@ object Downloader {
     val httpClient = HttpClient(CIO)
 
     suspend fun downloadAvatar(uuid: UUID) {
-        download("https://crafatar.com/avatars/$uuid?size=128&overlay", Dirs.avatar(uuid))
+        download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid))
     }
 
     suspend fun download(

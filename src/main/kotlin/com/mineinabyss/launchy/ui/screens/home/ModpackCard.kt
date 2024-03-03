@@ -37,12 +37,12 @@ object ModpackCardStyle {
 }
 
 @Composable
-fun AddNewModpackCard() {
+fun AddNewModpackCard(modifier: Modifier = Modifier) {
     val highlightColor = MaterialTheme.colorScheme.secondary
     Surface(
         border = BorderStroke(3.dp, highlightColor),
         shape = MaterialTheme.shapes.medium,
-        modifier = Modifier.width(cardWidth).height(cardHeight).clickable {}
+        modifier = modifier.height(cardHeight).clickable {}//.width(cardWidth)
     ) {
         Box {
             Row(Modifier.align(Alignment.Center), verticalAlignment = Alignment.CenterVertically) {
@@ -57,6 +57,7 @@ fun AddNewModpackCard() {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
     colorScheme = LaunchyColors(pack.hue).DarkColors
@@ -74,7 +75,7 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                 screen = Screen.Modpack
             }
         },
-        modifier = Modifier.width(cardWidth).height(cardHeight)
+        modifier = Modifier.height(cardHeight).width(cardWidth),
     ) {
         Box {
             if (background != null) {
