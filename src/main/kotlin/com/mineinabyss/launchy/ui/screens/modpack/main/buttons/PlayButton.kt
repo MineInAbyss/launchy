@@ -63,7 +63,7 @@ fun PlayButton(
                     if (packState.queued.downloads.isNotEmpty() || packState.queued.deletions.isNotEmpty())
                         dialog = Dialog.Options(
                             title = "Update before launch?",
-                            message = "Updates are available for this modpack. Would you like to download them beofre launching?",
+                            message = "Updates are available for this modpack. Would you like to download them?",
                             acceptText = "Download",
                             declineText = "Skip",
                             onAccept = {

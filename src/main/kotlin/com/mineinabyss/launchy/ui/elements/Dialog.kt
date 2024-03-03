@@ -16,6 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 
+
+object DialogSpecs {
+    val spaceUnderTitle = 16.dp
+    val padding = 24.dp
+    val paddingBetweenButtons = 8.dp
+}
+
 @Composable
 fun LaunchyDialog(
     title: @Composable () -> Unit,
@@ -42,7 +49,7 @@ fun LaunchyDialog(
             tonalElevation = 5.dp
         ) {
             Column(
-                modifier = Modifier.padding(24.dp)
+                modifier = Modifier.padding(DialogSpecs.padding)
             ) {
                 ProvideTextStyle(MaterialTheme.typography.headlineSmall) {
                     Box(modifier = Modifier.padding(bottom = 10.dp)) {
@@ -50,15 +57,18 @@ fun LaunchyDialog(
                     }
                 }
 
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(DialogSpecs.spaceUnderTitle))
+
                 ProvideTextStyle(MaterialTheme.typography.bodyMedium) {
-                    Box(modifier = Modifier.padding(bottom = 10.dp)) {
+                    Box(modifier = Modifier) {
                         content()
                     }
                 }
-                Spacer(Modifier.height(24.dp))
+
+                Spacer(Modifier.height(DialogSpecs.padding))
+
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.spacedBy(DialogSpecs.paddingBetweenButtons),
                     modifier = Modifier.align(Alignment.End)
                 ) {
                     if (declineText != null) TextButton(onClick = onDecline) {

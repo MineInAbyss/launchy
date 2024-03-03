@@ -6,6 +6,7 @@ import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -51,19 +52,19 @@ fun AppTopBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
-            Spacer(Modifier.width(8.dp))
             Row(
                 Modifier.weight(1f),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 AnimatedVisibility(showBackButton/*, enter = fadeIn(animationSpec = tween(300, 300))*/) {
-                    IconButton(onClick = onBackButtonClicked) {
-                        Icon(Icons.Rounded.ArrowBack, contentDescription = "Back button")
+                    WindowButton(Icons.AutoMirrored.Rounded.ArrowBack) {
+                        onBackButtonClicked()
                     }
                     Spacer(Modifier.width(5.dp))
                 }
                 AnimatedVisibility(!transparent) {
                     Row {
+                        Spacer(Modifier.width(8.dp))
                         Icon(
                             Icons.Rounded.RocketLaunch,
                             contentDescription = "Launchy",
