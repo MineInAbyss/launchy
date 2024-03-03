@@ -23,6 +23,7 @@ import com.mineinabyss.launchy.ui.screens.Screens
 import com.mineinabyss.launchy.ui.state.TopBarProvider
 import com.mineinabyss.launchy.ui.state.TopBarState
 import com.mineinabyss.launchy.util.OS
+import java.awt.Dimension
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
 
@@ -44,12 +45,13 @@ fun main() {
 
         Window(
             state = windowState,
-            title = "Mine in Abyss - Launcher",
+            title = "Launchy",
             icon = icon,
             onCloseRequest = onClose,
             undecorated = true,
             transparent = OS.get() == OS.WINDOWS, // Windows 11 shows a white bar on the bottom without this
         ) {
+            window.minimumSize = Dimension(400, 50)
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
             AppTheme {
