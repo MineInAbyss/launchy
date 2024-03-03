@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.data.modpacks.types
 
-import com.mineinabyss.launchy.data.ModInfo
+import com.mineinabyss.launchy.data.modpacks.ModInfo
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.Mods
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
@@ -30,6 +30,10 @@ data class ModrinthPackFormat(
                 downloadPath = path,
             )
         )
+    }
+
+    override fun getDependencies(packDir: Path): PackDependencies {
+        return dependencies
     }
 
     override fun toGenericMods(packDir: Path) =

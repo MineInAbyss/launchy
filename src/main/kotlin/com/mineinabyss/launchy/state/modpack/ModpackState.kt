@@ -1,22 +1,24 @@
 package com.mineinabyss.launchy.state.modpack
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
+import java.nio.file.Path
 import kotlin.io.path.Path
 
-class SelectedModpackState(
-    modpackFolderName: String,
+class ModpackState(
+    val modpackDir: Path,
     val modpack: Modpack,
     private val userConfig: ModpackUserConfig
 ) {
-
-    val modpackDir = userConfig.modpackMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(modpackFolderName)
-    val modpackConfigDir = Dirs.modpackConfigDir(modpackFolderName)
+    var currentLaunchProcess: Process? by mutableStateOf(null)
 
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
     val queued = DownloadQueueState(modpack.mods, toggles)
-    val downloads = DownloadState(queued)
+    val downloads = DownloadState()
 
     fun saveToConfig() {
         userConfig.copy(
@@ -29,6 +31,6 @@ class SelectedModpackState(
             seenGroups = modpack.mods.groups.map { it.name }.toSet(),
             modDownloads = toggles.downloadURLs.mapKeys { it.key.info.name },
             modConfigs = toggles.downloadConfigURLs.mapKeys { it.key.info.name },
-        ).save(modpackConfigDir)
+        ).save(modpack.info.configDir)
     }
 }

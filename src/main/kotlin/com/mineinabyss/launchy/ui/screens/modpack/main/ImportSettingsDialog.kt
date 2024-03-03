@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.main
+package com.mineinabyss.launchy.ui.screens.modpack.main
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

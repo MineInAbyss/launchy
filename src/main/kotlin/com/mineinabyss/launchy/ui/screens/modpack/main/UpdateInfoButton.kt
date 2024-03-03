@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.main
+package com.mineinabyss.launchy.ui.screens.modpack.main
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -21,14 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
 
 @Composable
 fun UpdateInfoButton() {
     val state = LocalLaunchyState
+    val packState = LocalModpackState
     var toggled by remember { mutableStateOf(false) }
     Button(onClick = { toggled = !toggled }, shape = RoundedCornerShape(20.dp)) {
         Column {
-            val queued = state.modpackState?.queued ?: return@Column
+            val queued = packState.queued
 
             Row {
                 Icon(Icons.Rounded.Update, contentDescription = "Updates")

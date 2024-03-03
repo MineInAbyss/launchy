@@ -1,10 +1,9 @@
 package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.ModInfo
 import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
-import com.mineinabyss.launchy.state.modpack.SelectedModpackState
+import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -13,19 +12,17 @@ import java.util.concurrent.CancellationException
 import kotlin.io.path.deleteIfExists
 
 object ModDownloader {
-    fun SelectedModpackState.installMCAndModLoaders() {
+    fun ModpackState.installMCAndModLoaders() {
         downloads.installingProfile = true
         Launcher.download(
             modpack.dependencies,
-            MinecraftDirectory(Dirs.mineinabyss.toFile()),
-            finishedDownload = {
-                //TODO notifs
-            },
+            modpackDir,
+            finishedDownload = { println("Finished installing: $it") },
         )
         downloads.installingProfile = false
     }
 
-    suspend fun SelectedModpackState.download(mod: Mod) {
+    suspend fun ModpackState.download(mod: Mod) {
         val name = mod.info.name
         runCatching {
             if (mod !in toggles.upToDateMods) {
@@ -86,7 +83,7 @@ object ModDownloader {
 //            )
         }
     }
-    suspend fun SelectedModpackState.install() = coroutineScope {
+    suspend fun ModpackState.install() = coroutineScope {
         installMCAndModLoaders()
         toggles.checkNonDownloadedMods()
         for (mod in queued.downloads)

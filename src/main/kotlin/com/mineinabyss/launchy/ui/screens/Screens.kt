@@ -4,35 +4,22 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.auth.AuthDialog
-import com.mineinabyss.launchy.ui.screens.main.MainScreen
-import com.mineinabyss.launchy.ui.screens.settings.SettingsScreen
+import com.mineinabyss.launchy.ui.elements.LaunchyDialog
+import com.mineinabyss.launchy.ui.screens.home.HomeScreen
+import com.mineinabyss.launchy.ui.screens.modpack.main.ModpackScreen
+import com.mineinabyss.launchy.ui.screens.modpack.settings.SettingsScreen
 import com.mineinabyss.launchy.ui.state.TopBar
 import com.mineinabyss.launchy.ui.state.windowScope
-
-sealed class Screen(val transparentTopBar: Boolean = false) {
-    object Default : Screen(transparentTopBar = true)
-    object Settings : Screen()
-}
-
-sealed interface Dialog {
-    object None : Dialog
-    object Auth : Dialog
-}
-
-sealed interface Progress {
-    object None : Progress
-    object Animated : Progress
-    class Percent(val percent: Float) : Progress
-}
 
 var screen: Screen by mutableStateOf(Screen.Default)
 
@@ -40,15 +27,29 @@ var dialog: Dialog by mutableStateOf(Dialog.None)
 
 var progress: Progress by mutableStateOf(Progress.Animated)
 
+private val ModpackStateProvider = compositionLocalOf<ModpackState> { error("No local modpack provided") }
+
+val LocalModpackState: ModpackState
+    @Composable get() = ModpackStateProvider.current
+
 @Composable
 fun Screens() {
-    TransitionFade(screen == Screen.Default) {
-        MainScreen()
+    val state = LocalLaunchyState
+    val packState = state.modpackState
+    if (packState != null) CompositionLocalProvider(ModpackStateProvider provides packState) {
+        TransitionFade(screen is Screen.Modpack) {
+            ModpackScreen()
+        }
+        TranslucentTopBar(screen) {
+            TransitionSlideUp(screen == Screen.Settings) {
+                SettingsScreen()
+            }
+        }
     }
 
     TranslucentTopBar(screen) {
-        TransitionSlideUp(screen == Screen.Settings) {
-            SettingsScreen()
+        TransitionFade(screen == Screen.Default) {
+            HomeScreen()
         }
     }
 
@@ -56,16 +57,30 @@ fun Screens() {
         TopBar,
         screen.transparentTopBar,
         showBackButton = screen != Screen.Default,
-        onBackButtonClicked = { screen = Screen.Default }
+        onBackButtonClicked = {
+            screen = when (screen) {
+                Screen.Modpack -> Screen.Default
+                Screen.Settings -> Screen.Modpack
+                else -> Screen.Default
+            }
+        }
     )
 
-
-    when (dialog) {
+    when (val castDialog = dialog) {
         Dialog.None -> {}
         Dialog.Auth -> AuthDialog(
             windowScope,
             onDismissRequest = { dialog = Dialog.None },
-            onComplete = { dialog = Dialog.None },
+        )
+
+        is Dialog.Error -> LaunchyDialog(
+            title = { Text(castDialog.title, style = LocalTextStyle.current) },
+            content = { Text(castDialog.message, style = LocalTextStyle.current) },
+            windowScope,
+            { dialog = Dialog.None },
+            { dialog = Dialog.None },
+            "Close",
+            null,
         )
     }
 }

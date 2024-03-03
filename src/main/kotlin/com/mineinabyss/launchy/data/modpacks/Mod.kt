@@ -1,7 +1,6 @@
 package com.mineinabyss.launchy.data.modpacks
 
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.ModInfo
 import java.nio.file.Path
 import kotlin.io.path.div
 import kotlin.io.path.exists

@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.main.buttons
+package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Row
@@ -11,30 +11,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.ModDownloader.install
+import com.mineinabyss.launchy.ui.elements.PrimaryButton
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import kotlinx.coroutines.launch
 
 @Composable
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
+    val packState = LocalModpackState
     val coroutineScope = rememberCoroutineScope()
-    Button(
-        enabled = enabled && state.modpackState != null,
+    PrimaryButton(
+        enabled = enabled,
         onClick = {
             coroutineScope.launch {
-                state.modpackState?.install()
+                packState.install()
             }
         },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.primary
-        ),
         modifier = modifier
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Rounded.Download, "Download")
-            val queued = state.modpackState?.queued ?: return@Row
+            val queued = packState.queued
             AnimatedVisibility(true, Modifier.animateContentSize()) {
-                val isDownloading = !state.modpackState!!.downloads.isDownloading
+                val isDownloading = packState.downloads.isDownloading
                 InstallTextAnimatedVisibility(queued.areOperationsQueued && isDownloading) {
                     Text("Install")
                 }

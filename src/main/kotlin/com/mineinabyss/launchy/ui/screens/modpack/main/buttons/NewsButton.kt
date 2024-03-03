@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.main.buttons
+package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
@@ -15,11 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.ui.elements.SecondaryButton
 
 @Composable
 fun NewsButton(hasUpdates: Boolean) {
     Box {
-        Button(onClick = {}) {
+        SecondaryButton {
             Icon(Icons.Rounded.Feed, contentDescription = "Settings")
             Text("News")
         }

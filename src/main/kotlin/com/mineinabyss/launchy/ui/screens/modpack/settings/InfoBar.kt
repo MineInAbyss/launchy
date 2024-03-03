@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.settings
+package com.mineinabyss.launchy.ui.screens.modpack.settings
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.animateIntAsState
@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Download
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -22,24 +24,26 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
 import com.mineinabyss.launchy.ui.elements.Tooltip
-import com.mineinabyss.launchy.ui.screens.main.buttons.InstallButton
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.InstallButton
 
 @Composable
 fun InfoBar() {
     val state = LocalLaunchyState
+    val packState = LocalModpackState
     Surface(
         tonalElevation = 2.dp,
         shadowElevation = 0.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
         modifier = Modifier.fillMaxWidth(),
     ) {
-        if (state.isDownloading) {
-            val totalBytesToDownload =
-                state.downloading.values.sumOf { it.totalBytes } + state.downloadingConfigs.values.sumOf { it.totalBytes }
-            val totalBytesDownloaded =
-                state.downloading.values.sumOf { it.bytesDownloaded } + state.downloadingConfigs.values.sumOf { it.bytesDownloaded }
+        if (packState.downloads.isDownloading) {
+            val inProgress = (packState.downloads.inProgressMods + packState.downloads.inProgressConfigs).values
+            val totalBytesToDownload = inProgress.sumOf { it.totalBytes }
+            val totalBytesDownloaded = inProgress.sumOf { it.bytesDownloaded }.toFloat()
+
             LinearProgressIndicator(
-                progress = if (totalBytesToDownload == 0L) 0f else totalBytesDownloaded.toFloat() / totalBytesToDownload,
+                progress = if (totalBytesToDownload == 0L) 0f else totalBytesDownloaded / totalBytesToDownload,
                 modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colorScheme.primaryContainer
             )
@@ -50,52 +54,33 @@ fun InfoBar() {
                 .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp)
         ) {
             InstallButton(
-                state.currentLaunchProcess == null && !state.isDownloading && state.operationsQueued && state.minecraftValid,
+                packState.currentLaunchProcess == null && !packState.downloads.isDownloading && packState.queued.areOperationsQueued,
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
             Spacer(Modifier.width(12.dp))
             ActionButton(
-                shown = !state.minecraftValid,
-                icon = Icons.Rounded.Error,
-                desc = "No minecraft installation found",
-            )
-            ActionButton(
-                shown = state.updatesQueued,
+                shown = packState.queued.areUpdatesQueued,
                 icon = Icons.Rounded.Update,
                 desc = "Queued updates",
-                count = state.queuedUpdates.size
+                count = packState.queued.updates.size
             )
             ActionButton(
-                shown = state.installsQueued,
+                shown = packState.queued.areInstallsQueued,
                 icon = Icons.Rounded.Download,
                 desc = "Queued downloads for new mods",
-                count = state.queuedInstalls.size
+                count = packState.queued.installs.size
             )
             ActionButton(
-                shown = state.deletionsQueued,
+                shown = packState.queued.areDeletionsQueued,
                 icon = Icons.Rounded.Delete,
                 desc = "Queued mod deletions",
-                count = state.queuedDeletions.size
+                count = packState.queued.deletions.size
             )
 
-            if (state.isDownloading) {
-                // Show download progress
-                val totalBytesToDownload =
-                    state.downloading.values.sumOf { it.totalBytes } + state.downloadingConfigs.values.sumOf { it.totalBytes }
-                val totalBytesDownloaded =
-                    state.downloading.values.sumOf { it.bytesDownloaded } + state.downloadingConfigs.values.sumOf { it.bytesDownloaded }
-                Text(
-                    text = "Downloading ${state.downloading.size + state.downloadingConfigs.size} files (${totalBytesDownloaded / 1000} / ${totalBytesToDownload / 1000} KB)",
-                    style = MaterialTheme.typography.bodySmall,
-                )
-            }
-
-            if (state.failedDownloads.isNotEmpty()) {
-                Text(
-                    text = "Failed downloads: ${state.failedDownloads.size}",
-                    style = MaterialTheme.typography.bodySmall,
-                )
-            }
+            if (packState.downloads.failed.isNotEmpty()) Text(
+                text = "Failed downloads: ${packState.downloads.failed.size}",
+                style = MaterialTheme.typography.bodySmall,
+            )
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.mineinabyss.launchy.data.modpacks
 
 import com.mineinabyss.launchy.data.GroupName
-import com.mineinabyss.launchy.data.ModInfo
 import com.mineinabyss.launchy.data.ModName
 
 class Mods(

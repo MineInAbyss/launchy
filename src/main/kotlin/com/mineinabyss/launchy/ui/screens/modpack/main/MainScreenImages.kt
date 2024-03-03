@@ -1,26 +1,33 @@
-package com.mineinabyss.launchy.ui.screens.main
+package com.mineinabyss.launchy.ui.screens.modpack.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
 
 @Composable
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
+    val pack = LocalModpackState
+    val painter by produceState<BitmapPainter?>(null) {
+        value =  BitmapPainter(pack.modpack.info.getOrDownloadBackground())
+    }
+    if(painter == null) return
     windowScope.WindowDraggableArea {
         Image(
-            painter = painterResource("mia_render.jpg"),
-            contentDescription = "Main render",
+            painter = painter!!,
+            contentDescription = "Modpack background",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
@@ -44,12 +51,33 @@ fun BoxScope.BackgroundTint() {
         )
     }
 }
+@Composable
+fun BoxScope.SlightBackgroundTint() {
+    val colors = listOf(
+        Color.Transparent,
+        MaterialTheme.colorScheme.background.copy(alpha = 0.9f),
+    )
+
+    BoxWithConstraints(Modifier.align(Alignment.BottomCenter)) {
+        Spacer(
+            Modifier
+                .fillMaxWidth()
+                .height(maxHeight / 1.5f)
+                .background(Brush.verticalGradient(colors))
+        )
+    }
+}
 
 @Composable
 fun LogoLarge(modifier: Modifier) {
+    val pack = LocalModpackState
+    val painter by produceState<BitmapPainter?>(null) {
+        value =  BitmapPainter(pack.modpack.info.getOrDownloadLogo())
+    }
+    if(painter == null) return
     Image(
-        painter = painterResource("mia_profile_icon.png"),
-        contentDescription = "Mine in Abyss logo",
+        painter = painter!!,
+        contentDescription = "Modpack logo",
         modifier = Modifier.widthIn(0.dp, 500.dp).fillMaxSize().then(modifier),
         contentScale = ContentScale.FillWidth
     )

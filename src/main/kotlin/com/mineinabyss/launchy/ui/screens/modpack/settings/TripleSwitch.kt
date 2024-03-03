@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.settings
+package com.mineinabyss.launchy.ui.screens.modpack.settings
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -16,19 +16,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.data.modpacks.Group
-import com.mineinabyss.launchy.data.ModInfo
+import com.mineinabyss.launchy.data.modpacks.Mod
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.util.Option
 
 @Composable
 fun ToggleButtons(
     onSwitch: (Option) -> Unit,
     group: Group,
-    mods: Collection<ModInfo>,
+    mods: Collection<Mod>,
 ) {
-    val state = LocalLaunchyState
+    val state = LocalModpackState
     val offColor = Color.Transparent
     val offTextColor = MaterialTheme.colorScheme.surface
     val forced = group.forceEnabled || group.forceDisabled
@@ -43,8 +43,8 @@ fun ToggleButtons(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             ) {
-                val fullEnable = state.enabledMods.containsAll(mods)
-                val fullDisable = mods.none { it in state.enabledMods }
+                val fullEnable = state.toggles.enabledMods.containsAll(mods)
+                val fullDisable = mods.none { it in state.toggles.enabledMods }
 
                 val disableColorContainer by animateColorAsState(
                     if (fullDisable) MaterialTheme.colorScheme.errorContainer

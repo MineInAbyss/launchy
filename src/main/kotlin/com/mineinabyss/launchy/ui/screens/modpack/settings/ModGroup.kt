@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.settings
+package com.mineinabyss.launchy.ui.screens.modpack.settings
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
@@ -20,19 +20,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.modpacks.Group
-import com.mineinabyss.launchy.data.ModInfo
+import com.mineinabyss.launchy.data.modpacks.Mod
+import com.mineinabyss.launchy.logic.ToggleMods.setModEnabled
 import com.mineinabyss.launchy.ui.elements.Tooltip
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.util.Option
 
 @Composable
-fun ModGroup(group: Group, mods: Collection<ModInfo>) {
+fun ModGroup(group: Group, mods: Collection<Mod>) {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
-    val state = LocalLaunchyState
+    val state = LocalModpackState
 
-    val modsChanged = mods.any { it in state.queuedDeletions || it in state.queuedDownloads }
+    val modsChanged = mods.any { it in state.queued.deletions || it in state.queued.downloads }
 
     val tonalElevation by animateDpAsState(if (expanded) 1.6.dp else 1.dp)
     Column {
@@ -50,12 +51,11 @@ fun ModGroup(group: Group, mods: Collection<ModInfo>) {
 
                 ToggleButtons(
                     onSwitch = { option ->
+                        val mods = state.modpack.mods.modGroups[group]
                         if (option == Option.ENABLED)
-                            state.versions.modGroups[group]
-                                ?.forEach { state.setModEnabled(it, true) }
+                            mods?.forEach { state.toggles.setModEnabled(it, true) }
                         else if (option == Option.DISABLED)
-                            state.versions.modGroups[group]
-                                ?.forEach { state.setModEnabled(it, false) }
+                            mods?.forEach { state.toggles.setModEnabled(it, false) }
                     },
                     group = group,
                     mods = mods
@@ -85,7 +85,7 @@ fun ModGroup(group: Group, mods: Collection<ModInfo>) {
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp, start = 10.dp)
             ) {
                 Column {
-                    for (mod in mods) ModInfo(group, mod)
+                    for (mod in mods) ModInfoDisplay(group, mod)
                 }
             }
         }

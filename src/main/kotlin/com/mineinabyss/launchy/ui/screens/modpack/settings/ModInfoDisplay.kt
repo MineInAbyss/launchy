@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.settings
+package com.mineinabyss.launchy.ui.screens.modpack.settings
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
@@ -19,39 +19,40 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.modpacks.Group
-import com.mineinabyss.launchy.data.ModInfo
+import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.logic.Browser
+import com.mineinabyss.launchy.logic.ToggleMods.setModConfigEnabled
+import com.mineinabyss.launchy.logic.ToggleMods.setModEnabled
 import com.mineinabyss.launchy.ui.elements.Tooltip
+import com.mineinabyss.launchy.ui.screens.LocalModpackState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ModInfo(group: Group, mod: ModInfo) {
-    val state = LocalLaunchyState
-    val modEnabled by derivedStateOf { mod in state.enabledMods }
-    val configEnabled by derivedStateOf { mod in state.enabledConfigs }
+fun ModInfoDisplay(group: Group, mod: Mod) {
+    val state = LocalModpackState
+    val modEnabled by derivedStateOf { mod in state.toggles.enabledMods }
+    val configEnabled by derivedStateOf { mod in state.toggles.enabledConfigs }
     var configExpanded by remember { mutableStateOf(false) }
     val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = when (mod) {
-            in state.failedDownloads -> MaterialTheme.colorScheme.error
-            in state.queuedDeletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
-            in state.queuedInstalls -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)//Color(105, 240, 174, alpha = 25)
+            in state.downloads.failed -> MaterialTheme.colorScheme.error
+            in state.queued.deletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
+            in state.queued.installs -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)//Color(105, 240, 174, alpha = 25)
             else -> MaterialTheme.colorScheme.surface
         },
-        onClick = { if (!group.forceEnabled && !group.forceDisabled) state.setModEnabled(mod, !modEnabled) }
+        onClick = { if (!group.forceEnabled && !group.forceDisabled) state.toggles.setModEnabled(mod, !modEnabled) }
     ) {
-        if (state.downloading.containsKey(mod) || state.downloadingConfigs.containsKey(mod)) {
-            val downloaded =
-                ((state.downloading[mod]?.bytesDownloaded ?: 0L) + (state.downloadingConfigs[mod]?.bytesDownloaded
-                    ?: 0L)).toFloat()
-            val total = ((state.downloading[mod]?.totalBytes ?: 0L) + (state.downloadingConfigs[mod]?.totalBytes
-                ?: 0L)).toFloat()
+        if (state.downloads.inProgressMods.containsKey(mod) || state.downloads.inProgressConfigs.containsKey(mod)) {
+            val modProgress = state.downloads.inProgressMods[mod]
+            val configProgress = state.downloads.inProgressConfigs[mod]
+            val downloaded = (modProgress?.bytesDownloaded ?: 0L) + (configProgress?.bytesDownloaded ?: 0L)
+            val total = (modProgress?.totalBytes ?: 0L) + (configProgress?.totalBytes ?: 0L)
             LinearProgressIndicator(
-                progress = if (total == 0f) 0f else downloaded / total,
+                progress = if (total == 0L) 0f else downloaded.toFloat() / total,
                 color = MaterialTheme.colorScheme.primaryContainer
             )
         }
@@ -63,23 +64,23 @@ fun ModInfo(group: Group, mod: ModInfo) {
                 Checkbox(
                     enabled = !group.forceEnabled && !group.forceDisabled,
                     checked = modEnabled,
-                    onCheckedChange = { state.setModEnabled(mod, !modEnabled) }
+                    onCheckedChange = { state.toggles.setModEnabled(mod, !modEnabled) }
                 )
 
                 Row(Modifier.weight(6f)) {
-                    Text(mod.name, style = MaterialTheme.typography.bodyLarge)
+                    Text(mod.info.name, style = MaterialTheme.typography.bodyLarge)
                     // build list of mods that are incompatible with this mod
-                    val incompatibleMods = state.versions.modGroups.flatMap { it.value }
-                        .filter { mod.name in it.incompatibleWith || it.name in mod.incompatibleWith }
-                        .map { it.name }
-                    if (mod.requires.isNotEmpty() || incompatibleMods.isNotEmpty()) {
+                    val incompatibleMods = state.modpack.mods.mods
+                        .filter { !mod.compatibleWith(it) }
+                        .map { it.info.name }
+                    if (mod.info.requires.isNotEmpty() || incompatibleMods.isNotEmpty()) {
                         TooltipArea(
                             modifier = Modifier.alpha(0.5f),
                             tooltip = {
                                 Tooltip {
-                                    if (mod.requires.isNotEmpty()) {
+                                    if (mod.info.requires.isNotEmpty()) {
                                         Text(
-                                            text = "Requires: ${mod.requires.joinToString()}",
+                                            text = "Requires: ${mod.info.requires.joinToString()}",
                                             style = MaterialTheme.typography.labelMedium
                                         )
                                     }
@@ -101,12 +102,12 @@ fun ModInfo(group: Group, mod: ModInfo) {
                     }
                 }
                 Text(
-                    mod.desc,
+                    mod.info.desc,
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.alpha(0.5f)
                 )
 
-                if (mod.configUrl.isNotEmpty()) {
+                if (mod.info.configUrl.isNotEmpty()) {
                     TooltipArea(
                         modifier = Modifier.alpha(0.5f),
                         tooltip = { Tooltip("Config") }
@@ -120,7 +121,7 @@ fun ModInfo(group: Group, mod: ModInfo) {
                         }
                     }
                 }
-                if (mod.homepage.isNotEmpty()) {
+                if (mod.info.homepage.isNotEmpty()) {
                     TooltipArea(
                         modifier = Modifier.alpha(0.5f),
                         tooltip = {
@@ -132,7 +133,7 @@ fun ModInfo(group: Group, mod: ModInfo) {
                             }
                         }
                     ) {
-                        IconButton(onClick = { Browser.browse(mod.homepage) }) {
+                        IconButton(onClick = { Browser.browse(mod.info.homepage) }) {
                             Icon(
                                 imageVector = Icons.Rounded.OpenInNew,
                                 contentDescription = "Homepage"
@@ -145,26 +146,26 @@ fun ModInfo(group: Group, mod: ModInfo) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .clickable { if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled) }
+                        .clickable { if (!mod.info.forceConfigDownload) state.toggles.setModConfigEnabled(mod, !configEnabled) }
                         .fillMaxWidth()
                 ) {
                     Spacer(Modifier.width(20.dp))
                     Checkbox(
-                        checked = configEnabled || mod.forceConfigDownload,
+                        checked = configEnabled || mod.info.forceConfigDownload,
                         onCheckedChange = {
-                            if (!mod.forceConfigDownload) state.setModConfigEnabled(mod, !configEnabled)
+                            if (!mod.info.forceConfigDownload) state.toggles.setModConfigEnabled(mod, !configEnabled)
                         },
-                        enabled = !mod.forceConfigDownload,
+                        enabled = !mod.info.forceConfigDownload,
                     )
                     Column {
                         Text(
                             "Download our recommended configuration",
                             style = MaterialTheme.typography.bodyMedium
                         )
-                        if (mod.configDesc.isNotEmpty()) {
+                        if (mod.info.configDesc.isNotEmpty()) {
                             Spacer(Modifier.width(4.dp))
                             Text(
-                                mod.configDesc,
+                                mod.info.configDesc,
                                 style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.alpha(0.5f)
                             )

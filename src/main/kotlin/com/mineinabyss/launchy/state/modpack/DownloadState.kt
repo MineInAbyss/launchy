@@ -1,12 +1,11 @@
 package com.mineinabyss.launchy.state.modpack
 
 import androidx.compose.runtime.*
-import com.mineinabyss.launchy.data.ModInfo
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.logic.Progress
 import com.mineinabyss.launchy.state.mutableStateSetOf
 
-class DownloadState(val queue: DownloadQueueState) {
+class DownloadState {
     val inProgressMods = mutableStateMapOf<Mod, Progress>()
     val inProgressConfigs = mutableStateMapOf<Mod, Progress>()
     val failed = mutableStateSetOf<Mod>()

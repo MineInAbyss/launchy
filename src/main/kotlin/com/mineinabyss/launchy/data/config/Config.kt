@@ -2,6 +2,7 @@ package com.mineinabyss.launchy.data.config
 
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
+import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.io.*
@@ -14,7 +15,8 @@ import kotlin.io.path.writeText
 data class Config(
     val handledImportOptions: Boolean = false,
     val onboardingComplete: Boolean = false,
-    val currentProfileUUID: String? = null,
+    val currentProfile: PlayerProfile? = null,
+    val modpacks: List<ModpackInfo> = emptyList(),
 
     ) {
     fun save() {
@@ -22,9 +24,8 @@ data class Config(
     }
 
     companion object {
-        fun read() = runCatching {
+        fun read() =
             Formats.yaml.decodeFromStream(serializer(), Dirs.configFile.inputStream())
-        }.getOrDefault(Config())
     }
 }
 

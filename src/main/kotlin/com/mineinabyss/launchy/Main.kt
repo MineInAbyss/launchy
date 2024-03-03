@@ -15,9 +15,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.modpacks.Mods
+import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.ui.colors.AppTheme
 import com.mineinabyss.launchy.ui.screens.Screens
@@ -26,9 +25,9 @@ import com.mineinabyss.launchy.ui.state.TopBarState
 import com.mineinabyss.launchy.util.OS
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }
+
 val LocalLaunchyState: LaunchyState
-    @Composable
-    get() = LaunchyStateProvider.current
+    @Composable get() = LaunchyStateProvider.current
 
 fun main() {
     application {

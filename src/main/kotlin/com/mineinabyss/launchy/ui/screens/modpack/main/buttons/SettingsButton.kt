@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.main.buttons
+package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Settings

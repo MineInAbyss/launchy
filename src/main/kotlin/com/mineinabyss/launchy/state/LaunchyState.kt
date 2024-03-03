@@ -3,7 +3,9 @@ package com.mineinabyss.launchy.state
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.*
 import com.mineinabyss.launchy.data.config.Config
-import com.mineinabyss.launchy.state.modpack.SelectedModpackState
+import com.mineinabyss.launchy.data.modpacks.Modpack
+import com.mineinabyss.launchy.data.modpacks.ModpackInfo
+import com.mineinabyss.launchy.state.modpack.ModpackState
 import java.util.*
 import kotlin.io.path.div
 import kotlin.io.path.exists
@@ -13,9 +15,7 @@ class LaunchyState(
     private val config: Config,
 ) {
     val profile = ProfileState(config)
-    val modpackState: SelectedModpackState? by mutableStateOf(null)
-    var currentLaunchProcess: Process? by mutableStateOf(null)
-
+    var modpackState: ModpackState? by mutableStateOf(null)
 
     // If any state is true, we consider import handled and move on
     var handledImportOptions by mutableStateOf(
@@ -26,12 +26,16 @@ class LaunchyState(
 
     var onboardingComplete by mutableStateOf(config.onboardingComplete)
 
+    val downloadedModpacks = mutableStateSetOf<ModpackInfo>().apply {
+        addAll(config.modpacks)
+    }
 
     fun saveToConfig() {
         config.copy(
             handledImportOptions = handledImportOptions,
             onboardingComplete = onboardingComplete,
-            currentProfileUUID = profile.currentProfileUUID,
+            currentProfile = profile.currentProfile,
+            modpacks = downloadedModpacks.toList(),
         ).save()
     }
 }
