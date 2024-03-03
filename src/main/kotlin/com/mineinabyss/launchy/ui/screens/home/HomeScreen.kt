@@ -1,12 +1,10 @@
 package com.mineinabyss.launchy.ui.screens.home
 
-import androidx.compose.foundation.HorizontalScrollbar
-import androidx.compose.foundation.LocalScrollbarStyle
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Settings
@@ -14,7 +12,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.ui.elements.PlayerAvatar
@@ -58,26 +58,16 @@ fun HomeScreen() {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ModpackGroup(title: String, packs: List<ModpackInfo>) {
     Box(Modifier.height(312.dp)) {
-        val lazyListState = rememberLazyListState()
         Column {
             Text(title, style = MaterialTheme.typography.headlineLarge)
-            LazyRow(Modifier.fillMaxSize(), lazyListState, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(packs) {
-                    ModpackCard(it)
-                }
-                item { AddNewModpackCard() }
+            FlowRow(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                packs.forEach { pack -> ModpackCard(pack) }
+                AddNewModpackCard()
             }
         }
-        HorizontalScrollbar(
-            modifier = Modifier.fillMaxWidth().align(Alignment.BottomStart),
-            adapter = rememberScrollbarAdapter(lazyListState),
-            style = LocalScrollbarStyle.current.copy(
-                unhoverColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.25f),
-                hoverColor = MaterialTheme.colorScheme.primary
-            )
-        )
     }
 }
