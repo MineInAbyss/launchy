@@ -1,12 +1,20 @@
 package com.mineinabyss.launchy.data.modpacks
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.loadImageBitmap
+import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.source.PackSource
 import com.mineinabyss.launchy.logic.Downloader
+import com.mineinabyss.launchy.state.LaunchyState
+import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.ui.screens.Dialog
+import com.mineinabyss.launchy.ui.screens.dialog
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlin.io.path.Path
 import kotlin.io.path.div
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
@@ -38,5 +46,17 @@ class ModpackInfo(
     suspend fun getOrDownloadLogo(): ImageBitmap {
         if (!logoPath.exists()) Downloader.download(logoURL, logoPath)
         return loadImageBitmap(logoPath.inputStream())
+    }
+
+    suspend fun createModpackState(): ModpackState? {
+        val userConfig = ModpackUserConfig()
+        val modpackDir = userConfig.modpackMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(folderName)
+        val modpack = source.getOrDownloadLatestPack(this, modpackDir) ?: run {
+            dialog = Dialog.Error("Failed to download modpack", "")
+            return null
+        }
+        return ModpackState(modpackDir, modpack, userConfig).apply {
+            this.background = background
+        }
     }
 }

@@ -19,6 +19,8 @@ data class PlayerProfile(
         val avatarPath = Dirs.avatar(uuid)
 
         if (!avatarPath.exists()) Downloader.downloadAvatar(uuid)
+
+        // TODO this apparently throws an error sometimes, investigate and fix
         return loadImageBitmap(avatarPath.inputStream())
     }
 }

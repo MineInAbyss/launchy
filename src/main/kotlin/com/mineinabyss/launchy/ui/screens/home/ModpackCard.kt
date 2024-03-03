@@ -21,6 +21,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
+import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
@@ -74,15 +75,7 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
     Card(
         onClick = {
             coroutineScope.launch {
-                val userConfig = ModpackUserConfig()
-                val modpackDir = userConfig.modpackMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(pack.folderName)
-                val modpack = pack.source.getOrDownloadLatestPack(pack, modpackDir) ?: run {
-                    dialog = Dialog.Error("Failed to download modpack", "")
-                    return@launch
-                }
-                state.modpackState = ModpackState(modpackDir, modpack, userConfig).apply {
-                    this.background = background
-                }
+                state.modpackState = pack.createModpackState()
                 currentHue = pack.hue
                 screen = Screen.Modpack
             }
@@ -109,8 +102,20 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                     Text(pack.desc, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(Modifier.weight(1f))
+
+                val (containerColor, contentColor) = (state.profile.currentProfile?.let {
+                    FloatingActionButtonDefaults.containerColor
+                } ?: MaterialTheme.colorScheme.background).let { it to contentColorFor(it) }
+
                 FloatingActionButton(
-                    onClick = {},
+                    onClick = {
+                        coroutineScope.launch {
+                            if (state.profile.currentProfile != null)
+                                pack.createModpackState()?.let { Launcher.launch(it, state.profile) }
+                        }
+                    },
+                    containerColor = containerColor,
+                    contentColor = contentColor,
                     modifier = Modifier
                 ) {
                     Icon(Icons.Rounded.PlayArrow, contentDescription = "Play")

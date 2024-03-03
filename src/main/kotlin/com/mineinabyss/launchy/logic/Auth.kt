@@ -24,6 +24,7 @@ object Auth {
                 Browser.browse(it.verificationUri)
                 state.authCode = it.userCode
                 dialog = Dialog.Auth
+                println(state.authCode)
             },
             onAuthenticate = {
                 launch(Dispatchers.IO) {
