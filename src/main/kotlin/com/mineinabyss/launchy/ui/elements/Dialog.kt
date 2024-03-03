@@ -2,6 +2,7 @@ package com.mineinabyss.launchy.ui.elements
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.onClick
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.ProvideTextStyle
@@ -22,13 +23,16 @@ fun LaunchyDialog(
     windowScope: WindowScope,
     onAccept: () -> Unit,
     onDecline: () -> Unit,
+    onDismiss: () -> Unit,
     acceptText: String,
     declineText: String?,
     modifier: Modifier = Modifier,
 ) {
     // Overlay that prevents clicking behind it
     windowScope.WindowDraggableArea {
-        Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize())
+        Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize().onClick {
+            onDismiss()
+        })
     }
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
@@ -57,11 +61,10 @@ fun LaunchyDialog(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.align(Alignment.End)
                 ) {
-                    if (declineText != null)
-                        TextButton(onClick = onAccept) {
-                            Text(declineText)
-                        }
-                    TextButton(onClick = onDecline) {
+                    if (declineText != null) TextButton(onClick = onDecline) {
+                        Text(declineText)
+                    }
+                    TextButton(onClick = onAccept) {
                         Text(acceptText)
                     }
                 }

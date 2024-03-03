@@ -7,15 +7,15 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
 import java.nio.file.Path
+import kotlin.io.path.name
 
 class ModpackState(
     val modpackDir: Path,
     val modpack: Modpack,
     private val userConfig: ModpackUserConfig
 ) {
+    val packFolderName = modpackDir.name
     var background: BitmapPainter? by mutableStateOf(null)
-    var currentLaunchProcess: Process? by mutableStateOf(null)
-
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
     val queued = DownloadQueueState(modpack.mods, toggles)
     val downloads = DownloadState()

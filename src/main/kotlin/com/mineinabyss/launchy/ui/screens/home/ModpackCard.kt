@@ -24,6 +24,7 @@ import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardHeight
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardPadding
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardWidth
 import com.mineinabyss.launchy.ui.screens.modpack.main.SlightBackgroundTint
+import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.PlayButton
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlinx.coroutines.launch
 
@@ -81,7 +82,7 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                     onClick = {
                         coroutineScope.launch {
                             if (state.profile.currentProfile != null)
-                                pack.createModpackState()?.let { Launcher.launch(it, state.profile) }
+                                pack.createModpackState()?.let { Launcher.launch(state, it, state.profile) }
                         }
                     },
                     containerColor = containerColor,

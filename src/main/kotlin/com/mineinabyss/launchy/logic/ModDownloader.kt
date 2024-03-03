@@ -4,10 +4,7 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.state.modpack.ModpackState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import org.to2mbn.jmccc.option.MinecraftDirectory
+import kotlinx.coroutines.*
 import java.util.concurrent.CancellationException
 import kotlin.io.path.deleteIfExists
 
@@ -83,24 +80,31 @@ object ModDownloader {
 //            )
         }
     }
-    suspend fun ModpackState.install() = coroutineScope {
+
+    suspend fun ModpackState.install(): Job = coroutineScope {
         installMCAndModLoaders()
         toggles.checkNonDownloadedMods()
-        for (mod in queued.downloads)
-            launch(Dispatchers.IO) {
-                download(mod)
-                toggles.checkNonDownloadedMods()
-            }
-        for (mod in queued.deletions) {
-            launch(Dispatchers.IO) {
-                try {
-                    mod.file.deleteIfExists()
-                } catch (e: FileSystemException) {
-                    return@launch
-                } finally {
-                    queued.deleted++
+        val modDownloads = launch {
+            queued.downloads.map { mod ->
+                launch(Dispatchers.IO) {
+                    download(mod)
+                    toggles.checkNonDownloadedMods()
                 }
-            }
+            }.joinAll()
         }
+        val modDeletions = launch {
+            queued.deletions.map { mod ->
+                launch(Dispatchers.IO) {
+                    try {
+                        mod.file.deleteIfExists()
+                    } catch (e: FileSystemException) {
+                        return@launch
+                    } finally {
+                        queued.deleted++
+                    }
+                }
+            }.joinAll()
+        }
+        return@coroutineScope launch { modDownloads.join(); modDeletions.join() }
     }
 }

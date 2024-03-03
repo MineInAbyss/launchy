@@ -45,6 +45,7 @@ fun AuthDialog(
         windowScope,
         { dialog = Dialog.None; onDismissRequest() },
         { dialog = Dialog.None; onDismissRequest() },
+        { dialog = Dialog.None; onDismissRequest() },
         "Cancel",
         null,
     )

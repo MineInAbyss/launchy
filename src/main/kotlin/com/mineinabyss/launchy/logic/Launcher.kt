@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
+import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.ProfileState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.coroutineScope
@@ -18,16 +19,16 @@ import kotlin.io.path.createParentDirectories
 
 
 object Launcher {
-    suspend fun launch(pack: ModpackState, profile: ProfileState): Unit = coroutineScope {
+    suspend fun launch(state: LaunchyState, pack: ModpackState, profile: ProfileState): Unit = coroutineScope {
         val dir = MinecraftDirectory(pack.modpackDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
 
         // Auth or show dialog
         when (val session = profile.currentSession) {
             null -> Auth.authOrShowDialog(profile) {
-                launch { launch(pack, profile) }
+                launch { launch(state, pack, profile) }
             }
-            else -> pack.currentLaunchProcess = launcher.launch(
+            else -> state.launchedProcesses[pack.packFolderName] = launcher.launch(
                 LaunchOption(
                     pack.modpack.dependencies.fullVersionName,
                     session,

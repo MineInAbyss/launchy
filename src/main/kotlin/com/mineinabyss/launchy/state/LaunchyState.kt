@@ -1,9 +1,8 @@
 package com.mineinabyss.launchy.state
 
 import androidx.compose.runtime.*
-import com.mineinabyss.launchy.data.*
+import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
-import com.mineinabyss.launchy.data.modpacks.Modpack
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import java.util.*
@@ -16,6 +15,9 @@ class LaunchyState(
 ) {
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
+    var launchedProcesses = mutableStateMapOf<String, Process>()
+
+    fun processFor(pack: ModpackState): Process? = launchedProcesses[pack.packFolderName]
 
     // If any state is true, we consider import handled and move on
     var handledImportOptions by mutableStateOf(

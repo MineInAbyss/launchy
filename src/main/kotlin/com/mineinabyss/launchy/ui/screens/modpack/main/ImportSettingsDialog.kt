@@ -53,6 +53,11 @@ fun ImportSettingsDialog(
         content = {
             Text("This will import the options.txt file from your .minecraft directory.")
         },
-        windowScope, onAccept, onDecline, "Import", "Skip"
+        windowScope = windowScope,
+        onAccept = onAccept,
+        onDecline = onDecline,
+        onDismiss = onDecline,
+        acceptText = "Import",
+        declineText = "Skip"
     )
 }

@@ -63,10 +63,12 @@ fun Screens() {
                     state.modpackState?.saveToConfig()
                     Screen.Default
                 }
+
                 Screen.Settings -> {
                     state.modpackState?.saveToConfig()
                     Screen.Modpack
                 }
+
                 else -> Screen.Default
             }
         }
@@ -82,12 +84,26 @@ fun Screens() {
         is Dialog.Error -> LaunchyDialog(
             title = { Text(castDialog.title, style = LocalTextStyle.current) },
             content = { Text(castDialog.message, style = LocalTextStyle.current) },
-            windowScope,
-            { dialog = Dialog.None },
-            { dialog = Dialog.None },
-            "Close",
-            null,
+            windowScope = windowScope,
+            onAccept = { dialog = Dialog.None },
+            onDecline = { dialog = Dialog.None },
+            onDismiss = { dialog = Dialog.None },
+            acceptText = "Close",
+            declineText = null,
         )
+
+        is Dialog.Options -> {
+            LaunchyDialog(
+                title = { Text(castDialog.title, style = LocalTextStyle.current) },
+                content = { Text(castDialog.message, style = LocalTextStyle.current) },
+                windowScope = windowScope,
+                onAccept = { castDialog.onAccept(); dialog = Dialog.None },
+                onDecline = { castDialog.onDecline(); dialog = Dialog.None },
+                onDismiss = { dialog = Dialog.None },
+                acceptText = castDialog.acceptText,
+                declineText = castDialog.declineText,
+            )
+        }
     }
 }
 
