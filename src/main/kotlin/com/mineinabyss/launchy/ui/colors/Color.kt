@@ -34,7 +34,7 @@ val md_theme_light_surfaceTint = Color(0xFF924C00)
 val md_theme_light_outlineVariant = Color(0xFFD6C3B7)
 val md_theme_light_scrim = Color(0xFF000000)
 
-class LaunchyColors(val hue: Float = 0.02f) {
+class LaunchyColors(val hue: Float = 0f) {
     fun Color.applyHue(): Color {
         val hsbVals = FloatArray(3)
         val javaCol = java.awt.Color(red, green, blue, alpha)

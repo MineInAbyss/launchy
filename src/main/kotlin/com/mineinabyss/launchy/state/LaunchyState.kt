@@ -26,7 +26,7 @@ class LaunchyState(
 
     var onboardingComplete by mutableStateOf(config.onboardingComplete)
 
-    val downloadedModpacks = mutableStateSetOf<ModpackInfo>().apply {
+    val downloadedModpacks = mutableStateListOf<ModpackInfo>().apply {
         addAll(config.modpacks)
     }
 
@@ -35,7 +35,7 @@ class LaunchyState(
             handledImportOptions = handledImportOptions,
             onboardingComplete = onboardingComplete,
             currentProfile = profile.currentProfile,
-            modpacks = downloadedModpacks.toList(),
+            modpacks = downloadedModpacks,
         ).save()
     }
 }

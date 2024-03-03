@@ -2,17 +2,20 @@ package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.Dirs
 import io.ktor.client.*
-import io.ktor.client.features.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.util.cio.*
+import io.ktor.utils.io.*
 import java.nio.file.Path
-import java.util.UUID
-import kotlin.io.encoding.Base64
-import kotlin.io.encoding.ExperimentalEncodingApi
+import java.util.*
 import kotlin.io.path.*
 
 object Downloader {
-    val httpClient = HttpClient()
+    val cacheDir = Dirs.config / "cache"
+    val httpClient = HttpClient(CIO)
 
     suspend fun downloadAvatar(uuid: UUID) {
         download("https://crafatar.com/avatars/$uuid?size=128&overlay", Dirs.avatar(uuid))
@@ -25,7 +28,19 @@ object Downloader {
     ) {
         try {
             val startTime = System.currentTimeMillis()
-            val response = httpClient.get<HttpStatement>(url) {
+            writeTo.createParentDirectories()
+            if (!writeTo.exists()) writeTo.createFile()
+            val headers = httpClient.head(url).headers
+            val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()
+            val length = headers["Content-Length"]?.toLongOrNull()
+            val cache = "Last-Modified: $lastModified, Content-Length: $length"
+            val cacheFile = cacheDir / "${writeTo.name}.cache"
+            if (cacheFile.exists() && cacheFile.readText() == cache) return
+            cacheFile.createParentDirectories()
+            cacheFile.deleteIfExists()
+            cacheFile.createFile().writeText(cache)
+
+            httpClient.get(url) {
                 onDownload { bytesSentTotal, contentLength ->
                     onProgressUpdate(
                         Progress(
@@ -35,11 +50,7 @@ object Downloader {
                         )
                     )
                 }
-            }.receive<ByteArray>()
-            writeTo.parent.createDirectories()
-            if (!writeTo.exists())
-                writeTo.createFile()
-            writeTo.writeBytes(response)
+            }.bodyAsChannel().copyAndClose(writeTo.toFile().writeChannel())
         } catch (e: Exception) {
             e.printStackTrace()
             throw e
@@ -47,7 +58,7 @@ object Downloader {
     }
 }
 
-data class Progress(val bytesDownloaded: Long, val totalBytes: Long, val timeElapsed : Long) {
+data class Progress(val bytesDownloaded: Long, val totalBytes: Long, val timeElapsed: Long) {
     val percent: Float
         get() = bytesDownloaded.toFloat() / totalBytes.toFloat()
 }

@@ -29,8 +29,9 @@ dependencies {
     implementation(compose.materialIconsExtended)
     implementation(idofrontLibs.kotlinx.serialization.json)
     implementation(idofrontLibs.kotlinx.serialization.kaml)
-    implementation("io.ktor:ktor-client-core:1.6.8")
-    implementation("io.ktor:ktor-client-cio:1.6.8")
+    implementation("io.ktor:ktor-client-core:2.3.8")
+    implementation("io.ktor:ktor-client-cio:2.3.8")
+    implementation("io.ktor:ktor-client-cio-jvm:2.3.8")
 
     implementation("org.json:json:20230227")
 //    implementation("net.fabricmc:fabric-installer:0.9.0")

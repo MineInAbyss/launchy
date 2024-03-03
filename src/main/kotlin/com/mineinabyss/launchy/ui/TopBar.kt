@@ -6,10 +6,7 @@ import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.CropSquare
-import androidx.compose.material.icons.rounded.Minimize
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,7 +51,7 @@ fun AppTopBar(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
-            Spacer(Modifier.width(5.dp))
+            Spacer(Modifier.width(8.dp))
             Row(
                 Modifier.weight(1f),
                 verticalAlignment = Alignment.CenterVertically,
@@ -66,11 +63,18 @@ fun AppTopBar(
                     Spacer(Modifier.width(5.dp))
                 }
                 AnimatedVisibility(!transparent) {
-                    Text(
-                        "Mine in Abyss",
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
+                    Row {
+                        Icon(
+                            Icons.Rounded.RocketLaunch,
+                            contentDescription = "Launchy",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            "Launchy",
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
             Row {
