@@ -26,7 +26,7 @@ object Downloader {
         writeTo: Path,
         onProgressUpdate: (progress: Progress) -> Unit = {},
     ) {
-        try {
+        runCatching {
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
             if (!writeTo.exists()) writeTo.createFile()
@@ -51,9 +51,8 @@ object Downloader {
                     )
                 }
             }.bodyAsChannel().copyAndClose(writeTo.toFile().writeChannel())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            throw e
+        }.onFailure {
+            it.printStackTrace()
         }
     }
 }

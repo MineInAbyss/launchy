@@ -15,7 +15,7 @@ fun AuthButton() {
     val coroutineScope = rememberCoroutineScope()
 
     PrimaryButton(
-        enabled = state.profile.currentSession != null,
+        enabled = state.profile.currentSession == null,
         onClick = {
             coroutineScope.launch {
                 Auth.authOrShowDialog(state.profile)
