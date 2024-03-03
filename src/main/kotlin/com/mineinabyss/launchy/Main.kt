@@ -51,7 +51,7 @@ fun main() {
             undecorated = true,
             transparent = OS.get() == OS.WINDOWS, // Windows 11 shows a white bar on the bottom without this
         ) {
-            window.minimumSize = Dimension(400, 50)
+            window.minimumSize = Dimension(600, 400)
             val topBarState = remember { TopBarState(onClose, windowState, this) }
             val ready = launchyState != null
             AppTheme {

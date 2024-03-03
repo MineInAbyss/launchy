@@ -7,8 +7,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.CropSquare
+import androidx.compose.material.icons.rounded.Minimize
+import androidx.compose.material.icons.rounded.RocketLaunch
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +41,7 @@ fun WindowButton(icon: ImageVector, onClick: () -> Unit) {
 fun AppTopBar(
     state: TopBarState,
     transparent: Boolean,
+    showTitle: Boolean,
     showBackButton: Boolean,
     onBackButtonClicked: (() -> Unit),
 ) = state.windowScope.WindowDraggableArea {
@@ -62,19 +69,10 @@ fun AppTopBar(
                     }
                     Spacer(Modifier.width(5.dp))
                 }
-                AnimatedVisibility(!transparent) {
+                AnimatedVisibility(showTitle) {
                     Row {
                         Spacer(Modifier.width(8.dp))
-                        Icon(
-                            Icons.Rounded.RocketLaunch,
-                            contentDescription = "Launchy",
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                        Text(
-                            "Launchy",
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                        LaunchyTitle()
                     }
                 }
             }
@@ -90,5 +88,39 @@ fun AppTopBar(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun LaunchyTitle() {
+    Row {
+        Icon(
+            Icons.Rounded.RocketLaunch,
+            contentDescription = "Launchy",
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            "Launchy",
+            fontWeight = FontWeight.Medium,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
+
+@Composable
+fun LaunchyHeadline() {
+    Row {
+        Icon(
+            Icons.Rounded.RocketLaunch,
+            contentDescription = "Launchy",
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(32.dp)
+        )
+        Text(
+            "Launchy",
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.headlineLarge
+        )
     }
 }

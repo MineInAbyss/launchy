@@ -9,11 +9,13 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollbarAdapter
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,32 +41,31 @@ fun ModpackGroup(title: String, packs: List<ModpackInfo>) {
 //                Text(if (showAll) "Show less" else "Show all")
             }
         }
-        BoxWithConstraints {
-            val total = packs.size
-            val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
-            val lazyGridState = rememberLazyGridState()
-            LazyVerticalGrid(
-                state = lazyGridState,
-                columns = GridCells.Fixed(colums),
-                modifier = Modifier.width((16.dp + ModpackCardStyle.cardWidth) * total).padding(end = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                items(visiblePacks) { pack ->
-                    ModpackCard(pack)
-                }
+
+        Surface(
+            Modifier.fillMaxWidth(),
+            tonalElevation = 2.dp,
+            shape = RoundedCornerShape(20.dp)
+        ) {
+            BoxWithConstraints(Modifier.padding(16.dp)) {
+                val total = packs.size
+                val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
+                val lazyGridState = rememberLazyGridState()
+                LazyVerticalGrid(
+                    state = lazyGridState,
+                    columns = GridCells.Fixed(colums),
+                    modifier = Modifier.width((16.dp + ModpackCardStyle.cardWidth) * total),/*.padding(end = 16.dp),*/
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                ) {
+                    items(visiblePacks) { pack ->
+                        ModpackCard(pack)
+                    }
 //                item {
 //                    AddNewModpackCard()
 //                }
+                }
             }
-            VerticalScrollbar(
-                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
-                adapter = rememberScrollbarAdapter(lazyGridState),
-                style = LocalScrollbarStyle.current.copy(
-                    unhoverColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.25f),
-                    hoverColor = MaterialTheme.colorScheme.primary
-                )
-            )
         }
     }
 }

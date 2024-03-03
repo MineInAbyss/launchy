@@ -40,22 +40,19 @@ fun Screens() {
         TransitionFade(screen is Screen.Modpack) {
             ModpackScreen()
         }
-        TranslucentTopBar(screen) {
-            TransitionSlideUp(screen == Screen.Settings) {
-                SettingsScreen()
-            }
+        TransitionSlideUp(screen == Screen.Settings) {
+            SettingsScreen()
         }
     }
 
-    TranslucentTopBar(screen) {
-        TransitionFade(screen == Screen.Default) {
-            HomeScreen()
-        }
+    TransitionFade(screen == Screen.Default) {
+        HomeScreen()
     }
 
     AppTopBar(
-        TopBar,
-        screen.transparentTopBar,
+        state = TopBar,
+        transparent = screen.transparentTopBar,
+        showTitle = screen.showTitle,
         showBackButton = screen != Screen.Default,
         onBackButtonClicked = {
             screen = when (screen) {
@@ -107,7 +104,7 @@ fun Screens() {
 }
 
 @Composable
-fun TranslucentTopBar(currentScreen: Screen, content: @Composable () -> Unit) {
+fun HandleTopBar(currentScreen: Screen, content: @Composable () -> Unit) {
     Column {
         AnimatedVisibility(!currentScreen.transparentTopBar, enter = fadeIn(), exit = fadeOut()) {
             Spacer(Modifier.height(40.dp))
