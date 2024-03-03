@@ -1,11 +1,8 @@
 package com.mineinabyss.launchy.ui.screens.home
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -36,28 +33,6 @@ object ModpackCardStyle {
     val cardWidth = 400.dp
 }
 
-@Composable
-fun AddNewModpackCard(modifier: Modifier = Modifier) {
-    val highlightColor = MaterialTheme.colorScheme.secondary
-    Surface(
-        border = BorderStroke(3.dp, highlightColor),
-        shape = MaterialTheme.shapes.medium,
-        modifier = modifier.height(cardHeight).clickable {}//.width(cardWidth)
-    ) {
-        Box {
-            Row(Modifier.align(Alignment.Center), verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    Icons.Rounded.Add,
-                    "Add modpack",
-                    Modifier.size(40.dp),
-                    tint = highlightColor
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
     colorScheme = LaunchyColors(pack.hue).DarkColors

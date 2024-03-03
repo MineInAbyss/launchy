@@ -1,14 +1,13 @@
 package com.mineinabyss.launchy.data.modpacks
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.loadImageBitmap
-import com.mineinabyss.launchy.LocalLaunchyState
+import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.data.Formats
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.source.PackSource
 import com.mineinabyss.launchy.logic.Downloader
-import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
@@ -33,6 +32,9 @@ class ModpackInfo(
     val configDir = Dirs.modpackConfigDir(folderName)
 
     @Transient
+    val userConfigFile = (configDir / "config.yml")
+
+    @Transient
     private val backgroundImagePath = configDir / "background.png"
 
     @Transient
@@ -49,7 +51,9 @@ class ModpackInfo(
     }
 
     suspend fun createModpackState(): ModpackState? {
-        val userConfig = ModpackUserConfig()
+        val userConfig =
+            if (userConfigFile.exists()) Formats.yaml.decodeFromStream<ModpackUserConfig>(userConfigFile.inputStream())
+            else ModpackUserConfig()
         val modpackDir = userConfig.modpackMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(folderName)
         val modpack = source.getOrDownloadLatestPack(this, modpackDir) ?: run {
             dialog = Dialog.Error("Failed to download modpack", "")

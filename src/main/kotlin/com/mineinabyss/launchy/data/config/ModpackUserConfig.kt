@@ -19,9 +19,8 @@ data class ModpackUserConfig(
     val modConfigs: Map<ModName, ConfigURL> = mapOf(),
     val downloadUpdates: Boolean = true,
 ) {
-    fun save(packConfigDir: Path) {
-        val file = (packConfigDir / "config.yml").createParentDirectories()
-        file.deleteIfExists()
+    fun save(file: Path) {
+        file.createParentDirectories().deleteIfExists()
         file.writeText(Formats.yaml.encodeToString<ModpackUserConfig>(this))
     }
 

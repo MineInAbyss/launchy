@@ -59,8 +59,14 @@ fun Screens() {
         showBackButton = screen != Screen.Default,
         onBackButtonClicked = {
             screen = when (screen) {
-                Screen.Modpack -> Screen.Default
-                Screen.Settings -> Screen.Modpack
+                Screen.Modpack -> {
+                    state.modpackState?.saveToConfig()
+                    Screen.Default
+                }
+                Screen.Settings -> {
+                    state.modpackState?.saveToConfig()
+                    Screen.Modpack
+                }
                 else -> Screen.Default
             }
         }

@@ -31,6 +31,6 @@ class ModpackState(
             seenGroups = modpack.mods.groups.map { it.name }.toSet(),
             modDownloads = toggles.downloadURLs.mapKeys { it.key.info.name },
             modConfigs = toggles.downloadConfigURLs.mapKeys { it.key.info.name },
-        ).save(modpack.info.configDir)
+        ).save(modpack.info.userConfigFile)
     }
 }
