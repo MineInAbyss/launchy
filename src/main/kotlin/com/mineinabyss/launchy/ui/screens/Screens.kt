@@ -15,11 +15,11 @@ import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.auth.AuthDialog
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
+import com.mineinabyss.launchy.ui.screens.addmodpack.AddModpackDialog
 import com.mineinabyss.launchy.ui.screens.home.HomeScreen
 import com.mineinabyss.launchy.ui.screens.modpack.main.ModpackScreen
 import com.mineinabyss.launchy.ui.screens.modpack.settings.SettingsScreen
 import com.mineinabyss.launchy.ui.state.TopBar
-import com.mineinabyss.launchy.ui.state.windowScope
 
 var screen: Screen by mutableStateOf(Screen.Default)
 
@@ -77,32 +77,31 @@ fun Screens() {
     when (val castDialog = dialog) {
         Dialog.None -> {}
         Dialog.Auth -> AuthDialog(
-            windowScope,
             onDismissRequest = { dialog = Dialog.None },
         )
 
         is Dialog.Error -> LaunchyDialog(
             title = { Text(castDialog.title, style = LocalTextStyle.current) },
-            content = { Text(castDialog.message, style = LocalTextStyle.current) },
-            windowScope = windowScope,
             onAccept = { dialog = Dialog.None },
             onDecline = { dialog = Dialog.None },
             onDismiss = { dialog = Dialog.None },
             acceptText = "Close",
             declineText = null,
-        )
+        ) { Text(castDialog.message, style = LocalTextStyle.current) }
 
         is Dialog.Options -> {
             LaunchyDialog(
                 title = { Text(castDialog.title, style = LocalTextStyle.current) },
-                content = { Text(castDialog.message, style = LocalTextStyle.current) },
-                windowScope = windowScope,
                 onAccept = { castDialog.onAccept(); dialog = Dialog.None },
                 onDecline = { castDialog.onDecline(); dialog = Dialog.None },
                 onDismiss = { dialog = Dialog.None },
                 acceptText = castDialog.acceptText,
                 declineText = castDialog.declineText,
-            )
+            ) { Text(castDialog.message, style = LocalTextStyle.current) }
+        }
+
+        Dialog.AddModpack -> {
+            AddModpackDialog()
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Feed
 import androidx.compose.material.icons.rounded.Feed
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -21,7 +22,7 @@ import com.mineinabyss.launchy.ui.elements.SecondaryButton
 fun NewsButton(hasUpdates: Boolean) {
     Box {
         SecondaryButton {
-            Icon(Icons.Rounded.Feed, contentDescription = "Settings")
+            Icon(Icons.AutoMirrored.Rounded.Feed, contentDescription = "Settings")
             Text("News")
         }
         if (hasUpdates) Surface(

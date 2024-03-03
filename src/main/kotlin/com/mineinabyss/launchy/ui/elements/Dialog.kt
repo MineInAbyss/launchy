@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.onClick
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.WindowScope
 
 
 object DialogSpecs {
@@ -26,21 +24,18 @@ object DialogSpecs {
 @Composable
 fun LaunchyDialog(
     title: @Composable () -> Unit,
-    content: @Composable () -> Unit,
-    windowScope: WindowScope,
     onAccept: () -> Unit,
     onDecline: () -> Unit,
     onDismiss: () -> Unit,
     acceptText: String,
     declineText: String?,
     modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
-    // Overlay that prevents clicking behind it
-    windowScope.WindowDraggableArea {
-        Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize().onClick {
-            onDismiss()
-        })
-    }
+    // Background tint that dismisses the dialog when clicked
+    Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize().onClick {
+        onDismiss()
+    })
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
         Surface(

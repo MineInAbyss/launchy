@@ -43,7 +43,7 @@ fun ModpackScreen() {
                 modifier = Modifier.fillMaxWidth().weight(1f),
             ) {
 //                AuthButton()
-                PlayButton()
+                PlayButton(hideText = false, packState.modpack.info) { packState }
 //                InstallButton(!state.isDownloading && state.operationsQueued)
 //                AnimatedVisibility(state.operationsQueued) {
 //                    UpdateInfoButton()

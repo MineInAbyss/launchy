@@ -78,19 +78,7 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                     FloatingActionButtonDefaults.containerColor
                 } ?: MaterialTheme.colorScheme.background).let { it to contentColorFor(it) }
 
-                FloatingActionButton(
-                    onClick = {
-                        coroutineScope.launch {
-                            if (state.profile.currentProfile != null)
-                                pack.createModpackState()?.let { Launcher.launch(state, it, state.profile) }
-                        }
-                    },
-                    containerColor = containerColor,
-                    contentColor = contentColor,
-                    modifier = Modifier
-                ) {
-                    Icon(Icons.Rounded.PlayArrow, contentDescription = "Play")
-                }
+                PlayButton(hideText = true, pack) { pack.createModpackState() }
             }
         }
     }

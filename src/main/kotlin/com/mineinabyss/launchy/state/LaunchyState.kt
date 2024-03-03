@@ -17,7 +17,7 @@ class LaunchyState(
     var modpackState: ModpackState? by mutableStateOf(null)
     var launchedProcesses = mutableStateMapOf<String, Process>()
 
-    fun processFor(pack: ModpackState): Process? = launchedProcesses[pack.packFolderName]
+    fun processFor(pack: ModpackInfo): Process? = launchedProcesses[pack.folderName]
 
     // If any state is true, we consider import handled and move on
     var handledImportOptions by mutableStateOf(

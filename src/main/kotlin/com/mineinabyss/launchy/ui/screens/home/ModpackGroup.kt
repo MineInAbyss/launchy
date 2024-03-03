@@ -40,7 +40,7 @@ fun ModpackGroup(title: String, packs: List<ModpackInfo>) {
             }
         }
         BoxWithConstraints {
-            val total = packs.size + 1
+            val total = packs.size
             val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
             val lazyGridState = rememberLazyGridState()
             LazyVerticalGrid(
@@ -53,9 +53,9 @@ fun ModpackGroup(title: String, packs: List<ModpackInfo>) {
                 items(visiblePacks) { pack ->
                     ModpackCard(pack)
                 }
-                item {
-                    AddNewModpackCard()
-                }
+//                item {
+//                    AddNewModpackCard()
+//                }
             }
             VerticalScrollbar(
                 modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),

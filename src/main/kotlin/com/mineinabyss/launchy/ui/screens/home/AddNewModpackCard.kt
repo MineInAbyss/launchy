@@ -15,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.ui.screens.Dialog
+import com.mineinabyss.launchy.ui.screens.dialog
 
 @Composable
 fun AddNewModpackCard(modifier: Modifier = Modifier) {
@@ -22,7 +24,7 @@ fun AddNewModpackCard(modifier: Modifier = Modifier) {
     Surface(
         border = BorderStroke(3.dp, highlightColor),
         shape = MaterialTheme.shapes.medium,
-        modifier = modifier.height(ModpackCardStyle.cardHeight).clickable {}//.width(cardWidth)
+        modifier = modifier.height(ModpackCardStyle.cardHeight).clickable { dialog = Dialog.AddModpack }
     ) {
         Box {
             Row(Modifier.align(Alignment.Center), verticalAlignment = Alignment.CenterVertically) {

@@ -1,7 +1,9 @@
 package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
@@ -13,16 +15,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.logic.ModDownloader.install
+import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
+import com.mineinabyss.launchy.ui.elements.PrimaryIconButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
+import com.mineinabyss.launchy.ui.elements.SecondaryIconButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.ui.screens.dialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,12 +33,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun PlayButton(
     hideText: Boolean = false,
+    info: ModpackInfo,
+    getModpackState: suspend () -> ModpackState?,
 ) {
     val state = LocalLaunchyState
-    val packState = LocalModpackState
-    val process = state.processFor(packState)
+    val process = state.processFor(info)
     val coroutineScope = rememberCoroutineScope()
-    val buttonSize = Size(120f, 0f)
     val buttonIcon by remember(state.profile.currentSession, process) {
         mutableStateOf(
             when {
@@ -53,12 +56,12 @@ fun PlayButton(
         else SecondaryButtonColors
     )
 
-
     Box {
-        Button(
-            modifier = Modifier.width(with(LocalDensity.current) { buttonSize.width.toDp() }),
-            enabled = state.profile.currentProfile != null && !packState.downloads.isDownloading,
-            onClick = {
+        var foundPackState: ModpackState? by remember { mutableStateOf(null) }
+        val onClick: () -> Unit = {
+            coroutineScope.launch(Dispatchers.IO) {
+                val packState = foundPackState ?: getModpackState() ?: return@launch
+                foundPackState = packState
                 if (process == null) {
                     if (packState.queued.downloads.isNotEmpty() || packState.queued.deletions.isNotEmpty())
                         dialog = Dialog.Options(
@@ -85,12 +88,27 @@ fun PlayButton(
                     process.destroyForcibly()
                     state.launchedProcesses.remove(packState.packFolderName)
                 }
-            },
-            shape = if (hideText) MaterialTheme.shapes.medium else RoundedCornerShape(20.dp),
+            }
+        }
+        val enabled = state.profile.currentProfile != null && foundPackState?.downloads?.isDownloading != true
+        if (hideText) Button(
+            enabled = enabled,
+            onClick = onClick,
+            modifier = Modifier.size(52.dp).defaultMinSize(minWidth = 1.dp, minHeight = 1.dp),
+            contentPadding = PaddingValues(0.dp),
+            colors = buttonColors,
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Icon(buttonIcon, buttonText)
+        }
+        else Button(
+            enabled = state.profile.currentProfile != null && foundPackState?.downloads?.isDownloading != true,
+            onClick = onClick,
+            shape = RoundedCornerShape(20.dp),
             colors = buttonColors
         ) {
             Icon(buttonIcon, buttonText)
-            if (!hideText) Text(buttonText)
+            Text(buttonText)
         }
     }
 }
