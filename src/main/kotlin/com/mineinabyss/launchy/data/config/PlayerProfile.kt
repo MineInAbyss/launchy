@@ -20,7 +20,6 @@ data class PlayerProfile(
 
         if (!avatarPath.exists()) Downloader.downloadAvatar(uuid)
 
-        // TODO this apparently throws an error sometimes, investigate and fix
         return loadImageBitmap(avatarPath.inputStream())
     }
 }

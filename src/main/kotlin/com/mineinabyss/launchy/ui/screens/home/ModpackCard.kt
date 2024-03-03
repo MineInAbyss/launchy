@@ -18,23 +18,17 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.logic.Launcher
-import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
-import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.Screen
-import com.mineinabyss.launchy.ui.screens.dialog
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardHeight
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardPadding
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardWidth
 import com.mineinabyss.launchy.ui.screens.modpack.main.SlightBackgroundTint
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlinx.coroutines.launch
-import kotlin.io.path.Path
 
 object ModpackCardStyle {
     val cardHeight = 256.dp

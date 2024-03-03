@@ -2,6 +2,7 @@ package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.Dirs
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
@@ -9,6 +10,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.cio.*
 import io.ktor.utils.io.*
+import io.ktor.utils.io.core.*
 import java.nio.file.Path
 import java.util.*
 import kotlin.io.path.*
@@ -29,18 +31,17 @@ object Downloader {
         runCatching {
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
-            if (!writeTo.exists()) writeTo.createFile()
             val headers = httpClient.head(url).headers
             val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()
             val length = headers["Content-Length"]?.toLongOrNull()
             val cache = "Last-Modified: $lastModified, Content-Length: $length"
             val cacheFile = cacheDir / "${writeTo.name}.cache"
-            if (cacheFile.exists() && cacheFile.readText() == cache) return
+            if (writeTo.exists() && cacheFile.exists() && cacheFile.readText() == cache) return
             cacheFile.createParentDirectories()
             cacheFile.deleteIfExists()
             cacheFile.createFile().writeText(cache)
 
-            httpClient.get(url) {
+            httpClient.prepareGet(url) {
                 onDownload { bytesSentTotal, contentLength ->
                     onProgressUpdate(
                         Progress(
@@ -50,7 +51,18 @@ object Downloader {
                         )
                     )
                 }
-            }.bodyAsChannel().copyAndClose(writeTo.toFile().writeChannel())
+            }.execute { httpResponse ->
+                writeTo.deleteIfExists()
+                writeTo.createFile()
+                val channel: ByteReadChannel = httpResponse.body()
+                while (!channel.isClosedForRead) {
+                    val packet = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
+                    while (!packet.isEmpty) {
+                        val bytes = packet.readBytes()
+                        writeTo.appendBytes(bytes)
+                    }
+                }
+            }
         }.onFailure {
             it.printStackTrace()
         }
