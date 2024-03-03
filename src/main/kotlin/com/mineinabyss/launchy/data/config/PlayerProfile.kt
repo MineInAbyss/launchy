@@ -5,12 +5,10 @@ import androidx.compose.ui.res.loadImageBitmap
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.serializers.UUIDSerializer
 import com.mineinabyss.launchy.logic.Downloader
-import kotlinx.coroutines.delay
 import kotlinx.serialization.Serializable
 import java.util.*
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
-import kotlin.time.Duration.Companion.milliseconds
 
 @Serializable
 data class PlayerProfile(
@@ -21,8 +19,8 @@ data class PlayerProfile(
         val avatarPath = Dirs.avatar(uuid)
 
         if (!avatarPath.exists()) Downloader.downloadAvatar(uuid)
-        // Delay here to allow for image to be properly downloaded and avoid exception below
-        delay(10.milliseconds)
+
+        // TODO this apparently throws an error sometimes, investigate and fix
         return loadImageBitmap(avatarPath.inputStream())
     }
 }
