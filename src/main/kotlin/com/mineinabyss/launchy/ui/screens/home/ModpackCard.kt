@@ -21,6 +21,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
+import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
@@ -74,15 +75,7 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
     Card(
         onClick = {
             coroutineScope.launch {
-                val userConfig = ModpackUserConfig()
-                val modpackDir = userConfig.modpackMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(pack.folderName)
-                val modpack = pack.source.getOrDownloadLatestPack(pack, modpackDir) ?: run {
-                    dialog = Dialog.Error("Failed to download modpack", "")
-                    return@launch
-                }
-                state.modpackState = ModpackState(modpackDir, modpack, userConfig).apply {
-                    this.background = background
-                }
+                state.modpackState = pack.createModpackState()
                 currentHue = pack.hue
                 screen = Screen.Modpack
             }
@@ -110,7 +103,11 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                 }
                 Spacer(Modifier.weight(1f))
                 FloatingActionButton(
-                    onClick = {},
+                    onClick = {
+                            coroutineScope.launch {
+                                pack.createModpackState()?.let { Launcher.launch(it, state.profile) }
+                            }
+                    },
                     modifier = Modifier
                 ) {
                     Icon(Icons.Rounded.PlayArrow, contentDescription = "Play")
