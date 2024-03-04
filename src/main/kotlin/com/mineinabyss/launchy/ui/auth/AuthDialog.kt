@@ -1,17 +1,30 @@
 package com.mineinabyss.launchy.ui.auth
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.rounded.ContentCopy
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.*
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.logic.Browser
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
+import com.mineinabyss.launchy.ui.elements.PrimaryIconButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
 
+@OptIn(ExperimentalTextApi::class)
 @Composable
 fun AuthDialog(
     onDismissRequest: () -> Unit
@@ -29,17 +42,63 @@ fun AuthDialog(
     ) {
         when {
             state.profile.authCode != null -> {
-                Text(buildAnnotatedString {
-                    append("Please go to ")
+                val clipboard = LocalClipboardManager.current
+                val annotatedText = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onBackground)) {
 
-                    pushStringAnnotation("link", "https://microsoft.com/link")
-                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                        append("microsoft.com/link")
+                        append("Please go to ")
+
+                        pushUrlAnnotation(UrlAnnotation("https://microsoft.com/link"))
+                        withStyle(
+                            style = SpanStyle(
+                                color = MaterialTheme.colorScheme.primary,
+                                textDecoration = TextDecoration.Underline,
+                            )
+                        ) {
+                            append("microsoft.com/link")
+                        }
+                        appendInlineContent("copyIcon", "[copy]")
+                        pop()
+
+                        append(" and enter the code ${state.profile.authCode}")
                     }
-                    pop()
+                }
+                val inlineContent = mapOf(
+                    // This tells the [CoreText] to replace the placeholder string "[icon]" by
+                    // the composable given in the [InlineTextContent] object.
+                    "copyIcon" to InlineTextContent(
+                        // Placeholder tells text layout the expected size and vertical alignment of
+                        // children composable.
+                        Placeholder(
+                            width = 12.sp,
+                            height = 12.sp,
+                            placeholderVerticalAlign = PlaceholderVerticalAlign.AboveBaseline
+                        )
+                    ) {
+                        // This Icon will fill maximum size, which is specified by the [Placeholder]
+                        // above. Notice the width and height in [Placeholder] are specified in TextUnit,
+                        // and are converted into pixel by text layout.
 
-                    append(" and enter the code ${state.profile.authCode}")
-                }, style = LocalTextStyle.current)
+                        Icon(Icons.Filled.ContentCopy, "")
+                    }
+                )
+                Row {
+                    ClickableText(
+                        annotatedText,
+                        style = TextStyle.Default,
+                        onClick = {
+                            annotatedText.getUrlAnnotations(it, it)
+                                .firstOrNull()
+                                ?.let { Browser.browse(it.item.url) }
+                        },
+                    )
+                    IconButton(
+                        onClick = { clipboard.setText(AnnotatedString(state.profile.authCode!!)) },
+                        colors = PrimaryIconButtonColors
+                    ) {
+                        Icon(Icons.Rounded.ContentCopy, "Copy")
+                    }
+                }
             }
 
             else -> Text("Getting authentiaction code...", style = LocalTextStyle.current)

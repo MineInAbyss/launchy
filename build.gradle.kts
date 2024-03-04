@@ -36,7 +36,7 @@ dependencies {
     implementation("org.json:json:20230227")
 //    implementation("net.fabricmc:fabric-installer:0.9.0")
     implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
-//    implementation("net.raphimc:MinecraftAuth:4.0.0")
+    implementation("net.raphimc:MinecraftAuth:4.0.0")
     implementation("dev.3-3:jmccc-mcdownloader:3.1.4")
     implementation("dev.3-3:jmccc:3.1.4")
     implementation("dev.3-3:jmccc-microsoft-authenticator:3.1.4")

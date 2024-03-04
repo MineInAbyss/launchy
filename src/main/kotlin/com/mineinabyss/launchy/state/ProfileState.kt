@@ -6,12 +6,13 @@ import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.PlayerProfile
 import jmccc.microsoft.MicrosoftAuthenticator
+import net.raphimc.minecraftauth.step.java.session.StepFullJavaSession.FullJavaSession
 
 class ProfileState(
     val config: Config
 ) {
     var authCode: String? by mutableStateOf(null)
 
-    var currentSession: MicrosoftAuthenticator? by mutableStateOf(null)
+    var currentSession: FullJavaSession? by mutableStateOf(null)
     var currentProfile: PlayerProfile? by mutableStateOf(config.currentProfile)
 }

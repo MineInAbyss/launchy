@@ -37,6 +37,7 @@ fun main() {
         val windowState = rememberWindowState(placement = WindowPlacement.Floating)
         val icon = painterResource("mia_profile_icon.png")
         val launchyState by produceState<LaunchyState?>(null) {
+            Dirs.createDirs()
             val config = Config.read()
             val instances = GameInstance.readAll(Dirs.modpackConfigsDir)
             value = LaunchyState(config, instances)
@@ -69,7 +70,6 @@ fun main() {
                             CompositionLocalProvider(
                                 LaunchyStateProvider provides launchyState!!,
                             ) {
-                                Dirs.createDirs()
                                 Screens()
                             }
                         }

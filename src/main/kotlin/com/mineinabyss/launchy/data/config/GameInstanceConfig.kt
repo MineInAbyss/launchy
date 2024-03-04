@@ -18,7 +18,11 @@ class GameInstance(
             return rootDir
                 .listDirectoryEntries()
                 .filter { it.isDirectory() }
-                .mapNotNull { runCatching { GameInstance(it) }.getOrNull() }
+                .mapNotNull {
+                    runCatching { GameInstance(it) }
+                        .onFailure { it.printStackTrace() }
+                        .getOrNull()
+                }
         }
     }
 }

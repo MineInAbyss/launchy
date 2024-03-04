@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.decodeFromStream
 import java.nio.file.Path
 import java.util.zip.ZipFile
+import kotlin.io.path.div
 import kotlin.io.path.inputStream
 import kotlin.io.path.isRegularFile
 
@@ -17,6 +18,13 @@ import kotlin.io.path.isRegularFile
 enum class PackType {
     Launchy, Modrinth;
 
+    fun getFilePath(modpackDir: Path): Path {
+        val ext = when (this) {
+            Launchy -> "yml"
+            Modrinth -> "zip"
+        }
+        return modpackDir / "pack.$ext"
+    }
     @OptIn(ExperimentalSerializationApi::class)
     fun getFormat(file: Path): PackFormat? {
         if (!file.isRegularFile()) return null

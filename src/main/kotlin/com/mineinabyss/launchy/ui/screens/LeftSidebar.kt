@@ -1,15 +1,25 @@
 package com.mineinabyss.launchy.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.QuestionMark
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.res.ResourceLoader
+import androidx.compose.ui.res.loadImageBitmap
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Auth
@@ -54,7 +64,12 @@ fun LeftSidebar() {
                     contentColor = MaterialTheme.colorScheme.secondary,
                 ) {
                     profile?.let { PlayerAvatar(profile, Modifier.fillMaxSize()) }
-//                                    ?: Icon(Icons.Rounded.Add, contentDescription = "Add account")
+                        ?: run {
+                            val missingSkin = remember {
+                                useResource("missing_skin.png") { BitmapPainter(loadImageBitmap(it), filterQuality = FilterQuality.None) }
+                            }
+                            Image(missingSkin, "Not logged in", Modifier.fillMaxSize())
+                        }
                 }
             }
         }

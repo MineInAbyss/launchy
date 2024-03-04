@@ -17,7 +17,9 @@ import kotlin.io.path.*
 
 object Downloader {
     val cacheDir = Dirs.config / "cache"
-    val httpClient = HttpClient(CIO)
+    val httpClient = HttpClient(CIO) {
+        install(HttpTimeout)
+    }
 
     suspend fun downloadAvatar(uuid: UUID) {
         download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid))
@@ -42,6 +44,9 @@ object Downloader {
             cacheFile.createFile().writeText(cache)
 
             httpClient.prepareGet(url) {
+                timeout {
+                    requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
+                }
                 onDownload { bytesSentTotal, contentLength ->
                     onProgressUpdate(
                         Progress(

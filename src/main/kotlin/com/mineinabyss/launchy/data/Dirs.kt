@@ -34,7 +34,7 @@ object Dirs {
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"
 
-    val modpackConfigsDir = config / "modpacks"
+    val modpackConfigsDir = (config / "modpacks")
 
     fun modpackDir(string: String) = mineinabyss / "modpacks" / string
     fun modpackConfigDir(name: String) = modpackConfigsDir / name
@@ -44,6 +44,7 @@ object Dirs {
         mineinabyss.createDirectories()
         mods.createDirectories()
         tmp.createDirectories()
+        modpackConfigsDir.createDirectories()
     }
 
     fun createConfigFiles() {

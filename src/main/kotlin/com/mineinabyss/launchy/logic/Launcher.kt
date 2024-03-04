@@ -6,6 +6,8 @@ import com.mineinabyss.launchy.state.ProfileState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.to2mbn.jmccc.auth.AuthInfo
+import org.to2mbn.jmccc.auth.Authenticator
 import org.to2mbn.jmccc.launch.LauncherBuilder
 import org.to2mbn.jmccc.mcdownloader.MinecraftDownloaderBuilder
 import org.to2mbn.jmccc.mcdownloader.download.concurrent.CallbackAdapter
@@ -13,8 +15,10 @@ import org.to2mbn.jmccc.mcdownloader.provider.DownloadProviderChain
 import org.to2mbn.jmccc.mcdownloader.provider.fabric.FabricDownloadProvider
 import org.to2mbn.jmccc.option.LaunchOption
 import org.to2mbn.jmccc.option.MinecraftDirectory
+import org.to2mbn.jmccc.util.UUIDUtils
 import org.to2mbn.jmccc.version.Version
 import java.nio.file.Path
+import java.util.*
 import kotlin.io.path.createParentDirectories
 
 
@@ -31,7 +35,16 @@ object Launcher {
             else -> state.launchedProcesses[pack.packFolderName] = launcher.launch(
                 LaunchOption(
                     pack.modpack.dependencies.fullVersionName,
-                    session,
+                    Authenticator {
+                        return@Authenticator AuthInfo(
+                            session.mcProfile.name,
+                            session.mcProfile.mcToken.accessToken,
+                            session.mcProfile.id,
+                            Collections.emptyMap(),
+                            "msa",
+                            "unknown",
+                        );
+                    },
                     dir
                 )
             )

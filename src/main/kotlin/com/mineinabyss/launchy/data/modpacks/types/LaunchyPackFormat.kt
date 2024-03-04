@@ -7,7 +7,7 @@ import java.nio.file.Path
 
 @Serializable
 data class LaunchyPackFormat(
-    val fabricVersion: String,
+    val fabricVersion: String? = null,
     val minecraftVersion: String,
     val groups: Set<Group>,
     private val modGroups: Map<GroupName, Set<ModInfo>>,
