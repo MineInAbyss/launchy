@@ -3,6 +3,8 @@ package com.mineinabyss.launchy.state
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
+import com.mineinabyss.launchy.data.config.GameInstance
+import com.mineinabyss.launchy.data.config.GameInstanceConfig
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import java.util.*
@@ -12,10 +14,15 @@ import kotlin.io.path.exists
 class LaunchyState(
     // Config should never be mutated unless it also updates UI state
     private val config: Config,
+    private val instances: List<GameInstance>
 ) {
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
-    var launchedProcesses = mutableStateMapOf<String, Process>()
+    val launchedProcesses = mutableStateMapOf<String, Process>()
+
+    val gameInstances = mutableStateListOf<GameInstance>().apply {
+        addAll(instances)
+    }
 
     fun processFor(pack: ModpackInfo): Process? = launchedProcesses[pack.folderName]
 
@@ -28,16 +35,11 @@ class LaunchyState(
 
     var onboardingComplete by mutableStateOf(config.onboardingComplete)
 
-    val downloadedModpacks = mutableStateListOf<ModpackInfo>().apply {
-        addAll(config.modpacks)
-    }
-
     fun saveToConfig() {
         config.copy(
             handledImportOptions = handledImportOptions,
             onboardingComplete = onboardingComplete,
             currentProfile = profile.currentProfile,
-            modpacks = downloadedModpacks,
         ).save()
     }
 }

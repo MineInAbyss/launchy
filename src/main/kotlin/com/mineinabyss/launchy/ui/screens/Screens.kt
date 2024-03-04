@@ -1,9 +1,9 @@
 package com.mineinabyss.launchy.ui.screens
 
 import androidx.compose.animation.*
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -15,7 +15,7 @@ import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.auth.AuthDialog
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
-import com.mineinabyss.launchy.ui.screens.addmodpack.AddModpackDialog
+import com.mineinabyss.launchy.ui.screens.addmodpack.NewInstance
 import com.mineinabyss.launchy.ui.screens.home.HomeScreen
 import com.mineinabyss.launchy.ui.screens.modpack.main.ModpackScreen
 import com.mineinabyss.launchy.ui.screens.modpack.settings.SettingsScreen
@@ -36,17 +36,20 @@ val LocalModpackState: ModpackState
 fun Screens() {
     val state = LocalLaunchyState
     val packState = state.modpackState
-    if (packState != null) CompositionLocalProvider(ModpackStateProvider provides packState) {
-        TransitionFade(screen is Screen.Modpack) {
-            ModpackScreen()
-        }
-        TransitionSlideUp(screen == Screen.Settings) {
-            SettingsScreen()
-        }
-    }
 
-    TransitionFade(screen == Screen.Default) {
-        HomeScreen()
+    if (packState != null) CompositionLocalProvider(ModpackStateProvider provides packState) {
+        Screen(Screen.Modpack) { ModpackScreen() }
+        Screen(Screen.Settings, transition = Transitions.SlideUp) { SettingsScreen() }
+    }
+    Screen(Screen.Default) { HomeScreen() }
+    Screen(Screen.NewInstance) { NewInstance() }
+
+    AnimatedVisibility(
+        screen.showSidebar,
+        enter = slideInHorizontally(initialOffsetX = { -80 }) + fadeIn(),
+        exit = slideOutHorizontally(targetOffsetX = { -80 }) + fadeOut()
+    ) {
+        LeftSidebar()
     }
 
     AppTopBar(
@@ -96,38 +99,34 @@ fun Screens() {
                 declineText = castDialog.declineText,
             ) { Text(castDialog.message, style = LocalTextStyle.current) }
         }
+    }
+}
 
-        Dialog.AddModpack -> {
-            AddModpackDialog()
+enum class Transitions {
+    FadeIn, SlideUp
+}
+
+@Composable
+fun Screen(
+    onScreen: Screen,
+    transition: Transitions = Transitions.FadeIn,
+    content: @Composable () -> Unit,
+) {
+    val enter = when (transition) {
+        Transitions.FadeIn -> fadeIn()
+        Transitions.SlideUp -> fadeIn() + slideIn(initialOffset = { IntOffset(0, 100) })
+    }
+    val exit = when (transition) {
+        Transitions.FadeIn -> fadeOut()
+        Transitions.SlideUp -> fadeOut() + slideOut(targetOffset = { IntOffset(0, 100) })
+    }
+    val topPadding = if (onScreen.showTitle) 40.dp else 0.dp
+    val startPadding = if (onScreen.showSidebar) 80.dp else 0.dp
+    AnimatedVisibility(screen == onScreen, enter = enter, exit = exit) {
+        Column {
+            Box(Modifier.padding(start = startPadding, top = topPadding)) {
+                content()
+            }
         }
     }
 }
-
-@Composable
-fun HandleTopBar(currentScreen: Screen, content: @Composable () -> Unit) {
-    Column {
-        AnimatedVisibility(!currentScreen.transparentTopBar, enter = fadeIn(), exit = fadeOut()) {
-            Spacer(Modifier.height(40.dp))
-        }
-        content()
-    }
-}
-
-@Composable
-fun TransitionFade(enabled: Boolean, content: @Composable () -> Unit) {
-    AnimatedVisibility(enabled, enter = fadeIn(), exit = fadeOut()) {
-        content()
-    }
-}
-
-@Composable
-fun TransitionSlideUp(enabled: Boolean, content: @Composable () -> Unit) {
-    AnimatedVisibility(
-        enabled,
-        enter = fadeIn() + slideIn(initialOffset = { IntOffset(0, 100) }),
-        exit = fadeOut() + slideOut(targetOffset = { IntOffset(0, 100) }),
-    ) {
-        content()
-    }
-}
-

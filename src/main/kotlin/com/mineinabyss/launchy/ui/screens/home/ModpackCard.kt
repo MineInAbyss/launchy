@@ -1,10 +1,14 @@
 package com.mineinabyss.launchy.ui.screens.home
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.PlayArrow
-import androidx.compose.material3.*
+import androidx.compose.material.icons.rounded.Cloud
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -15,10 +19,10 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
-import com.mineinabyss.launchy.logic.Launcher
+import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
+import com.mineinabyss.launchy.ui.elements.Tooltip
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardHeight
 import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardPadding
@@ -35,13 +39,14 @@ object ModpackCardStyle {
 }
 
 @Composable
-fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
-    colorScheme = LaunchyColors(pack.hue).DarkColors
+fun ModpackCard(instance: GameInstance) = MaterialTheme(
+    colorScheme = LaunchyColors(instance.modpackInfo.hue).DarkColors
 ) {
+    val pack = instance.modpackInfo
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
     val background by produceState<BitmapPainter?>(null) {
-        value = BitmapPainter(pack.getOrDownloadBackground())
+        value = pack.getOrDownloadBackground()
     }
     Card(
         onClick = {
@@ -63,21 +68,25 @@ fun ModpackCard(pack: ModpackInfo) = MaterialTheme(
                 )
                 SlightBackgroundTint()
             }
+            if (instance.config.isCloudInstance) TooltipArea(
+                tooltip = { Tooltip("Cloud modpack") },
+                modifier = Modifier.align(Alignment.TopEnd).padding(cardPadding + 4.dp).size(24.dp),
+            ) {
+                Icon(
+                    Icons.Rounded.Cloud,
+                    "Cloud modpack",
+                )
+            }
             Row(
                 Modifier.align(Alignment.BottomStart).padding(cardPadding),
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Column {
-                    Text(pack.name, style = MaterialTheme.typography.headlineMedium)
+                    Text(instance.config.customName ?: pack.name, style = MaterialTheme.typography.headlineMedium)
                     Text(pack.desc, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(Modifier.weight(1f))
-
-                val (containerColor, contentColor) = (state.profile.currentProfile?.let {
-                    FloatingActionButtonDefaults.containerColor
-                } ?: MaterialTheme.colorScheme.background).let { it to contentColorFor(it) }
-
                 PlayButton(hideText = true, pack) { pack.createModpackState() }
             }
         }

@@ -15,7 +15,6 @@ class ModpackState(
     private val userConfig: ModpackUserConfig
 ) {
     val packFolderName = modpackDir.name
-    var background: BitmapPainter? by mutableStateOf(null)
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
     val queued = DownloadQueueState(modpack.mods, toggles)
     val downloads = DownloadState()

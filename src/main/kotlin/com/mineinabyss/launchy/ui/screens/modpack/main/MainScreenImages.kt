@@ -16,18 +16,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import org.jetbrains.skia.Bitmap
 
 @Composable
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalModpackState
-    LaunchedEffect(pack) {
-        if(pack.background == null)
-            pack.background = BitmapPainter(pack.modpack.info.getOrDownloadBackground())
+    val background by produceState<BitmapPainter?>(null) {
+        value = pack.modpack.info.getOrDownloadBackground()
     }
-    if(pack.background == null) return
+    if(background == null) return
     windowScope.WindowDraggableArea {
         Image(
-            painter = pack.background!!,
+            painter = background!!,
             contentDescription = "Modpack background",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -73,7 +73,7 @@ fun BoxScope.SlightBackgroundTint() {
 fun LogoLarge(modifier: Modifier) {
     val pack = LocalModpackState
     val painter by produceState<BitmapPainter?>(null) {
-        value =  BitmapPainter(pack.modpack.info.getOrDownloadLogo())
+        value =  pack.modpack.info.getOrDownloadLogo()
     }
     if(painter == null) return
     Image(

@@ -15,9 +15,7 @@ import kotlin.io.path.writeText
 data class Config(
     val handledImportOptions: Boolean = false,
     val onboardingComplete: Boolean = false,
-    val currentProfile: PlayerProfile? = null,
-    val modpacks: List<ModpackInfo> = emptyList(),
-
+    val currentProfile: PlayerProfile? = null
     ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))

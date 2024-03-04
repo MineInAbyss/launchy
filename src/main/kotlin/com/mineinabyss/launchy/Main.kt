@@ -17,6 +17,8 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
+import com.mineinabyss.launchy.data.config.GameInstance
+import com.mineinabyss.launchy.data.config.GameInstanceConfig
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.ui.colors.AppTheme
 import com.mineinabyss.launchy.ui.screens.Screens
@@ -36,7 +38,8 @@ fun main() {
         val icon = painterResource("mia_profile_icon.png")
         val launchyState by produceState<LaunchyState?>(null) {
             val config = Config.read()
-            value = LaunchyState(config)
+            val instances = GameInstance.readAll(Dirs.modpackConfigsDir)
+            value = LaunchyState(config, instances)
         }
         val onClose: () -> Unit = {
             exitApplication()

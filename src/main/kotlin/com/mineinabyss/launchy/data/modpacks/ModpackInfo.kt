@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.data.modpacks
 
-import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
 import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.data.Dirs
@@ -13,6 +14,7 @@ import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.div
 import kotlin.io.path.exists
@@ -40,14 +42,27 @@ class ModpackInfo(
     @Transient
     private val logoPath = configDir / "logo.png"
 
-    suspend fun getOrDownloadBackground(): ImageBitmap {
+    @Transient
+    private var cachedBackground: BitmapPainter? = null
+
+    @Transient
+    private var cachedLogo: BitmapPainter? = null
+
+    suspend fun getOrDownloadBackground(): BitmapPainter {
+        cachedBackground?.let { return it }
         if (!backgroundImagePath.exists()) Downloader.download(backgroundURL, backgroundImagePath)
-        return loadImageBitmap(backgroundImagePath.inputStream())
+        val painter =
+            BitmapPainter(loadImageBitmap(backgroundImagePath.inputStream()), filterQuality = FilterQuality.High)
+        cachedBackground = painter
+        return painter
     }
 
-    suspend fun getOrDownloadLogo(): ImageBitmap {
+    suspend fun getOrDownloadLogo(): BitmapPainter {
+        cachedLogo?.let { return it }
         if (!logoPath.exists()) Downloader.download(logoURL, logoPath)
-        return loadImageBitmap(logoPath.inputStream())
+        val painter = BitmapPainter(loadImageBitmap(logoPath.inputStream()), filterQuality = FilterQuality.High)
+        cachedLogo = painter
+        return painter
     }
 
     suspend fun createModpackState(): ModpackState? {
@@ -59,8 +74,11 @@ class ModpackInfo(
             dialog = Dialog.Error("Failed to download modpack", "")
             return null
         }
-        return ModpackState(modpackDir, modpack, userConfig).apply {
-            this.background = background
-        }
+        return ModpackState(modpackDir, modpack, userConfig)
+    }
+
+    companion object {
+        fun read(path: Path) =
+            Formats.yaml.decodeFromStream(serializer(), path.inputStream())
     }
 }

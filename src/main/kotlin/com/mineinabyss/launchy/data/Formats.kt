@@ -7,7 +7,7 @@ import kotlinx.serialization.json.Json
 object Formats {
     val yaml = Yaml(
         configuration = YamlConfiguration(
-//            strictMode = false,
+            strictMode = false,
         )
     )
 

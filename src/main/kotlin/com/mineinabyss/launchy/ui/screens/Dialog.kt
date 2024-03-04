@@ -14,6 +14,4 @@ sealed interface Dialog {
     ) : Dialog
 
     class Error(val title: String, val message: String) : Dialog
-
-    object AddModpack: Dialog
 }
