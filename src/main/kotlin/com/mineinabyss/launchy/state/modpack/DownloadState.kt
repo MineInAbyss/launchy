@@ -10,6 +10,9 @@ class DownloadState {
     val inProgressConfigs = mutableStateMapOf<Mod, Progress>()
     val failed = mutableStateSetOf<Mod>()
 
+    class InProgressTask(val name: String)
+    val inProgressTasks = mutableStateMapOf<String, InProgressTask>()
+
     val isDownloading by derivedStateOf { inProgressMods.isNotEmpty() || inProgressConfigs.isNotEmpty() || installingProfile }
 
     // Caclculate the speed of the download

@@ -12,6 +12,8 @@ import org.to2mbn.jmccc.auth.Authenticator
 import org.to2mbn.jmccc.launch.LauncherBuilder
 import org.to2mbn.jmccc.mcdownloader.MinecraftDownloaderBuilder
 import org.to2mbn.jmccc.mcdownloader.download.concurrent.CallbackAdapter
+import org.to2mbn.jmccc.mcdownloader.download.concurrent.DownloadCallback
+import org.to2mbn.jmccc.mcdownloader.download.tasks.DownloadTask
 import org.to2mbn.jmccc.mcdownloader.provider.DownloadProviderChain
 import org.to2mbn.jmccc.mcdownloader.provider.fabric.FabricDownloadProvider
 import org.to2mbn.jmccc.option.LaunchOption
@@ -54,7 +56,8 @@ object Launcher {
     fun download(
         deps: PackDependencies,
         minecraftDir: Path,
-        finishedDownload: (String) -> Unit
+        onStartDownload: (String) -> Unit,
+        onFinishDownload: (String) -> Unit
     ): Job {
         val downloadJob = Job()
         minecraftDir.createParentDirectories()
@@ -66,7 +69,7 @@ object Launcher {
         }
         val callback = object : CallbackAdapter<Version>() {
             override fun done(result: Version) {
-                finishedDownload("${result.type} $result")
+                onFinishDownload("${result.type} $result")
                 downloader.shutdown()
                 downloadJob.complete()
             }
@@ -75,6 +78,11 @@ object Launcher {
                 e.printStackTrace()
                 downloader.shutdown()
                 downloadJob.complete()
+            }
+
+            override fun <R : Any?> taskStart(task: DownloadTask<R>?): DownloadCallback<R>? {
+                onStartDownload(deps.fullVersionName)
+                return null
             }
         }
         downloader.downloadIncrementally(dir, deps.fullVersionName, callback)

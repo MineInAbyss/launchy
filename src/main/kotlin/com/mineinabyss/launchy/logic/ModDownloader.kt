@@ -4,19 +4,26 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
+import com.mineinabyss.launchy.state.modpack.DownloadState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.*
 import java.util.concurrent.CancellationException
 import kotlin.io.path.deleteIfExists
 
 object ModDownloader {
+    val installModLoadersId = "installMCAndModLoaders"
     suspend fun ModpackState.installMCAndModLoaders(dependencies: PackDependencies) {
         downloads.installingProfile = true
         Launcher.download(
             dependencies,
             modpackDir,
-            finishedDownload = { println("Finished installing: $it") },
+            onStartDownload = {
+                println("Starting install: $it")
+                downloads.inProgressTasks[installModLoadersId] = DownloadState.InProgressTask(it)
+            },
+            onFinishDownload = { println("Finished installing: $it") },
         ).join()
+        downloads.inProgressTasks.remove(installModLoadersId)
         downloads.installingProfile = false
         queued.dependenciesInstalled = true
     }
