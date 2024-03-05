@@ -54,7 +54,9 @@ fun InfoBar() {
                 .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp)
         ) {
             InstallButton(
-                true, //state.processFor(packState.modpack.info) == null && !packState.downloads.isDownloading && packState.queued.areOperationsQueued,
+                state.processFor(packState.modpack.info) == null
+                        && !packState.downloads.isDownloading
+                        && (packState.queued.areOperationsQueued || packState.userAgreedDeps == null),
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
             Spacer(Modifier.width(12.dp))

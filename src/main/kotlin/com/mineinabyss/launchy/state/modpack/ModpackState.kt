@@ -15,7 +15,7 @@ class ModpackState(
 ) {
     val packFolderName = modpackDir.name
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
-    val queued = DownloadQueueState(modpackDir, modpack, toggles)
+    val queued = DownloadQueueState(modpack, toggles)
     val downloads = DownloadState()
     var userAgreedDeps by mutableStateOf(userConfig.userAgreedDeps)
 

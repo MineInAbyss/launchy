@@ -2,6 +2,8 @@ package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material3.*
@@ -9,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.ModDownloader.install
 import com.mineinabyss.launchy.ui.elements.PrimaryButton
@@ -26,7 +29,7 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
                 packState.install()
             }
         },
-        modifier = modifier
+        modifier = modifier.width(150.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Rounded.Download, "Download")
@@ -40,7 +43,7 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
                     Text("Installed")
                 }
                 InstallTextAnimatedVisibility(isDownloading) {
-                    Text("Installing...")
+                    Text("Installing")
                 }
             }
         }

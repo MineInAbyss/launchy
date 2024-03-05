@@ -25,7 +25,6 @@ object ModDownloader {
         ).join()
         downloads.inProgressTasks.remove(installModLoadersId)
         downloads.installingProfile = false
-        queued.dependenciesInstalled = true
     }
 
     suspend fun ModpackState.download(mod: Mod) {
