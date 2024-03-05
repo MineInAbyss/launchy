@@ -1,5 +1,6 @@
 package com.mineinabyss.launchy.ui.screens.home
 
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.layout.*
@@ -20,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
+import com.mineinabyss.launchy.data.config.GameInstanceConfig
 import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
 import com.mineinabyss.launchy.ui.elements.Tooltip
@@ -39,35 +41,44 @@ object ModpackCardStyle {
 }
 
 @Composable
-fun ModpackCard(instance: GameInstance) = MaterialTheme(
-    colorScheme = LaunchyColors(instance.config.hue).DarkColors
+fun InstanceCard(
+    config: GameInstanceConfig,
+    instance: GameInstance? = null,
+    modifier: Modifier = Modifier
+) = MaterialTheme(
+    colorScheme = LaunchyColors(config.hue).DarkColors
 ) {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
     val background by produceState<BitmapPainter?>(null) {
-        value = instance.getOrDownloadBackground()
+        value = instance?.getOrDownloadBackground() ?: config.loadBackgroundFromTmpFile()
     }
     Card(
         onClick = {
+            instance ?: return@Card
             coroutineScope.launch {
                 state.modpackState = instance.createModpackState()
                 currentHue = instance.config.hue
                 screen = Screen.Modpack
             }
         },
-        modifier = Modifier.height(cardHeight).width(cardWidth),
+        modifier = modifier.height(cardHeight).width(cardWidth),
     ) {
-        Box {
-            if (background != null) {
-                Image(
+        Box(Modifier.fillMaxSize()) {
+            androidx.compose.animation.AnimatedVisibility(
+                visible = background != null,
+                enter = fadeIn(),
+                modifier = Modifier.fillMaxSize()) {
+                if (background != null) Image(
                     painter = background!!,
                     contentDescription = "Pack background image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
-                SlightBackgroundTint()
             }
-            if (instance.config.cloudInstanceURL != null) TooltipArea(
+            SlightBackgroundTint()
+
+            if (config.cloudInstanceURL != null) TooltipArea(
                 tooltip = { Tooltip("Cloud modpack") },
                 modifier = Modifier.align(Alignment.TopEnd).padding(cardPadding + 4.dp).size(24.dp),
             ) {
@@ -82,11 +93,12 @@ fun ModpackCard(instance: GameInstance) = MaterialTheme(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Column {
-                    Text(instance.config.name, style = MaterialTheme.typography.headlineMedium)
-                    Text(instance.config.description, style = MaterialTheme.typography.bodyMedium)
+                    Text(config.name, style = MaterialTheme.typography.headlineMedium)
+                    Text(config.description, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(Modifier.weight(1f))
-                PlayButton(hideText = true, instance) { instance.createModpackState() }
+                if (instance != null)
+                    PlayButton(hideText = true, instance) { instance.createModpackState() }
             }
         }
     }

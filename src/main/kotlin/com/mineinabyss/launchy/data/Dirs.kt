@@ -17,14 +17,14 @@ object Dirs {
         OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss"
         OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
     }
-    val mods = mineinabyss / "mods"
-    val tmp = mineinabyss / ".tmp"
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))
         OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support"
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
+
+    val tmp = config / ".tmp"
 
     val accounts = config / "accounts"
     val avatars = config / "avatars"
@@ -42,7 +42,6 @@ object Dirs {
     fun createDirs() {
         config.createDirectories()
         mineinabyss.createDirectories()
-        mods.createDirectories()
         tmp.createDirectories()
         modpackConfigsDir.createDirectories()
     }

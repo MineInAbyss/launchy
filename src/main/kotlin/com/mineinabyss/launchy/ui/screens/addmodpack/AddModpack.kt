@@ -22,6 +22,7 @@ import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.ui.elements.ComfyContent
 import com.mineinabyss.launchy.ui.elements.ComfyWidth
 import com.mineinabyss.launchy.ui.screens.Screen
+import com.mineinabyss.launchy.ui.screens.home.InstanceCard
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -115,50 +116,56 @@ fun NewInstance() {
                 enter = slideInHorizontally() + fadeIn(),
                 exit = slideOutHorizontally() + fadeOut()
             ) {
-                ComfyContent {
-                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Confirm import", style = MaterialTheme.typography.headlineMedium)
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    ComfyContent {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("Confirm import", style = MaterialTheme.typography.headlineMedium)
 
-                        var nameText by remember { mutableStateOf(importingInstance?.name ?: "") }
-                        fun nameValid() = nameText.matches(validInstanceNameRegex)
-                        fun packWithNameExists() = Dirs.modpackConfigDir(nameText).exists()
-                        var nameValid by remember { mutableStateOf(nameValid()) }
-                        var packWithNameExists by remember { mutableStateOf(packWithNameExists()) }
+                            var nameText by remember { mutableStateOf(importingInstance?.name ?: "") }
+                            fun nameValid() = nameText.matches(validInstanceNameRegex)
+                            fun packWithNameExists() = Dirs.modpackConfigDir(nameText).exists()
+                            var nameValid by remember { mutableStateOf(nameValid()) }
+                            var packWithNameExists by remember { mutableStateOf(packWithNameExists()) }
 
-                        OutlinedTextField(
-                            value = nameText,
-                            singleLine = true,
-                            isError = !nameValid || packWithNameExists,
-                            leadingIcon = { Icon(Icons.Rounded.TextFields, contentDescription = "Name") },
-                            supportingText = {
-                                if (!nameValid) Text("Name must be alphanumeric")
-                                else if (packWithNameExists) Text("A modpack with this name already exists")
-                            },
-                            onValueChange = {
-                                nameText = it
-                                packWithNameExists = false
-                            },
-                            label = { Text("Instance name") },
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                            OutlinedTextField(
+                                value = nameText,
+                                singleLine = true,
+                                isError = !nameValid || packWithNameExists,
+                                leadingIcon = { Icon(Icons.Rounded.TextFields, contentDescription = "Name") },
+                                supportingText = {
+                                    if (!nameValid) Text("Name must be alphanumeric")
+                                    else if (packWithNameExists) Text("A modpack with this name already exists")
+                                },
+                                onValueChange = {
+                                    nameText = it
+                                    packWithNameExists = false
+                                },
+                                label = { Text("Instance name") },
+                                modifier = Modifier.fillMaxWidth()
+                            )
 
-                        TextButton(
-                            enabled = importingInstance != null,
-                            onClick = {
-                                nameValid = nameValid()
-                                packWithNameExists = packWithNameExists()
-                                val instance = importingInstance ?: return@TextButton
-                                if (!nameValid || packWithNameExists) return@TextButton
-                                GameInstance.create(
-                                    state, instance.copy(
-                                        name = nameText,
+                            TextButton(
+                                enabled = importingInstance != null,
+                                onClick = {
+                                    nameValid = nameValid()
+                                    packWithNameExists = packWithNameExists()
+                                    val instance = importingInstance ?: return@TextButton
+                                    if (!nameValid || packWithNameExists) return@TextButton
+                                    GameInstance.create(
+                                        state, instance.copy(
+                                            name = nameText,
+                                        )
                                     )
-                                )
-                                screen = Screen.Default
+                                    screen = Screen.Default
+                                }
+                            ) {
+                                Text("Confirm", color = MaterialTheme.colorScheme.primary)
                             }
-                        ) {
-                            Text("Confirm", color = MaterialTheme.colorScheme.primary)
                         }
+                    }
+
+                    ComfyWidth {
+                        importingInstance?.let { InstanceCard(it.copy(name = "Preview"), modifier = Modifier.fillMaxWidth()) }
                     }
                 }
             }

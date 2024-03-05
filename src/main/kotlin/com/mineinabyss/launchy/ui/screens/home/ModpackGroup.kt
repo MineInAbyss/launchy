@@ -37,7 +37,7 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 items(visiblePacks) { pack ->
-                    ModpackCard(pack)
+                    InstanceCard(pack.config, pack)
                 }
             }
         }
