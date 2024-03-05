@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
-    val state = LocalLaunchyState
     val packState = LocalModpackState
     val coroutineScope = rememberCoroutineScope()
     PrimaryButton(
@@ -34,7 +33,7 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
             val queued = packState.queued
             AnimatedVisibility(true, Modifier.animateContentSize()) {
                 val isDownloading = packState.downloads.isDownloading
-                InstallTextAnimatedVisibility(queued.areOperationsQueued && isDownloading) {
+                InstallTextAnimatedVisibility(queued.areOperationsQueued && !isDownloading) {
                     Text("Install")
                 }
                 InstallTextAnimatedVisibility(!queued.areOperationsQueued && !isDownloading) {

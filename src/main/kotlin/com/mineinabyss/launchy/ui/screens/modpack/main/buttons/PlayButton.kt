@@ -20,11 +20,10 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.logic.ModDownloader.install
+import com.mineinabyss.launchy.logic.ModDownloader.ensureCurrentDepsInstalled
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
-import com.mineinabyss.launchy.ui.elements.PrimaryIconButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
-import com.mineinabyss.launchy.ui.elements.SecondaryIconButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
 import kotlinx.coroutines.Dispatchers
@@ -77,11 +76,14 @@ fun PlayButton(
                             },
                             onDecline = {
                                 coroutineScope.launch(Dispatchers.IO) {
+                                    packState.install().join()
                                     Launcher.launch(state, packState, state.profile)
                                 }
                             }
                         )
                     else coroutineScope.launch(Dispatchers.IO) {
+                        packState.ensureCurrentDepsInstalled().join()
+                        println("Launching now!")
                         Launcher.launch(state, packState, state.profile)
                     }
                 } else {

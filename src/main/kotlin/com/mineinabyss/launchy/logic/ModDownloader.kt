@@ -3,20 +3,22 @@ package com.mineinabyss.launchy.logic
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
+import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.*
 import java.util.concurrent.CancellationException
 import kotlin.io.path.deleteIfExists
 
 object ModDownloader {
-    fun ModpackState.installMCAndModLoaders() {
+    suspend fun ModpackState.installMCAndModLoaders(dependencies: PackDependencies) {
         downloads.installingProfile = true
         Launcher.download(
-            modpack.dependencies,
+            dependencies,
             modpackDir,
             finishedDownload = { println("Finished installing: $it") },
-        )
+        ).join()
         downloads.installingProfile = false
+        queued.dependenciesInstalled = true
     }
 
     suspend fun ModpackState.download(mod: Mod) {
@@ -81,30 +83,52 @@ object ModDownloader {
         }
     }
 
+    /**
+     * Ensures dependencies the user definitely wants are installed,
+     * does not install any mod updates or new dep versions if they changed in the modpack.
+     * Primarily the mod loader/minecraft version.
+     */
+    suspend fun ModpackState.ensureCurrentDepsInstalled(): Job = coroutineScope {
+        launch {
+            val currentDeps = userAgreedDeps
+            if (currentDeps == null) {
+                userAgreedDeps = modpack.dependencies
+            }
+            installMCAndModLoaders(currentDeps ?: modpack.dependencies)
+        }
+    }
+
+    /**
+     * Updates mod loader versions and mods to latest modpack definition.
+     */
     suspend fun ModpackState.install(): Job = coroutineScope {
-        installMCAndModLoaders()
-        toggles.checkNonDownloadedMods()
-        val modDownloads = launch {
-            queued.downloads.map { mod ->
-                launch(Dispatchers.IO) {
-                    download(mod)
-                    toggles.checkNonDownloadedMods()
-                }
-            }.joinAll()
-        }
-        val modDeletions = launch {
-            queued.deletions.map { mod ->
-                launch(Dispatchers.IO) {
-                    try {
-                        mod.file.deleteIfExists()
-                    } catch (e: FileSystemException) {
-                        return@launch
-                    } finally {
-                        queued.deleted++
+        launch {
+            userAgreedDeps = modpack.dependencies
+            ensureCurrentDepsInstalled().join()
+            toggles.checkNonDownloadedMods()
+            val modDownloads = launch {
+                queued.downloads.map { mod ->
+                    launch(Dispatchers.IO) {
+                        download(mod)
+                        toggles.checkNonDownloadedMods()
                     }
-                }
-            }.joinAll()
+                }.joinAll()
+            }
+            val modDeletions = launch {
+                queued.deletions.map { mod ->
+                    launch(Dispatchers.IO) {
+                        try {
+                            mod.file.deleteIfExists()
+                        } catch (e: FileSystemException) {
+                            return@launch
+                        } finally {
+                            queued.deleted++
+                        }
+                    }
+                }.joinAll()
+            }
+            modDownloads.join()
+            modDeletions.join()
         }
-        return@coroutineScope launch { modDownloads.join(); modDeletions.join() }
     }
 }

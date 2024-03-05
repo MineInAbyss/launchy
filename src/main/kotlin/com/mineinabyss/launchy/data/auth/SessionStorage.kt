@@ -24,11 +24,16 @@ data class SessionStorage(
         fun load(uuid: UUID): FullJavaSession? {
             val targetFile = (Dirs.accounts / "$uuid.json")
             if (!targetFile.exists()) return null
-            return MinecraftAuth.JAVA_DEVICE_CODE_LOGIN.fromJson(
-                JsonParser.parseString(
-                    targetFile.readText()
-                ).asJsonObject
-            )
+            return runCatching {
+                MinecraftAuth.JAVA_DEVICE_CODE_LOGIN.fromJson(
+                    JsonParser.parseString(
+                        targetFile.readText()
+                    ).asJsonObject
+                )
+            }.onFailure {
+                println("Failed to load session for $uuid, ignoring file")
+                it.printStackTrace()
+            }.getOrNull()
         }
 
         fun save(session: FullJavaSession) {

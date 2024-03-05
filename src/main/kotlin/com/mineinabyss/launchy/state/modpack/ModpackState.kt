@@ -3,7 +3,6 @@ package com.mineinabyss.launchy.state.modpack
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
 import java.nio.file.Path
@@ -16,14 +15,16 @@ class ModpackState(
 ) {
     val packFolderName = modpackDir.name
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
-    val queued = DownloadQueueState(modpack.mods, toggles)
+    val queued = DownloadQueueState(modpackDir, modpack, toggles)
     val downloads = DownloadState()
+    var userAgreedDeps by mutableStateOf(userConfig.userAgreedDeps)
 
     fun saveToConfig() {
         userConfig.copy(
             fullEnabledGroups = modpack.mods.modGroups
                 .filter { toggles.enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
+            userAgreedDeps = userAgreedDeps,
             toggledMods = toggles.enabledMods.mapTo(mutableSetOf()) { it.info.name },
             toggledConfigs = toggles.enabledConfigs.mapTo(mutableSetOf()) { it.info.name } + toggles.enabledMods.filter { it.info.forceConfigDownload }
                 .mapTo(mutableSetOf()) { it.info.name },

@@ -4,6 +4,7 @@ import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.ProfileState
 import com.mineinabyss.launchy.state.modpack.ModpackState
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.to2mbn.jmccc.auth.AuthInfo
@@ -15,7 +16,6 @@ import org.to2mbn.jmccc.mcdownloader.provider.DownloadProviderChain
 import org.to2mbn.jmccc.mcdownloader.provider.fabric.FabricDownloadProvider
 import org.to2mbn.jmccc.option.LaunchOption
 import org.to2mbn.jmccc.option.MinecraftDirectory
-import org.to2mbn.jmccc.util.UUIDUtils
 import org.to2mbn.jmccc.version.Version
 import java.nio.file.Path
 import java.util.*
@@ -55,7 +55,8 @@ object Launcher {
         deps: PackDependencies,
         minecraftDir: Path,
         finishedDownload: (String) -> Unit
-    ) {
+    ): Job {
+        val downloadJob = Job()
         minecraftDir.createParentDirectories()
         val dir = MinecraftDirectory(minecraftDir.toFile())
 
@@ -67,14 +68,17 @@ object Launcher {
             override fun done(result: Version) {
                 finishedDownload("${result.type} $result")
                 downloader.shutdown()
+                downloadJob.complete()
             }
 
             override fun failed(e: Throwable) {
                 e.printStackTrace()
                 downloader.shutdown()
+                downloadJob.complete()
             }
         }
         downloader.downloadIncrementally(dir, deps.fullVersionName, callback)
+        return downloadJob
     }
 
 

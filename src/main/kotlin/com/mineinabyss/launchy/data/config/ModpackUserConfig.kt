@@ -2,6 +2,7 @@ package com.mineinabyss.launchy.data.config
 
 import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.data.*
+import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.nio.file.Path
@@ -10,6 +11,7 @@ import kotlin.io.path.*
 @Serializable
 data class ModpackUserConfig(
     val modpackMinecraftDir: String? = null,
+    val userAgreedDeps: PackDependencies? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val fullDisabledGroups: Set<GroupName> = setOf(),
     val toggledMods: Set<ModName> = setOf(),
