@@ -49,7 +49,11 @@ object Launcher {
                     },
                     dir
                 )
-            )
+            ).apply {
+                onExit().whenComplete { process, throwable ->
+                    state.launchedProcesses.remove(pack.packFolderName)
+                }
+            }
         }
     }
 
