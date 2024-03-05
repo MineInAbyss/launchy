@@ -1,12 +1,13 @@
 package com.mineinabyss.launchy.ui.screens
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -24,8 +25,6 @@ import com.mineinabyss.launchy.ui.state.TopBar
 var screen: Screen by mutableStateOf(Screen.Default)
 
 var dialog: Dialog by mutableStateOf(Dialog.None)
-
-var progress: Progress by mutableStateOf(Progress.Animated)
 
 private val ModpackStateProvider = compositionLocalOf<ModpackState> { error("No local modpack provided") }
 
@@ -99,6 +98,21 @@ fun Screens() {
                 declineText = castDialog.declineText,
             ) { Text(castDialog.message, style = LocalTextStyle.current) }
         }
+    }
+
+    val tasks = state.inProgressTasks
+
+    if(screen != Screen.Settings && tasks.isNotEmpty()) Box(Modifier.fillMaxSize()) {
+            val task = tasks.values.first()
+            Text(
+                "Installing ${task.name}...",
+                modifier = Modifier.align(Alignment.BottomStart).padding(start = 10.dp, bottom = 20.dp)
+            )
+
+        LinearProgressIndicator(
+            modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter),
+            color = MaterialTheme.colorScheme.primaryContainer
+        )
     }
 }
 

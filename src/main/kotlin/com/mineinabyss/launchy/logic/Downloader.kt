@@ -29,8 +29,8 @@ object Downloader {
         url: String,
         writeTo: Path,
         onProgressUpdate: (progress: Progress) -> Unit = {},
-    ) {
-        runCatching {
+    ): Result<Unit> {
+        return runCatching {
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
             val headers = httpClient.head(url).headers
@@ -38,7 +38,7 @@ object Downloader {
             val length = headers["Content-Length"]?.toLongOrNull()
             val cache = "Last-Modified: $lastModified, Content-Length: $length"
             val cacheFile = cacheDir / "${writeTo.name}.cache"
-            if (writeTo.exists() && cacheFile.exists() && cacheFile.readText() == cache) return
+            if (writeTo.exists() && cacheFile.exists() && cacheFile.readText() == cache) return@runCatching
             cacheFile.createParentDirectories()
             cacheFile.deleteIfExists()
             cacheFile.createFile().writeText(cache)

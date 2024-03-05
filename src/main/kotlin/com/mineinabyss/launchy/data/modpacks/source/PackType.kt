@@ -18,26 +18,25 @@ import kotlin.io.path.isRegularFile
 enum class PackType {
     Launchy, Modrinth;
 
-    fun getFilePath(modpackDir: Path): Path {
+    fun getFilePath(configDir: Path): Path {
         val ext = when (this) {
             Launchy -> "yml"
             Modrinth -> "zip"
         }
-        return modpackDir / "pack.$ext"
+        return configDir / "pack.$ext"
     }
-    @OptIn(ExperimentalSerializationApi::class)
-    fun getFormat(file: Path): PackFormat? {
-        if (!file.isRegularFile()) return null
-        return when (this) {
-            Launchy -> {
-                Formats.yaml.decodeFromStream<LaunchyPackFormat>(file.inputStream())
-            }
 
-            Modrinth -> {
+    @OptIn(ExperimentalSerializationApi::class)
+    fun getFormat(file: Path): Result<PackFormat> {
+        if (!file.isRegularFile()) return Result.failure(IllegalStateException("Could not find modpack file at $file"))
+        return when (this) {
+            Launchy -> runCatching { Formats.yaml.decodeFromStream<LaunchyPackFormat>(file.inputStream()) }
+
+            Modrinth -> runCatching {
                 ZipFile(file.toFile()).use { zip ->
-                    zip.getEntry("modrinth.index.json")?.let {
-                        Formats.json.decodeFromStream<ModrinthPackFormat>(zip.getInputStream(it))
-                    }
+                    val index = zip.getEntry("modrinth.index.json")
+                        ?: return Result.failure(IllegalStateException("Could not find modrinth.index.json in $file"))
+                    Formats.json.decodeFromStream<ModrinthPackFormat>(zip.getInputStream(index))
                 }
             }
         }

@@ -3,17 +3,15 @@ package com.mineinabyss.launchy.state.modpack
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.data.config.ModpackUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
-import java.nio.file.Path
-import kotlin.io.path.name
 
 class ModpackState(
-    val modpackDir: Path,
+    val instance: GameInstance,
     val modpack: Modpack,
     private val userConfig: ModpackUserConfig
 ) {
-    val packFolderName = modpackDir.name
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
     val queued = DownloadQueueState(modpack, toggles)
     val downloads = DownloadState()
@@ -31,6 +29,6 @@ class ModpackState(
             seenGroups = modpack.mods.groups.map { it.name }.toSet(),
             modDownloads = toggles.downloadURLs.mapKeys { it.key.info.name },
             modConfigs = toggles.downloadConfigURLs.mapKeys { it.key.info.name },
-        ).save(modpack.info.userConfigFile)
+        ).save(instance.userConfigFile)
     }
 }

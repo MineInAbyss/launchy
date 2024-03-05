@@ -5,7 +5,7 @@ import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import java.nio.file.Path
 
 sealed interface PackFormat {
-    fun toGenericMods(packDir: Path): Mods
+    fun toGenericMods(minecraftDir: Path): Mods
 
-    fun getDependencies(packDir: Path): PackDependencies
+    fun getDependencies(minecraftDir: Path): PackDependencies
 }

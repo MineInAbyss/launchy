@@ -20,13 +20,14 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
+    val state = LocalLaunchyState
     val packState = LocalModpackState
     val coroutineScope = rememberCoroutineScope()
     PrimaryButton(
         enabled = enabled,
         onClick = {
             coroutineScope.launch {
-                packState.install()
+                packState.install(state)
             }
         },
         modifier = modifier.width(150.dp)

@@ -4,6 +4,8 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
+import com.mineinabyss.launchy.state.InProgressTask
+import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.modpack.DownloadState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.*
@@ -12,18 +14,17 @@ import kotlin.io.path.deleteIfExists
 
 object ModDownloader {
     val installModLoadersId = "installMCAndModLoaders"
-    suspend fun ModpackState.installMCAndModLoaders(dependencies: PackDependencies) {
+    suspend fun ModpackState.installMCAndModLoaders(state: LaunchyState, dependencies: PackDependencies) {
         downloads.installingProfile = true
         Launcher.download(
             dependencies,
-            modpackDir,
+            instance.minecraftDir,
             onStartDownload = {
-                println("Starting install: $it")
-                downloads.inProgressTasks[installModLoadersId] = DownloadState.InProgressTask(it)
+                state.inProgressTasks[installModLoadersId] = InProgressTask(it)
             },
             onFinishDownload = { println("Finished installing: $it") },
         ).join()
-        downloads.inProgressTasks.remove(installModLoadersId)
+        state.inProgressTasks.remove(installModLoadersId)
         downloads.installingProfile = false
     }
 
@@ -94,23 +95,23 @@ object ModDownloader {
      * does not install any mod updates or new dep versions if they changed in the modpack.
      * Primarily the mod loader/minecraft version.
      */
-    suspend fun ModpackState.ensureCurrentDepsInstalled(): Job = coroutineScope {
+    suspend fun ModpackState.ensureCurrentDepsInstalled(state: LaunchyState): Job = coroutineScope {
         launch {
             val currentDeps = userAgreedDeps
             if (currentDeps == null) {
                 userAgreedDeps = modpack.dependencies
             }
-            installMCAndModLoaders(currentDeps ?: modpack.dependencies)
+            installMCAndModLoaders(state, currentDeps ?: modpack.dependencies)
         }
     }
 
     /**
      * Updates mod loader versions and mods to latest modpack definition.
      */
-    suspend fun ModpackState.install(): Job = coroutineScope {
+    suspend fun ModpackState.install(state: LaunchyState): Job = coroutineScope {
         launch {
             userAgreedDeps = modpack.dependencies
-            ensureCurrentDepsInstalled().join()
+            ensureCurrentDepsInstalled(state).join()
             toggles.checkNonDownloadedMods()
             val modDownloads = launch {
                 queued.downloads.map { mod ->

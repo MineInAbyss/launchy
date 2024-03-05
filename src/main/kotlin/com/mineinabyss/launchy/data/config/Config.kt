@@ -2,7 +2,6 @@ package com.mineinabyss.launchy.data.config
 
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.io.*

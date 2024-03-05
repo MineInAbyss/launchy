@@ -16,21 +16,13 @@ import com.mineinabyss.launchy.data.config.GameInstance
 fun ModpackGroup(title: String, packs: List<GameInstance>) {
     Column {
 //        var showAll by remember { mutableStateOf(false) }
-        val visiblePacks = packs.take(6)
+        val visiblePacks = packs//.take(6)
         Row {
             Text(title, style = MaterialTheme.typography.headlineLarge)
-//            Icon(
-//                Icons.Rounded.ArrowDropDown,
-//                contentDescription = "Show all",
-//            )
         }
-//        Surface(
-//            Modifier.fillMaxWidth(),
-//            tonalElevation = 2.dp,
-//            shape = RoundedCornerShape(20.dp)
-//        ) {
+        Spacer(Modifier.height(8.dp))
         BoxWithConstraints(Modifier) {
-            val total = packs.size
+            val total = packs.size + 1
             val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
             val rows = (total / colums).coerceAtLeast(1)
             val lazyGridState = rememberLazyGridState()

@@ -12,13 +12,13 @@ data class LaunchyPackFormat(
     val groups: Set<Group>,
     private val modGroups: Map<GroupName, Set<ModInfo>>,
 ) : PackFormat {
-    override fun toGenericMods(packDir: Path): Mods {
+    override fun toGenericMods(minecraftDir: Path): Mods {
         return Mods(modGroups
             .mapKeys { (name, _) -> groups.single { it.name == name } }
-            .mapValues { (_, mods) -> mods.map { Mod(packDir, it) }.toSet() })
+            .mapValues { (_, mods) -> mods.map { Mod(minecraftDir, it) }.toSet() })
     }
 
-    override fun getDependencies(packDir: Path): PackDependencies {
+    override fun getDependencies(minecraftDir: Path): PackDependencies {
         return PackDependencies(minecraft = minecraftVersion, fabricLoader = fabricVersion)
     }
 }

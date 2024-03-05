@@ -40,19 +40,18 @@ object ModpackCardStyle {
 
 @Composable
 fun ModpackCard(instance: GameInstance) = MaterialTheme(
-    colorScheme = LaunchyColors(instance.modpackInfo.hue).DarkColors
+    colorScheme = LaunchyColors(instance.config.hue).DarkColors
 ) {
-    val pack = instance.modpackInfo
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
     val background by produceState<BitmapPainter?>(null) {
-        value = pack.getOrDownloadBackground()
+        value = instance.getOrDownloadBackground()
     }
     Card(
         onClick = {
             coroutineScope.launch {
-                state.modpackState = pack.createModpackState()
-                currentHue = pack.hue
+                state.modpackState = instance.createModpackState()
+                currentHue = instance.config.hue
                 screen = Screen.Modpack
             }
         },
@@ -68,7 +67,7 @@ fun ModpackCard(instance: GameInstance) = MaterialTheme(
                 )
                 SlightBackgroundTint()
             }
-            if (instance.config.isCloudInstance) TooltipArea(
+            if (instance.config.cloudInstanceURL != null) TooltipArea(
                 tooltip = { Tooltip("Cloud modpack") },
                 modifier = Modifier.align(Alignment.TopEnd).padding(cardPadding + 4.dp).size(24.dp),
             ) {
@@ -83,11 +82,11 @@ fun ModpackCard(instance: GameInstance) = MaterialTheme(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Column {
-                    Text(instance.config.customName ?: pack.name, style = MaterialTheme.typography.headlineMedium)
-                    Text(pack.desc, style = MaterialTheme.typography.bodyMedium)
+                    Text(instance.config.name, style = MaterialTheme.typography.headlineMedium)
+                    Text(instance.config.description, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(Modifier.weight(1f))
-                PlayButton(hideText = true, pack) { pack.createModpackState() }
+                PlayButton(hideText = true, instance) { instance.createModpackState() }
             }
         }
     }

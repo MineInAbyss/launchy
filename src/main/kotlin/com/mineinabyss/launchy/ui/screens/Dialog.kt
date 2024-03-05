@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.ui.screens
 
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
+import com.mineinabyss.launchy.data.config.GameInstanceConfig
 
 sealed interface Dialog {
     object None : Dialog
@@ -18,6 +18,6 @@ sealed interface Dialog {
     class Error(val title: String, val message: String) : Dialog
 
     class ConfirmImportModpackDialog(
-        val info: ModpackInfo
+        val info: GameInstanceConfig
     )
 }

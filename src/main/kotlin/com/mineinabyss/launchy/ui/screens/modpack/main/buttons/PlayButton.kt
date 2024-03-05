@@ -17,7 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
+import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.logic.ModDownloader.install
 import com.mineinabyss.launchy.logic.ModDownloader.ensureCurrentDepsInstalled
@@ -32,11 +32,11 @@ import kotlinx.coroutines.launch
 @Composable
 fun PlayButton(
     hideText: Boolean = false,
-    info: ModpackInfo,
+    instance: GameInstance,
     getModpackState: suspend () -> ModpackState?,
 ) {
     val state = LocalLaunchyState
-    val process = state.processFor(info)
+    val process = state.processFor(instance)
     val coroutineScope = rememberCoroutineScope()
     val buttonIcon by remember(state.profile.currentSession, process) {
         mutableStateOf(
@@ -70,25 +70,25 @@ fun PlayButton(
                             declineText = "Skip",
                             onAccept = {
                                 coroutineScope.launch(Dispatchers.IO) {
-                                    packState.install().join()
+                                    packState.install(state).join()
                                     Launcher.launch(state, packState, state.profile)
                                 }
                             },
                             onDecline = {
                                 coroutineScope.launch(Dispatchers.IO) {
-                                    packState.install().join()
+                                    packState.install(state).join()
                                     Launcher.launch(state, packState, state.profile)
                                 }
                             }
                         )
                     else coroutineScope.launch(Dispatchers.IO) {
-                        packState.ensureCurrentDepsInstalled().join()
+                        packState.ensureCurrentDepsInstalled(state).join()
                         println("Launching now!")
                         Launcher.launch(state, packState, state.profile)
                     }
                 } else {
                     process.destroyForcibly()
-                    state.launchedProcesses.remove(packState.packFolderName)
+                    state.setProcessFor(packState.instance, null)
                 }
             }
         }

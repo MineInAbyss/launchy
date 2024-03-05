@@ -5,10 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.data.modpacks.Modpack
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
-import com.mineinabyss.launchy.data.modpacks.Mods
-import java.nio.file.Path
-import kotlin.io.path.div
 
 class DownloadQueueState(
     val modpack: Modpack,

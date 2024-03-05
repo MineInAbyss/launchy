@@ -26,7 +26,7 @@ import kotlin.io.path.createParentDirectories
 
 object Launcher {
     suspend fun launch(state: LaunchyState, pack: ModpackState, profile: ProfileState): Unit = coroutineScope {
-        val dir = MinecraftDirectory(pack.modpackDir.toFile())
+        val dir = MinecraftDirectory(pack.instance.minecraftDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
 
         // Auth or show dialog
@@ -34,7 +34,8 @@ object Launcher {
             null -> Auth.authOrShowDialog(profile) {
                 launch { launch(state, pack, profile) }
             }
-            else -> state.launchedProcesses[pack.packFolderName] = launcher.launch(
+
+            else -> state.setProcessFor(pack.instance, launcher.launch(
                 LaunchOption(
                     pack.modpack.dependencies.fullVersionName,
                     Authenticator {
@@ -51,9 +52,9 @@ object Launcher {
                 )
             ).apply {
                 onExit().whenComplete { process, throwable ->
-                    state.launchedProcesses.remove(pack.packFolderName)
+                    state.setProcessFor(pack.instance, null)
                 }
-            }
+            })
         }
     }
 

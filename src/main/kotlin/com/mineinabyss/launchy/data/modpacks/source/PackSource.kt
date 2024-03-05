@@ -1,11 +1,10 @@
 package com.mineinabyss.launchy.data.modpacks.source
 
+import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.data.modpacks.Modpack
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.logic.Downloader
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.nio.file.Path
 import kotlin.io.path.createFile
 import kotlin.io.path.createParentDirectories
 import kotlin.io.path.exists
@@ -15,31 +14,23 @@ sealed class PackSource {
     @Serializable
     @SerialName("localFile")
     class LocalFile(val type: PackType) : PackSource() {
-        override suspend fun getOrDownloadLatestPack(packInfo: ModpackInfo, modpackDir: Path): Modpack? {
-            val downloadTo = type.getFilePath(packInfo.configDir)
-            val dir = packInfo.configDir
-            val format = type.getFormat(downloadTo) ?: return null
-            val mods = format.toGenericMods(modpackDir)
-            val dependencies = format.getDependencies(dir)
-            return Modpack(dependencies, mods, packInfo)
+        override suspend fun loadInstance(instance: GameInstance): Result<Modpack> = runCatching {
+            val format = type.getFormat(type.getFilePath(instance.configDir)).getOrThrow()
+            val mods = format.toGenericMods(instance.minecraftDir)
+            val dependencies = format.getDependencies(instance.minecraftDir)
+            Modpack(dependencies, mods)
         }
-
     }
 
-    @SerialName("singleFileUrl")
+    @SerialName("downloadFromURL")
     @Serializable
-    class SingleFileUrl(val url: String, val type: PackType) : PackSource() {
-        override suspend fun getOrDownloadLatestPack(packInfo: ModpackInfo, modpackDir: Path): Modpack? {
-            val downloadTo = type.getFilePath(modpackDir)
-            if (!downloadTo.exists()) downloadTo.createParentDirectories().createFile()
+    class DownloadFromURL(val url: String, val type: PackType) : PackSource() {
+        override suspend fun loadInstance(instance: GameInstance): Result<Modpack> {
+            val downloadTo = type.getFilePath(instance.configDir)
             Downloader.download(url, downloadTo)
-            return LocalFile(type).getOrDownloadLatestPack(packInfo, modpackDir)
+            return LocalFile(type).loadInstance(instance)
         }
     }
 
-    companion object {
-
-    }
-
-    abstract suspend fun getOrDownloadLatestPack(packInfo: ModpackInfo, modpackDir: Path): Modpack?
+    abstract suspend fun loadInstance(instance: GameInstance): Result<Modpack>
 }

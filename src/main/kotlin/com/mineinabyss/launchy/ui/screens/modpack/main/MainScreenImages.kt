@@ -22,7 +22,7 @@ import org.jetbrains.skia.Bitmap
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalModpackState
     val background by produceState<BitmapPainter?>(null) {
-        value = pack.modpack.info.getOrDownloadBackground()
+        value = pack.instance.getOrDownloadBackground()
     }
     if(background == null) return
     windowScope.WindowDraggableArea {
@@ -73,7 +73,7 @@ fun BoxScope.SlightBackgroundTint() {
 fun LogoLarge(modifier: Modifier) {
     val pack = LocalModpackState
     val painter by produceState<BitmapPainter?>(null) {
-        value =  pack.modpack.info.getOrDownloadLogo()
+        value =  pack.instance.getOrDownloadLogo()
     }
     if(painter == null) return
     Image(

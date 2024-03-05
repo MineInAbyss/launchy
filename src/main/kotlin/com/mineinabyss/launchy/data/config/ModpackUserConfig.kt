@@ -10,7 +10,6 @@ import kotlin.io.path.*
 
 @Serializable
 data class ModpackUserConfig(
-    val modpackMinecraftDir: String? = null,
     val userAgreedDeps: PackDependencies? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val fullDisabledGroups: Set<GroupName> = setOf(),

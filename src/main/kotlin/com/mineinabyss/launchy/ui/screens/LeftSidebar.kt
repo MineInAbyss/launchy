@@ -23,6 +23,7 @@ import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Auth
+import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.ui.elements.PlayerAvatar
 import kotlinx.coroutines.launch
 
@@ -50,7 +51,9 @@ fun LeftSidebar() {
                 NavigationRailItem(
                     icon = { Icon(Icons.Rounded.Add, contentDescription = "New instance") },
                     selected = screen == Screen.NewInstance,
-                    onClick = { screen = Screen.NewInstance}
+                    onClick = {
+                        screen = Screen.NewInstance
+                    }
                 )
                 val profile = state.profile.currentProfile
                 FloatingActionButton(

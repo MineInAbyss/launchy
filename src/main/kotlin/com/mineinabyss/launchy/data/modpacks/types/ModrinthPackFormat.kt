@@ -32,11 +32,11 @@ data class ModrinthPackFormat(
         )
     }
 
-    override fun getDependencies(packDir: Path): PackDependencies {
+    override fun getDependencies(minecraftDir: Path): PackDependencies {
         return dependencies
     }
 
-    override fun toGenericMods(packDir: Path) =
-        Mods.withSingleGroup(files.map { it.toMod(packDir) })
+    override fun toGenericMods(minecraftDir: Path) =
+        Mods.withSingleGroup(files.map { it.toMod(minecraftDir) })
 }
 

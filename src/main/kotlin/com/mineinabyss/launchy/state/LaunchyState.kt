@@ -4,8 +4,6 @@ import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.GameInstance
-import com.mineinabyss.launchy.data.config.GameInstanceConfig
-import com.mineinabyss.launchy.data.modpacks.ModpackInfo
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import java.util.*
 import kotlin.io.path.div
@@ -18,13 +16,19 @@ class LaunchyState(
 ) {
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
-    val launchedProcesses = mutableStateMapOf<String, Process>()
+    private val launchedProcesses = mutableStateMapOf<String, Process>()
 
     val gameInstances = mutableStateListOf<GameInstance>().apply {
         addAll(instances)
     }
 
-    fun processFor(pack: ModpackInfo): Process? = launchedProcesses[pack.folderName]
+    val inProgressTasks = mutableStateMapOf<String, InProgressTask>()
+
+    fun processFor(instance: GameInstance): Process? = launchedProcesses[instance.minecraftDir.toString()]
+    fun setProcessFor(instance: GameInstance, process: Process?) {
+        if (process == null) launchedProcesses.remove(instance.minecraftDir.toString())
+        else launchedProcesses[instance.minecraftDir.toString()] = process
+    }
 
     // If any state is true, we consider import handled and move on
     var handledImportOptions by mutableStateOf(
