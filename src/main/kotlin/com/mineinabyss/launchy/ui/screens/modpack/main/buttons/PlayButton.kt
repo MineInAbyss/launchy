@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.logic.Launcher
-import com.mineinabyss.launchy.logic.ModDownloader.install
 import com.mineinabyss.launchy.logic.ModDownloader.ensureCurrentDepsInstalled
+import com.mineinabyss.launchy.logic.ModDownloader.install
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
@@ -62,29 +62,41 @@ fun PlayButton(
                 val packState = foundPackState ?: getModpackState() ?: return@launch
                 foundPackState = packState
                 if (process == null) {
-                    if (packState.queued.downloads.isNotEmpty() || packState.queued.deletions.isNotEmpty())
-                        dialog = Dialog.Options(
-                            title = "Update before launch?",
-                            message = "Updates are available for this modpack. Would you like to download them?",
-                            acceptText = "Download",
-                            declineText = "Skip",
-                            onAccept = {
-                                coroutineScope.launch(Dispatchers.IO) {
-                                    packState.install(state).join()
-                                    Launcher.launch(state, packState, state.profile)
-                                }
-                            },
-                            onDecline = {
-                                coroutineScope.launch(Dispatchers.IO) {
-                                    packState.install(state).join()
-                                    Launcher.launch(state, packState, state.profile)
-                                }
+                    when {
+                        // Assume this means not launched before
+                        packState.userAgreedDeps == null -> {
+                            coroutineScope.launch(Dispatchers.IO) {
+                                packState.install(state).join()
+                                Launcher.launch(state, packState, state.profile)
                             }
-                        )
-                    else coroutineScope.launch(Dispatchers.IO) {
-                        packState.ensureCurrentDepsInstalled(state).join()
-                        println("Launching now!")
-                        Launcher.launch(state, packState, state.profile)
+                        }
+                        packState.queued.downloads.isNotEmpty() || packState.queued.deletions.isNotEmpty() -> {
+                            dialog = Dialog.Options(
+                                title = "Update before launch?",
+                                message = "Updates are available for this modpack. Would you like to download them?",
+                                acceptText = "Download",
+                                declineText = "Skip",
+                                onAccept = {
+                                    coroutineScope.launch(Dispatchers.IO) {
+                                        packState.install(state).join()
+                                        Launcher.launch(state, packState, state.profile)
+                                    }
+                                },
+                                onDecline = {
+                                    coroutineScope.launch(Dispatchers.IO) {
+                                        packState.install(state).join()
+                                        Launcher.launch(state, packState, state.profile)
+                                    }
+                                }
+                            )
+                        }
+                        else -> {
+                            coroutineScope.launch(Dispatchers.IO) {
+                                packState.ensureCurrentDepsInstalled(state).join()
+                                println("Launching now!")
+                                Launcher.launch(state, packState, state.profile)
+                            }
+                        }
                     }
                 } else {
                     process.destroyForcibly()

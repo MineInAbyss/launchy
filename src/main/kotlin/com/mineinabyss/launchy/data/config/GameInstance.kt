@@ -55,7 +55,9 @@ class GameInstance(
             else ModpackUserConfig()
         val modpack = config.source.loadInstance(this)
             .getOrElse {
-                dialog = Dialog.Error("Failed read instance", it.message ?: "Unknown error")
+                dialog = Dialog.Error("Failed read instance", it
+                    .stackTraceToString()
+                    .split("\n").take(5).joinToString("\n"))
                 it.printStackTrace()
                 return null
             }

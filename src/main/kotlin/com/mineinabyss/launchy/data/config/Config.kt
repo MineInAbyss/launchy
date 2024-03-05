@@ -5,9 +5,9 @@ import com.mineinabyss.launchy.data.Formats
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import java.io.*
+import java.nio.file.Path
 import java.util.zip.ZipFile
-import kotlin.io.path.inputStream
-import kotlin.io.path.writeText
+import kotlin.io.path.*
 
 
 @Serializable
@@ -15,7 +15,7 @@ data class Config(
     val handledImportOptions: Boolean = false,
     val onboardingComplete: Boolean = false,
     val currentProfile: PlayerProfile? = null
-    ) {
+) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))
     }
@@ -27,30 +27,27 @@ data class Config(
 }
 
 @Throws(IOException::class)
-fun unzip(zipFilePath: File, destDirectory: String) {
+fun unzip(zipFilePath: Path, destDirectory: Path) {
+    if (destDirectory.notExists()) destDirectory.createDirectories()
 
-    File(destDirectory).run {
-        if (!exists()) {
-            mkdirs()
-        }
-    }
-
-    ZipFile(zipFilePath).use { zip ->
+    ZipFile(zipFilePath.toFile()).use { zip ->
         zip.entries().asSequence().forEach { entry ->
             zip.getInputStream(entry).use { input ->
-                val filePath = destDirectory + File.separator + entry.name
-
+                val filePath = destDirectory / entry.name
+                filePath.createParentDirectories()
                 if (!entry.isDirectory) extractFile(input, filePath)
-                else File(filePath).mkdir()
+                else {
+                    if (filePath.notExists()) filePath.createDirectory()
+                }
             }
         }
     }
 }
 
 @Throws(IOException::class)
-fun extractFile(inputStream: InputStream, destFilePath: String) {
+fun extractFile(inputStream: InputStream, destFilePath: Path) {
     val bufferSize = 4096
-    val buffer = BufferedOutputStream(FileOutputStream(destFilePath))
+    val buffer = BufferedOutputStream(destFilePath.outputStream())
     val bytes = ByteArray(bufferSize)
     var read: Int
     while (inputStream.read(bytes).also { read = it } != -1) {

@@ -10,10 +10,13 @@ import com.mineinabyss.launchy.state.modpack.DownloadState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.*
 import java.util.concurrent.CancellationException
+import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.copyToRecursively
 import kotlin.io.path.deleteIfExists
 
 object ModDownloader {
     val installModLoadersId = "installMCAndModLoaders"
+    val copyOverridesId = "copyOverrides"
     suspend fun ModpackState.installMCAndModLoaders(state: LaunchyState, dependencies: PackDependencies) {
         downloads.installingProfile = true
         Launcher.download(
@@ -58,11 +61,11 @@ object ModDownloader {
                     println("Starting download of $name config")
                     downloads.inProgressConfigs[mod] = Progress(0, 0, 0) // set progress to 0
                     val config = mod.config
-                    Downloader.download(url = mod.info.configUrl, writeTo = config) progress@{
+                    Downloader.download(url = mod.info.configUrl, writeTo = config) {
                         downloads.inProgressConfigs[mod] = it
                     }
                     toggles.downloadConfigURLs[mod] = mod.info.configUrl
-                    unzip(config.toFile(), Dirs.mineinabyss.toString())
+                    unzip(config, Dirs.mineinabyss)
                     config.toFile().delete()
                     saveToConfig()
                     println("Successfully downloaded $name config")
@@ -105,6 +108,18 @@ object ModDownloader {
         }
     }
 
+    @OptIn(ExperimentalPathApi::class)
+    suspend fun ModpackState.copyOverrides(state: LaunchyState): Job = coroutineScope {
+        launch {
+            state.inProgressTasks[copyOverridesId] = InProgressTask("Copying overrides")
+            modpack.overridesPath?.copyToRecursively(
+                target = instance.minecraftDir,
+                followLinks = false,
+                overwrite = true,
+            )
+            state.inProgressTasks.remove(copyOverridesId)
+        }
+    }
     /**
      * Updates mod loader versions and mods to latest modpack definition.
      */
@@ -112,6 +127,7 @@ object ModDownloader {
         launch {
             userAgreedDeps = modpack.dependencies
             ensureCurrentDepsInstalled(state).join()
+            copyOverrides(state).join()
             toggles.checkNonDownloadedMods()
             val modDownloads = launch {
                 queued.downloads.map { mod ->

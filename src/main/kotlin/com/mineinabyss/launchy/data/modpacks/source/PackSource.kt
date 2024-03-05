@@ -15,10 +15,10 @@ sealed class PackSource {
     @SerialName("localFile")
     class LocalFile(val type: PackType) : PackSource() {
         override suspend fun loadInstance(instance: GameInstance): Result<Modpack> = runCatching {
-            val format = type.getFormat(type.getFilePath(instance.configDir)).getOrThrow()
+            val format = type.getFormat(instance.configDir).getOrThrow()
             val mods = format.toGenericMods(instance.minecraftDir)
             val dependencies = format.getDependencies(instance.minecraftDir)
-            Modpack(dependencies, mods)
+            Modpack(dependencies, mods, format.getOverridesPath(instance.configDir))
         }
     }
 
@@ -27,7 +27,9 @@ sealed class PackSource {
     class DownloadFromURL(val url: String, val type: PackType) : PackSource() {
         override suspend fun loadInstance(instance: GameInstance): Result<Modpack> {
             val downloadTo = type.getFilePath(instance.configDir)
-            Downloader.download(url, downloadTo)
+            Downloader.download(url, downloadTo, onFinishDownloadWhenChanged = {
+                type.afterDownload(instance.configDir)
+            })
             return LocalFile(type).loadInstance(instance)
         }
     }

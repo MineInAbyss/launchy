@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.data.modpacks.types
+package com.mineinabyss.launchy.data.modpacks.formats
 
 import com.mineinabyss.launchy.data.GroupName
 import com.mineinabyss.launchy.data.modpacks.*
@@ -21,4 +21,6 @@ data class LaunchyPackFormat(
     override fun getDependencies(minecraftDir: Path): PackDependencies {
         return PackDependencies(minecraft = minecraftVersion, fabricLoader = fabricVersion)
     }
+
+    override fun getOverridesPath(configDir: Path): Path? = null
 }

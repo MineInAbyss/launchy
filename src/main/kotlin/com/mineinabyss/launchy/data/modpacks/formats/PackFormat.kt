@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.data.modpacks.types
+package com.mineinabyss.launchy.data.modpacks.formats
 
 import com.mineinabyss.launchy.data.modpacks.Mods
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
@@ -8,4 +8,6 @@ sealed interface PackFormat {
     fun toGenericMods(minecraftDir: Path): Mods
 
     fun getDependencies(minecraftDir: Path): PackDependencies
+
+    fun getOverridesPath(configDir: Path): Path?
 }

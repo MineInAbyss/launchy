@@ -28,6 +28,7 @@ object Downloader {
     suspend fun download(
         url: String,
         writeTo: Path,
+        onFinishDownloadWhenChanged: () -> Unit = {},
         onProgressUpdate: (progress: Progress) -> Unit = {},
     ): Result<Unit> {
         return runCatching {
@@ -67,6 +68,7 @@ object Downloader {
                         writeTo.appendBytes(bytes)
                     }
                 }
+                onFinishDownloadWhenChanged()
             }
         }.onFailure {
             it.printStackTrace()

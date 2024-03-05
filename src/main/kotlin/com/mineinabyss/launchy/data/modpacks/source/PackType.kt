@@ -2,17 +2,15 @@ package com.mineinabyss.launchy.data.modpacks.source
 
 import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.data.Formats
-import com.mineinabyss.launchy.data.modpacks.types.LaunchyPackFormat
-import com.mineinabyss.launchy.data.modpacks.types.ModrinthPackFormat
-import com.mineinabyss.launchy.data.modpacks.types.PackFormat
+import com.mineinabyss.launchy.data.config.unzip
+import com.mineinabyss.launchy.data.modpacks.formats.LaunchyPackFormat
+import com.mineinabyss.launchy.data.modpacks.formats.ModrinthPackFormat
+import com.mineinabyss.launchy.data.modpacks.formats.PackFormat
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.decodeFromStream
 import java.nio.file.Path
-import java.util.zip.ZipFile
-import kotlin.io.path.div
-import kotlin.io.path.inputStream
-import kotlin.io.path.isRegularFile
+import kotlin.io.path.*
 
 @Serializable
 enum class PackType {
@@ -26,18 +24,32 @@ enum class PackType {
         return configDir / "pack.$ext"
     }
 
+    @OptIn(ExperimentalPathApi::class)
+    fun afterDownload(configDir: Path) {
+        val path = getFilePath(configDir)
+        if (this == Modrinth) {
+            val unzipDir = configDir / "mrpack"
+            unzipDir.deleteRecursively()
+            unzip(path, unzipDir)
+        }
+    }
+
     @OptIn(ExperimentalSerializationApi::class)
-    fun getFormat(file: Path): Result<PackFormat> {
-        if (!file.isRegularFile()) return Result.failure(IllegalStateException("Could not find modpack file at $file"))
+    fun getFormat(configDir: Path): Result<PackFormat> {
+        val file = getFilePath(configDir)
         return when (this) {
-            Launchy -> runCatching { Formats.yaml.decodeFromStream<LaunchyPackFormat>(file.inputStream()) }
+            Launchy -> runCatching {
+                if (!file.isRegularFile()) return Result.failure(IllegalStateException("Could not find modpack file at $file"))
+                Formats.yaml.decodeFromStream<LaunchyPackFormat>(file.inputStream())
+            }
 
             Modrinth -> runCatching {
-                ZipFile(file.toFile()).use { zip ->
-                    val index = zip.getEntry("modrinth.index.json")
-                        ?: return Result.failure(IllegalStateException("Could not find modrinth.index.json in $file"))
-                    Formats.json.decodeFromStream<ModrinthPackFormat>(zip.getInputStream(index))
+                val unzipDir = configDir / "mrpack"
+                val index = unzipDir / "modrinth.index.json"
+                if(unzipDir.notExists()) {
+                    afterDownload(configDir)
                 }
+                Formats.json.decodeFromStream<ModrinthPackFormat>(index.inputStream())
             }
         }
     }
