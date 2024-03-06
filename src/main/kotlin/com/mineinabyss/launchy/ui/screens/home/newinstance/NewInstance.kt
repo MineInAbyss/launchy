@@ -60,53 +60,57 @@ fun NewInstance() {
                 enter = slideInHorizontally() + fadeIn(),
                 exit = slideOutHorizontally() + fadeOut()
             ) {
-                ComfyContent {
-                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        var urlText by remember { mutableStateOf("") }
-                        var urlValid by remember { mutableStateOf(true) }
-                        fun urlValid() = urlText.startsWith("https://") || urlText.startsWith("http://")
-                        var urlFailedToParse by remember { mutableStateOf(false) }
-
+                Column {
+                    ComfyWidth {
                         Text("Import from link", style = MaterialTheme.typography.headlineMedium)
-                        OutlinedTextField(
-                            value = urlText,
-                            singleLine = true,
-                            isError = !urlValid || urlFailedToParse,
-                            leadingIcon = { Icon(Icons.Rounded.Link, contentDescription = "Link") },
-                            onValueChange = {
-                                urlText = it
-                                urlFailedToParse = false
-                            },
-                            label = { Text("Link") },
-                            supportingText = {
-                                if (!urlValid) Text("Must be valid URL")
-                                else if (urlFailedToParse) Text("URL is not a valid instance file")
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                    }
+                    ComfyContent {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            var urlText by remember { mutableStateOf("") }
+                            var urlValid by remember { mutableStateOf(true) }
+                            fun urlValid() = urlText.startsWith("https://") || urlText.startsWith("http://")
+                            var urlFailedToParse by remember { mutableStateOf(false) }
 
-                        TextButton(onClick = {
-                            urlValid = urlValid()
-                            if (!urlValid) return@TextButton
-                            val taskKey = "import-cloud-instance-${urlText.hashCode()}"
-                            val downloadPath = Dirs.tmp / "launchy-cloud-instance-${urlText.hashCode()}.yml"
-                            downloadPath.deleteIfExists()
-                            coroutineScope.launch(Dispatchers.IO) {
-                                state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")
-                                val cloudInstance = Downloader.download(urlText, downloadPath).mapCatching {
-                                    GameInstanceConfig.read(downloadPath)
-                                }.getOrElse {
-                                    urlFailedToParse = true
+                            OutlinedTextField(
+                                value = urlText,
+                                singleLine = true,
+                                isError = !urlValid || urlFailedToParse,
+                                leadingIcon = { Icon(Icons.Rounded.Link, contentDescription = "Link") },
+                                onValueChange = {
+                                    urlText = it
+                                    urlFailedToParse = false
+                                },
+                                label = { Text("Link") },
+                                supportingText = {
+                                    if (!urlValid) Text("Must be valid URL")
+                                    else if (urlFailedToParse) Text("URL is not a valid instance file")
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                            )
+
+                            TextButton(onClick = {
+                                urlValid = urlValid()
+                                if (!urlValid) return@TextButton
+                                val taskKey = "import-cloud-instance-${urlText.hashCode()}"
+                                val downloadPath = Dirs.tmp / "launchy-cloud-instance-${urlText.hashCode()}.yml"
+                                downloadPath.deleteIfExists()
+                                coroutineScope.launch(Dispatchers.IO) {
+                                    state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")
+                                    val cloudInstance = Downloader.download(urlText, downloadPath).mapCatching {
+                                        GameInstanceConfig.read(downloadPath)
+                                    }.getOrElse {
+                                        urlFailedToParse = true
+                                        state.inProgressTasks.remove(taskKey)
+                                        return@launch
+                                    }
+                                    importingInstance = cloudInstance.copy(
+                                        cloudInstanceURL = urlText
+                                    )
                                     state.inProgressTasks.remove(taskKey)
-                                    return@launch
                                 }
-                                importingInstance = cloudInstance.copy(
-                                    cloudInstanceURL = urlText
-                                )
-                                state.inProgressTasks.remove(taskKey)
+                            }) {
+                                Text("Import", color = MaterialTheme.colorScheme.primary)
                             }
-                        }) {
-                            Text("Import", color = MaterialTheme.colorScheme.primary)
                         }
                     }
                 }

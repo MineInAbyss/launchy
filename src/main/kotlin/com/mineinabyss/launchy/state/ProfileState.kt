@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.PlayerProfile
-import jmccc.microsoft.MicrosoftAuthenticator
 import net.raphimc.minecraftauth.step.java.session.StepFullJavaSession.FullJavaSession
 
 class ProfileState(

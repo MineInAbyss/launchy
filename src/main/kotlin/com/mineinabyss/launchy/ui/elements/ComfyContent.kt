@@ -12,7 +12,7 @@ fun ComfyWidth(
     content: @Composable () -> Unit
 ) {
     Box(
-        Modifier.fillMaxWidth().padding(end = 16.dp, top = 16.dp, bottom = 16.dp),
+        Modifier.fillMaxWidth().padding(end = 16.dp, top = 16.dp),
         contentAlignment = androidx.compose.ui.Alignment.Center
     ) {
         Box(Modifier.width(800.dp)) {

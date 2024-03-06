@@ -35,7 +35,7 @@ val LocalLaunchyState: LaunchyState
 fun main() {
     application {
         val windowState = rememberWindowState(placement = WindowPlacement.Floating)
-        val icon = painterResource("mia_profile_icon.png")
+        val icon = painterResource("icon.png")
         val launchyState by produceState<LaunchyState?>(null) {
             Dirs.createDirs()
             val config = Config.read()

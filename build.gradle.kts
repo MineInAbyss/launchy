@@ -19,13 +19,10 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(files("deps/BrowserLauncher2-all-1_3.jar"))
     implementation(compose.desktop.currentOs) {
         exclude(group = "org.jetbrains.compose.material", module = "material")
     }
-    @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
     implementation(compose.material3)
-    implementation(compose.material)
     implementation(compose.materialIconsExtended)
     implementation(idofrontLibs.kotlinx.serialization.json)
     implementation(idofrontLibs.kotlinx.serialization.kaml)
@@ -35,13 +32,12 @@ dependencies {
 
     implementation("com.darkrockstudios:mpfilepicker:3.1.0")
     implementation("org.rauschig:jarchivelib:1.2.0")
-    implementation("org.json:json:20230227")
-//    implementation("net.fabricmc:fabric-installer:0.9.0")
     implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
+
     implementation("net.raphimc:MinecraftAuth:4.0.0")
     implementation("dev.3-3:jmccc-mcdownloader:3.1.4")
     implementation("dev.3-3:jmccc:3.1.4")
-    implementation("dev.3-3:jmccc-microsoft-authenticator:3.1.4")
+//    implementation("dev.3-3:jmccc-microsoft-authenticator:3.1.4")
 }
 
 tasks.withType<KotlinCompile> {
@@ -64,10 +60,12 @@ compose.desktop {
         mainClass = "com.mineinabyss.launchy.MainKt"
         buildTypes.release.proguard {
             configurationFiles.from(
-                project.file("proguard/compose-desktop.pro"),
-                project.file("proguard/gson.pro"),
+//                project.file("proguard/compose-desktop.pro"),
+//                project.file("proguard/gson.pro"),
                 project.file("proguard/custom.pro")
             )
+            optimize = false
+            obfuscate = false
         }
 
         nativeDistributions {
@@ -77,8 +75,7 @@ compose.desktop {
                 else -> targetFormats(TargetFormat.AppImage)
             }
 
-             includeAllModules = true
-//            modules("java.instrument", "java.management", "java.naming", "java.security.jgss", "jdk.httpserver", "jdk.unsupported")
+            modules("java.instrument", "java.management", "java.naming", "java.security.jgss", "jdk.httpserver", "jdk.unsupported")
             packageName = appName
             packageVersion = "${project.version}"
             val iconsRoot = project.file("packaging/icons")
@@ -128,7 +125,7 @@ tasks {
     val copyBuildToPackaging by registering(Copy::class) {
         dependsOn("packageReleaseDistributionForCurrentOS")
         dependsOn(deleteOldAppDirFiles)
-        from("$buildDir/compose/binaries/main/app/$appName")
+        from("$buildDir/compose/binaries/main-release/app/$appName")
         into("$linuxAppDir/usr")
     }
 

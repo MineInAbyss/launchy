@@ -18,7 +18,7 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
 //        var showAll by remember { mutableStateOf(false) }
         val visiblePacks = packs//.take(6)
         Row {
-            Text(title, style = MaterialTheme.typography.headlineLarge)
+            Text(title, style = MaterialTheme.typography.headlineMedium)
         }
         Spacer(Modifier.height(8.dp))
         if (visiblePacks.isEmpty()) {

@@ -79,6 +79,11 @@ fun Screens() = Scaffold(
                     Screen.Instance
                 }
 
+                Screen.Settings -> {
+                    state.saveToConfig()
+                    Screen.Default
+                }
+
                 else -> Screen.Default
             }
         }

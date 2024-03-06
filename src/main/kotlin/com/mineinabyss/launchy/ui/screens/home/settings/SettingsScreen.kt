@@ -18,6 +18,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.SuggestedJVMArgs
 import com.mineinabyss.launchy.state.JvmState
 import com.mineinabyss.launchy.ui.elements.ComfyContent
+import com.mineinabyss.launchy.ui.elements.ComfyWidth
 import java.awt.FileDialog
 import java.awt.Frame
 import java.nio.file.Path
@@ -27,7 +28,9 @@ import java.nio.file.Path
 fun SettingsScreen() {
     val state = LocalLaunchyState
     Column {
-        Text("Settings", style = MaterialTheme.typography.headlineMedium)
+        ComfyWidth {
+            Text("Settings", style = MaterialTheme.typography.headlineMedium)
+        }
         ComfyContent {
             var directoryPickerShown by remember { mutableStateOf(false) }
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -38,7 +41,8 @@ fun SettingsScreen() {
                     directoryPickerShown = false
                 })
                 Column {
-                    Text("Java path", style = MaterialTheme.typography.titleMedium)
+                    Text("Java path", style = MaterialTheme.typography.titleSmall)
+                    Spacer(Modifier.height(8.dp))
                     OutlinedTextField(
                         value = state.jvm.javaPath?.toString() ?: "No path selected",
                         readOnly = true,
@@ -92,6 +96,8 @@ fun SettingsScreen() {
                         Checkbox(state.jvm.useRecommendedJvmArgs, onCheckedChange = { state.jvm.useRecommendedJvmArgs = it })
                         Text("Use recommended JVM arguments")
                     }
+
+                    Spacer(Modifier.height(16.dp))
 
                     OutlinedTextField(
                         value = state.jvm.jvmArgs,
