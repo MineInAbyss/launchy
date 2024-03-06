@@ -7,10 +7,12 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.FileUpload
 import androidx.compose.material.icons.rounded.Link
 import androidx.compose.material.icons.rounded.TextFields
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
@@ -24,8 +26,12 @@ import com.mineinabyss.launchy.ui.elements.ComfyWidth
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.home.InstanceCard
 import com.mineinabyss.launchy.ui.screens.screen
+import com.mineinabyss.launchy.ui.state.windowScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.awt.datatransfer.DataFlavor
+import java.awt.dnd.*
+import java.io.File
 import kotlin.collections.set
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.div
@@ -38,6 +44,9 @@ fun NewInstance() {
     val state = LocalLaunchyState
     var selectedTabIndex by remember { mutableStateOf(0) }
     var importingInstance: GameInstanceConfig? by remember { mutableStateOf(null) }
+    val showDragFileCard = remember { mutableStateOf(false) }
+    HandleFileDropping(showDragFileCard)
+    ShowDropFileCard(showDragFileCard)
     Column {
         ComfyWidth {
             PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
@@ -191,5 +200,59 @@ fun NewInstance() {
 ////                    )
 //                }
 //            }
+    }
+}
+
+@Composable
+private fun HandleFileDropping(showDragFileCard: MutableState<Boolean>) {
+    val state = LocalLaunchyState
+    val target = object : DropTarget() {
+        @Synchronized
+        override fun dragEnter(event: DropTargetDragEvent) {
+            val files = (event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>).filterIsInstance<File>()
+            if (files.any { it.extension == "mrpack" })
+                showDragFileCard.value = true
+            else event.rejectDrag()
+        }
+
+        @Synchronized
+        override fun dragExit(event: DropTargetEvent) {
+            showDragFileCard.value = false
+        }
+
+        @Synchronized
+        override fun drop(event: DropTargetDropEvent) {
+            showDragFileCard.value = false
+            runCatching {
+                event.acceptDrop(DnDConstants.ACTION_REFERENCE)
+                val files = (event.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<*>).filterIsInstance<File>()
+                files.firstOrNull { it.extension == "mrpack" }?.let {
+                    //TODO This does not work as GameInstanceConfig#read doesnt properly deserialize .mrpack
+                    //GameInstance.create(state, GameInstanceConfig.read(it.toPath()))
+                }
+            }.onFailure {
+                it.printStackTrace()
+            }
+        }
+    }
+    windowScope.window.dropTarget = target
+}
+
+@Composable
+private fun ShowDropFileCard(showDragFileCard: MutableState<Boolean>) {
+    if (!showDragFileCard.value) return
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background.copy(alpha = 0.5f)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Row {
+                Icon(Icons.Rounded.FileUpload, contentDescription = "Upload")
+                Text("Drop a .mrpack to create an instance...", style = MaterialTheme.typography.bodyLarge)
+            }
+        }
     }
 }
