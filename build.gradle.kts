@@ -78,11 +78,14 @@ compose.desktop {
             modules("java.instrument", "java.management", "java.naming", "java.security.jgss", "jdk.httpserver", "jdk.unsupported")
             packageName = appName
             packageVersion = "${project.version}"
+            val strippedVersion = project.version.toString().substringBeforeLast("-")
             val iconsRoot = project.file("packaging/icons")
             macOS {
+                packageVersion = strippedVersion
                 iconFile.set(iconsRoot.resolve("icon.icns"))
             }
             windows {
+                packageVersion = strippedVersion
                 menu = true
                 shortcut = true
                 upgradeUuid = "b627d78b-947c-4f5c-9f3b-ae02bfa97d08"
