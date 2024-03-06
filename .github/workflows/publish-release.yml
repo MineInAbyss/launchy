@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - develop
     paths-ignore:
       - '**.md'
       - 'versions.yml'
@@ -84,7 +85,7 @@ jobs:
       - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
+          prerelease: "${{ github.ref == 'refs/heads/develop' }}"
           automatic_release_tag: v${{ steps.extract_version.outputs.version }}
           files: |
             releases/*
