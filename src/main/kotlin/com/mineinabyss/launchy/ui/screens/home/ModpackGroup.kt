@@ -23,7 +23,7 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
         Spacer(Modifier.height(8.dp))
         BoxWithConstraints(Modifier) {
             val total = packs.size + 1
-            val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
+            val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceIn(1..total)
             val rows = (total / colums).coerceAtLeast(1)
             val lazyGridState = rememberLazyGridState()
             LazyVerticalGrid(
