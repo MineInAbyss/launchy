@@ -4,6 +4,9 @@ import com.mineinabyss.launchy.data.config.GameInstanceConfig
 
 sealed interface Dialog {
     object None : Dialog
+
+    object ChooseJVMPath : Dialog
+
     object Auth : Dialog
 
     class Options(

@@ -26,6 +26,7 @@ import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
+import com.mineinabyss.launchy.ui.screens.snackbarHostState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -57,6 +58,8 @@ fun PlayButton(
 
     Box {
         var foundPackState: ModpackState? by remember { mutableStateOf(null) }
+        val updateBeforeLaunch = foundPackState?.queued?.downloads?.isNotEmpty() ?: false
+                || foundPackState?.queued?.deletions?.isNotEmpty() ?: false
         val onClick: () -> Unit = {
             coroutineScope.launch(Dispatchers.IO) {
                 val packState = foundPackState ?: getModpackState() ?: return@launch
@@ -70,7 +73,7 @@ fun PlayButton(
                                 Launcher.launch(state, packState, state.profile)
                             }
                         }
-                        packState.queued.downloads.isNotEmpty() || packState.queued.deletions.isNotEmpty() -> {
+                        updateBeforeLaunch -> {
                             dialog = Dialog.Options(
                                 title = "Update before launch?",
                                 message = "Updates are available for this modpack. Would you like to download them?",

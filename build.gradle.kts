@@ -33,6 +33,8 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:2.3.8")
     implementation("io.ktor:ktor-client-cio-jvm:2.3.8")
 
+    implementation("com.darkrockstudios:mpfilepicker:3.1.0")
+    implementation("org.rauschig:jarchivelib:1.2.0")
     implementation("org.json:json:20230227")
 //    implementation("net.fabricmc:fabric-installer:0.9.0")
     implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
@@ -50,16 +52,24 @@ tasks.withType<KotlinCompile> {
     )
 }
 
-val appInstallerName = "MineInAbyss_Launcher-" + when {
+val appInstallerName = "Launchy-" + when {
     Os.isFamily(Os.FAMILY_MAC) -> "macOS"
     Os.isFamily(Os.FAMILY_WINDOWS) -> "windows"
     else -> "linux"
 }
-val appName = "Mine in Abyss Launcher"
+val appName = "Launchy"
 
 compose.desktop {
     application {
         mainClass = "com.mineinabyss.launchy.MainKt"
+        buildTypes.release.proguard {
+            configurationFiles.from(
+                project.file("proguard/compose-desktop.pro"),
+                project.file("proguard/gson.pro"),
+                project.file("proguard/custom.pro")
+            )
+        }
+
         nativeDistributions {
             when {
                 Os.isFamily(Os.FAMILY_MAC) -> targetFormats(TargetFormat.Dmg)
@@ -67,7 +77,8 @@ compose.desktop {
                 else -> targetFormats(TargetFormat.AppImage)
             }
 
-            modules("java.instrument", "jdk.unsupported")
+             includeAllModules = true
+//            modules("java.instrument", "java.management", "java.naming", "java.security.jgss", "jdk.httpserver", "jdk.unsupported")
             packageName = appName
             packageVersion = "${project.version}"
             val iconsRoot = project.file("packaging/icons")
@@ -89,7 +100,7 @@ compose.desktop {
     }
 }
 
-val linuxAppDir = project.file("packaging/appimage/Mine in Abyss.AppDir")
+val linuxAppDir = project.file("packaging/appimage/Launchy.AppDir")
 val appImageTool = project.file("deps/appimagetool.AppImage")
 val composePackageDir = "$buildDir/compose/binaries/main/${
     when {
@@ -115,7 +126,7 @@ tasks {
     }
 
     val copyBuildToPackaging by registering(Copy::class) {
-        dependsOn("packageDistributionForCurrentOS")
+        dependsOn("packageReleaseDistributionForCurrentOS")
         dependsOn(deleteOldAppDirFiles)
         from("$buildDir/compose/binaries/main/app/$appName")
         into("$linuxAppDir/usr")
@@ -129,7 +140,7 @@ tasks {
     }
 
     val exeRelease by registering(Copy::class) {
-        dependsOn("packageDistributionForCurrentOS")
+        dependsOn("packageReleaseDistributionForCurrentOS")
         from(composePackageDir)
         include("*.exe")
         rename("$appName*", appInstallerName)
@@ -137,7 +148,7 @@ tasks {
     }
 
     val dmgRelease by registering(Copy::class) {
-        dependsOn("packageDistributionForCurrentOS")
+        dependsOn("packageReleaseDistributionForCurrentOS")
         from(composePackageDir)
         include("*.dmg")
         rename("$appName*", appInstallerName)

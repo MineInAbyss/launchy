@@ -28,11 +28,11 @@ fun HandleImportSettings() {
                     // TODO: Show error message
                     e.printStackTrace()
                 }
-                screen = Screen.Settings
+                screen = Screen.InstanceSettings
                 state.handledImportOptions = true
             },
             onDecline = {
-                screen = Screen.Settings
+                screen = Screen.InstanceSettings
                 state.handledImportOptions = true
             }
         )

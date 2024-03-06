@@ -24,6 +24,9 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
+    val jdks = mineinabyss / ".jdks"
+    val jdkGraal = mineinabyss / ".jdks" / "graalvm-jdk-17.zip"
+
     val tmp = config / ".tmp"
 
     val accounts = config / "accounts"

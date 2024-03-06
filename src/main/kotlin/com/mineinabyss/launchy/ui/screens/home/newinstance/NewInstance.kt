@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.screens.addmodpack
+package com.mineinabyss.launchy.ui.screens.home.newinstance
 
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut

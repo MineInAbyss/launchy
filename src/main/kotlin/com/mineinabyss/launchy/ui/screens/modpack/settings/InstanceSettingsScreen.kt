@@ -12,14 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
 import com.mineinabyss.launchy.ui.screens.LocalModpackState
 
 @Composable
 @Preview
-fun SettingsScreen() {
+fun InstanceSettingsScreen() {
     val state = LocalModpackState
     Scaffold(
         bottomBar = { InfoBar() },

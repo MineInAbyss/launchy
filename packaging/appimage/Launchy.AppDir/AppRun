@@ -2,5 +2,5 @@
 
 HERE="$(dirname $"$(readlink -f "${0}")")"
 ls "${HERE}/usr/bin"
-EXEC="${HERE}/usr/bin/MineInAbyss_Launcher-linux"
+EXEC="${HERE}/usr/bin/Launchy"
 exec "${EXEC}"

@@ -21,7 +21,9 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
             Text(title, style = MaterialTheme.typography.headlineLarge)
         }
         Spacer(Modifier.height(8.dp))
-        BoxWithConstraints(Modifier) {
+        if (visiblePacks.isEmpty()) {
+            Text("No instances installed yet, click the + button on the sidebar to add one!")
+        } else BoxWithConstraints(Modifier) {
             val total = packs.size + 1
             val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
             val rows = (total / colums).coerceAtLeast(1)

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.QuestionMark
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,16 +13,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.res.ResourceLoader
 import androidx.compose.ui.res.loadImageBitmap
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Auth
-import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.ui.elements.PlayerAvatar
 import kotlinx.coroutines.launch
 
@@ -46,7 +41,7 @@ fun LeftSidebar() {
                 NavigationRailItem(
                     icon = { Icon(Icons.Rounded.Settings, contentDescription = "Settings") },
                     selected = screen == Screen.Settings,
-                    onClick = { }
+                    onClick = { screen = Screen.Settings }
                 )
                 NavigationRailItem(
                     icon = { Icon(Icons.Rounded.Add, contentDescription = "New instance") },

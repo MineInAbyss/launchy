@@ -1,0 +1,42 @@
+package com.mineinabyss.launchy.ui.dialogs
+
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.logic.Downloader
+import com.mineinabyss.launchy.ui.elements.LaunchyDialog
+import com.mineinabyss.launchy.ui.screens.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+@Composable
+fun SelectJVMDialog() {
+    val coroutineScope = rememberCoroutineScope()
+    val state = LocalLaunchyState
+    LaunchyDialog(
+        title = { Text("Install java", style = LocalTextStyle.current) },
+        onAccept = {
+            dialog = Dialog.None
+            coroutineScope.launch(Dispatchers.IO) {
+                val jdkPath = Downloader.installJDK(state)
+                if (jdkPath != null) {
+                    state.jvm.javaPath = jdkPath
+                    state.saveToConfig()
+                } else {
+                    dialog = Dialog.Error(
+                        "Failed to install Java",
+                        "Please install Java manually and select the path in settings."
+                    )
+                }
+            }
+        },
+        onDecline = { dialog = Dialog.None; screen = Screen.Settings },
+        onDismiss = { dialog = Dialog.None; },
+        acceptText = "Install automatically",
+        declineText = "Choose manually",
+    ) {
+        Text("Launchy needs Java to run Minecraft. It can install a version for you, or you can choose a path to an existing installation.")
+    }
+}

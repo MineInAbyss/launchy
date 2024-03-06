@@ -17,6 +17,7 @@ class LaunchyState(
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()
+    val jvm = JvmState(config)
 
     val gameInstances = mutableStateListOf<GameInstance>().apply {
         addAll(instances)
@@ -44,6 +45,10 @@ class LaunchyState(
             handledImportOptions = handledImportOptions,
             onboardingComplete = onboardingComplete,
             currentProfile = profile.currentProfile,
+            javaPath = jvm.javaPath?.toString(),
+            jvmArguments = jvm.userJvmArgs,
+            memoryAllocation = jvm.userMemoryAllocation,
+            useRecommendedJvmArguments = jvm.useRecommendedJvmArgs
         ).save()
     }
 }

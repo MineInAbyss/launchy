@@ -4,15 +4,21 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
+import com.mineinabyss.launchy.logic.ModDownloader.download
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.modpack.DownloadState
 import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.util.OS
 import kotlinx.coroutines.*
+import org.rauschig.jarchivelib.ArchiveFormat
+import org.rauschig.jarchivelib.ArchiverFactory
+import org.rauschig.jarchivelib.CompressionType
 import java.util.concurrent.CancellationException
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.copyToRecursively
 import kotlin.io.path.deleteIfExists
+import kotlin.io.path.div
 
 object ModDownloader {
     val installModLoadersId = "installMCAndModLoaders"
@@ -23,7 +29,7 @@ object ModDownloader {
             dependencies,
             instance.minecraftDir,
             onStartDownload = {
-                state.inProgressTasks[installModLoadersId] = InProgressTask(it)
+                state.inProgressTasks[installModLoadersId] = InProgressTask("Installing $it")
             },
             onFinishDownload = { println("Finished installing: $it") },
         ).join()

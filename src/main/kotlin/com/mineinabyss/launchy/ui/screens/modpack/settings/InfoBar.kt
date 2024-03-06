@@ -56,7 +56,8 @@ fun InfoBar() {
             InstallButton(
                 state.processFor(packState.instance) == null
                         && !packState.downloads.isDownloading
-                        && (packState.queued.areOperationsQueued || packState.userAgreedDeps == null),
+                        && (packState.queued.areOperationsQueued || packState.userAgreedDeps == null)
+                        && state.inProgressTasks.isEmpty(),
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
             Spacer(Modifier.width(12.dp))

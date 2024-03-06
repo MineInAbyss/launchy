@@ -4,45 +4,56 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.AppTopBar
-import com.mineinabyss.launchy.ui.auth.AuthDialog
+import com.mineinabyss.launchy.ui.dialogs.AuthDialog
+import com.mineinabyss.launchy.ui.dialogs.SelectJVMDialog
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
-import com.mineinabyss.launchy.ui.screens.addmodpack.NewInstance
 import com.mineinabyss.launchy.ui.screens.home.HomeScreen
+import com.mineinabyss.launchy.ui.screens.home.newinstance.NewInstance
+import com.mineinabyss.launchy.ui.screens.home.settings.SettingsScreen
 import com.mineinabyss.launchy.ui.screens.modpack.main.ModpackScreen
-import com.mineinabyss.launchy.ui.screens.modpack.settings.SettingsScreen
+import com.mineinabyss.launchy.ui.screens.modpack.settings.InstanceSettingsScreen
 import com.mineinabyss.launchy.ui.state.TopBar
 
 var screen: Screen by mutableStateOf(Screen.Default)
 
 var dialog: Dialog by mutableStateOf(Dialog.None)
 
+var notifications = mutableStateListOf<String>()
+
 private val ModpackStateProvider = compositionLocalOf<ModpackState> { error("No local modpack provided") }
+
+val snackbarHostState = SnackbarHostState()
+fun pushNotification(message: String) {
+    notifications.add(message)
+}
 
 val LocalModpackState: ModpackState
     @Composable get() = ModpackStateProvider.current
 
 @Composable
-fun Screens() {
+fun Screens() = Scaffold(
+    snackbarHost = { SnackbarHost(snackbarHostState) }
+) {
     val state = LocalLaunchyState
     val packState = state.modpackState
 
     if (packState != null) CompositionLocalProvider(ModpackStateProvider provides packState) {
-        Screen(Screen.Modpack) { ModpackScreen() }
-        Screen(Screen.Settings, transition = Transitions.SlideUp) { SettingsScreen() }
+        Screen(Screen.Instance) { ModpackScreen() }
+        Screen(Screen.InstanceSettings, transition = Transitions.SlideUp) { InstanceSettingsScreen() }
     }
     Screen(Screen.Default) { HomeScreen() }
     Screen(Screen.NewInstance) { NewInstance() }
-
+    Screen(Screen.Settings) { SettingsScreen() }
     AnimatedVisibility(
         screen.showSidebar,
         enter = slideInHorizontally(initialOffsetX = { -80 }) + fadeIn(),
@@ -58,14 +69,14 @@ fun Screens() {
         showBackButton = screen != Screen.Default,
         onBackButtonClicked = {
             screen = when (screen) {
-                Screen.Modpack -> {
+                Screen.Instance -> {
                     packState?.saveToConfig()
                     Screen.Default
                 }
 
-                Screen.Settings -> {
+                Screen.InstanceSettings -> {
                     packState?.saveToConfig()
-                    Screen.Modpack
+                    Screen.Instance
                 }
 
                 else -> Screen.Default
@@ -78,6 +89,8 @@ fun Screens() {
         Dialog.Auth -> AuthDialog(
             onDismissRequest = { dialog = Dialog.None },
         )
+
+        Dialog.ChooseJVMPath -> SelectJVMDialog()
 
         is Dialog.Error -> LaunchyDialog(
             title = { Text(castDialog.title, style = LocalTextStyle.current) },
@@ -102,17 +115,36 @@ fun Screens() {
 
     val tasks = state.inProgressTasks
 
-    if(screen != Screen.Settings && tasks.isNotEmpty()) Box(Modifier.fillMaxSize()) {
-            val task = tasks.values.first()
-            Text(
-                "Installing ${task.name}...",
-                modifier = Modifier.align(Alignment.BottomStart).padding(start = 10.dp, bottom = 20.dp)
-            )
+    if (screen != Screen.InstanceSettings && tasks.isNotEmpty()) Box(Modifier.fillMaxSize()) {
+        val task = tasks.values.first()
+        val textModifier = Modifier.align(Alignment.BottomStart).padding(start = 10.dp, bottom = 20.dp)
+        val progressBarModifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
+        val progressBarColor = MaterialTheme.colorScheme.primaryContainer
+        when (task) {
+            is InProgressTask.WithPercentage -> {
+                Text(
+                    "${task.name}... (${task.current}/${task.total}${if (task.measurement != null) " ${task.measurement}" else ")"}",
+                    modifier = textModifier
+                )
+                LinearProgressIndicator(
+                    progress = task.current.toFloat() / task.total,
+                    modifier = progressBarModifier,
+                    color = progressBarColor
+                )
+            }
 
-        LinearProgressIndicator(
-            modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter),
-            color = MaterialTheme.colorScheme.primaryContainer
-        )
+            else -> {
+                Text(
+                    "${task.name}...",
+                    modifier = textModifier
+                )
+
+                LinearProgressIndicator(
+                    modifier = progressBarModifier,
+                    color = progressBarColor
+                )
+            }
+        }
     }
 }
 

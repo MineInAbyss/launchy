@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.ui.auth
+package com.mineinabyss.launchy.ui.dialogs
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.ClickableText

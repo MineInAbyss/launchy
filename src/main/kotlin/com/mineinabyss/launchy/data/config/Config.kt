@@ -14,7 +14,11 @@ import kotlin.io.path.*
 data class Config(
     val handledImportOptions: Boolean = false,
     val onboardingComplete: Boolean = false,
-    val currentProfile: PlayerProfile? = null
+    val currentProfile: PlayerProfile? = null,
+    val javaPath: String? = null,
+    val jvmArguments: String? = null,
+    val memoryAllocation: Int? = null,
+    val useRecommendedJvmArguments: Boolean = true,
 ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))

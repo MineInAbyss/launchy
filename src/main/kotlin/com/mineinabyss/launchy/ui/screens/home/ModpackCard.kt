@@ -4,7 +4,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Cloud
 import androidx.compose.material3.Card
@@ -14,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
@@ -58,7 +56,7 @@ fun InstanceCard(
             coroutineScope.launch {
                 state.modpackState = instance.createModpackState()
                 currentHue = instance.config.hue
-                screen = Screen.Modpack
+                screen = Screen.Instance
             }
         },
         modifier = modifier.height(cardHeight).width(cardWidth),

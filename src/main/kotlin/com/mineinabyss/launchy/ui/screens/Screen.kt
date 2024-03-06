@@ -7,7 +7,9 @@ sealed class Screen(
 ) {
     object Default : Screen(transparentTopBar = true, showTitle = true, showSidebar = true)
     object NewInstance: Screen(transparentTopBar = true, showTitle = true, showSidebar = true)
+    object Settings : Screen(transparentTopBar = true, showTitle = true, showSidebar = true)
 
-    object Settings : Screen(showTitle = true)
-    object Modpack : Screen(transparentTopBar = true)
+    object InstanceSettings : Screen(showTitle = true)
+    object Instance : Screen(transparentTopBar = true)
+
 }

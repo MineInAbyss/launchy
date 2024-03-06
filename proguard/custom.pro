@@ -1,0 +1,3 @@
+-ignorewarnings
+-keep class io.ktor.** { *; }
+-keep class javax.** { *; }
