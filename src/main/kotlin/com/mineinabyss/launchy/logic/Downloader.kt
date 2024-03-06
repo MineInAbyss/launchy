@@ -3,6 +3,7 @@ package com.mineinabyss.launchy.logic
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
+import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
 import com.mineinabyss.launchy.util.OS
 import io.ktor.client.*
@@ -98,7 +99,7 @@ object Downloader {
                 OS.WINDOWS -> JavaInstallation(
                     "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_windows-x64_bin.zip",
                     "bin/java.exe",
-                    ArchiverFactory.createArchiver(ArchiveFormat.ZIP, CompressionType.GZIP)
+                    ArchiverFactory.createArchiver(ArchiveFormat.ZIP)
                 )
 
                 OS.MAC -> JavaInstallation(
@@ -128,8 +129,6 @@ object Downloader {
 
             // Handle a case where the extraction failed and the folder exists but not the java executable
             findGraalvmExtractedPath()?.takeIf { it.exists() }?.deleteRecursively()
-
-            dialog
             javaInstallation.archiver.extract(Dirs.jdkGraal.toFile(), Dirs.jdks.toFile())
             return (findGraalvmExtractedPath() ?: return null) / javaInstallation.relativeJavaExecutable
         } finally {

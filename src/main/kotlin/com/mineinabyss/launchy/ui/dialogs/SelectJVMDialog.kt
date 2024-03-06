@@ -19,8 +19,16 @@ fun SelectJVMDialog() {
         title = { Text("Install java", style = LocalTextStyle.current) },
         onAccept = {
             dialog = Dialog.None
-            coroutineScope.launch(Dispatchers.IO) {
-                val jdkPath = Downloader.installJDK(state)
+            state.installationCoroutineScope.launch {
+                val jdkPath = runCatching {
+                    Downloader.installJDK(state)
+                }.getOrElse {
+                    dialog = Dialog.Error(
+                        "Failed to install Java",
+                        it.stackTraceToString()
+                    )
+                    return@launch
+                }
                 if (jdkPath != null) {
                     state.jvm.javaPath = jdkPath
                     state.saveToConfig()

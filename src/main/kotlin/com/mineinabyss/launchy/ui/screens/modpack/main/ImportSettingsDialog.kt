@@ -13,6 +13,7 @@ import com.mineinabyss.launchy.ui.screens.screen
 import kotlin.io.path.copyTo
 import kotlin.io.path.div
 
+//TODO needs to be updated for multiple instances
 @Composable
 fun HandleImportSettings() {
     val state = LocalLaunchyState

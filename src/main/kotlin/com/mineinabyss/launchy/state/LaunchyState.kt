@@ -5,6 +5,8 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.state.modpack.ModpackState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 import kotlin.io.path.div
 import kotlin.io.path.exists
@@ -14,6 +16,7 @@ class LaunchyState(
     private val config: Config,
     private val instances: List<GameInstance>
 ) {
+    val installationCoroutineScope = CoroutineScope(Dispatchers.IO)
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()
@@ -33,9 +36,7 @@ class LaunchyState(
 
     // If any state is true, we consider import handled and move on
     var handledImportOptions by mutableStateOf(
-        config.handledImportOptions ||
-                (Dirs.mineinabyss / "options.txt").exists() ||
-                !Dirs.minecraft.exists()
+        config.handledImportOptions
     )
 
     var onboardingComplete by mutableStateOf(config.onboardingComplete)

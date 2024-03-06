@@ -42,7 +42,6 @@ fun ModpackScreen() {
             }
         }
         FirstLaunchDialog()
-        HandleImportSettings()
-
+//        HandleImportSettings()
     }
 }

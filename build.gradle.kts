@@ -71,7 +71,7 @@ compose.desktop {
         nativeDistributions {
             when {
                 Os.isFamily(Os.FAMILY_MAC) -> targetFormats(TargetFormat.Dmg)
-                Os.isFamily(Os.FAMILY_WINDOWS) -> targetFormats(TargetFormat.Exe)
+                Os.isFamily(Os.FAMILY_WINDOWS) -> targetFormats(TargetFormat.Exe, TargetFormat.AppImage)
                 else -> targetFormats(TargetFormat.AppImage)
             }
 
@@ -102,7 +102,7 @@ compose.desktop {
 
 val linuxAppDir = project.file("packaging/appimage/Launchy.AppDir")
 val appImageTool = project.file("deps/appimagetool.AppImage")
-val composePackageDir = "$buildDir/compose/binaries/main/${
+val composePackageDir = "$buildDir/compose/binaries/main-release/${
     when {
         Os.isFamily(Os.FAMILY_MAC) -> "dmg"
         Os.isFamily(Os.FAMILY_WINDOWS) -> "exe"

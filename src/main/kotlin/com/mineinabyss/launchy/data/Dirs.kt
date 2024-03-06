@@ -47,6 +47,7 @@ object Dirs {
         mineinabyss.createDirectories()
         tmp.createDirectories()
         modpackConfigsDir.createDirectories()
+        jdks.createDirectories()
     }
 
     fun createConfigFiles() {

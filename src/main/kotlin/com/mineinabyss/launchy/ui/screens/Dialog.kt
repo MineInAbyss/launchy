@@ -23,4 +23,10 @@ sealed interface Dialog {
     class ConfirmImportModpackDialog(
         val info: GameInstanceConfig
     )
+
+    companion object {
+        fun fromException(exception: Throwable, title: String? = null): Error {
+            return Error(title ?: "Error", exception.message ?: "An error occurred")
+        }
+    }
 }

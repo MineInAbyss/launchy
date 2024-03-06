@@ -15,70 +15,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Browser
+import com.mineinabyss.launchy.ui.elements.LaunchyDialog
 import com.mineinabyss.launchy.ui.state.windowScope
 
 @Composable
 fun FirstLaunchDialog() {
     val state = LocalLaunchyState
-    if (!state.onboardingComplete) {
-        FirstLaunchDialog(
-            windowScope,
-            onAccept = {
-                state.onboardingComplete = true
-            },
-            onDecline = {
-                state.onboardingComplete = true
-            }
-        )
-    }
-}
+    if (state.onboardingComplete) return
 
-@Composable
-fun FirstLaunchDialog(
-    windowScope: WindowScope,
-    onAccept: () -> Unit,
-    onDecline: () -> Unit,
-) {
+    val complete = { state.onboardingComplete = true}
     // Overlay that prevents clicking behind it
     windowScope.WindowDraggableArea {
         Box(Modifier.background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)).fillMaxSize())
     }
 
-    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-        Surface(
-            shape = RoundedCornerShape(10.dp),
-            modifier = Modifier.padding(20.dp),
-            color = MaterialTheme.colorScheme.surface,
-        ) {
-            Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    "Welcome to Launchy!",
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Text(
-                    "Launchy is a launcher & mod installer provided by the MineInAbyss team. \n" +
-                            "You can launch the game by connecting your Microsoft account. \n" +
-                            "It comes bundled with a bunch of recommended mods for performance and quality of life. \n" +
-                            "You can change these settings later in the settings screen.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                ) {
-                    TextButton(onClick = onAccept) {
-                        Text("Ok", color = MaterialTheme.colorScheme.primary)
-                    }
-                }
-            }
+    LaunchyDialog(
+        title = { Text("Welcome to Launchy!") },
+        onAccept = complete,
+        onDecline = complete,
+        onDismiss = complete,
+        acceptText = "Ok",
+        declineText = null,
+        content = {
+            Text(
+                """Launchy is a launcher & mod installer provided by the MineInAbyss team. 
+                You can launch the game by connecting your Microsoft account. 
+                It comes bundled with a bunch of recommended mods for performance and quality of life. 
+                You can change these settings later in the settings screen.""".trimIndent(),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(bottom = 10.dp),
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
-    }
+    )
 }
