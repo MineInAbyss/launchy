@@ -33,7 +33,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run custom gradle package
-        run: gradle packageForRelease
+        run: gradle packageForRelease packageReleaseUberJarForCurrentOS
 
       - name: Upload build
         uses: actions/upload-artifact@v2
@@ -46,7 +46,7 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-latest' }}
         id: extract_version
         run: |
-          version=`./gradlew properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}'`
+          version=`gradle properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}'`
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Create release version artifact

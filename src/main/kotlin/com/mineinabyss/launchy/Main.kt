@@ -18,7 +18,6 @@ import androidx.compose.ui.window.rememberWindowState
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.GameInstance
-import com.mineinabyss.launchy.data.config.GameInstanceConfig
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.ui.colors.AppTheme
 import com.mineinabyss.launchy.ui.screens.Screens
