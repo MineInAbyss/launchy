@@ -4,6 +4,10 @@ enum class OS {
     WINDOWS, MAC, LINUX;
 
     companion object {
+        fun isArm(): Boolean {
+            return System.getProperty("os.arch", "unknown").lowercase().contains("arm")
+        }
+
         fun get(): OS {
             val os = System.getProperty("os.name").lowercase()
             return when {

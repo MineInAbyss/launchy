@@ -63,7 +63,7 @@ fun main() {
                     Scaffold {
                         AnimatedVisibility(!ready, exit = fadeOut()) {
                             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                Text("Getting latest plugin versions...")
+                                Text("Reading launchy config...")
                             }
                         }
                         AnimatedVisibility(ready, enter = fadeIn()) {

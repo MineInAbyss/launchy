@@ -102,11 +102,18 @@ object Downloader {
                     ArchiverFactory.createArchiver(ArchiveFormat.ZIP)
                 )
 
-                OS.MAC -> JavaInstallation(
-                    "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_macos-x64_bin.tar.gz",
-                    "Contents/Home/bin/java",
-                    ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
-                )
+                OS.MAC -> when {
+                    OS.isArm() -> JavaInstallation(
+                        "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_macos-aarch64_bin.tar.gz",
+                        "Contents/Home/bin/java",
+                        ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
+                    )
+                    else -> JavaInstallation(
+                        "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_macos-x64_bin.tar.gz",
+                        "Contents/Home/bin/java",
+                        ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
+                    )
+                }
 
                 OS.LINUX -> JavaInstallation(
                     "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz",
