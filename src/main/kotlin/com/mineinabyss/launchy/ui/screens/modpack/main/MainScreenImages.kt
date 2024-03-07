@@ -25,7 +25,7 @@ import com.mineinabyss.launchy.ui.screens.LocalModpackState
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalModpackState
     val state = LocalLaunchyState
-    val background by pack.instance.config.getBackground(state)
+    val background by pack.instance.config.getBackground()
     AnimatedVisibility(background != null, enter = fadeIn(), exit = fadeOut()) {
         if (background == null) return@AnimatedVisibility
         windowScope.WindowDraggableArea {
@@ -78,7 +78,7 @@ fun BoxScope.SlightBackgroundTint(modifier: Modifier = Modifier) {
 fun LogoLarge(modifier: Modifier) {
     val state = LocalLaunchyState
     val pack = LocalModpackState
-    val painter by pack.instance.config.getLogo(state)
+    val painter by pack.instance.config.getLogo()
     AnimatedVisibility(
         painter != null,
         enter = fadeIn() + expandVertically(clip = false) + fadeIn(),

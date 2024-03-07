@@ -10,7 +10,9 @@ import androidx.compose.ui.res.loadImageBitmap
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.serializers.UUIDSerializer
 import com.mineinabyss.launchy.logic.Downloader
-import com.mineinabyss.launchy.state.LaunchyState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -25,14 +27,20 @@ data class PlayerProfile(
     @Transient
     private val avatar = mutableStateOf<BitmapPainter?>(null)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Transient
+    private val downloadScope = CoroutineScope(Dispatchers.IO.limitedParallelism(1))
+
     @Composable
-    fun getAvatar(state: LaunchyState): MutableState<BitmapPainter?> = remember {
+    fun getAvatar(): MutableState<BitmapPainter?> = remember {
         avatar.also {
             if (it.value != null) return@also
-            state.ioScope.launch {
+            downloadScope.launch {
                 Downloader.downloadAvatar(uuid)
-                it.value =
-                    BitmapPainter(loadImageBitmap(Dirs.avatar(uuid).inputStream()), filterQuality = FilterQuality.None)
+                it.value = BitmapPainter(
+                    loadImageBitmap(Dirs.avatar(uuid).inputStream()),
+                    filterQuality = FilterQuality.None
+                )
             }
         }
     }

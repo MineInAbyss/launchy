@@ -46,7 +46,7 @@ object Downloader {
             val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()?.timestamp?.toHexString()
             val length = headers["Content-Length"]?.toLongOrNull()?.toHexString()
             val cache = "Last-Modified: $lastModified, Content-Length: $length"
-            val cacheFile = Dirs.cacheDir / "${writeTo.name}.cache"
+            val cacheFile = Dirs.cacheDir / "${urlToFileName(url)}.cache"
             if (writeTo.exists() && cacheFile.exists() && cacheFile.readText() == cache) return@runCatching
             cacheFile.createParentDirectories()
             cacheFile.deleteIfExists()

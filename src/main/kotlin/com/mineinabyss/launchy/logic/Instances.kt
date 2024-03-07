@@ -9,11 +9,12 @@ import kotlin.io.path.deleteRecursively
 
 object Instances {
     @OptIn(ExperimentalPathApi::class)
-    fun GameInstance.delete(state: LaunchyState) {
+    fun GameInstance.delete(state: LaunchyState, deleteDotMinecraft: Boolean) {
         try {
             state.inProgressTasks["deleteInstance"] = InProgressTask("Deleting instance ${config.name}")
             state.gameInstances.remove(this)
             state.ioScope.launch {
+                if (deleteDotMinecraft) minecraftDir.deleteRecursively()
                 configDir.deleteRecursively()
             }
         } finally {

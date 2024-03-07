@@ -15,6 +15,7 @@ import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.data.config.GameInstanceConfig
 import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.logic.showDialogOnError
+import com.mineinabyss.launchy.logic.urlToFileName
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.ui.elements.AnimatedTab
 import com.mineinabyss.launchy.ui.elements.ComfyContent
@@ -85,8 +86,8 @@ fun NewInstance() {
                             TextButton(onClick = {
                                 urlValid = urlValid()
                                 if (!urlValid) return@TextButton
-                                val taskKey = "import-cloud-instance-${urlText.hashCode()}"
-                                val downloadPath = Dirs.tmp / "launchy-cloud-instance-${urlText.hashCode()}.yml"
+                                val taskKey = "import-cloud-instance-${urlToFileName(urlText)}"
+                                val downloadPath = Dirs.tmp / "launchy-cloud-instance-${urlToFileName(urlText)}.yml"
                                 downloadPath.deleteIfExists()
                                 coroutineScope.launch(Dispatchers.IO) {
                                     state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")

@@ -48,7 +48,7 @@ fun InstanceCard(
 ) {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
-    val background by config.getBackground(state)
+    val background by config.getBackground()
     Card(
         onClick = {
             instance ?: return@Card

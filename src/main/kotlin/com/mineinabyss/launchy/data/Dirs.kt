@@ -6,21 +6,22 @@ import kotlin.io.path.*
 
 object Dirs {
     val home = Path(System.getProperty("user.home"))
+
     val minecraft = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".minecraft"
-        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/minecraft"
-        OS.LINUX -> Path(System.getProperty("user.home")) / ".minecraft"
+        OS.MAC -> home / "Library/Application Support/minecraft"
+        OS.LINUX -> home / ".minecraft"
     }
 
     val mineinabyss = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA")) / ".mineinabyss"
-        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support/mineinabyss"
-        OS.LINUX -> Path(System.getProperty("user.home")) / ".mineinabyss"
+        OS.MAC -> home / "Library/Application Support/mineinabyss"
+        OS.LINUX -> home / ".mineinabyss"
     }
 
     val config = when (OS.get()) {
         OS.WINDOWS -> Path(System.getenv("APPDATA"))
-        OS.MAC -> Path(System.getProperty("user.home")) / "Library/Application Support"
+        OS.MAC -> home / "Library/Application Support"
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 

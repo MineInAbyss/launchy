@@ -9,7 +9,10 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
 import com.mineinabyss.launchy.data.modpacks.source.PackSource
 import com.mineinabyss.launchy.logic.Downloader
-import com.mineinabyss.launchy.state.LaunchyState
+import com.mineinabyss.launchy.logic.urlToFileName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -30,10 +33,10 @@ data class GameInstanceConfig(
     val overrideMinecraftDir: String? = null,
 ) {
     @Transient
-    val backgroundPath = Dirs.imageCache / "background-${backgroundURL.hashCode().toHexString()}"
+    val backgroundPath = Dirs.imageCache / "background-${urlToFileName(backgroundURL)}"
 
     @Transient
-    val logoPath = Dirs.imageCache / "icon-${logoURL.hashCode().toHexString()}"
+    val logoPath = Dirs.imageCache / "icon-${urlToFileName(logoURL)}"
 
     @Transient
     private var cachedBackground = mutableStateOf<BitmapPainter?>(null)
@@ -41,9 +44,11 @@ data class GameInstanceConfig(
     @Transient
     private var cachedLogo = mutableStateOf<BitmapPainter?>(null)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Transient
+    val downloadScope = CoroutineScope(Dispatchers.IO.limitedParallelism(1))
 
     private suspend fun loadBackground() {
-        if (cachedBackground.value != null) return
         runCatching {
             Downloader.download(backgroundURL, backgroundPath, override = false)
             val painter = BitmapPainter(loadImageBitmap(backgroundPath.inputStream()))
@@ -52,7 +57,6 @@ data class GameInstanceConfig(
     }
 
     private suspend fun loadLogo() {
-        if (cachedLogo.value != null) return
         runCatching {
             Downloader.download(logoURL, logoPath, override = false)
             val painter = BitmapPainter(loadImageBitmap(logoPath.inputStream()))
@@ -61,16 +65,16 @@ data class GameInstanceConfig(
     }
 
     @Composable
-    fun getBackground(state: LaunchyState) = remember {
+    fun getBackground() = remember {
         cachedBackground.also {
-            if (it.value == null) state.ioScope.launch { loadBackground() }
+            if (it.value == null) downloadScope.launch { loadBackground() }
         }
     }
 
     @Composable
-    fun getLogo(state: LaunchyState) = remember {
+    fun getLogo() = remember {
         cachedLogo.also {
-            if (it.value == null) state.ioScope.launch { loadLogo() }
+            if (it.value == null) downloadScope.launch { loadLogo() }
         }
     }
 

@@ -12,7 +12,7 @@ import com.mineinabyss.launchy.data.config.PlayerProfile
 @Composable
 fun PlayerAvatar(profile: PlayerProfile, modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
-    val avatar: BitmapPainter? by profile.getAvatar(state)
+    val avatar: BitmapPainter? by profile.getAvatar()
     if (avatar != null) Image(
         painter = avatar!!,
         contentDescription = "Avatar",

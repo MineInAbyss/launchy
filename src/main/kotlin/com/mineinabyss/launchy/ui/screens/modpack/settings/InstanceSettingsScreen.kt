@@ -63,11 +63,19 @@ fun OptionsTab() {
     ComfyContent(Modifier.padding(16.dp)) {
         Column {
             TitleSmall("Danger zone")
-            TextButton(onClick = {
-                screen = Screen.Default
-                pack.instance.delete(state)
-            }) {
-                Text("Delete Instance", color = MaterialTheme.colorScheme.primary)
+            Row {
+                TextButton(onClick = {
+                    screen = Screen.Default
+                    pack.instance.delete(state, deleteDotMinecraft = false)
+                }) {
+                    Text("Delete Instance from config", color = MaterialTheme.colorScheme.primary)
+                }
+                TextButton(onClick = {
+                    screen = Screen.Default
+                    pack.instance.delete(state, deleteDotMinecraft = true)
+                }) {
+                    Text("Delete Instance and its .minecraft", color = MaterialTheme.colorScheme.error)
+                }
             }
         }
     }
