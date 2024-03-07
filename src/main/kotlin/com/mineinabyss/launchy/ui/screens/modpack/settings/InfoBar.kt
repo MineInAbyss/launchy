@@ -30,14 +30,14 @@ object InfoBarProperties {
     val height = 64.dp
 }
 @Composable
-fun InfoBar() {
+fun InfoBar(modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
     val packState = LocalModpackState
     Surface(
         tonalElevation = 2.dp,
         shadowElevation = 0.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
-        modifier = Modifier.fillMaxWidth().height(InfoBarProperties.height),
+        modifier = Modifier.fillMaxWidth().height(InfoBarProperties.height).then(modifier),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

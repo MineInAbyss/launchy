@@ -1,5 +1,6 @@
 package com.mineinabyss.launchy.ui.screens.modpack.main
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.PlayButton
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.SettingsButton
+import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.UpdateButton
 import com.mineinabyss.launchy.ui.state.windowScope
 
 @ExperimentalComposeUiApi
@@ -38,6 +40,9 @@ fun ModpackScreen() {
                 modifier = Modifier.fillMaxWidth().weight(1f, false),
             ) {
                 PlayButton(hideText = false, packState.instance) { packState }
+                AnimatedVisibility(packState.instance.updatesAvailable) {
+                    UpdateButton()
+                }
                 SettingsButton()
             }
         }

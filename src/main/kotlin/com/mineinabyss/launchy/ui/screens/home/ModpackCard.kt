@@ -15,11 +15,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.data.config.GameInstanceConfig
+import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
 import com.mineinabyss.launchy.ui.elements.Tooltip
@@ -53,20 +56,25 @@ fun InstanceCard(
         onClick = {
             instance ?: return@Card
             coroutineScope.launch {
-                state.modpackState = instance.createModpackState()
+                state.modpackState = instance.createModpackState(state)
                 currentHue = instance.config.hue
                 screen = Screen.Instance
             }
         },
+        enabled = instance?.enabled == true,
         modifier = modifier.height(cardHeight).width(cardWidth),
     ) {
         Box(Modifier.fillMaxSize()) {
             androidx.compose.animation.AnimatedVisibility(
                 visible = background != null,
                 enter = fadeIn(),
-                modifier = Modifier.fillMaxSize()) {
+                modifier = Modifier.fillMaxSize()
+            ) {
                 if (background != null) Image(
                     painter = background!!,
+                    colorFilter =
+                    if (instance?.enabled == false) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
+                    else null,
                     contentDescription = "Pack background image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -80,6 +88,7 @@ fun InstanceCard(
             ) {
                 Icon(Icons.Rounded.Cloud, "Cloud modpack")
             }
+
             Row(
                 Modifier.align(Alignment.BottomStart).padding(cardPadding),
                 verticalAlignment = Alignment.Bottom,
@@ -90,8 +99,15 @@ fun InstanceCard(
                     Text(config.description, style = MaterialTheme.typography.bodyMedium)
                 }
                 Spacer(Modifier.weight(1f))
-                if (instance != null)
-                    PlayButton(hideText = true, instance) { instance.createModpackState() }
+                if (instance?.enabled == true)
+                    PlayButton(hideText = true, instance) {
+                        state.inProgressTasks["modpackState"] = InProgressTask("Reading modpack configuration")
+                        try {
+                            instance.createModpackState(state)
+                        } finally {
+                            state.inProgressTasks.remove("modpackState")
+                        }
+                    }
             }
         }
     }

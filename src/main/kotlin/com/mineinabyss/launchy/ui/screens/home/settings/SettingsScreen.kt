@@ -39,7 +39,7 @@ fun SettingsScreen() {
         ComfyContent {
             var directoryPickerShown by remember { mutableStateOf(false) }
             Column(
-                Modifier.padding(16.dp).verticalScroll(scrollState),
+                Modifier.verticalScroll(scrollState),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Column {

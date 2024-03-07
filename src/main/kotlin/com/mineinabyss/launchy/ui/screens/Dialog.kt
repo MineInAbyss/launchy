@@ -26,7 +26,12 @@ sealed interface Dialog {
 
     companion object {
         fun fromException(exception: Throwable, title: String? = null): Error {
-            return Error(title ?: "Error", exception.message ?: "An error occurred")
+            return Error(
+                title ?: "Error",
+                exception
+                    .stackTraceToString()
+                    .split("\n").joinToString("\n", limit = 5)
+            )
         }
     }
 }

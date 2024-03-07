@@ -10,19 +10,21 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.ui.screens.screen
 
 @Composable
 fun ComfyWidth(
-    content: @Composable () -> Unit
+    overrideWidth: Dp? = null,
+    content: @Composable () -> Unit,
 ) {
     val endDp = if (screen.showSidebar) 16.dp else 0.dp
     Box(
         Modifier.fillMaxWidth().padding(end = endDp),
         contentAlignment = androidx.compose.ui.Alignment.Center
     ) {
-        Box(Modifier.width(800.dp)) {
+        Box(Modifier.width(overrideWidth ?: 800.dp)) {
             content()
         }
     }
@@ -40,15 +42,16 @@ fun ComfyTitle(
 @Composable
 fun ComfyContent(
     modifier: Modifier = Modifier,
+    overrideWidth: Dp? = null,
     content: @Composable () -> Unit,
 ) {
-    ComfyWidth {
+    ComfyWidth(overrideWidth) {
         Surface(
             tonalElevation = 1.dp,
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp).then(modifier)
         ) {
-            Box(Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp)) {
+            Box(Modifier.padding(20.dp)) {
                 content()
             }
         }

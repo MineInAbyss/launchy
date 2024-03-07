@@ -30,27 +30,41 @@ object Downloader {
         download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid))
     }
 
+    class CacheInfo(val result: UpdateResult, val cacheKey: String, val cacheFile: Path)
+
     @OptIn(ExperimentalStdlibApi::class)
+    suspend fun checkUpdates(url: String): CacheInfo {
+        val headers = httpClient.head(url).headers
+        val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()?.timestamp?.toHexString()
+        val length = headers["Content-Length"]?.toLongOrNull()?.toHexString()
+        val cache = "Last-Modified: $lastModified, Content-Length: $length"
+        val cacheFile = Dirs.cacheDir / "${urlToFileName(url)}.cache"
+        val result = when {
+            cacheFile.notExists() -> UpdateResult.NotCached
+            cacheFile.readText() == cache -> UpdateResult.UpToDate
+            else -> UpdateResult.HasUpdates
+        }
+        return CacheInfo(result, cache, cacheFile)
+    }
+
     suspend fun download(
         url: String,
         writeTo: Path,
         override: Boolean = true,
-        onFinishDownloadWhenChanged: () -> Unit = {},
+        whenChanged: () -> Unit = {},
         onProgressUpdate: (progress: Progress) -> Unit = {},
     ): Result<Unit> {
         return runCatching {
             if (!override && writeTo.exists()) return@runCatching
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
-            val headers = httpClient.head(url).headers
-            val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()?.timestamp?.toHexString()
-            val length = headers["Content-Length"]?.toLongOrNull()?.toHexString()
-            val cache = "Last-Modified: $lastModified, Content-Length: $length"
-            val cacheFile = Dirs.cacheDir / "${urlToFileName(url)}.cache"
-            if (writeTo.exists() && cacheFile.exists() && cacheFile.readText() == cache) return@runCatching
-            cacheFile.createParentDirectories()
-            cacheFile.deleteIfExists()
-            cacheFile.createFile().writeText(cache)
+            val updates = checkUpdates(url)
+            if (writeTo.exists() && updates.result == UpdateResult.UpToDate) return@runCatching
+            updates.cacheFile.apply {
+                createParentDirectories()
+                deleteIfExists()
+                createFile().writeText(updates.cacheKey)
+            }
 
             httpClient.prepareGet(url) {
                 timeout {
@@ -76,7 +90,7 @@ object Downloader {
                         writeTo.appendBytes(bytes)
                     }
                 }
-                onFinishDownloadWhenChanged()
+                whenChanged()
             }
         }.onFailure {
             it.printStackTrace()

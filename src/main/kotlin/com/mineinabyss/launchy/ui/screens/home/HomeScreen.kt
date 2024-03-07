@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +17,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 fun HomeScreen() {
     val state = LocalLaunchyState
 
-    Scaffold { paddingValues ->
+    Box {
         val scrollState = rememberLazyListState()
         BoxWithConstraints {
             Column(Modifier.padding(end = 20.dp).fillMaxSize()) {

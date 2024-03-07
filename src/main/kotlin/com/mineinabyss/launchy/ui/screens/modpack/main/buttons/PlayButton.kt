@@ -70,11 +70,12 @@ fun PlayButton(
                                 Launcher.launch(state, packState, state.profile)
                             }
                         }
+
                         packState.queued.areOperationsQueued -> {
                             dialog = Dialog.Options(
-                                title = "Update before launch?",
-                                message = "Updates are available for this modpack. Would you like to download them?",
-                                acceptText = "Download",
+                                title = "Install changes before launch?",
+                                message = "New mods have been selected/removed,\nwould you like to apply these changes?",
+                                acceptText = "Install",
                                 declineText = "Skip",
                                 onAccept = {
                                     state.ioScope.launch {
@@ -84,12 +85,13 @@ fun PlayButton(
                                 },
                                 onDecline = {
                                     state.ioScope.launch {
-                                        packState.install(state).join()
+                                        packState.ensureCurrentDepsInstalled(state)
                                         Launcher.launch(state, packState, state.profile)
                                     }
                                 }
                             )
                         }
+
                         else -> {
                             coroutineScope.launch(Dispatchers.IO) {
                                 packState.ensureCurrentDepsInstalled(state)
@@ -104,7 +106,10 @@ fun PlayButton(
                 }
             }
         }
-        val enabled = state.profile.currentProfile != null && foundPackState?.downloads?.isDownloading != true
+        val enabled = state.profile.currentProfile != null
+                && foundPackState?.downloads?.isDownloading != true
+                && state.inProgressTasks.isEmpty()
+
         if (hideText) Button(
             enabled = enabled,
             onClick = onClick,

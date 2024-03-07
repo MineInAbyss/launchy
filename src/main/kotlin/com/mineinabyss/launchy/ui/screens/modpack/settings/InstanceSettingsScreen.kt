@@ -7,15 +7,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
-import androidx.compose.material.TextButton
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
 import com.mineinabyss.launchy.logic.Instances.delete
+import com.mineinabyss.launchy.logic.Instances.updateInstance
 import com.mineinabyss.launchy.ui.elements.AnimatedTab
 import com.mineinabyss.launchy.ui.elements.ComfyContent
 import com.mineinabyss.launchy.ui.elements.ComfyWidth
@@ -31,7 +32,7 @@ fun InstanceSettingsScreen() {
     var selectedTabIndex by remember { mutableStateOf(0) }
     ComfyWidth {
         Column {
-            PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
+            PrimaryTabRow(selectedTabIndex = selectedTabIndex, containerColor = Color.Transparent) {
                 Tab(
                     text = { Text("Manage Mods") },
                     selected = selectedTabIndex == 0,
@@ -61,20 +62,31 @@ fun OptionsTab() {
     val pack = LocalModpackState
 
     ComfyContent(Modifier.padding(16.dp)) {
-        Column {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            TitleSmall("Mods")
+            OutlinedButton(onClick = { pack.instance.updateInstance(state) }) {
+                Text("Force update Instance")
+            }
+
             TitleSmall("Danger zone")
-            Row {
-                TextButton(onClick = {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedButton(onClick = {
                     screen = Screen.Default
                     pack.instance.delete(state, deleteDotMinecraft = false)
                 }) {
-                    Text("Delete Instance from config", color = MaterialTheme.colorScheme.primary)
+                    Text("Delete Instance from config")
                 }
-                TextButton(onClick = {
-                    screen = Screen.Default
-                    pack.instance.delete(state, deleteDotMinecraft = true)
-                }) {
-                    Text("Delete Instance and its .minecraft", color = MaterialTheme.colorScheme.error)
+                OutlinedButton(
+                    onClick = {
+                        screen = Screen.Default
+                        pack.instance.delete(state, deleteDotMinecraft = true)
+                    },
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        containerColor = MaterialTheme.colorScheme.errorContainer,
+                        contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                    )
+                ) {
+                    Text("Delete Instance and its .minecraft")
                 }
             }
         }
@@ -85,6 +97,7 @@ fun OptionsTab() {
 fun ModManagement() {
     val state = LocalModpackState
     Scaffold(
+        containerColor = Color.Transparent,
         bottomBar = { InfoBar() },
     ) { paddingValues ->
         Box(Modifier.padding(paddingValues)) {

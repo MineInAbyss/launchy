@@ -1,7 +1,7 @@
 package com.mineinabyss.launchy.ui.screens
 
 sealed class Screen(
-    val transparentTopBar: Boolean = false,
+    val transparentTopBar: Boolean = true,
     val showTitle: Boolean = false,
     val showSidebar: Boolean = false,
 ) {

@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
+import com.charleskorn.kaml.encodeToStream
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
 import com.mineinabyss.launchy.data.modpacks.source.PackSource
@@ -19,6 +20,7 @@ import kotlinx.serialization.Transient
 import java.nio.file.Path
 import kotlin.io.path.div
 import kotlin.io.path.inputStream
+import kotlin.io.path.outputStream
 
 @Serializable
 @OptIn(ExperimentalStdlibApi::class)
@@ -76,6 +78,10 @@ data class GameInstanceConfig(
         cachedLogo.also {
             if (it.value == null) downloadScope.launch { loadLogo() }
         }
+    }
+
+    fun saveTo(path: Path) = runCatching {
+        Formats.yaml.encodeToStream(this, path.outputStream())
     }
 
     companion object {

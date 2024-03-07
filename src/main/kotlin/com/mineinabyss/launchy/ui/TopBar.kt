@@ -3,8 +3,8 @@ package com.mineinabyss.launchy.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
@@ -20,9 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.ui.elements.BetterWindowDraggableArea
 import com.mineinabyss.launchy.ui.state.TopBarState
 
 @Composable
@@ -44,7 +46,13 @@ fun AppTopBar(
     showTitle: Boolean,
     showBackButton: Boolean,
     onBackButtonClicked: (() -> Unit),
-) = state.windowScope.WindowDraggableArea {
+) = state.windowScope.BetterWindowDraggableArea(
+    Modifier.pointerInput(Unit) {
+        detectTapGestures(onDoubleTap = {
+            state.toggleMaximized()
+        })
+    }
+) {
     Box(
         Modifier.fillMaxWidth().height(40.dp)
     ) {

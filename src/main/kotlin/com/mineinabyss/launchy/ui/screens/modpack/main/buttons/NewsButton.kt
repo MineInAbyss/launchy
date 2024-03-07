@@ -1,13 +1,12 @@
 package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Feed
-import androidx.compose.material.icons.rounded.Feed
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,10 +24,15 @@ fun NewsButton(hasUpdates: Boolean) {
             Icon(Icons.AutoMirrored.Rounded.Feed, contentDescription = "Settings")
             Text("News")
         }
-        if (hasUpdates) Surface(
-            Modifier.size(12.dp).align(Alignment.TopEnd).offset((-2).dp, (2).dp),
-            shape = CircleShape,
-            color = Color(255, 138, 128)
-        ) {}
+        if (hasUpdates) Ping()
     }
+}
+
+@Composable
+fun BoxScope.Ping() {
+    Surface(
+        Modifier.size(12.dp).align(Alignment.TopEnd).offset((-2).dp, (2).dp),
+        shape = CircleShape,
+        color = Color(255, 138, 128)
+    ) {}
 }

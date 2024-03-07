@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -32,7 +33,7 @@ fun LeftSidebar() {
     var showAccountsPopup by remember { mutableStateOf(false) }
     var accountHeadPosition: LayoutCoordinates? by remember { mutableStateOf(null) }
 
-    NavigationRail {
+    NavigationRail(containerColor = Color.Transparent) {
         Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxHeight()) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
