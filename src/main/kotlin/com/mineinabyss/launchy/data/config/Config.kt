@@ -4,10 +4,8 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
-import java.io.*
-import java.nio.file.Path
-import java.util.zip.ZipFile
-import kotlin.io.path.*
+import kotlin.io.path.inputStream
+import kotlin.io.path.writeText
 
 
 @Serializable
@@ -26,38 +24,8 @@ data class Config(
     }
 
     companion object {
-        fun read() =
+        fun read(): Result<Config> = runCatching {
             Formats.yaml.decodeFromStream(serializer(), Dirs.configFile.inputStream())
+        }.onFailure { it.printStackTrace() }
     }
 }
-
-@Throws(IOException::class)
-fun unzip(zipFilePath: Path, destDirectory: Path) {
-    if (destDirectory.notExists()) destDirectory.createDirectories()
-
-    ZipFile(zipFilePath.toFile()).use { zip ->
-        zip.entries().asSequence().forEach { entry ->
-            zip.getInputStream(entry).use { input ->
-                val filePath = destDirectory / entry.name
-                filePath.createParentDirectories()
-                if (!entry.isDirectory) extractFile(input, filePath)
-                else {
-                    if (filePath.notExists()) filePath.createDirectory()
-                }
-            }
-        }
-    }
-}
-
-@Throws(IOException::class)
-fun extractFile(inputStream: InputStream, destFilePath: Path) {
-    val bufferSize = 4096
-    val buffer = BufferedOutputStream(destFilePath.outputStream())
-    val bytes = ByteArray(bufferSize)
-    var read: Int
-    while (inputStream.read(bytes).also { read = it } != -1) {
-        buffer.write(bytes, 0, read)
-    }
-    buffer.close()
-}
-

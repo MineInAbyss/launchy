@@ -26,10 +26,9 @@ data class ModpackUserConfig(
     }
 
     companion object {
-        fun load(packConfigDir: Path): ModpackUserConfig {
-            val file = packConfigDir / "config.yml"
-            return if (file.exists()) Formats.yaml.decodeFromStream<ModpackUserConfig>(file.inputStream())
+        fun load(file: Path): Result<ModpackUserConfig> = runCatching {
+            return@runCatching if (file.exists()) Formats.yaml.decodeFromStream<ModpackUserConfig>(file.inputStream())
             else ModpackUserConfig()
-        }
+        }.onFailure { it.printStackTrace() }
     }
 }

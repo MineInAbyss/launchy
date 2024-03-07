@@ -1,7 +1,7 @@
 package com.mineinabyss.launchy.data
 
 import com.mineinabyss.launchy.util.OS
-import java.util.UUID
+import java.util.*
 import kotlin.io.path.*
 
 object Dirs {
@@ -36,7 +36,6 @@ object Dirs {
     fun avatar(uuid: UUID) = imageCache / "avatar-$uuid"
 
     val configFile = config / "mia-launcher.yml"
-    val versionsFile = config / "mia-versions.yml"
 
     val modpackConfigsDir = (config / "modpacks")
 
@@ -56,7 +55,5 @@ object Dirs {
     fun createConfigFiles() {
         if (configFile.notExists())
             configFile.createFile().writeText("{}")
-        if (versionsFile.notExists())
-            versionsFile.createFile().writeText("{}")
     }
 }

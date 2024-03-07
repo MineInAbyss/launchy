@@ -1,6 +1,5 @@
 package com.mineinabyss.launchy.data.config
 
-import com.charleskorn.kaml.decodeFromStream
 import com.charleskorn.kaml.encodeToStream
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
@@ -20,16 +19,14 @@ class GameInstance(
         require(configDir.isDirectory()) { "Game instance at $configDir must be a directory" }
     }
 
-    val config: GameInstanceConfig = GameInstanceConfig.read(configDir / "instance.yml")
+    val config: GameInstanceConfig = GameInstanceConfig.read(configDir / "instance.yml").getOrThrow()
 
     val minecraftDir = config.overrideMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(configDir.name)
 
     val userConfigFile = (configDir / "config.yml")
 
     suspend fun createModpackState(): ModpackState? {
-        val userConfig =
-            if (userConfigFile.exists()) Formats.yaml.decodeFromStream<ModpackUserConfig>(userConfigFile.inputStream())
-            else ModpackUserConfig()
+        val userConfig = ModpackUserConfig.load(userConfigFile).getOrNull() ?: ModpackUserConfig()
         val modpack = config.source.loadInstance(this)
             .getOrElse {
                 dialog = Dialog.Error(

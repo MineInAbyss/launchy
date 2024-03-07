@@ -1,9 +1,5 @@
 package com.mineinabyss.launchy.ui.screens.home.newinstance
 
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
@@ -18,8 +14,11 @@ import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.data.config.GameInstanceConfig
 import com.mineinabyss.launchy.logic.Downloader
+import com.mineinabyss.launchy.logic.showDialogOnError
 import com.mineinabyss.launchy.state.InProgressTask
+import com.mineinabyss.launchy.ui.elements.AnimatedTab
 import com.mineinabyss.launchy.ui.elements.ComfyContent
+import com.mineinabyss.launchy.ui.elements.ComfyTitle
 import com.mineinabyss.launchy.ui.elements.ComfyWidth
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.home.InstanceCard
@@ -55,15 +54,10 @@ fun NewInstance() {
         }
         val coroutineScope = rememberCoroutineScope()
         Box {
-            androidx.compose.animation.AnimatedVisibility(
-                visible = selectedTabIndex == 0 && importingInstance == null,
-                enter = slideInHorizontally() + fadeIn(),
-                exit = slideOutHorizontally() + fadeOut()
-            ) {
+            AnimatedTab(visible = selectedTabIndex == 0 && importingInstance == null) {
                 Column {
-                    ComfyWidth {
-                        Text("Import from link", style = MaterialTheme.typography.headlineMedium)
-                    }
+                    ComfyTitle("Import from link")
+
                     ComfyContent {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             var urlText by remember { mutableStateOf("") }
@@ -98,6 +92,8 @@ fun NewInstance() {
                                     state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")
                                     val cloudInstance = Downloader.download(urlText, downloadPath).mapCatching {
                                         GameInstanceConfig.read(downloadPath)
+                                            .showDialogOnError("Failed to read cloud instance")
+                                            .getOrThrow()
                                     }.getOrElse {
                                         urlFailedToParse = true
                                         state.inProgressTasks.remove(taskKey)
@@ -115,11 +111,7 @@ fun NewInstance() {
                     }
                 }
             }
-            androidx.compose.animation.AnimatedVisibility(
-                importingInstance != null,
-                enter = slideInHorizontally() + fadeIn(),
-                exit = slideOutHorizontally() + fadeOut()
-            ) {
+            AnimatedTab(importingInstance != null) {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     ComfyWidth {
                         Text("Confirm import", style = MaterialTheme.typography.headlineMedium)
@@ -170,7 +162,12 @@ fun NewInstance() {
                     }
 
                     ComfyWidth {
-                        importingInstance?.let { InstanceCard(it.copy(name = "Preview"), modifier = Modifier.fillMaxWidth()) }
+                        importingInstance?.let {
+                            InstanceCard(
+                                it.copy(name = "Preview"),
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
                     }
                 }
             }

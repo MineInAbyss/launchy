@@ -26,7 +26,6 @@ import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
-import com.mineinabyss.launchy.ui.screens.snackbarHostState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -66,7 +65,7 @@ fun PlayButton(
                     when {
                         // Assume this means not launched before
                         packState.userAgreedDeps == null -> {
-                            state.downloadContext.launch {
+                            state.ioScope.launch {
                                 packState.install(state).join()
                                 Launcher.launch(state, packState, state.profile)
                             }
@@ -78,13 +77,13 @@ fun PlayButton(
                                 acceptText = "Download",
                                 declineText = "Skip",
                                 onAccept = {
-                                    state.downloadContext.launch {
+                                    state.ioScope.launch {
                                         packState.install(state).join()
                                         Launcher.launch(state, packState, state.profile)
                                     }
                                 },
                                 onDecline = {
-                                    state.downloadContext.launch {
+                                    state.ioScope.launch {
                                         packState.install(state).join()
                                         Launcher.launch(state, packState, state.profile)
                                     }

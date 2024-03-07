@@ -3,12 +3,11 @@ package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Download
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,7 +24,7 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     PrimaryButton(
         enabled = enabled,
         onClick = {
-            state.downloadContext.launch {
+            state.ioScope.launch {
                 packState.install(state)
             }
         },

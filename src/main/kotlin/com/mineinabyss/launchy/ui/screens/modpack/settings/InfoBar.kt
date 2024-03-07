@@ -5,7 +5,6 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.TooltipArea
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Download
@@ -28,7 +27,7 @@ import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.InstallButton
 
 object InfoBarProperties {
-    val height = 48.dp
+    val height = 64.dp
 }
 @Composable
 fun InfoBar() {

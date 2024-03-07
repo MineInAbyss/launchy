@@ -1,7 +1,6 @@
 package com.mineinabyss.launchy.ui.screens.home.settings
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,9 +20,9 @@ import com.darkrockstudios.libraries.mpfilepicker.FilePicker
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.logic.SuggestedJVMArgs
-import com.mineinabyss.launchy.state.JvmState
 import com.mineinabyss.launchy.ui.elements.ComfyContent
-import com.mineinabyss.launchy.ui.elements.ComfyWidth
+import com.mineinabyss.launchy.ui.elements.ComfyTitle
+import com.mineinabyss.launchy.ui.elements.TitleSmall
 import com.mineinabyss.launchy.util.OS
 import java.awt.FileDialog
 import java.awt.Frame
@@ -36,14 +35,15 @@ fun SettingsScreen() {
     val state = LocalLaunchyState
     val scrollState = rememberScrollState()
     Column {
-        ComfyWidth {
-            Text("Settings", style = MaterialTheme.typography.headlineMedium)
-        }
+        ComfyTitle("Settings")
         ComfyContent {
             var directoryPickerShown by remember { mutableStateOf(false) }
-            Column(Modifier.padding(16.dp).verticalScroll(scrollState), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(
+                Modifier.padding(16.dp).verticalScroll(scrollState),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Column {
-                    Text("Hue", style = MaterialTheme.typography.titleSmall)
+                    TitleSmall("Hue")
                     Row {
                         Slider(
                             value = state.preferHue,
@@ -61,8 +61,7 @@ fun SettingsScreen() {
                     directoryPickerShown = false
                 })
                 Column {
-                    Text("Java path", style = MaterialTheme.typography.titleSmall)
-                    Spacer(Modifier.height(8.dp))
+                    TitleSmall("Java path")
                     OutlinedTextField(
                         value = state.jvm.javaPath?.toString() ?: "No path selected",
                         readOnly = true,
@@ -78,7 +77,7 @@ fun SettingsScreen() {
                 }
 
                 Column {
-                    Text("Memory", style = MaterialTheme.typography.titleSmall)
+                    TitleSmall("Memory")
                     Row {
                         val memory = state.jvm.userMemoryAllocation ?: SuggestedJVMArgs.memory
                         Slider(
@@ -101,7 +100,7 @@ fun SettingsScreen() {
                 }
 
                 Column {
-                    Text("JVM arguments", style = MaterialTheme.typography.titleSmall)
+                    TitleSmall("JVM arguments")
                     OutlinedTextField(
                         value = state.jvm.userJvmArgs ?: "",
                         enabled = !state.jvm.useRecommendedJvmArgs,
@@ -113,7 +112,9 @@ fun SettingsScreen() {
                     )
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Checkbox(state.jvm.useRecommendedJvmArgs, onCheckedChange = { state.jvm.useRecommendedJvmArgs = it })
+                        Checkbox(
+                            state.jvm.useRecommendedJvmArgs,
+                            onCheckedChange = { state.jvm.useRecommendedJvmArgs = it })
                         Text("Use recommended JVM arguments")
                     }
 
@@ -140,7 +141,7 @@ fun FileDialog(
     parent: Frame? = null,
     onCloseRequest: (result: Path?) -> Unit
 ) {
-    when(OS.get()) {
+    when (OS.get()) {
         OS.WINDOWS -> FilePicker(
             true,
             initialDirectory = Dirs.jdks.toString(),
@@ -149,6 +150,7 @@ fun FileDialog(
         ) { file ->
             onCloseRequest(file?.let { Path(it.path) })
         }
+
         else -> AwtWindow(
             create = {
                 object : FileDialog(parent, "Choose a file", LOAD) {

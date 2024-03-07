@@ -15,7 +15,8 @@ class LaunchyState(
     private val instances: List<GameInstance>
 ) {
     @OptIn(ExperimentalCoroutinesApi::class)
-    val downloadContext = CoroutineScope(Dispatchers.IO.limitedParallelism(10))
+    val ioContext = Dispatchers.IO.limitedParallelism(10)
+    val ioScope = CoroutineScope(ioContext)
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()

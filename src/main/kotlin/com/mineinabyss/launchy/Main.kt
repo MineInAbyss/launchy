@@ -37,7 +37,8 @@ fun main() {
         val icon = painterResource("icon.png")
         val launchyState by produceState<LaunchyState?>(null) {
             Dirs.createDirs()
-            val config = Config.read()
+            Dirs.createConfigFiles()
+            val config = Config.read().getOrElse { Config() }
             val instances = GameInstance.readAll(Dirs.modpackConfigsDir)
             value = LaunchyState(config, instances)
         }

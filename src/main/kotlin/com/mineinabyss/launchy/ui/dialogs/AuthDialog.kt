@@ -3,13 +3,10 @@ package com.mineinabyss.launchy.ui.dialogs
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.InlineTextContent
-import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
-import androidx.compose.material.icons.rounded.ContentCopy
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +17,6 @@ import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Browser
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
-import com.mineinabyss.launchy.ui.elements.PrimaryIconButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
 
@@ -57,7 +53,6 @@ fun AuthDialog(
                         ) {
                             append("microsoft.com/link")
                         }
-                        appendInlineContent("copyIcon", "[copy]")
                         pop()
 
                         append(" and enter the code ${state.profile.authCode}")

@@ -141,7 +141,7 @@ object ModDownloader {
             toggles.checkNonDownloadedMods()
             val modDownloads = launch {
                 queued.downloads.map { mod ->
-                    state.downloadContext.launch {
+                    state.ioScope.launch {
                         download(state, mod)
                         toggles.checkNonDownloadedMods()
                     }

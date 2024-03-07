@@ -27,7 +27,7 @@ object Downloader {
     }
 
     suspend fun downloadAvatar(uuid: UUID) {
-        download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid), override = false)
+        download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid))
     }
 
     @OptIn(ExperimentalStdlibApi::class)

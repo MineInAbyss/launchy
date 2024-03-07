@@ -1,6 +1,9 @@
 package com.mineinabyss.launchy.ui.screens.modpack.main
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,12 +11,10 @@ import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
@@ -24,7 +25,7 @@ import com.mineinabyss.launchy.ui.screens.LocalModpackState
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalModpackState
     val state = LocalLaunchyState
-    val background by pack.instance.config.produceBackgroundState(state)
+    val background by pack.instance.config.getBackground(state)
     AnimatedVisibility(background != null, enter = fadeIn(), exit = fadeOut()) {
         if (background == null) return@AnimatedVisibility
         windowScope.WindowDraggableArea {
@@ -77,7 +78,7 @@ fun BoxScope.SlightBackgroundTint(modifier: Modifier = Modifier) {
 fun LogoLarge(modifier: Modifier) {
     val state = LocalLaunchyState
     val pack = LocalModpackState
-    val painter by pack.instance.config.produceLogoState(state)
+    val painter by pack.instance.config.getLogo(state)
     AnimatedVisibility(
         painter != null,
         enter = fadeIn() + expandVertically(clip = false) + fadeIn(),
