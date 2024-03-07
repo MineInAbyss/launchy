@@ -12,6 +12,7 @@ import net.raphimc.minecraftauth.MinecraftAuth
 import net.raphimc.minecraftauth.step.java.session.StepFullJavaSession.FullJavaSession
 import net.raphimc.minecraftauth.step.msa.StepMsaDeviceCode.MsaDeviceCode
 import net.raphimc.minecraftauth.step.msa.StepMsaDeviceCode.MsaDeviceCodeCallback
+import java.util.UUID
 
 
 object Auth {
@@ -71,5 +72,13 @@ object Auth {
                 )
             })
         onAuthenticate(javaSession)
+    }
+
+    fun ProfileState.logout(uuid: UUID) {
+        SessionStorage.deleteIfExists(uuid)
+        if(currentProfile?.uuid == uuid) {
+            currentProfile = null
+            currentSession = null
+        }
     }
 }

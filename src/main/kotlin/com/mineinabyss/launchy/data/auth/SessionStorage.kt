@@ -36,6 +36,11 @@ data class SessionStorage(
             }.getOrNull()
         }
 
+        fun deleteIfExists(uuid: UUID) {
+            val targetFile = (Dirs.accounts / "$uuid.json")
+            targetFile.deleteIfExists()
+        }
+
         fun save(session: FullJavaSession) {
             val json = MinecraftAuth.JAVA_DEVICE_CODE_LOGIN.toJson(session)
             val targetFile = (Dirs.accounts / "${session.mcProfile.id}.json").createParentDirectories()

@@ -27,6 +27,9 @@ import com.mineinabyss.launchy.ui.elements.Tooltip
 import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.InstallButton
 
+object InfoBarProperties {
+    val height = 48.dp
+}
 @Composable
 fun InfoBar() {
     val state = LocalLaunchyState
@@ -35,19 +38,8 @@ fun InfoBar() {
         tonalElevation = 2.dp,
         shadowElevation = 0.dp,
         shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().height(InfoBarProperties.height),
     ) {
-        if (packState.downloads.isDownloading) {
-            val inProgress = (packState.downloads.inProgressMods + packState.downloads.inProgressConfigs).values
-            val totalBytesToDownload = inProgress.sumOf { it.totalBytes }
-            val totalBytesDownloaded = inProgress.sumOf { it.bytesDownloaded }.toFloat()
-
-            LinearProgressIndicator(
-                progress = if (totalBytesToDownload == 0L) 0f else totalBytesDownloaded / totalBytesToDownload,
-                modifier = Modifier.fillMaxWidth(),
-                color = MaterialTheme.colorScheme.primaryContainer
-            )
-        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier

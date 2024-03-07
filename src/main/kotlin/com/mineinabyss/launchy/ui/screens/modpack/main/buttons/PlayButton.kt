@@ -39,7 +39,7 @@ fun PlayButton(
     val state = LocalLaunchyState
     val process = state.processFor(instance)
     val coroutineScope = rememberCoroutineScope()
-    val buttonIcon by remember(state.profile.currentSession, process) {
+    val buttonIcon by remember(state.profile.currentProfile, process) {
         mutableStateOf(
             when {
                 state.profile.currentProfile == null -> Icons.Rounded.PlayDisabled
@@ -58,8 +58,6 @@ fun PlayButton(
 
     Box {
         var foundPackState: ModpackState? by remember { mutableStateOf(null) }
-        val updateBeforeLaunch = foundPackState?.queued?.downloads?.isNotEmpty() ?: false
-                || foundPackState?.queued?.deletions?.isNotEmpty() ?: false
         val onClick: () -> Unit = {
             coroutineScope.launch(Dispatchers.IO) {
                 val packState = foundPackState ?: getModpackState() ?: return@launch
@@ -73,7 +71,7 @@ fun PlayButton(
                                 Launcher.launch(state, packState, state.profile)
                             }
                         }
-                        updateBeforeLaunch -> {
+                        packState.queued.areOperationsQueued -> {
                             dialog = Dialog.Options(
                                 title = "Update before launch?",
                                 message = "Updates are available for this modpack. Would you like to download them?",
@@ -95,7 +93,7 @@ fun PlayButton(
                         }
                         else -> {
                             coroutineScope.launch(Dispatchers.IO) {
-                                packState.ensureCurrentDepsInstalled(state).join()
+                                packState.ensureCurrentDepsInstalled(state)
                                 println("Launching now!")
                                 Launcher.launch(state, packState, state.profile)
                             }
@@ -119,7 +117,7 @@ fun PlayButton(
             Icon(buttonIcon, buttonText)
         }
         else Button(
-            enabled = state.profile.currentProfile != null && foundPackState?.downloads?.isDownloading != true,
+            enabled = enabled,
             onClick = onClick,
             shape = RoundedCornerShape(20.dp),
             colors = buttonColors

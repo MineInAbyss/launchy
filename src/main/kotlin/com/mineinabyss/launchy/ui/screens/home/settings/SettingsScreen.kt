@@ -1,8 +1,11 @@
 package com.mineinabyss.launchy.ui.screens.home.settings
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Code
@@ -14,26 +17,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.AwtWindow
+import com.darkrockstudios.libraries.mpfilepicker.FilePicker
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.logic.SuggestedJVMArgs
 import com.mineinabyss.launchy.state.JvmState
 import com.mineinabyss.launchy.ui.elements.ComfyContent
 import com.mineinabyss.launchy.ui.elements.ComfyWidth
+import com.mineinabyss.launchy.util.OS
 import java.awt.FileDialog
 import java.awt.Frame
 import java.nio.file.Path
+import kotlin.io.path.Path
 
 @Composable
 @Preview
 fun SettingsScreen() {
     val state = LocalLaunchyState
+    val scrollState = rememberScrollState()
     Column {
         ComfyWidth {
             Text("Settings", style = MaterialTheme.typography.headlineMedium)
         }
         ComfyContent {
             var directoryPickerShown by remember { mutableStateOf(false) }
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(Modifier.padding(16.dp).verticalScroll(scrollState), verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 if (directoryPickerShown) FileDialog(onCloseRequest = {
                     if (it != null) {
                         state.jvm.javaPath = it
@@ -119,20 +127,33 @@ fun SettingsScreen() {
 fun FileDialog(
     parent: Frame? = null,
     onCloseRequest: (result: Path?) -> Unit
-) = AwtWindow(
-    create = {
-        object : FileDialog(parent, "Choose a file", LOAD) {
-            override fun setVisible(value: Boolean) {
-                super.setVisible(value)
-                if (value) {
-                    onCloseRequest(files.firstOrNull()?.toPath())
-                }
-            }
-        }.apply {
-            setFilenameFilter { dir, name ->
-                name == "java.exe" || name == "java"
-            }
+) {
+    when(OS.get()) {
+        OS.WINDOWS -> FilePicker(
+            true,
+            initialDirectory = Dirs.jdks.toString(),
+            title = "Choose java executable",
+            fileExtensions = listOf("exe"),
+        ) { file ->
+            onCloseRequest(file?.let { Path(it.path) })
         }
-    },
-    dispose = FileDialog::dispose
-)
+        else -> AwtWindow(
+            create = {
+                object : FileDialog(parent, "Choose a file", LOAD) {
+                    override fun setVisible(value: Boolean) {
+                        super.setVisible(value)
+                        if (value) {
+                            onCloseRequest(files.firstOrNull()?.toPath())
+                        }
+                    }
+                }.apply {
+                    setFilenameFilter { dir, name ->
+                        name == "java.exe" || name == "java"
+                    }
+                }
+            },
+            dispose = FileDialog::dispose
+        )
+    }
+
+}

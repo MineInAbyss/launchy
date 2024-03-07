@@ -53,15 +53,15 @@ fun BoxScope.BackgroundTint() {
     }
 }
 @Composable
-fun BoxScope.SlightBackgroundTint() {
+fun BoxScope.SlightBackgroundTint(modifier: Modifier = Modifier) {
     val colors = listOf(
         Color.Transparent,
         MaterialTheme.colorScheme.background.copy(alpha = 0.9f),
     )
 
-    BoxWithConstraints(Modifier.align(Alignment.BottomCenter)) {
+    BoxWithConstraints(modifier.align(Alignment.BottomCenter)) {
         Spacer(
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .height(maxHeight / 1.5f)
                 .background(Brush.verticalGradient(colors))

@@ -28,7 +28,8 @@ fun ComfyContent(
     ComfyWidth {
         Surface(
             tonalElevation = 1.dp,
-            shape = RoundedCornerShape(20.dp)
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier.padding(bottom = 16.dp)
         ) {
             Box(Modifier.padding(16.dp)) {
                 content()

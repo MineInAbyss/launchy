@@ -16,8 +16,8 @@ import kotlin.io.path.deleteIfExists
 object ModDownloader {
     val installModLoadersId = "installMCAndModLoaders"
     val copyOverridesId = "copyOverrides"
-    suspend fun ModpackState.installMCAndModLoaders(state: LaunchyState, dependencies: PackDependencies): Result<*> =
-        runCatching {
+    suspend fun ModpackState.installMCAndModLoaders(state: LaunchyState, dependencies: PackDependencies) {
+        try {
             downloads.installingProfile = true
             Launcher.download(
                 dependencies,
@@ -27,13 +27,15 @@ object ModDownloader {
                 },
                 onFinishDownload = { println("Finished installing: $it") },
             ).join()
+        } finally {
             state.inProgressTasks.remove(installModLoadersId)
-        }.also {
             downloads.installingProfile = false
         }
+    }
 
-    suspend fun ModpackState.download(mod: Mod) {
+    suspend fun ModpackState.download(state: LaunchyState, mod: Mod) {
         val name = mod.info.name
+        val taskKey = "modDownload${mod.info.url}"
         runCatching {
             if (mod !in toggles.upToDateMods) {
                 try {
@@ -41,6 +43,9 @@ object ModDownloader {
                     downloads.inProgressMods[mod] = Progress(0, 0, 0) // set progress to 0
                     Downloader.download(url = mod.info.url, writeTo = mod.file) progress@{
                         downloads.inProgressMods[mod] = it
+                        state.inProgressTasks[taskKey] = InProgressTask.bytes(
+                            "Downloading $name", it.bytesDownloaded, it.totalBytes
+                        )
                     }
                     toggles.downloadURLs[mod] = mod.info.url
                     saveToConfig()
@@ -92,6 +97,7 @@ object ModDownloader {
 //                "Failed to download ${mod.name}: ${it.localizedMessage}!", "OK"
 //            )
         }
+        state.inProgressTasks.remove(taskKey)
     }
 
     /**
@@ -99,25 +105,27 @@ object ModDownloader {
      * does not install any mod updates or new dep versions if they changed in the modpack.
      * Primarily the mod loader/minecraft version.
      */
-    suspend fun ModpackState.ensureCurrentDepsInstalled(state: LaunchyState): Deferred<Result<*>> = coroutineScope {
-        async {
-            val currentDeps = userAgreedDeps
-            if (currentDeps == null) {
-                userAgreedDeps = modpack.dependencies
-            }
-            installMCAndModLoaders(state, currentDeps ?: modpack.dependencies)
+    suspend fun ModpackState.ensureCurrentDepsInstalled(state: LaunchyState) {
+        val currentDeps = userAgreedDeps
+        if (currentDeps == null) {
+            userAgreedDeps = modpack.dependencies
         }
+        installMCAndModLoaders(state, currentDeps ?: modpack.dependencies)
     }
 
     @OptIn(ExperimentalPathApi::class)
-    fun ModpackState.copyOverrides(state: LaunchyState): Result<*> = runCatching {
-        state.inProgressTasks[copyOverridesId] = InProgressTask("Copying overrides")
-        modpack.overridesPath?.copyToRecursively(
-            target = instance.minecraftDir,
-            followLinks = false,
-            overwrite = true,
-        )
-    }.also { state.inProgressTasks.remove(copyOverridesId) }
+    fun ModpackState.copyOverrides(state: LaunchyState) {
+        try {
+            state.inProgressTasks[copyOverridesId] = InProgressTask("Copying overrides")
+            modpack.overridesPath?.copyToRecursively(
+                target = instance.minecraftDir,
+                followLinks = false,
+                overwrite = true,
+            )
+        } finally {
+            state.inProgressTasks.remove(copyOverridesId)
+        }
+    }
 
     /**
      * Updates mod loader versions and mods to latest modpack definition.
@@ -125,13 +133,13 @@ object ModDownloader {
     suspend fun ModpackState.install(state: LaunchyState): Job = coroutineScope {
         launch {
             userAgreedDeps = modpack.dependencies
-            ensureCurrentDepsInstalled(state).await().getOrShowDialog() ?: return@launch
-            copyOverrides(state).getOrShowDialog() ?: return@launch
+            runCatching { ensureCurrentDepsInstalled(state) }.getOrShowDialog() ?: return@launch
+            runCatching { copyOverrides(state) }.getOrShowDialog() ?: return@launch
             toggles.checkNonDownloadedMods()
             val modDownloads = launch {
                 queued.downloads.map { mod ->
                     launch(Dispatchers.IO) {
-                        download(mod)
+                        download(state, mod)
                         toggles.checkNonDownloadedMods()
                     }
                 }.joinAll()

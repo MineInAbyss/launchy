@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.ui.screens
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.LocalTextStyle
@@ -21,6 +22,8 @@ import com.mineinabyss.launchy.ui.screens.home.HomeScreen
 import com.mineinabyss.launchy.ui.screens.home.newinstance.NewInstance
 import com.mineinabyss.launchy.ui.screens.home.settings.SettingsScreen
 import com.mineinabyss.launchy.ui.screens.modpack.main.ModpackScreen
+import com.mineinabyss.launchy.ui.screens.modpack.main.SlightBackgroundTint
+import com.mineinabyss.launchy.ui.screens.modpack.settings.InfoBarProperties
 import com.mineinabyss.launchy.ui.screens.modpack.settings.InstanceSettingsScreen
 import com.mineinabyss.launchy.ui.state.TopBar
 
@@ -28,14 +31,9 @@ var screen: Screen by mutableStateOf(Screen.Default)
 
 var dialog: Dialog by mutableStateOf(Dialog.None)
 
-var notifications = mutableStateListOf<String>()
-
 private val ModpackStateProvider = compositionLocalOf<ModpackState> { error("No local modpack provided") }
 
 val snackbarHostState = SnackbarHostState()
-fun pushNotification(message: String) {
-    notifications.add(message)
-}
 
 val LocalModpackState: ModpackState
     @Composable get() = ModpackStateProvider.current
@@ -119,16 +117,18 @@ fun Screens() = Scaffold(
     }
 
     val tasks = state.inProgressTasks
+    val progressBarHeight by animateDpAsState(if (screen == Screen.InstanceSettings) InfoBarProperties.height else 0.dp)
 
-    if (screen != Screen.InstanceSettings && tasks.isNotEmpty()) Box(Modifier.fillMaxSize()) {
+    if (tasks.isNotEmpty()) Box(Modifier.fillMaxSize().padding(bottom = progressBarHeight)) {
         val task = tasks.values.first()
         val textModifier = Modifier.align(Alignment.BottomStart).padding(start = 10.dp, bottom = 20.dp)
         val progressBarModifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
         val progressBarColor = MaterialTheme.colorScheme.primaryContainer
+        SlightBackgroundTint(Modifier.height(50.dp))
         when (task) {
             is InProgressTask.WithPercentage -> {
                 Text(
-                    "${task.name}... (${task.current}/${task.total}${if (task.measurement != null) " ${task.measurement}" else ")"}",
+                    "${task.name}... (${task.current}/${task.total}${if (task.measurement != null) " ${task.measurement}" else ""})",
                     modifier = textModifier
                 )
                 LinearProgressIndicator(
