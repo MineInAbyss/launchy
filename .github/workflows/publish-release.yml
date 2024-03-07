@@ -61,6 +61,10 @@ jobs:
         with:
           name: version
           path: version.txt
+
+      - name: Stop gradle daemon for Windows cache
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: gradlew --stop
   publish-release:
     needs: [ build ]
     runs-on: ubuntu-latest
