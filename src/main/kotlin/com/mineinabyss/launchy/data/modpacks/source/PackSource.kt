@@ -5,9 +5,6 @@ import com.mineinabyss.launchy.data.modpacks.Modpack
 import com.mineinabyss.launchy.logic.Downloader
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlin.io.path.createFile
-import kotlin.io.path.createParentDirectories
-import kotlin.io.path.exists
 
 @Serializable
 sealed class PackSource {
@@ -18,7 +15,7 @@ sealed class PackSource {
             val format = type.getFormat(instance.configDir).getOrThrow()
             val mods = format.toGenericMods(instance.minecraftDir)
             val dependencies = format.getDependencies(instance.minecraftDir)
-            Modpack(dependencies, mods, format.getOverridesPath(instance.configDir))
+            Modpack(dependencies, mods, format.getOverridesPaths(instance.configDir))
         }
     }
 

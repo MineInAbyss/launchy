@@ -3,8 +3,7 @@ package com.mineinabyss.launchy.logic
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
-import com.mineinabyss.launchy.ui.screens.Dialog
-import com.mineinabyss.launchy.ui.screens.dialog
+import com.mineinabyss.launchy.util.Arch
 import com.mineinabyss.launchy.util.OS
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -23,29 +22,31 @@ import java.util.*
 import kotlin.io.path.*
 
 object Downloader {
-    val cacheDir = Dirs.config / "cache"
     val httpClient = HttpClient(CIO) {
         install(HttpTimeout)
     }
 
     suspend fun downloadAvatar(uuid: UUID) {
-        download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid))
+        download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid), override = false)
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     suspend fun download(
         url: String,
         writeTo: Path,
+        override: Boolean = true,
         onFinishDownloadWhenChanged: () -> Unit = {},
         onProgressUpdate: (progress: Progress) -> Unit = {},
     ): Result<Unit> {
         return runCatching {
+            if (!override && writeTo.exists()) return@runCatching
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
             val headers = httpClient.head(url).headers
-            val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()
-            val length = headers["Content-Length"]?.toLongOrNull()
+            val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()?.timestamp?.toHexString()
+            val length = headers["Content-Length"]?.toLongOrNull()?.toHexString()
             val cache = "Last-Modified: $lastModified, Content-Length: $length"
-            val cacheFile = cacheDir / "${writeTo.name}.cache"
+            val cacheFile = Dirs.cacheDir / "${writeTo.name}.cache"
             if (writeTo.exists() && cacheFile.exists() && cacheFile.readText() == cache) return@runCatching
             cacheFile.createParentDirectories()
             cacheFile.deleteIfExists()
@@ -95,57 +96,54 @@ object Downloader {
     ): Path? {
         try {
             state.inProgressTasks["installJDK"] = InProgressTask("Downloading Java environment")
+            val arch = Arch.get().openJDKArch
+            val os = OS.get().openJDKName
+            val url = "https://api.adoptium.net/v3/binary/latest/17/ga/$os/$arch/jre/hotspot/normal/eclipse"
             val javaInstallation = when (OS.get()) {
                 OS.WINDOWS -> JavaInstallation(
-                    "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_windows-x64_bin.zip",
+                    url,
                     "bin/java.exe",
                     ArchiverFactory.createArchiver(ArchiveFormat.ZIP)
                 )
 
-                OS.MAC -> when {
-                    OS.isArm() -> JavaInstallation(
-                        "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_macos-aarch64_bin.tar.gz",
-                        "Contents/Home/bin/java",
-                        ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
-                    )
-                    else -> JavaInstallation(
-                        "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_macos-x64_bin.tar.gz",
-                        "Contents/Home/bin/java",
-                        ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
-                    )
-                }
+                OS.MAC -> JavaInstallation(
+                    url,
+                    "Contents/Home/bin/java",
+                    ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
+                )
 
                 OS.LINUX -> JavaInstallation(
-                    "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz",
+                    url,
                     "bin/java",
                     ArchiverFactory.createArchiver(ArchiveFormat.TAR, CompressionType.GZIP)
                 )
             }
-            val existingInstall = findGraalvmExtractedPath()?.resolve(javaInstallation.relativeJavaExecutable)
-            if (existingInstall?.exists() == true) return existingInstall
-            download(javaInstallation.url, Dirs.jdkGraal, onProgressUpdate = {
+            val downloadTo = Dirs.jdks / "openjdk-17${javaInstallation.archiver.filenameExtension}"
+            val extractTo = Dirs.jdks / "openjdk-17"
+
+            val existingInstall = extractTo.resolve(javaInstallation.relativeJavaExecutable)
+            if (existingInstall.exists()) return existingInstall
+            download(javaInstallation.url, downloadTo, onProgressUpdate = {
                 state.inProgressTasks["installJDK"] =
-                    InProgressTask.WithPercentage(
+                    InProgressTask.bytes(
                         "Downloading Java environment",
                         it.bytesDownloaded,
-                        it.totalBytes,
-                        "MB"
+                        it.totalBytes
                     )
             })
             state.inProgressTasks["installJDK"] = InProgressTask("Extracting Java environment")
 
             // Handle a case where the extraction failed and the folder exists but not the java executable
-            findGraalvmExtractedPath()?.takeIf { it.exists() }?.deleteRecursively()
-            javaInstallation.archiver.extract(Dirs.jdkGraal.toFile(), Dirs.jdks.toFile())
-            return (findGraalvmExtractedPath() ?: return null) / javaInstallation.relativeJavaExecutable
+            extractTo.takeIf { it.exists() }?.deleteRecursively()
+            javaInstallation.archiver.extract(downloadTo.toFile(), extractTo.toFile())
+            val entries = extractTo.listDirectoryEntries()
+            val jrePath = if (entries.size == 1) entries.first() else extractTo
+            downloadTo.deleteIfExists()
+            return jrePath / javaInstallation.relativeJavaExecutable
         } finally {
             state.inProgressTasks.remove("installJDK")
         }
     }
-
-    fun findGraalvmExtractedPath() = Dirs.jdks
-        .listDirectoryEntries()
-        .firstOrNull { it.isDirectory() && it.name.startsWith("graalvm-jdk-17") }
 }
 
 data class Progress(val bytesDownloaded: Long, val totalBytes: Long, val timeElapsed: Long) {

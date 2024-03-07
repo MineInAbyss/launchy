@@ -66,7 +66,7 @@ fun PlayButton(
                     when {
                         // Assume this means not launched before
                         packState.userAgreedDeps == null -> {
-                            coroutineScope.launch(Dispatchers.IO) {
+                            state.downloadContext.launch {
                                 packState.install(state).join()
                                 Launcher.launch(state, packState, state.profile)
                             }
@@ -78,13 +78,13 @@ fun PlayButton(
                                 acceptText = "Download",
                                 declineText = "Skip",
                                 onAccept = {
-                                    coroutineScope.launch(Dispatchers.IO) {
+                                    state.downloadContext.launch {
                                         packState.install(state).join()
                                         Launcher.launch(state, packState, state.profile)
                                     }
                                 },
                                 onDecline = {
-                                    coroutineScope.launch(Dispatchers.IO) {
+                                    state.downloadContext.launch {
                                         packState.install(state).join()
                                         Launcher.launch(state, packState, state.profile)
                                     }

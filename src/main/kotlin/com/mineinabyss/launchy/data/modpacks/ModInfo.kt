@@ -7,7 +7,7 @@ data class ModInfo(
     val name: String,
     val license: String = "Unknown",
     val homepage: String = "",
-    val desc: String,
+    val desc: String = "",
     val url: String,
     val configUrl: String = "",
     val configDesc: String = "",

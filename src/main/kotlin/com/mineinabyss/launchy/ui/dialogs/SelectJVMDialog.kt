@@ -8,7 +8,6 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
 import com.mineinabyss.launchy.ui.screens.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
@@ -19,7 +18,7 @@ fun SelectJVMDialog() {
         title = { Text("Install java", style = LocalTextStyle.current) },
         onAccept = {
             dialog = Dialog.None
-            state.installationCoroutineScope.launch {
+            state.downloadContext.launch {
                 val jdkPath = runCatching {
                     Downloader.installJDK(state)
                 }.getOrElse {

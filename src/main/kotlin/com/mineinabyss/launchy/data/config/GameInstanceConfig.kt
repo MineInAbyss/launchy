@@ -1,18 +1,22 @@
 package com.mineinabyss.launchy.data.config
 
-import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
 import com.mineinabyss.launchy.data.modpacks.source.PackSource
 import com.mineinabyss.launchy.logic.Downloader
+import com.mineinabyss.launchy.state.LaunchyState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import java.nio.file.Path
 import kotlin.io.path.div
-import kotlin.io.path.exists
 import kotlin.io.path.inputStream
+import kotlin.time.Duration.Companion.seconds
 
 @Serializable
 @OptIn(ExperimentalStdlibApi::class)
@@ -27,10 +31,10 @@ data class GameInstanceConfig(
     val overrideMinecraftDir: String? = null,
 ) {
     @Transient
-    private val backgroundImagePath = Dirs.tmp / "background-${backgroundURL.hashCode().toHexString()}.png"
+    val backgroundPath = Dirs.imageCache / "background-${backgroundURL.hashCode().toHexString()}"
 
     @Transient
-    private val logoPath = Dirs.tmp / "icon-${backgroundURL.hashCode().toHexString()}.png"
+    val logoPath = Dirs.imageCache / "icon-${logoURL.hashCode().toHexString()}"
 
     @Transient
     private var cachedBackground: BitmapPainter? = null
@@ -38,21 +42,34 @@ data class GameInstanceConfig(
     @Transient
     private var cachedLogo: BitmapPainter? = null
 
-    suspend fun loadBackgroundFromTmpFile(): BitmapPainter {
+    suspend fun loadBackgroundImage(): BitmapPainter {
         cachedBackground?.let { return it }
-        if (!backgroundImagePath.exists()) Downloader.download(backgroundURL, backgroundImagePath)
-        val painter =
-            BitmapPainter(loadImageBitmap(backgroundImagePath.inputStream()), filterQuality = FilterQuality.High)
+        Downloader.download(backgroundURL, backgroundPath, override = false)
+        val painter = BitmapPainter(loadImageBitmap(backgroundPath.inputStream()))
         cachedBackground = painter
         return painter
     }
 
-    suspend fun loadIconFromTmpFile(): BitmapPainter {
+    suspend fun loadLogo(): BitmapPainter {
         cachedLogo?.let { return it }
-        if (!logoPath.exists()) Downloader.download(logoURL, logoPath)
-        val painter = BitmapPainter(loadImageBitmap(logoPath.inputStream()), filterQuality = FilterQuality.High)
+        Downloader.download(logoURL, logoPath, override = false)
+        val painter = BitmapPainter(loadImageBitmap(logoPath.inputStream()))
         cachedLogo = painter
         return painter
+    }
+
+    @Composable
+    fun produceBackgroundState(state: LaunchyState) = produceState(cachedBackground) {
+        state.downloadContext.launch {
+            value = loadBackgroundImage()
+        }
+    }
+
+    @Composable
+    fun produceLogoState(state: LaunchyState) = produceState(cachedLogo) {
+        state.downloadContext.launch {
+            value = loadLogo()
+        }
     }
 
     companion object {

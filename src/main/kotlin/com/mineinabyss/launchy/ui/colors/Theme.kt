@@ -1,20 +1,21 @@
 package com.mineinabyss.launchy.ui.colors
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.ui.LaunchyTypography
 
 var currentHue by mutableStateOf(0f)
 
 @Composable
 fun AppTheme(
-    useDarkTheme: Boolean = true,
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
-    val animatedHue by animateFloatAsState(currentHue, animationSpec = tween(durationMillis = 1000))
+    val animatedHue by animateFloatAsState(currentHue, animationSpec = tween(durationMillis = 500))
     val colors = LaunchyColors(animatedHue)
 
     MaterialTheme(

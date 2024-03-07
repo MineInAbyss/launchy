@@ -19,6 +19,7 @@ data class Config(
     val jvmArguments: String? = null,
     val memoryAllocation: Int? = null,
     val useRecommendedJvmArguments: Boolean = true,
+    val preferHue: Float? = null,
 ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))

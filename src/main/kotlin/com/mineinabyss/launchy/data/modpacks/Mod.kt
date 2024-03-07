@@ -5,7 +5,7 @@ import java.nio.file.Path
 import kotlin.io.path.div
 import kotlin.io.path.exists
 
-class Mod(
+data class Mod(
     val packDir: Path,
     val info: ModInfo
 ) {

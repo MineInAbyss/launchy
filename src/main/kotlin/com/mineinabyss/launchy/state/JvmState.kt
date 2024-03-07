@@ -17,9 +17,11 @@ class JvmState(
     var useRecommendedJvmArgs by mutableStateOf(config.useRecommendedJvmArguments)
     val suggestedArgs get() = buildString {
         if("graalvm" in javaPath.toString()) {
-            append(SuggestedJVMArgs.graalVM)
-            append(" ")
+            append(SuggestedJVMArgs.graalVMBaseFlags)
+        } else {
+            append(SuggestedJVMArgs.baseFlags)
         }
+        append(" ")
         append(SuggestedJVMArgs.clientG1GC)
     }
     val jvmArgs by derivedStateOf {

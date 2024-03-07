@@ -40,6 +40,6 @@ data class ModrinthPackFormat(
     override fun toGenericMods(minecraftDir: Path) =
         Mods.withSingleGroup(files.map { it.toMod(minecraftDir) })
 
-    override fun getOverridesPath(configDir: Path): Path = configDir / "mrpack" / "overrides"
+    override fun getOverridesPaths(configDir: Path): List<Path> = listOf(configDir / "mrpack" / "overrides")
 }
 

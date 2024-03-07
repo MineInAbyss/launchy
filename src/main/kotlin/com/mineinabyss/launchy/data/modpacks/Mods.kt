@@ -3,7 +3,7 @@ package com.mineinabyss.launchy.data.modpacks
 import com.mineinabyss.launchy.data.GroupName
 import com.mineinabyss.launchy.data.ModName
 
-class Mods(
+data class Mods(
     val modGroups: Map<Group, Set<Mod>>,
 ) {
     val groups = modGroups.keys

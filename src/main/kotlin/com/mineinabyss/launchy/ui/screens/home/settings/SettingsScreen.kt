@@ -42,6 +42,18 @@ fun SettingsScreen() {
         ComfyContent {
             var directoryPickerShown by remember { mutableStateOf(false) }
             Column(Modifier.padding(16.dp).verticalScroll(scrollState), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column {
+                    Text("Hue", style = MaterialTheme.typography.titleSmall)
+                    Row {
+                        Slider(
+                            value = state.preferHue,
+                            onValueChange = { state.preferHue = it },
+                            valueRange = 0f..1f,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
                 if (directoryPickerShown) FileDialog(onCloseRequest = {
                     if (it != null) {
                         state.jvm.javaPath = it

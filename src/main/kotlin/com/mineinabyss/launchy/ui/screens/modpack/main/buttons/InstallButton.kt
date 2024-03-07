@@ -22,11 +22,10 @@ import kotlinx.coroutines.launch
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
     val packState = LocalModpackState
-    val coroutineScope = rememberCoroutineScope()
     PrimaryButton(
         enabled = enabled,
         onClick = {
-            coroutineScope.launch {
+            state.downloadContext.launch {
                 packState.install(state)
             }
         },

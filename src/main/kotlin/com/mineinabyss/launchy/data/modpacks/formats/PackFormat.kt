@@ -9,5 +9,5 @@ sealed interface PackFormat {
 
     fun getDependencies(minecraftDir: Path): PackDependencies
 
-    fun getOverridesPath(configDir: Path): Path?
+    fun getOverridesPaths(configDir: Path): List<Path>
 }

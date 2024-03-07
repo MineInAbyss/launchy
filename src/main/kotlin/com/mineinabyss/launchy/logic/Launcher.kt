@@ -27,6 +27,8 @@ import java.io.File
 import java.nio.file.Path
 import java.util.*
 import kotlin.io.path.createParentDirectories
+import kotlin.io.path.exists
+import kotlin.io.path.notExists
 
 
 object Launcher {
@@ -34,7 +36,7 @@ object Launcher {
         val dir = MinecraftDirectory(pack.instance.minecraftDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
         val javaPath = state.jvm.javaPath
-        if(javaPath == null) {
+        if(javaPath == null || javaPath.notExists()) {
             dialog = Dialog.ChooseJVMPath
             return@coroutineScope
         }

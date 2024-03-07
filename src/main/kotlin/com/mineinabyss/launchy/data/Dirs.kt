@@ -24,15 +24,16 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
+    val cacheDir = config / "cache"
+    val imageCache = cacheDir / "images"
+
     val jdks = mineinabyss / ".jdks"
-    val jdkGraal = mineinabyss / ".jdks" / "graalvm-jdk-17.zip"
 
     val tmp = config / ".tmp"
 
     val accounts = config / "accounts"
-    val avatars = config / "avatars"
 
-    fun avatar(uuid: UUID) = avatars / "$uuid.png"
+    fun avatar(uuid: UUID) = imageCache / "avatar-$uuid"
 
     val configFile = config / "mia-launcher.yml"
     val versionsFile = config / "mia-versions.yml"
@@ -48,6 +49,8 @@ object Dirs {
         tmp.createDirectories()
         modpackConfigsDir.createDirectories()
         jdks.createDirectories()
+        cacheDir.createDirectories()
+        imageCache.createDirectories()
     }
 
     fun createConfigFiles() {

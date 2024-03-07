@@ -47,9 +47,7 @@ fun InstanceCard(
 ) {
     val state = LocalLaunchyState
     val coroutineScope = rememberCoroutineScope()
-    val background by produceState<BitmapPainter?>(null) {
-        value = instance?.getOrDownloadBackground() ?: config.loadBackgroundFromTmpFile()
-    }
+    val background by config.produceBackgroundState(state)
     Card(
         onClick = {
             instance ?: return@Card

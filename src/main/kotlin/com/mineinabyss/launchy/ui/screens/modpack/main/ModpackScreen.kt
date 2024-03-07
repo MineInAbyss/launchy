@@ -28,14 +28,14 @@ fun ModpackScreen() {
             Modifier.align(Alignment.Center)
                 .heightIn(0.dp, 550.dp)
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LogoLarge(Modifier.weight(3f))
+            LogoLarge(Modifier.weight(3f, false))
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().weight(1f),
+                modifier = Modifier.fillMaxWidth().weight(1f, false),
             ) {
                 PlayButton(hideText = false, packState.instance) { packState }
                 SettingsButton()

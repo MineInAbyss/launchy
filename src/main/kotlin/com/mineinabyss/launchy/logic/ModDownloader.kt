@@ -1,17 +1,17 @@
 package com.mineinabyss.launchy.logic
 
-import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.config.unzip
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.*
+import org.rauschig.jarchivelib.ArchiverFactory
 import java.util.concurrent.CancellationException
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.copyToRecursively
 import kotlin.io.path.deleteIfExists
+import kotlin.io.path.extension
 
 object ModDownloader {
     val installModLoadersId = "installMCAndModLoaders"
@@ -71,8 +71,9 @@ object ModDownloader {
                         downloads.inProgressConfigs[mod] = it
                     }
                     toggles.downloadConfigURLs[mod] = mod.info.configUrl
-                    unzip(config, Dirs.mineinabyss)
-                    config.toFile().delete()
+                    ArchiverFactory.createArchiver(config.extension)
+                        .extract(config.toFile(), instance.overridesDir.toFile())
+                    config.deleteIfExists()
                     saveToConfig()
                     println("Successfully downloaded $name config")
                 } catch (ex: CancellationException) {
@@ -117,11 +118,13 @@ object ModDownloader {
     fun ModpackState.copyOverrides(state: LaunchyState) {
         try {
             state.inProgressTasks[copyOverridesId] = InProgressTask("Copying overrides")
-            modpack.overridesPath?.copyToRecursively(
-                target = instance.minecraftDir,
-                followLinks = false,
-                overwrite = true,
-            )
+            modpack.overridesPaths.forEach {
+                it.copyToRecursively(
+                    target = instance.minecraftDir,
+                    followLinks = false,
+                    overwrite = true,
+                )
+            }
         } finally {
             state.inProgressTasks.remove(copyOverridesId)
         }
@@ -138,7 +141,7 @@ object ModDownloader {
             toggles.checkNonDownloadedMods()
             val modDownloads = launch {
                 queued.downloads.map { mod ->
-                    launch(Dispatchers.IO) {
+                    state.downloadContext.launch {
                         download(state, mod)
                         toggles.checkNonDownloadedMods()
                     }

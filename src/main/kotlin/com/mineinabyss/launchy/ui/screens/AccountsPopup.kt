@@ -15,7 +15,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Auth.logout
 
 @Composable
-fun AccountsPopup(onLogout : () -> Unit) {
+fun AccountsPopup(onLogout: () -> Unit) {
     val state = LocalLaunchyState
     Surface(
         tonalElevation = 2.dp,
@@ -25,7 +25,10 @@ fun AccountsPopup(onLogout : () -> Unit) {
         val currentProfile = state.profile.currentProfile
         if (currentProfile != null) {
             IconButton(
-                onClick = { state.profile.logout(currentProfile.uuid) },
+                onClick = {
+                    state.profile.logout(currentProfile.uuid)
+                    onLogout()
+                },
             ) {
                 Icon(
                     Icons.AutoMirrored.Rounded.Logout,

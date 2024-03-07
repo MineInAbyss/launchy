@@ -1,26 +1,26 @@
 package com.mineinabyss.launchy.state
 
 import androidx.compose.runtime.*
-import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.util.*
-import kotlin.io.path.div
-import kotlin.io.path.exists
 
 class LaunchyState(
     // Config should never be mutated unless it also updates UI state
     private val config: Config,
     private val instances: List<GameInstance>
 ) {
-    val installationCoroutineScope = CoroutineScope(Dispatchers.IO)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val downloadContext = CoroutineScope(Dispatchers.IO.limitedParallelism(10))
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()
     val jvm = JvmState(config)
+    var preferHue: Float by mutableStateOf(config.preferHue ?: 0f)
 
     val gameInstances = mutableStateListOf<GameInstance>().apply {
         addAll(instances)
@@ -49,7 +49,8 @@ class LaunchyState(
             javaPath = jvm.javaPath?.toString(),
             jvmArguments = jvm.userJvmArgs,
             memoryAllocation = jvm.userMemoryAllocation,
-            useRecommendedJvmArguments = jvm.useRecommendedJvmArgs
+            useRecommendedJvmArguments = jvm.useRecommendedJvmArgs,
+            preferHue = preferHue,
         ).save()
     }
 }

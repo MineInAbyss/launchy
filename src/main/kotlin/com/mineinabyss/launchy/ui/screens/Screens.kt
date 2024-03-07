@@ -15,6 +15,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.AppTopBar
+import com.mineinabyss.launchy.ui.colors.currentHue
 import com.mineinabyss.launchy.ui.dialogs.AuthDialog
 import com.mineinabyss.launchy.ui.dialogs.SelectJVMDialog
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
@@ -58,6 +59,12 @@ fun Screens() = Scaffold(
         exit = slideOutHorizontally(targetOffsetX = { -80 }) + fadeOut()
     ) {
         LeftSidebar()
+    }
+
+    val isDefault = screen is Screen.OnLeftSidebar
+
+    LaunchedEffect(isDefault, state.preferHue) {
+        if (isDefault) currentHue = state.preferHue
     }
 
     AppTopBar(

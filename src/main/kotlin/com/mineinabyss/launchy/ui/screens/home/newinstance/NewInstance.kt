@@ -121,10 +121,11 @@ fun NewInstance() {
                 exit = slideOutHorizontally() + fadeOut()
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    ComfyWidth {
+                        Text("Confirm import", style = MaterialTheme.typography.headlineMedium)
+                    }
                     ComfyContent {
                         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Text("Confirm import", style = MaterialTheme.typography.headlineMedium)
-
                             var nameText by remember { mutableStateOf(importingInstance?.name ?: "") }
                             fun nameValid() = nameText.matches(validInstanceNameRegex)
                             fun packWithNameExists() = Dirs.modpackConfigDir(nameText).exists()

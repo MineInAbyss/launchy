@@ -5,9 +5,11 @@ sealed class Screen(
     val showTitle: Boolean = false,
     val showSidebar: Boolean = false,
 ) {
-    object Default : Screen(transparentTopBar = true, showTitle = true, showSidebar = true)
-    object NewInstance: Screen(transparentTopBar = true, showTitle = true, showSidebar = true)
-    object Settings : Screen(transparentTopBar = true, showTitle = true, showSidebar = true)
+    interface OnLeftSidebar
+
+    object Default : Screen(transparentTopBar = true, showTitle = true, showSidebar = true), OnLeftSidebar
+    object NewInstance: Screen(transparentTopBar = true, showTitle = true, showSidebar = true), OnLeftSidebar
+    object Settings : Screen(transparentTopBar = true, showTitle = true, showSidebar = true), OnLeftSidebar
 
     object InstanceSettings : Screen(showTitle = true)
     object Instance : Screen(transparentTopBar = true)

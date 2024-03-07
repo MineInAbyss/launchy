@@ -34,7 +34,6 @@ dependencies {
 
     implementation("com.darkrockstudios:mpfilepicker:3.1.0")
     implementation("org.rauschig:jarchivelib:1.2.0")
-    implementation("edu.stanford.ejalbert:BrowserLauncher2:1.3")
 
     implementation("net.raphimc:MinecraftAuth:4.0.0")
     implementation("dev.3-3:jmccc-mcdownloader:3.1.4")

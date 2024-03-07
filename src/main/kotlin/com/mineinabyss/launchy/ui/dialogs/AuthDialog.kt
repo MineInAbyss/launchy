@@ -92,12 +92,6 @@ fun AuthDialog(
                                 ?.let { Browser.browse(it.item.url) }
                         },
                     )
-                    IconButton(
-                        onClick = { clipboard.setText(AnnotatedString(state.profile.authCode!!)) },
-                        colors = PrimaryIconButtonColors
-                    ) {
-                        Icon(Icons.Rounded.ContentCopy, "Copy")
-                    }
                 }
             }
 

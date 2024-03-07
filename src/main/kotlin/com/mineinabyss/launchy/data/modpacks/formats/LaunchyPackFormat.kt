@@ -22,5 +22,5 @@ data class LaunchyPackFormat(
         return PackDependencies(minecraft = minecraftVersion, fabricLoader = fabricVersion)
     }
 
-    override fun getOverridesPath(configDir: Path): Path? = null
+    override fun getOverridesPaths(configDir: Path): List<Path> = emptyList()
 }
