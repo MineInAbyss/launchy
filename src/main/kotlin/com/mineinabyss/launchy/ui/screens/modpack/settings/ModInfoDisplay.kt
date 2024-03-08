@@ -37,7 +37,7 @@ fun ModInfoDisplay(group: Group, mod: Mod) {
     val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(end = 8.dp),
         color = when (mod) {
             in state.downloads.failed -> MaterialTheme.colorScheme.error
             in state.queued.deletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)

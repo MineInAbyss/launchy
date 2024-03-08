@@ -29,6 +29,7 @@ data class ExtraInfoFormat(
         val originalGroups = originalMods.modGroups.mapValues {
             it.value.filterTo(mutableSetOf()) { mod -> mod !in foundMods }
         }
-        return Mods(originalGroups + mods)
+        return Mods((originalGroups + mods)
+            .filter { (_, mods) -> mods.isNotEmpty() })
     }
 }

@@ -1,7 +1,7 @@
 package com.mineinabyss.launchy.data.modpacks.formats
 
-import com.mineinabyss.launchy.data.modpacks.ModInfo
 import com.mineinabyss.launchy.data.modpacks.Mod
+import com.mineinabyss.launchy.data.modpacks.ModInfo
 import com.mineinabyss.launchy.data.modpacks.Mods
 import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import kotlinx.serialization.Serializable
@@ -26,7 +26,7 @@ data class ModrinthPackFormat(
             packDir,
             ModInfo(
                 name = path.removePrefix("mods/").removeSuffix(".jar"),
-                desc = "Unknown",
+                desc = "",
                 url = downloads.single(),
                 downloadPath = path,
             )
