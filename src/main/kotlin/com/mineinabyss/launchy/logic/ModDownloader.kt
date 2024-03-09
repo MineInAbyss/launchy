@@ -102,7 +102,7 @@ object ModDownloader {
     fun ModpackState.copyMods() {
         // Clear mods folder
         val existingEntries = instance.modsDir.useDirectoryEntries { files ->
-            files.filter { it.isSymbolicLink() || it.isRegularFile() }.toList()
+            files.filter { !it.isDirectory() }.toList()
         }
 
         val userMods = instance.userMods.listDirectoryEntries("*.jar")
@@ -114,10 +114,11 @@ object ModDownloader {
                 val linkDest = (instance.minecraftDir / relative)
                 if (!linkDest.isSymbolicLink()) linkDest.deleteIfExists()
                 if (linkDest.notExists())
-                    linkDest.createSymbolicLinkPointingTo(absolute.relativeTo(linkDest.parent))
+                    linkDest.createLinkPointingTo(absolute.relativeTo(linkDest.parent))
                 linkDest
             }
             .toSet()
+
         (existingEntries - linked).forEach { it.deleteIfExists() }
     }
 
