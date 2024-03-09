@@ -29,7 +29,6 @@ import com.mineinabyss.launchy.ui.elements.ComfyWidth
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.home.InstanceCard
 import com.mineinabyss.launchy.ui.screens.screen
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.collections.set
 import kotlin.io.path.deleteIfExists
@@ -99,10 +98,13 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceConfig) -> Unit = {}
                         val taskKey = "importCloudInstance"
                         val downloadPath = Dirs.tmpCloudInstance(urlText)
                         downloadPath.deleteIfExists()
-                        AppDispatchers.IO.launch(Dispatchers.IO) {
+                        AppDispatchers.IO.launch {
                             state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")
-                            val cloudInstance =
-                                Downloader.download(urlText, downloadPath, skipDownloadIfCached = false).mapCatching {
+                            val cloudInstance = Downloader.download(
+                                urlText,
+                                downloadPath,
+                                skipDownloadIfCached = false
+                            ).mapCatching {
                                 GameInstanceConfig.read(downloadPath)
                                     .showDialogOnError("Failed to read cloud instance")
                                     .getOrThrow()

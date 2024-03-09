@@ -89,7 +89,7 @@ object Launcher {
         minecraftDir: Path,
         onStartDownload: (String) -> Unit = {},
         onFinishDownload: (String) -> Unit = {}
-    ): Job = AppDispatchers.IO.launch {
+    ): Job {
         val downloadJob = Job()
         minecraftDir.createParentDirectories()
         val dir = MinecraftDirectory(minecraftDir.toFile())
@@ -98,25 +98,28 @@ object Launcher {
             modLoaders.fabricLoader != null -> fabricDownloader()
             else -> vanillaDownloader()
         }
-        val callback = object : CallbackAdapter<Version>() {
-            override fun done(result: Version) {
-                onFinishDownload("${result.type} $result")
-                downloader.shutdown()
-                downloadJob.complete()
-            }
+        AppDispatchers.IO.launch {
+            val callback = object : CallbackAdapter<Version>() {
+                override fun done(result: Version) {
+                    onFinishDownload("${result.type} $result")
+                    downloader.shutdown()
+                    downloadJob.complete()
+                }
 
-            override fun failed(e: Throwable) {
-                e.printStackTrace()
-                downloader.shutdown()
-                downloadJob.complete()
-            }
+                override fun failed(e: Throwable) {
+                    e.printStackTrace()
+                    downloader.shutdown()
+                    downloadJob.complete()
+                }
 
-            override fun <R : Any?> taskStart(task: DownloadTask<R>?): DownloadCallback<R>? {
-                onStartDownload(modLoaders.fullVersionName)
-                return null
+                override fun <R : Any?> taskStart(task: DownloadTask<R>?): DownloadCallback<R>? {
+                    onStartDownload(modLoaders.fullVersionName)
+                    return null
+                }
             }
+            downloader.downloadIncrementally(dir, modLoaders.fullVersionName, callback)
         }
-        downloader.downloadIncrementally(dir, modLoaders.fullVersionName, callback)
+        return downloadJob
     }
 
 

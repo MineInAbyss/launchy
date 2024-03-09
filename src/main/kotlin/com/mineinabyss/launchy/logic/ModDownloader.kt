@@ -146,6 +146,11 @@ object ModDownloader {
         userAgreedDeps = modpack.modLoaders
         ensureDependenciesReady(state)
         copyOverrides(state)
+
+        queued.deletions.forEach {
+            queued.modDownloadInfo.remove(it.modId)
+        }
+
         val downloads = queued.needsInstall.map { mod ->
             async(AppDispatchers.IOContext) {
                 mod to download(mod, ignoreCachedCheck)
