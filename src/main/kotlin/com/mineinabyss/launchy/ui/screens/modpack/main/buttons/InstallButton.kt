@@ -12,11 +12,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.logic.ModDownloader.install
+import com.mineinabyss.launchy.logic.AppDispatchers
+import com.mineinabyss.launchy.logic.ModDownloader.startInstall
+import com.mineinabyss.launchy.ui.elements.OutlinedRedButton
 import com.mineinabyss.launchy.ui.elements.PrimaryButton
 import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import kotlinx.coroutines.launch
 
+@Composable
+fun RetryFailedButton(enabled: Boolean) {
+    val state = LocalLaunchyState
+    val packState = LocalModpackState
+    OutlinedRedButton(
+        enabled = enabled,
+        onClick = {
+            AppDispatchers.profileLaunch.launch {
+                packState.startInstall(state, ignoreCachedCheck = true)
+            }
+        },
+    ) {
+        Text("Retry ${packState.queued.failures.size} failed downloads")
+    }
+}
 @Composable
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
@@ -24,8 +41,8 @@ fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     PrimaryButton(
         enabled = enabled,
         onClick = {
-            state.ioScope.launch {
-                packState.install(state)
+            AppDispatchers.profileLaunch.launch {
+                packState.startInstall(state, ignoreCachedCheck = true)
             }
         },
         modifier = modifier.width(150.dp)

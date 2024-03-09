@@ -1,21 +1,24 @@
 package com.mineinabyss.launchy.data.modpacks
 
 import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.data.modpacks.formats.ModrinthPackFormat
+import io.ktor.http.*
 import java.nio.file.Path
 import kotlin.io.path.div
-import kotlin.io.path.exists
 
 data class Mod(
-    val packDir: Path,
-    val info: ModInfo
+    private val downloadDir: Path,
+    val info: ModConfig,
+    val modId: String,
+    val desiredHashes: ModrinthPackFormat.Hashes?,
 ) {
-    val file =
-        if (info.downloadPath != null) packDir / info.downloadPath
-        else packDir / "mods" / "${info.name}.jar"
+    val absoluteDownloadDest =
+        if (info.downloadPath != null) downloadDir / info.downloadPath.validated
+        else downloadDir / "mods" / "${info.id ?: info.name}.jar"
+
+    val downloadUrl: Url = Url(info.url)
 
     val config = Dirs.tmp / "${info.name}-config.zip"
-
-    val isDownloaded get() = file.exists()
 
 
     fun compatibleWith(other: Mod) =

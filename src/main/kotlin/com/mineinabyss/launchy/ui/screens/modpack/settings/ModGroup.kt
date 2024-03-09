@@ -33,7 +33,9 @@ fun ModGroup(group: Group, mods: Collection<Mod>) {
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
     val state = LocalModpackState
 
-    val modsChanged = mods.any { it in state.queued.deletions || it in state.queued.downloads }
+    val modsChanged = mods.any {
+        it in state.queued.deletions || it in state.queued.newDownloads || it in state.queued.failures
+    }
 
     val tonalElevation by animateDpAsState(if (expanded) 1.6.dp else 1.dp)
     Column {

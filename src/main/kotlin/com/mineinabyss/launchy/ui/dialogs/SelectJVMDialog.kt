@@ -5,6 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
 import com.mineinabyss.launchy.ui.screens.Dialog
@@ -21,7 +22,7 @@ fun SelectJVMDialog() {
         title = { Text("Install java", style = LocalTextStyle.current) },
         onAccept = {
             dialog = Dialog.None
-            state.ioScope.launch {
+            AppDispatchers.IO.launch {
                 val jdkPath = runCatching {
                     Downloader.installJDK(state)
                 }.getOrElse {

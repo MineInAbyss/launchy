@@ -1,16 +1,16 @@
 package com.mineinabyss.launchy.data.modpacks.formats
 
+import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
 import com.mineinabyss.launchy.data.modpacks.Mod
-import com.mineinabyss.launchy.data.modpacks.ModInfo
+import com.mineinabyss.launchy.data.modpacks.ModConfig
 import com.mineinabyss.launchy.data.modpacks.Mods
-import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import kotlinx.serialization.Serializable
 import java.nio.file.Path
 import kotlin.io.path.div
 
 @Serializable
 data class ModrinthPackFormat(
-    val dependencies: PackDependencies,
+    val dependencies: InstanceModLoaders,
     val files: List<PackFile>,
     val formatVersion: Int,
     val name: String,
@@ -20,25 +20,34 @@ data class ModrinthPackFormat(
     data class PackFile(
         val downloads: List<String>,
         val fileSize: Long,
-        val path: String,
+        val path: ModDownloadPath,
+        val hashes: Hashes,
     ) {
         fun toMod(packDir: Path) = Mod(
             packDir,
-            ModInfo(
-                name = path.removePrefix("mods/").removeSuffix(".jar"),
+            ModConfig(
+                name = path.validated.toString().removePrefix("mods/").removeSuffix(".jar"),
                 desc = "",
                 url = downloads.single(),
                 downloadPath = path,
-            )
+            ),
+            modId = downloads.single().removePrefix("https://cdn.modrinth.com/data/").substringBefore("/versions"),
+            desiredHashes = hashes,
         )
     }
 
-    override fun getDependencies(minecraftDir: Path): PackDependencies {
+    @Serializable
+    data class Hashes(
+        val sha1: String,
+        val sha512: String,
+    )
+
+    override fun getModLoaders(): InstanceModLoaders {
         return dependencies
     }
 
-    override fun toGenericMods(minecraftDir: Path) =
-        Mods.withSingleGroup(files.map { it.toMod(minecraftDir) })
+    override fun toGenericMods(downloadsDir: Path) =
+        Mods.withSingleGroup(files.map { it.toMod(downloadsDir) })
 
     override fun getOverridesPaths(configDir: Path): List<Path> = listOf(configDir / "mrpack" / "overrides")
 }

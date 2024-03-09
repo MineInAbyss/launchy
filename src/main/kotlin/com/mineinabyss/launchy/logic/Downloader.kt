@@ -27,7 +27,7 @@ object Downloader {
     }
 
     suspend fun downloadAvatar(uuid: UUID) {
-        download("https://crafatar.com/avatars/$uuid?size=16&overlay", Dirs.avatar(uuid))
+        download("https://mc-heads.net/avatar/$uuid", Dirs.avatar(uuid))
     }
 
     class CacheInfo(val result: UpdateResult, val cacheKey: String, val cacheFile: Path)
@@ -51,6 +51,7 @@ object Downloader {
         url: String,
         writeTo: Path,
         override: Boolean = true,
+        skipDownloadIfCached: Boolean = true,
         whenChanged: () -> Unit = {},
         onProgressUpdate: (progress: Progress) -> Unit = {},
     ): Result<Unit> {
@@ -58,12 +59,14 @@ object Downloader {
             if (!override && writeTo.exists()) return@runCatching
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
-            val updates = checkUpdates(url)
-            if (writeTo.exists() && updates.result == UpdateResult.UpToDate) return@runCatching
-            updates.cacheFile.apply {
-                createParentDirectories()
-                deleteIfExists()
-                createFile().writeText(updates.cacheKey)
+            if (skipDownloadIfCached) {
+                val updates = checkUpdates(url)
+                if (writeTo.exists() && updates.result == UpdateResult.UpToDate) return@runCatching
+                updates.cacheFile.apply {
+                    createParentDirectories()
+                    deleteIfExists()
+                    createFile().writeText(updates.cacheKey)
+                }
             }
 
             httpClient.prepareGet(url) {

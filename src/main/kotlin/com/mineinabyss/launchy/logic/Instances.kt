@@ -13,15 +13,12 @@ import kotlin.io.path.*
 object Instances {
     @OptIn(ExperimentalPathApi::class)
     fun GameInstance.delete(state: LaunchyState, deleteDotMinecraft: Boolean) {
-        try {
-            state.inProgressTasks["deleteInstance"] = InProgressTask("Deleting instance ${config.name}")
-            state.gameInstances.remove(this)
-            state.ioScope.launch {
+        state.gameInstances.remove(this)
+        state.runTask("deleteInstance", InProgressTask("Deleting instance ${config.name}")) {
+            AppDispatchers.IO.launch {
                 if (deleteDotMinecraft) minecraftDir.deleteRecursively()
                 configDir.deleteRecursively()
             }
-        } finally {
-            state.inProgressTasks.remove("deleteInstance")
         }
     }
 
@@ -29,12 +26,11 @@ object Instances {
         state: LaunchyState,
         onSuccess: () -> Unit = {},
     ) {
-        state.inProgressTasks["updateInstance"] = InProgressTask("Updating instance: ${config.name}")
-        try {
-            screen = Screen.Default
-            enabled = false
-            val index = state.gameInstances.indexOf(this)
-            state.ioScope.launch {
+        screen = Screen.Default
+        enabled = false
+        val index = state.gameInstances.indexOf(this)
+        AppDispatchers.IO.launch {
+            state.runTask("updateInstance", InProgressTask("Updating instance: ${config.name}")) {
                 val cloudUrl = config.cloudInstanceURL
                 if (cloudUrl != null) {
                     val newCloudInstance = Dirs.tmpCloudInstance(cloudUrl)
@@ -65,8 +61,6 @@ object Instances {
                         onSuccess()
                     }
             }
-        } finally {
-            state.inProgressTasks.remove("updateInstance")
         }
     }
 }

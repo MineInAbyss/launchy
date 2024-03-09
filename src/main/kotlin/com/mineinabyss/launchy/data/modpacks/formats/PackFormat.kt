@@ -1,13 +1,13 @@
 package com.mineinabyss.launchy.data.modpacks.formats
 
+import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
 import com.mineinabyss.launchy.data.modpacks.Mods
-import com.mineinabyss.launchy.data.modpacks.PackDependencies
 import java.nio.file.Path
 
 sealed interface PackFormat {
-    fun toGenericMods(minecraftDir: Path): Mods
+    fun toGenericMods(downloadsDir: Path): Mods
 
-    fun getDependencies(minecraftDir: Path): PackDependencies
+    fun getModLoaders(): InstanceModLoaders
 
     fun getOverridesPaths(configDir: Path): List<Path>
 }

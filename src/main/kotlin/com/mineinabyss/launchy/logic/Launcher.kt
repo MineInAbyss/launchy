@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.logic
 
-import com.mineinabyss.launchy.data.modpacks.PackDependencies
+import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.ProfileState
 import com.mineinabyss.launchy.state.modpack.ModpackState
@@ -23,11 +23,9 @@ import org.to2mbn.jmccc.option.JavaEnvironment
 import org.to2mbn.jmccc.option.LaunchOption
 import org.to2mbn.jmccc.option.MinecraftDirectory
 import org.to2mbn.jmccc.version.Version
-import java.io.File
 import java.nio.file.Path
 import java.util.*
 import kotlin.io.path.createParentDirectories
-import kotlin.io.path.exists
 import kotlin.io.path.notExists
 
 
@@ -36,7 +34,7 @@ object Launcher {
         val dir = MinecraftDirectory(pack.instance.minecraftDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
         val javaPath = state.jvm.javaPath
-        if(javaPath == null || javaPath.notExists()) {
+        if (javaPath == null || javaPath.notExists()) {
             dialog = Dialog.ChooseJVMPath
             return@coroutineScope
         }
@@ -48,7 +46,7 @@ object Launcher {
 
             else -> state.setProcessFor(pack.instance, launcher.launch(
                 LaunchOption(
-                    pack.modpack.dependencies.fullVersionName,
+                    pack.modpack.modLoaders.fullVersionName,
                     Authenticator {
                         return@Authenticator AuthInfo(
                             session.mcProfile.name,
@@ -67,7 +65,7 @@ object Launcher {
                     extraJvmArguments().addAll(state.jvm.jvmArgs.split(" "))
                     javaEnvironment = JavaEnvironment(javaPath.toFile())
                 },
-                object: ProcessListener {
+                object : ProcessListener {
                     override fun onLog(p0: String?) {
                         System.out.println(p0)
                     }
@@ -87,17 +85,17 @@ object Launcher {
     }
 
     fun download(
-        deps: PackDependencies,
+        modLoaders: InstanceModLoaders,
         minecraftDir: Path,
-        onStartDownload: (String) -> Unit,
-        onFinishDownload: (String) -> Unit
-    ): Job {
+        onStartDownload: (String) -> Unit = {},
+        onFinishDownload: (String) -> Unit = {}
+    ): Job = AppDispatchers.IO.launch {
         val downloadJob = Job()
         minecraftDir.createParentDirectories()
         val dir = MinecraftDirectory(minecraftDir.toFile())
 
         val downloader = when {
-            deps.fabricLoader != null -> fabricDownloader()
+            modLoaders.fabricLoader != null -> fabricDownloader()
             else -> vanillaDownloader()
         }
         val callback = object : CallbackAdapter<Version>() {
@@ -114,12 +112,11 @@ object Launcher {
             }
 
             override fun <R : Any?> taskStart(task: DownloadTask<R>?): DownloadCallback<R>? {
-                onStartDownload(deps.fullVersionName)
+                onStartDownload(modLoaders.fullVersionName)
                 return null
             }
         }
-        downloader.downloadIncrementally(dir, deps.fullVersionName, callback)
-        return downloadJob
+        downloader.downloadIncrementally(dir, modLoaders.fullVersionName, callback)
     }
 
 

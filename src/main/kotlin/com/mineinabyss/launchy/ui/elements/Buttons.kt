@@ -1,9 +1,6 @@
 package com.mineinabyss.launchy.ui.elements
 
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -55,4 +52,21 @@ fun SecondaryButton(
         colors = SecondaryButtonColors,
         modifier = modifier,
     ) { content() }
+}
+
+@Composable
+fun OutlinedRedButton(
+    enabled: Boolean = true,
+    onClick: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    OutlinedButton(
+        enabled = enabled,
+        onClick = onClick,
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error),
+        modifier = modifier,
+    ) {
+        content()
+    }
 }

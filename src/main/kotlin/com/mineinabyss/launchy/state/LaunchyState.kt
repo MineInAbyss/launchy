@@ -4,9 +4,6 @@ import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.state.modpack.ModpackState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.util.*
 
 class LaunchyState(
@@ -14,9 +11,6 @@ class LaunchyState(
     private val config: Config,
     private val instances: List<GameInstance>
 ) {
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val ioContext = Dispatchers.IO.limitedParallelism(10)
-    val ioScope = CoroutineScope(ioContext)
     val profile = ProfileState(config)
     var modpackState: ModpackState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()
@@ -53,6 +47,15 @@ class LaunchyState(
             useRecommendedJvmArguments = jvm.useRecommendedJvmArgs,
             preferHue = preferHue,
         ).save()
+    }
+
+    inline fun <T> runTask(key: String, task: InProgressTask, run: () -> T): T {
+        try {
+            inProgressTasks[key] = task
+            return run()
+        } finally {
+            inProgressTasks.remove(key)
+        }
     }
 }
 

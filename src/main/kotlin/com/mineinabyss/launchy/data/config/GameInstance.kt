@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import com.charleskorn.kaml.encodeToStream
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
+import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.logic.UpdateResult
 import com.mineinabyss.launchy.logic.showDialogOnError
@@ -26,13 +27,12 @@ class GameInstance(
 
     val overridesDir = configDir / "overrides"
 
-    init {
-        require(configDir.isDirectory()) { "Game instance at $configDir must be a directory" }
-    }
-
-
     val minecraftDir = config.overrideMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(configDir.name)
 
+    val modsDir = (minecraftDir / "mods").createDirectories()
+    val userMods = (minecraftDir / "modsFromUser").createDirectories()
+
+    val downloadsDir: Path = minecraftDir / "launchyDownloads"
     val userConfigFile = (configDir / "config.yml")
 
     val updateCheckerScope = CoroutineScope(Dispatchers.IO)
@@ -43,23 +43,28 @@ class GameInstance(
     suspend fun createModpackState(state: LaunchyState): ModpackState? {
         val userConfig = ModpackUserConfig.load(userConfigFile).getOrNull() ?: ModpackUserConfig()
 
-        state.inProgressTasks["loadingModpack"] = InProgressTask("Loading modpack ${config.name}")
-        val modpack = config.source.loadInstance(this)
-            .showDialogOnError("Failed to read instance")
-            .getOrElse {
-                it.printStackTrace()
-                return null
-            }
-        state.inProgressTasks.remove("loadingModpack")
+        val modpack = state.runTask("loadingModpack ${config.name}", InProgressTask("Loading modpack ${config.name}")) {
+            config.source.loadInstance(this)
+                .showDialogOnError("Failed to read instance")
+                .getOrElse {
+                    it.printStackTrace()
+                    return null
+                }
+        }
 
         val cloudUrl = config.cloudInstanceURL
-        if (cloudUrl != null) state.ioScope.launch {
+        if (cloudUrl != null) AppDispatchers.IO.launch {
             val updates = Downloader.checkUpdates(cloudUrl)
             if (updates.result != UpdateResult.UpToDate) {
                 updatesAvailable = true
             }
         }
         return ModpackState(this, modpack, userConfig)
+    }
+
+    init {
+        require(configDir.isDirectory()) { "Game instance at $configDir must be a directory" }
+        userMods
     }
 
     companion object {

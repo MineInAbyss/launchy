@@ -8,9 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.OpenInNew
-import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.data.modpacks.Group
 import com.mineinabyss.launchy.data.modpacks.Mod
@@ -36,14 +35,24 @@ fun ModInfoDisplay(group: Group, mod: Mod) {
     var configExpanded by remember { mutableStateOf(false) }
     val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
+    val surfaceColor = when (mod) {
+        in state.queued.failures -> MaterialTheme.colorScheme.error
+        in state.queued.deletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
+        in state.queued.newDownloads -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)
+        in state.queued.updates -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.1f)
+        else -> MaterialTheme.colorScheme.surface
+    }
+
+    val infoIcon: ImageVector? = when (mod) {
+        in state.queued.failures -> Icons.Rounded.Error
+        in state.queued.deletions -> Icons.Rounded.Delete
+        in state.queued.newDownloads -> Icons.Rounded.Download
+        in state.queued.updates -> Icons.Rounded.Update
+        else -> null
+    }
     Surface(
-        modifier = Modifier.fillMaxWidth().padding(end = 8.dp),
-        color = when (mod) {
-            in state.downloads.failed -> MaterialTheme.colorScheme.error
-            in state.queued.deletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
-            in state.queued.installs -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)//Color(105, 240, 174, alpha = 25)
-            else -> MaterialTheme.colorScheme.surface
-        },
+        modifier = Modifier.fillMaxWidth(),
+        color = surfaceColor,
         onClick = { if (!group.forceEnabled && !group.forceDisabled) state.toggles.setModEnabled(mod, !modEnabled) }
     ) {
         if (state.downloads.inProgressMods.containsKey(mod) || state.downloads.inProgressConfigs.containsKey(mod)) {
@@ -56,16 +65,19 @@ fun ModInfoDisplay(group: Group, mod: Mod) {
                 color = MaterialTheme.colorScheme.primaryContainer
             )
         }
-        Column {
+        Column() {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.padding(end = 8.dp)
             ) {
                 Checkbox(
                     enabled = !group.forceEnabled && !group.forceDisabled,
                     checked = modEnabled,
                     onCheckedChange = { state.toggles.setModEnabled(mod, !modEnabled) }
                 )
+
+                if (infoIcon != null) Icon(infoIcon, "Mod Information", modifier = Modifier.padding(end = 8.dp))
 
                 Row(Modifier.weight(6f)) {
                     Text(mod.info.name, style = MaterialTheme.typography.bodyLarge)
@@ -146,7 +158,12 @@ fun ModInfoDisplay(group: Group, mod: Mod) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .clickable { if (!mod.info.forceConfigDownload) state.toggles.setModConfigEnabled(mod, !configEnabled) }
+                        .clickable {
+                            if (!mod.info.forceConfigDownload) state.toggles.setModConfigEnabled(
+                                mod,
+                                !configEnabled
+                            )
+                        }
                         .fillMaxWidth()
                 ) {
                     Spacer(Modifier.width(20.dp))

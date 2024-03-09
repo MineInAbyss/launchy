@@ -11,8 +11,8 @@ data class ExtraInfoFormat(
     val format: PackFormat,
     val extraInfoPack: ExtraPackInfo,
 ) : PackFormat by format {
-    override fun toGenericMods(minecraftDir: Path): Mods {
-        val originalMods = format.toGenericMods(minecraftDir)
+    override fun toGenericMods(downloadsDir: Path): Mods {
+        val originalMods = format.toGenericMods(downloadsDir)
         val foundMods = mutableSetOf<Mod>()
         val mods: Map<Group, Set<Mod>> = extraInfoPack.modGroups
             .mapKeys { (name, _) -> extraInfoPack.groups.single { it.name == name } }

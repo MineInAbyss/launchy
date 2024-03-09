@@ -18,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
+import com.mineinabyss.launchy.logic.AppDispatchers
+import com.mineinabyss.launchy.logic.AppDispatchers.launchOrShowDialog
 import com.mineinabyss.launchy.logic.Launcher
-import com.mineinabyss.launchy.logic.ModDownloader.ensureCurrentDepsInstalled
-import com.mineinabyss.launchy.logic.ModDownloader.install
+import com.mineinabyss.launchy.logic.ModDownloader.prepareWithoutChangingInstalledMods
+import com.mineinabyss.launchy.logic.ModDownloader.startInstall
 import com.mineinabyss.launchy.state.modpack.ModpackState
 import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
@@ -65,8 +67,8 @@ fun PlayButton(
                     when {
                         // Assume this means not launched before
                         packState.userAgreedDeps == null -> {
-                            state.ioScope.launch {
-                                packState.install(state).join()
+                            AppDispatchers.profileLaunch.launchOrShowDialog {
+                                packState.startInstall(state)
                                 Launcher.launch(state, packState, state.profile)
                             }
                         }
@@ -78,14 +80,14 @@ fun PlayButton(
                                 acceptText = "Install",
                                 declineText = "Skip",
                                 onAccept = {
-                                    state.ioScope.launch {
-                                        packState.install(state).join()
+                                    AppDispatchers.profileLaunch.launch {
+                                        packState.startInstall(state)
                                         Launcher.launch(state, packState, state.profile)
                                     }
                                 },
                                 onDecline = {
-                                    state.ioScope.launch {
-                                        packState.ensureCurrentDepsInstalled(state)
+                                    AppDispatchers.profileLaunch.launch {
+                                        packState.prepareWithoutChangingInstalledMods(state)
                                         Launcher.launch(state, packState, state.profile)
                                     }
                                 }
@@ -93,8 +95,8 @@ fun PlayButton(
                         }
 
                         else -> {
-                            coroutineScope.launch(Dispatchers.IO) {
-                                packState.ensureCurrentDepsInstalled(state)
+                            AppDispatchers.profileLaunch.launchOrShowDialog {
+                                packState.prepareWithoutChangingInstalledMods(state)
                                 println("Launching now!")
                                 Launcher.launch(state, packState, state.profile)
                             }

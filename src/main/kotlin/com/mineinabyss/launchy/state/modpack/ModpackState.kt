@@ -13,7 +13,7 @@ class ModpackState(
     private val userConfig: ModpackUserConfig
 ) {
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
-    val queued = DownloadQueueState(modpack, toggles)
+    val queued = DownloadQueueState(userConfig, modpack, toggles)
     val downloads = DownloadState()
     var userAgreedDeps by mutableStateOf(userConfig.userAgreedDeps)
 
@@ -27,8 +27,8 @@ class ModpackState(
             toggledConfigs = toggles.enabledConfigs.mapTo(mutableSetOf()) { it.info.name } + toggles.enabledMods.filter { it.info.forceConfigDownload }
                 .mapTo(mutableSetOf()) { it.info.name },
             seenGroups = modpack.mods.groups.map { it.name }.toSet(),
-            modDownloads = toggles.downloadURLs.mapKeys { it.key.info.name },
-            modConfigs = toggles.downloadConfigURLs.mapKeys { it.key.info.name },
+            modDownloadInfo = queued.modDownloadInfo,
+//            configDownloadInfo = toggles.downloadConfigURLs.mapKeys { it.key.info.name },
         ).save(instance.userConfigFile)
     }
 }

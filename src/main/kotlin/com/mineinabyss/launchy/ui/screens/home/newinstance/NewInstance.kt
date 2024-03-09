@@ -18,6 +18,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.data.config.GameInstanceConfig
+import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.Downloader
 import com.mineinabyss.launchy.logic.showDialogOnError
 import com.mineinabyss.launchy.state.InProgressTask
@@ -98,9 +99,10 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceConfig) -> Unit = {}
                         val taskKey = "importCloudInstance"
                         val downloadPath = Dirs.tmpCloudInstance(urlText)
                         downloadPath.deleteIfExists()
-                        state.ioScope.launch(Dispatchers.IO) {
+                        AppDispatchers.IO.launch(Dispatchers.IO) {
                             state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")
-                            val cloudInstance = Downloader.download(urlText, downloadPath).mapCatching {
+                            val cloudInstance =
+                                Downloader.download(urlText, downloadPath, skipDownloadIfCached = false).mapCatching {
                                 GameInstanceConfig.read(downloadPath)
                                     .showDialogOnError("Failed to read cloud instance")
                                     .getOrThrow()

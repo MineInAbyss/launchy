@@ -10,7 +10,6 @@ import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +24,7 @@ import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
 import com.mineinabyss.launchy.ui.elements.Tooltip
 import com.mineinabyss.launchy.ui.screens.LocalModpackState
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.InstallButton
+import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.RetryFailedButton
 
 object InfoBarProperties {
     val height = 64.dp
@@ -42,7 +42,8 @@ fun InfoBar(modifier: Modifier = Modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp)
+                .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             InstallButton(
                 state.processFor(packState.instance) == null
@@ -51,7 +52,10 @@ fun InfoBar(modifier: Modifier = Modifier) {
                         && state.inProgressTasks.isEmpty(),
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
-            Spacer(Modifier.width(12.dp))
+            val failures = packState.queued.failures.isNotEmpty()
+            AnimatedVisibility(failures) {
+                RetryFailedButton(failures)
+            }
             ActionButton(
                 shown = packState.queued.areUpdatesQueued,
                 icon = Icons.Rounded.Update,
@@ -59,21 +63,16 @@ fun InfoBar(modifier: Modifier = Modifier) {
                 count = packState.queued.updates.size
             )
             ActionButton(
-                shown = packState.queued.areInstallsQueued,
+                shown = packState.queued.areNewDownloadsQueued,
                 icon = Icons.Rounded.Download,
                 desc = "Queued downloads for new mods",
-                count = packState.queued.installs.size
+                count = packState.queued.newDownloads.size
             )
             ActionButton(
                 shown = packState.queued.areDeletionsQueued,
                 icon = Icons.Rounded.Delete,
                 desc = "Queued mod deletions",
                 count = packState.queued.deletions.size
-            )
-
-            if (packState.downloads.failed.isNotEmpty()) Text(
-                text = "Failed downloads: ${packState.downloads.failed.size}",
-                style = MaterialTheme.typography.bodySmall,
             )
         }
     }
@@ -96,7 +95,6 @@ fun ActionButton(shown: Boolean, icon: ImageVector, desc: String, count: Int? = 
                     }
                 }
             }
-            Spacer(Modifier.width(12.dp))
         }
     }
 }

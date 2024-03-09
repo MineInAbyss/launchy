@@ -15,9 +15,9 @@ sealed class PackSource {
     class LocalFile(val type: PackType) : PackSource() {
         override suspend fun loadInstance(instance: GameInstance): Result<Modpack> = runCatching {
             val format = type.getFormat(instance.configDir).getOrThrow()
-            val mods = format.toGenericMods(instance.minecraftDir)
-            val dependencies = format.getDependencies(instance.minecraftDir)
-            Modpack(dependencies, mods, format.getOverridesPaths(instance.configDir))
+            val mods = format.toGenericMods(instance.downloadsDir)
+            val modLoaders = format.getModLoaders()
+            Modpack(modLoaders, mods, format.getOverridesPaths(instance.configDir))
         }
 
         override suspend fun updateInstance(instance: GameInstance): Result<GameInstance> {

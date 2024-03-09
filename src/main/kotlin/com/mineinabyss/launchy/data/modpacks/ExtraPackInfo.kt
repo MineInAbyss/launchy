@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 class ModReference(
     val urlContains: String,
-    val info: ModInfo? = null,
+    val info: ModConfig? = null,
 )
 @Serializable
 class ExtraPackInfo(

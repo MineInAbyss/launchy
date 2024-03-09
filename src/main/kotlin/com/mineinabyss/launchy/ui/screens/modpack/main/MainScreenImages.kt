@@ -24,7 +24,6 @@ import com.mineinabyss.launchy.ui.screens.LocalModpackState
 @Composable
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalModpackState
-    val state = LocalLaunchyState
     val background by pack.instance.config.getBackground()
     AnimatedVisibility(background != null, enter = fadeIn(), exit = fadeOut()) {
         if (background == null) return@AnimatedVisibility

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-data class PackDependencies(
+data class InstanceModLoaders(
     val minecraft: String,
     @SerialName("fabric-loader")
     val fabricLoader: String? = null,

@@ -9,11 +9,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Download
-import androidx.compose.material.icons.rounded.HistoryEdu
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -34,7 +32,7 @@ fun UpdateInfoButton() {
 
             Row {
                 Icon(Icons.Rounded.Update, contentDescription = "Updates")
-                Text("${queued.downloads.size + queued.deletions.size} Updates")
+                Text("${queued.newDownloads.size + queued.deletions.size} Updates")
             }
 
             AnimatedVisibility(
@@ -50,10 +48,10 @@ fun UpdateInfoButton() {
                         extra = queued.updates.size.toString()
                     )
                     InfoText(
-                        shown = queued.areInstallsQueued,
+                        shown = queued.areNewDownloadsQueued,
                         icon = Icons.Rounded.Download,
                         desc = "Download",
-                        extra = queued.installs.size.toString()
+                        extra = queued.newDownloads.size.toString()
                     )
                     InfoText(
                         shown = queued.areDeletionsQueued,

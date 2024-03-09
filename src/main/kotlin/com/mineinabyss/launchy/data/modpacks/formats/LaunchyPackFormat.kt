@@ -10,16 +10,25 @@ data class LaunchyPackFormat(
     val fabricVersion: String? = null,
     val minecraftVersion: String,
     val groups: Set<Group>,
-    private val modGroups: Map<GroupName, Set<ModInfo>>,
+    private val modGroups: Map<GroupName, Set<ModConfig>>,
 ) : PackFormat {
-    override fun toGenericMods(minecraftDir: Path): Mods {
+    override fun toGenericMods(downloadsDir: Path): Mods {
         return Mods(modGroups
             .mapKeys { (name, _) -> groups.single { it.name == name } }
-            .mapValues { (_, mods) -> mods.map { Mod(minecraftDir, it) }.toSet() })
+            .mapValues { (_, mods) ->
+                mods.map {
+                    Mod(
+                        downloadDir = downloadsDir,
+                        info = it,
+                        modId = it.id ?: it.name,
+                        desiredHashes = null,
+                    )
+                }.toSet()
+            })
     }
 
-    override fun getDependencies(minecraftDir: Path): PackDependencies {
-        return PackDependencies(minecraft = minecraftVersion, fabricLoader = fabricVersion)
+    override fun getModLoaders(): InstanceModLoaders {
+        return InstanceModLoaders(minecraft = minecraftVersion, fabricLoader = fabricVersion)
     }
 
     override fun getOverridesPaths(configDir: Path): List<Path> = emptyList()

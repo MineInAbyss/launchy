@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import de.undercouch.gradle.tasks.download.Download
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
@@ -9,7 +8,6 @@ plugins {
     alias(idofrontLibs.plugins.kotlinx.serialization)
     alias(idofrontLibs.plugins.compose)
     id("de.undercouch.download") version "5.3.1"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 repositories {
