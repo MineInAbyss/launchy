@@ -114,7 +114,7 @@ object ModDownloader {
                 val linkDest = (instance.minecraftDir / relative)
                 if (!linkDest.isSymbolicLink()) linkDest.deleteIfExists()
                 if (linkDest.notExists())
-                    linkDest.createLinkPointingTo(absolute.relativeTo(linkDest.parent))
+                    linkDest.createLinkPointingTo(absolute)
                 linkDest
             }
             .toSet()

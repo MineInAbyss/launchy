@@ -60,7 +60,7 @@ fun LeftSidebar() {
                 FloatingActionButton(
                     onClick = {
                         if (state.profile.currentProfile == null) coroutineScope.launch {
-                            if (profile == null) Auth.authOrShowDialog(state.profile)
+                            if (profile == null) Auth.authOrShowDialog(state, state.profile)
                         } else {
                             showAccountsPopup = !showAccountsPopup
                         }

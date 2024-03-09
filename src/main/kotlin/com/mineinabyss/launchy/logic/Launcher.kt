@@ -40,7 +40,7 @@ object Launcher {
         }
         // Auth or show dialog
         when (val session = profile.currentSession) {
-            null -> Auth.authOrShowDialog(profile) {
+            null -> Auth.authOrShowDialog(state, profile) {
                 launch { launch(state, pack, profile) }
             }
 

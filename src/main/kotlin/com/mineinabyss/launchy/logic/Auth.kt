@@ -2,6 +2,8 @@ package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.auth.SessionStorage
 import com.mineinabyss.launchy.data.config.PlayerProfile
+import com.mineinabyss.launchy.state.InProgressTask
+import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.ProfileState
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
@@ -12,34 +14,38 @@ import net.raphimc.minecraftauth.MinecraftAuth
 import net.raphimc.minecraftauth.step.java.session.StepFullJavaSession.FullJavaSession
 import net.raphimc.minecraftauth.step.msa.StepMsaDeviceCode.MsaDeviceCode
 import net.raphimc.minecraftauth.step.msa.StepMsaDeviceCode.MsaDeviceCodeCallback
-import java.util.UUID
+import java.util.*
 
 
 object Auth {
     suspend fun authOrShowDialog(
-        state: ProfileState,
+        state: LaunchyState,
+        profile: ProfileState,
         onAuthenticate: (FullJavaSession) -> Unit = {},
     ) = coroutineScope {
         launch(Dispatchers.IO) {
-            if (state.currentProfile == null) dialog = Dialog.Auth
-            authFlow(
-                state,
-                onVerificationRequired = {
-                    Browser.browse(it.redirectTo)
-                    state.authCode = it.code
-                    dialog = Dialog.Auth
-                    println(state.authCode)
-                },
-                onAuthenticate = {
-                    launch(Dispatchers.IO) {
-                        SessionStorage.save(it)
+            if (profile.currentProfile == null) dialog = Dialog.Auth
+            state.runTask("auth", InProgressTask("Authenticating")) {
+                authFlow(
+                    profile,
+                    onVerificationRequired = {
+                        state.inProgressTasks.remove("auth")
+                        Browser.browse(it.redirectTo)
+                        profile.authCode = it.code
+                        dialog = Dialog.Auth
+                        println(profile.authCode)
+                    },
+                    onAuthenticate = {
+                        launch(Dispatchers.IO) {
+                            SessionStorage.save(it)
+                        }
+                        profile.currentSession = it
+                        profile.currentProfile = PlayerProfile(it.mcProfile.name, it.mcProfile.id)
+                        dialog = Dialog.None
+                        onAuthenticate(it)
                     }
-                    state.currentSession = it
-                    state.currentProfile = PlayerProfile(it.mcProfile.name, it.mcProfile.id)
-                    dialog = Dialog.None
-                    onAuthenticate(it)
-                }
-            )
+                )
+            }
         }
     }
 
@@ -55,7 +61,7 @@ object Auth {
     ) {
         val httpClient = MinecraftAuth.createHttpClient()
         val previousSession = state.currentProfile?.let { SessionStorage.load(it.uuid) }
-        if(previousSession != null) {
+        if (previousSession != null) {
             val refreshedSession = MinecraftAuth.JAVA_DEVICE_CODE_LOGIN.refresh(httpClient, previousSession)
             onAuthenticate(refreshedSession)
             return
@@ -76,7 +82,7 @@ object Auth {
 
     fun ProfileState.logout(uuid: UUID) {
         SessionStorage.deleteIfExists(uuid)
-        if(currentProfile?.uuid == uuid) {
+        if (currentProfile?.uuid == uuid) {
             currentProfile = null
             currentSession = null
         }

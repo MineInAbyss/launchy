@@ -18,7 +18,7 @@ fun AuthButton() {
         enabled = state.profile.currentSession == null,
         onClick = {
             coroutineScope.launch {
-                Auth.authOrShowDialog(state.profile)
+                Auth.authOrShowDialog(state, state.profile)
             }
         },
     ) {
