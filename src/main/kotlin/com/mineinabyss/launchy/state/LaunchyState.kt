@@ -15,7 +15,7 @@ class LaunchyState(
     var modpackState: ModpackState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()
     val jvm = JvmState(config)
-    var preferHue: Float by mutableStateOf(config.preferHue ?: 0f)
+    val ui = UIState(config)
 
     val gameInstances = mutableStateListOf<GameInstance>().apply {
         addAll(instances)
@@ -45,7 +45,8 @@ class LaunchyState(
             jvmArguments = jvm.userJvmArgs,
             memoryAllocation = jvm.userMemoryAllocation,
             useRecommendedJvmArguments = jvm.useRecommendedJvmArgs,
-            preferHue = preferHue,
+            preferHue = ui.preferHue,
+            startInFullscreen = ui.fullscreen
         ).save()
     }
 

@@ -18,6 +18,7 @@ data class Config(
     val memoryAllocation: Int? = null,
     val useRecommendedJvmArguments: Boolean = true,
     val preferHue: Float? = null,
+    val startInFullscreen: Boolean = false,
 ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))

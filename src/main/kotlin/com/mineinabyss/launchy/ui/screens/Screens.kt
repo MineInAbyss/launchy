@@ -63,8 +63,8 @@ fun Screens() = Scaffold(
 
     val isDefault = screen is Screen.OnLeftSidebar
 
-    LaunchedEffect(isDefault, state.preferHue) {
-        if (isDefault) currentHue = state.preferHue
+    LaunchedEffect(isDefault, state.ui.preferHue) {
+        if (isDefault) currentHue = state.ui.preferHue
     }
 
     AppTopBar(

@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,6 +25,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.WindowPlacement
+import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.ui.elements.BetterWindowDraggableArea
 import com.mineinabyss.launchy.ui.state.TopBarState
 
@@ -46,13 +49,26 @@ fun AppTopBar(
     showTitle: Boolean,
     showBackButton: Boolean,
     onBackButtonClicked: (() -> Unit),
-) = state.windowScope.BetterWindowDraggableArea(
-    Modifier.pointerInput(Unit) {
-        detectTapGestures(onDoubleTap = {
-            state.toggleMaximized()
-        })
-    }
 ) {
+    val appState = LocalLaunchyState
+    val forceFullscreen = appState.ui.fullscreen
+    LaunchedEffect(forceFullscreen) {
+        when (forceFullscreen) {
+            true -> state.windowState.placement = WindowPlacement.Fullscreen
+            false -> state.windowState.placement = WindowPlacement.Floating
+        }
+    }
+
+    if (!forceFullscreen) state.windowScope.BetterWindowDraggableArea(
+        Modifier.pointerInput(Unit) {
+            detectTapGestures(onDoubleTap = {
+                state.toggleMaximized()
+            })
+        }
+    ) {
+        Box(Modifier.fillMaxWidth().height(40.dp))
+    }
+
     Box(
         Modifier.fillMaxWidth().height(40.dp)
     ) {
@@ -85,11 +101,15 @@ fun AppTopBar(
                 }
             }
             Row {
-                WindowButton(Icons.Rounded.Minimize) {
-                    state.windowState.isMinimized = true
-                }
-                WindowButton(Icons.Rounded.CropSquare) {
-                    state.toggleMaximized()
+                AnimatedVisibility(!forceFullscreen) {
+                    Row {
+                        WindowButton(Icons.Rounded.Minimize) {
+                            state.windowState.isMinimized = true
+                        }
+                        WindowButton(Icons.Rounded.CropSquare) {
+                            state.toggleMaximized()
+                        }
+                    }
                 }
                 WindowButton(Icons.Rounded.Close) {
                     state.onClose()

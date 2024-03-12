@@ -143,7 +143,8 @@ object ModDownloader {
     /**
      * Updates mod loader versions and mods to latest modpack definition.
      */
-    suspend fun ModpackState.startInstall(state: LaunchyState, ignoreCachedCheck: Boolean = false) = coroutineScope {
+    suspend fun ModpackState.startInstall(state: LaunchyState, ignoreCachedCheck: Boolean = false): Result<*> =
+        coroutineScope {
         userAgreedDeps = modpack.modLoaders
         ensureDependenciesReady(state)
         copyOverrides(state)
@@ -190,11 +191,13 @@ object ModDownloader {
         saveToConfig()
 
         if (queued.modDownloadInfo.any { it.value.hashCheck != HashCheck.VERIFIED }) {
-            error("Hash check failed on one or more downloads downloads, please re-run the installer!")
+            return@coroutineScope Result.failure(Exception("Failed to verify hashes"))
         }
 
         copyMods()
 
         saveToConfig()
+
+            return@coroutineScope Result.success(Unit)
     }
 }

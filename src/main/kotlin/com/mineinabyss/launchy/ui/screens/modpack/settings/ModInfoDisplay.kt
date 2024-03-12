@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.data.modpacks.Group
 import com.mineinabyss.launchy.data.modpacks.Mod
-import com.mineinabyss.launchy.logic.Browser
+import com.mineinabyss.launchy.logic.DesktopHelpers
 import com.mineinabyss.launchy.logic.ToggleMods.setModConfigEnabled
 import com.mineinabyss.launchy.logic.ToggleMods.setModEnabled
 import com.mineinabyss.launchy.ui.elements.Tooltip
@@ -145,7 +145,7 @@ fun ModInfoDisplay(group: Group, mod: Mod) {
                             }
                         }
                     ) {
-                        IconButton(onClick = { Browser.browse(mod.info.homepage) }) {
+                        IconButton(onClick = { DesktopHelpers.browse(mod.info.homepage) }) {
                             Icon(
                                 imageVector = Icons.Rounded.OpenInNew,
                                 contentDescription = "Homepage"

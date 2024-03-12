@@ -24,7 +24,7 @@ fun AddNewModpackCard(modifier: Modifier = Modifier) {
     Surface(
         border = BorderStroke(3.dp, highlightColor),
         shape = MaterialTheme.shapes.medium,
-        modifier = modifier.height(ModpackCardStyle.cardHeight).clickable { screen = Screen.NewInstance }
+        modifier = modifier.height(InstanceCardStyle.cardHeight).clickable { screen = Screen.NewInstance }
     ) {
         Box {
             Row(Modifier.align(Alignment.Center), verticalAlignment = Alignment.CenterVertically) {

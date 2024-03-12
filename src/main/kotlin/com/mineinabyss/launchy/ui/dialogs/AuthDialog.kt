@@ -15,7 +15,7 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.logic.Browser
+import com.mineinabyss.launchy.logic.DesktopHelpers
 import com.mineinabyss.launchy.ui.elements.LaunchyDialog
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
@@ -84,7 +84,7 @@ fun AuthDialog(
                         onClick = {
                             annotatedText.getUrlAnnotations(it, it)
                                 .firstOrNull()
-                                ?.let { Browser.browse(it.item.url) }
+                                ?.let { DesktopHelpers.browse(it.item.url) }
                         },
                     )
                 }

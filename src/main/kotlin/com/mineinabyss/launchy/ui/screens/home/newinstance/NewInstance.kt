@@ -28,6 +28,7 @@ import com.mineinabyss.launchy.ui.elements.ComfyTitle
 import com.mineinabyss.launchy.ui.elements.ComfyWidth
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.home.InstanceCard
+import com.mineinabyss.launchy.ui.screens.modpack.settings.InstanceProperties
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlinx.coroutines.launch
 import kotlin.collections.set
@@ -146,6 +147,7 @@ fun ConfirmImportTab(visible: Boolean, importingInstance: GameInstanceConfig?) {
                     fun instanceExists() = Dirs.modpackConfigDir(nameText).exists()
                     var nameValid by remember { mutableStateOf(nameValid()) }
                     var instanceExists by remember { mutableStateOf(instanceExists()) }
+                    var minecraftDir: String? by remember { mutableStateOf(null) }
 
                     OutlinedTextField(
                         value = nameText,
@@ -164,6 +166,11 @@ fun ConfirmImportTab(visible: Boolean, importingInstance: GameInstanceConfig?) {
                         modifier = Modifier.fillMaxWidth()
                     )
 
+                    InstanceProperties(
+                        minecraftDir ?: Dirs.modpackDir(nameText).toString(),
+                        onChangeMinecraftDir = { minecraftDir = it }
+                    )
+
                     TextButton(
                         enabled = importingInstance != null,
                         onClick = {
@@ -174,6 +181,7 @@ fun ConfirmImportTab(visible: Boolean, importingInstance: GameInstanceConfig?) {
                             GameInstance.create(
                                 state, instance.copy(
                                     name = nameText,
+                                    overrideMinecraftDir = minecraftDir.takeIf { it?.isNotEmpty() == true }
                                 )
                             )
                             screen = Screen.Default

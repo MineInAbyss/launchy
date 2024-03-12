@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
@@ -27,15 +28,15 @@ import com.mineinabyss.launchy.ui.colors.LaunchyColors
 import com.mineinabyss.launchy.ui.colors.currentHue
 import com.mineinabyss.launchy.ui.elements.Tooltip
 import com.mineinabyss.launchy.ui.screens.Screen
-import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardHeight
-import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardPadding
-import com.mineinabyss.launchy.ui.screens.home.ModpackCardStyle.cardWidth
+import com.mineinabyss.launchy.ui.screens.home.InstanceCardStyle.cardHeight
+import com.mineinabyss.launchy.ui.screens.home.InstanceCardStyle.cardPadding
+import com.mineinabyss.launchy.ui.screens.home.InstanceCardStyle.cardWidth
 import com.mineinabyss.launchy.ui.screens.modpack.main.SlightBackgroundTint
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.PlayButton
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlinx.coroutines.launch
 
-object ModpackCardStyle {
+object InstanceCardStyle {
     val cardHeight = 256.dp
     val cardPadding = 12.dp
     val cardWidth = 400.dp
@@ -92,15 +93,24 @@ fun InstanceCard(
             Row(
                 Modifier.align(Alignment.BottomStart).padding(cardPadding),
                 verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.SpaceAround
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column {
-                    Text(config.name, style = MaterialTheme.typography.headlineMedium)
-                    Text(config.description, style = MaterialTheme.typography.bodyMedium)
+                Column(Modifier.weight(1f, true)) {
+                    Text(
+                        config.name,
+                        style = MaterialTheme.typography.headlineMedium,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                    Text(
+                        config.description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
                 }
-                Spacer(Modifier.weight(1f))
                 if (instance?.enabled == true)
-                    PlayButton(hideText = true, instance) {
+                    PlayButton(hideText = true, instance, Modifier.weight(1f, false)) {
                         state.inProgressTasks["modpackState"] = InProgressTask("Reading modpack configuration")
                         try {
                             instance.createModpackState(state)

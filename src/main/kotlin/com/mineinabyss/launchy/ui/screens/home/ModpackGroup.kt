@@ -25,7 +25,7 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
             Text("No instances installed yet, click the + button on the sidebar to add one!")
         } else BoxWithConstraints(Modifier) {
             val total = packs.size + 1
-            val colums = ((maxWidth / ModpackCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
+            val colums = ((maxWidth / InstanceCardStyle.cardWidth).toInt()).coerceAtMost(total).coerceAtLeast(1)
             val rows = (total / colums).coerceAtLeast(1)
             val lazyGridState = rememberLazyGridState()
             LazyVerticalGrid(
@@ -33,8 +33,8 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
                 state = lazyGridState,
                 columns = GridCells.Fixed(colums),
                 modifier = Modifier
-                    .width((16.dp + ModpackCardStyle.cardWidth) * total)
-                    .heightIn(max = (16.dp + ModpackCardStyle.cardHeight) * rows),
+                    .width((16.dp + InstanceCardStyle.cardWidth) * total)
+                    .heightIn(max = (16.dp + InstanceCardStyle.cardHeight) * rows),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {

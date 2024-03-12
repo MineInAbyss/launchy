@@ -43,7 +43,8 @@ object Dirs {
 
     val modpackConfigsDir = (config / "modpacks")
 
-    fun modpackDir(string: String) = mineinabyss / "modpacks" / string
+    val modpacksDir = mineinabyss / "modpacks"
+    fun modpackDir(string: String) = modpacksDir / string
     fun modpackConfigDir(name: String) = modpackConfigsDir / name
 
     fun createDirs() {

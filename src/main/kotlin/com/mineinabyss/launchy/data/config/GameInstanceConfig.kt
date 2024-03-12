@@ -23,7 +23,6 @@ import kotlin.io.path.inputStream
 import kotlin.io.path.outputStream
 
 @Serializable
-@OptIn(ExperimentalStdlibApi::class)
 data class GameInstanceConfig(
     val name: String,
     val description: String,

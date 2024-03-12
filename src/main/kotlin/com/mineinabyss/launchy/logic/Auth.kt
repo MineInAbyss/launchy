@@ -30,7 +30,7 @@ object Auth {
                     profile,
                     onVerificationRequired = {
                         state.inProgressTasks.remove("auth")
-                        Browser.browse(it.redirectTo)
+                        DesktopHelpers.browse(it.redirectTo)
                         profile.authCode = it.code
                         dialog = Dialog.Auth
                         println(profile.authCode)

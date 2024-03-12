@@ -2,7 +2,6 @@ package com.mineinabyss.launchy.ui.screens.modpack.main.buttons
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -35,6 +34,7 @@ import kotlinx.coroutines.launch
 fun PlayButton(
     hideText: Boolean = false,
     instance: GameInstance,
+    modifier: Modifier = Modifier,
     getModpackState: suspend () -> ModpackState?,
 ) {
     val state = LocalLaunchyState
@@ -115,7 +115,7 @@ fun PlayButton(
         if (hideText) Button(
             enabled = enabled,
             onClick = onClick,
-            modifier = Modifier.size(52.dp).defaultMinSize(minWidth = 1.dp, minHeight = 1.dp),
+            modifier = Modifier.size(52.dp).then(modifier),
             contentPadding = PaddingValues(0.dp),
             colors = buttonColors,
             shape = MaterialTheme.shapes.medium
