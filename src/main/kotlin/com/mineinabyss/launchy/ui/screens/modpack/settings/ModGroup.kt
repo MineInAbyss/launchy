@@ -24,14 +24,14 @@ import com.mineinabyss.launchy.data.modpacks.Group
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.logic.ToggleMods.setModEnabled
 import com.mineinabyss.launchy.ui.elements.Tooltip
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import com.mineinabyss.launchy.util.Option
 
 @Composable
 fun ModGroup(group: Group, mods: Collection<Mod>) {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
-    val state = LocalModpackState
+    val state = LocalGameInstanceState
 
     val modsChanged = mods.any {
         it in state.queued.deletions || it in state.queued.newDownloads || it in state.queued.failures

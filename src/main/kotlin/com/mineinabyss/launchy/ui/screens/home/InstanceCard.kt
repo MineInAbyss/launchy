@@ -57,7 +57,7 @@ fun InstanceCard(
         onClick = {
             instance ?: return@Card
             coroutineScope.launch {
-                state.modpackState = instance.createModpackState(state)
+                state.instanceState = instance.createModpackState(state)
                 currentHue = instance.config.hue
                 screen = Screen.Instance
             }

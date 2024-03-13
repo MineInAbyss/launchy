@@ -10,10 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
 
 @Composable
-fun ModpackGroup(title: String, packs: List<GameInstance>) {
+fun InstanceList(title: String, packs: List<GameInstance>) {
+    val state = LocalLaunchyState
     Column {
 //        var showAll by remember { mutableStateOf(false) }
         val visiblePacks = packs//.take(6)
@@ -38,7 +40,7 @@ fun ModpackGroup(title: String, packs: List<GameInstance>) {
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(visiblePacks) { pack ->
+                items(visiblePacks.sortedByDescending { state.lastPlayed[it.config.name] }) { pack ->
                     InstanceCard(pack.config, pack)
                 }
             }

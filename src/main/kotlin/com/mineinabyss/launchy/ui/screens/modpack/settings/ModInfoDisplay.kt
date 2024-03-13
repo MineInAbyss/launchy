@@ -24,12 +24,12 @@ import com.mineinabyss.launchy.logic.DesktopHelpers
 import com.mineinabyss.launchy.logic.ToggleMods.setModConfigEnabled
 import com.mineinabyss.launchy.logic.ToggleMods.setModEnabled
 import com.mineinabyss.launchy.ui.elements.Tooltip
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ModInfoDisplay(group: Group, mod: Mod) {
-    val state = LocalModpackState
+    val state = LocalGameInstanceState
     val modEnabled by derivedStateOf { mod in state.toggles.enabledMods }
     val configEnabled by derivedStateOf { mod in state.toggles.enabledConfigs }
     var configExpanded by remember { mutableStateOf(false) }

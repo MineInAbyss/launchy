@@ -6,7 +6,7 @@ import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
-import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -16,7 +16,7 @@ import kotlin.io.path.*
 
 object ModDownloader {
 
-    suspend fun ModpackState.installMCAndModLoaders(state: LaunchyState, modLoaders: InstanceModLoaders) {
+    suspend fun GameInstanceState.installMCAndModLoaders(state: LaunchyState, modLoaders: InstanceModLoaders) {
         state.runTask(Tasks.installModLoadersId, InProgressTask("Installing ${modLoaders.fabricLoader}")) {
             Launcher.download(
                 modLoaders,
@@ -35,7 +35,7 @@ object ModDownloader {
         data object Failed : DownloadResult
     }
 
-    suspend fun ModpackState.download(mod: Mod, ignoreCachedCheck: Boolean): DownloadResult {
+    suspend fun GameInstanceState.download(mod: Mod, ignoreCachedCheck: Boolean): DownloadResult {
         val name = mod.info.name
         try {
             println("Starting download of $name")
@@ -91,7 +91,7 @@ object ModDownloader {
      * does not install any mod updates or new dep versions if they changed in the modpack.
      * Primarily the mod loader/minecraft version.
      */
-    suspend fun ModpackState.ensureDependenciesReady(state: LaunchyState) = coroutineScope {
+    suspend fun GameInstanceState.ensureDependenciesReady(state: LaunchyState) = coroutineScope {
         val currentDeps = userAgreedDeps
         if (currentDeps == null) {
             userAgreedDeps = modpack.modLoaders
@@ -99,7 +99,7 @@ object ModDownloader {
         installMCAndModLoaders(state, currentDeps ?: modpack.modLoaders)
     }
 
-    fun ModpackState.copyMods() {
+    fun GameInstanceState.copyMods() {
         // Clear mods folder
         val existingEntries = instance.modsDir.useDirectoryEntries { files ->
             files.filter { !it.isDirectory() }.toList()
@@ -122,13 +122,13 @@ object ModDownloader {
         (existingEntries - linked).forEach { it.deleteIfExists() }
     }
 
-    suspend fun ModpackState.prepareWithoutChangingInstalledMods(state: LaunchyState) {
+    suspend fun GameInstanceState.prepareWithoutChangingInstalledMods(state: LaunchyState) {
         ensureDependenciesReady(state)
         copyMods()
     }
 
     @OptIn(ExperimentalPathApi::class)
-    fun ModpackState.copyOverrides(state: LaunchyState) {
+    fun GameInstanceState.copyOverrides(state: LaunchyState) {
         state.runTask(Tasks.copyOverridesId, InProgressTask("Copying overrides")) {
             modpack.overridesPaths.forEach {
                 it.copyToRecursively(
@@ -143,7 +143,7 @@ object ModDownloader {
     /**
      * Updates mod loader versions and mods to latest modpack definition.
      */
-    suspend fun ModpackState.startInstall(state: LaunchyState, ignoreCachedCheck: Boolean = false): Result<*> =
+    suspend fun GameInstanceState.startInstall(state: LaunchyState, ignoreCachedCheck: Boolean = false): Result<*> =
         coroutineScope {
         userAgreedDeps = modpack.modLoaders
         ensureDependenciesReady(state)

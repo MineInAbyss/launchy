@@ -19,11 +19,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 
 @Composable
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
-    val pack = LocalModpackState
+    val pack = LocalGameInstanceState
     val background by pack.instance.config.getBackground()
     AnimatedVisibility(background != null, enter = fadeIn(), exit = fadeOut()) {
         if (background == null) return@AnimatedVisibility
@@ -76,7 +76,7 @@ fun BoxScope.SlightBackgroundTint(modifier: Modifier = Modifier) {
 @Composable
 fun LogoLarge(modifier: Modifier) {
     val state = LocalLaunchyState
-    val pack = LocalModpackState
+    val pack = LocalGameInstanceState
     val painter by pack.instance.config.getLogo()
     AnimatedVisibility(
         painter != null,

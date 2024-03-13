@@ -19,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 
 @Composable
 fun UpdateInfoButton() {
     val state = LocalLaunchyState
-    val packState = LocalModpackState
+    val packState = LocalGameInstanceState
     var toggled by remember { mutableStateOf(false) }
     Button(onClick = { toggled = !toggled }, shape = RoundedCornerShape(20.dp)) {
         Column {

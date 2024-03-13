@@ -12,7 +12,7 @@ import com.mineinabyss.launchy.logic.UpdateResult
 import com.mineinabyss.launchy.logic.showDialogOnError
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
-import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,8 +40,8 @@ class GameInstance(
     var updatesAvailable by mutableStateOf(false)
     var enabled: Boolean by mutableStateOf(true)
 
-    suspend fun createModpackState(state: LaunchyState): ModpackState? {
-        val userConfig = ModpackUserConfig.load(userConfigFile).getOrNull() ?: ModpackUserConfig()
+    suspend fun createModpackState(state: LaunchyState): GameInstanceState? {
+        val userConfig = InstanceUserConfig.load(userConfigFile).getOrNull() ?: InstanceUserConfig()
 
         val modpack = state.runTask("loadingModpack ${config.name}", InProgressTask("Loading modpack ${config.name}")) {
             config.source.loadInstance(this)
@@ -59,7 +59,7 @@ class GameInstance(
                 updatesAvailable = true
             }
         }
-        return ModpackState(this, modpack, userConfig)
+        return GameInstanceState(this, modpack, userConfig)
     }
 
     init {

@@ -3,7 +3,7 @@ package com.mineinabyss.launchy.logic
 import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.state.ProfileState
-import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import com.mineinabyss.launchy.ui.screens.Dialog
 import com.mineinabyss.launchy.ui.screens.dialog
 import kotlinx.coroutines.Job
@@ -30,7 +30,7 @@ import kotlin.io.path.notExists
 
 
 object Launcher {
-    suspend fun launch(state: LaunchyState, pack: ModpackState, profile: ProfileState): Unit = coroutineScope {
+    suspend fun launch(state: LaunchyState, pack: GameInstanceState, profile: ProfileState): Unit = coroutineScope {
         val dir = MinecraftDirectory(pack.instance.minecraftDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
         val javaPath = state.jvm.javaPath
@@ -38,6 +38,7 @@ object Launcher {
             dialog = Dialog.ChooseJVMPath
             return@coroutineScope
         }
+        state.lastPlayed[pack.instance.config.name] = Date().time
         // Auth or show dialog
         when (val session = profile.currentSession) {
             null -> Auth.authOrShowDialog(state, profile) {

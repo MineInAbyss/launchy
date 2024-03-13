@@ -9,12 +9,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.logic.Instances.updateInstance
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 
 @Composable
 fun UpdateButton() {
     val state = LocalLaunchyState
-    val pack = LocalModpackState
+    val pack = LocalGameInstanceState
     Box {
         Button(onClick = {
             pack.instance.updateInstance(state)

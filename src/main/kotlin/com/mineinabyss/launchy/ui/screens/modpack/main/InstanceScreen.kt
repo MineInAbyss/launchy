@@ -8,8 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.PlayButton
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.SettingsButton
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.UpdateButton
@@ -18,9 +17,8 @@ import com.mineinabyss.launchy.ui.state.windowScope
 @ExperimentalComposeUiApi
 @Preview
 @Composable
-fun ModpackScreen() {
-    val state = LocalLaunchyState
-    val packState = LocalModpackState
+fun InstanceScreen() {
+    val packState = LocalGameInstanceState
 
     Box {
         BackgroundImage(windowScope)

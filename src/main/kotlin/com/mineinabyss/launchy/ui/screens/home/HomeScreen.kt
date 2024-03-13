@@ -40,7 +40,7 @@ fun HomeScreen() {
                         Spacer(Modifier.height(16.dp))
                     }
                     item {
-                        ModpackGroup("Instances", state.gameInstances)
+                        InstanceList("Instances", state.gameInstances)
                     }
 //                    item {
 //                        ModpackGroup("Find more", state.downloadedModpacks)

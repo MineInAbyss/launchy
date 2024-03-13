@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.data.modpacks.Group
 import com.mineinabyss.launchy.data.modpacks.Mod
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import com.mineinabyss.launchy.util.Option
 
 @Composable
@@ -28,7 +28,7 @@ fun ToggleButtons(
     group: Group,
     mods: Collection<Mod>,
 ) {
-    val state = LocalModpackState
+    val state = LocalGameInstanceState
     val offColor = Color.Transparent
     val offTextColor = MaterialTheme.colorScheme.surface
     val forced = group.forceEnabled || group.forceDisabled

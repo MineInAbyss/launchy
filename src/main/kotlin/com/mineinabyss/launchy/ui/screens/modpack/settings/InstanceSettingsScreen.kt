@@ -25,7 +25,7 @@ import com.mineinabyss.launchy.logic.DesktopHelpers
 import com.mineinabyss.launchy.logic.Instances.delete
 import com.mineinabyss.launchy.logic.Instances.updateInstance
 import com.mineinabyss.launchy.ui.elements.*
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlin.io.path.listDirectoryEntries
@@ -33,7 +33,7 @@ import kotlin.io.path.listDirectoryEntries
 @Composable
 @Preview
 fun InstanceSettingsScreen() {
-    val state = LocalModpackState
+    val state = LocalGameInstanceState
     var selectedTabIndex by remember { mutableStateOf(0) }
     ComfyWidth {
         Column {
@@ -98,7 +98,7 @@ fun InstanceProperties(
 @Composable
 fun OptionsTab() {
     val state = LocalLaunchyState
-    val pack = LocalModpackState
+    val pack = LocalGameInstanceState
 
     ComfyContent(Modifier.padding(16.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -139,7 +139,7 @@ fun OptionsTab() {
 
 @Composable
 fun ModManagement() {
-    val state = LocalModpackState
+    val state = LocalGameInstanceState
     Scaffold(
         containerColor = Color.Transparent,
         bottomBar = { InfoBar() },

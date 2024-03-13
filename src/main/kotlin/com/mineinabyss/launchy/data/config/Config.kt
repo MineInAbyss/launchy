@@ -19,6 +19,7 @@ data class Config(
     val useRecommendedJvmArguments: Boolean = true,
     val preferHue: Float? = null,
     val startInFullscreen: Boolean = false,
+    val lastPlayedMap: Map<String, Long> = mapOf(),
 ) {
     fun save() {
         Dirs.configFile.writeText(Formats.yaml.encodeToString(this))

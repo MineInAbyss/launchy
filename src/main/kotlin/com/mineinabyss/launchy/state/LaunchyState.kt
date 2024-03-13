@@ -3,7 +3,7 @@ package com.mineinabyss.launchy.state
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.config.Config
 import com.mineinabyss.launchy.data.config.GameInstance
-import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import java.util.*
 
 class LaunchyState(
@@ -12,10 +12,13 @@ class LaunchyState(
     private val instances: List<GameInstance>
 ) {
     val profile = ProfileState(config)
-    var modpackState: ModpackState? by mutableStateOf(null)
+    var instanceState: GameInstanceState? by mutableStateOf(null)
     private val launchedProcesses = mutableStateMapOf<String, Process>()
     val jvm = JvmState(config)
     val ui = UIState(config)
+    val lastPlayed = mutableStateMapOf<String, Long>().apply {
+        putAll(config.lastPlayedMap)
+    }
 
     val gameInstances = mutableStateListOf<GameInstance>().apply {
         addAll(instances)
@@ -46,7 +49,8 @@ class LaunchyState(
             memoryAllocation = jvm.userMemoryAllocation,
             useRecommendedJvmArguments = jvm.useRecommendedJvmArgs,
             preferHue = ui.preferHue,
-            startInFullscreen = ui.fullscreen
+            startInFullscreen = ui.fullscreen,
+            lastPlayedMap = lastPlayed
         ).save()
     }
 

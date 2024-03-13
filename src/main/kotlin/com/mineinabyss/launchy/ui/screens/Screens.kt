@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.state.InProgressTask
-import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import com.mineinabyss.launchy.ui.AppTopBar
 import com.mineinabyss.launchy.ui.colors.currentHue
 import com.mineinabyss.launchy.ui.dialogs.AuthDialog
@@ -22,7 +22,7 @@ import com.mineinabyss.launchy.ui.elements.LaunchyDialog
 import com.mineinabyss.launchy.ui.screens.home.HomeScreen
 import com.mineinabyss.launchy.ui.screens.home.newinstance.NewInstance
 import com.mineinabyss.launchy.ui.screens.home.settings.SettingsScreen
-import com.mineinabyss.launchy.ui.screens.modpack.main.ModpackScreen
+import com.mineinabyss.launchy.ui.screens.modpack.main.InstanceScreen
 import com.mineinabyss.launchy.ui.screens.modpack.main.SlightBackgroundTint
 import com.mineinabyss.launchy.ui.screens.modpack.settings.InfoBarProperties
 import com.mineinabyss.launchy.ui.screens.modpack.settings.InstanceSettingsScreen
@@ -32,11 +32,11 @@ var screen: Screen by mutableStateOf(Screen.Default)
 
 var dialog: Dialog by mutableStateOf(Dialog.None)
 
-private val ModpackStateProvider = compositionLocalOf<ModpackState> { error("No local modpack provided") }
+private val ModpackStateProvider = compositionLocalOf<GameInstanceState> { error("No local modpack provided") }
 
 val snackbarHostState = SnackbarHostState()
 
-val LocalModpackState: ModpackState
+val LocalGameInstanceState: GameInstanceState
     @Composable get() = ModpackStateProvider.current
 
 @Composable
@@ -44,10 +44,10 @@ fun Screens() = Scaffold(
     snackbarHost = { SnackbarHost(snackbarHostState) }
 ) {
     val state = LocalLaunchyState
-    val packState = state.modpackState
+    val packState = state.instanceState
 
     if (packState != null) CompositionLocalProvider(ModpackStateProvider provides packState) {
-        Screen(Screen.Instance) { ModpackScreen() }
+        Screen(Screen.Instance) { InstanceScreen() }
         Screen(Screen.InstanceSettings, transition = Transitions.SlideUp) { InstanceSettingsScreen() }
     }
     Screen(Screen.Default) { HomeScreen() }

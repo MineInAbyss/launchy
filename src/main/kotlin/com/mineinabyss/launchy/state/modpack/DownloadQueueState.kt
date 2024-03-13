@@ -5,11 +5,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
 import com.mineinabyss.launchy.data.ModID
 import com.mineinabyss.launchy.data.config.DownloadInfo
-import com.mineinabyss.launchy.data.config.ModpackUserConfig
+import com.mineinabyss.launchy.data.config.InstanceUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
 
 class DownloadQueueState(
-    private val userConfig: ModpackUserConfig,
+    private val userConfig: InstanceUserConfig,
     val modpack: Modpack,
     val toggles: ModTogglesState
 ) {

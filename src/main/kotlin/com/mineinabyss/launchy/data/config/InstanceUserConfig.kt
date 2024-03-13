@@ -43,7 +43,7 @@ data class DownloadInfo(
 }
 
 @Serializable
-data class ModpackUserConfig(
+data class InstanceUserConfig(
     val userAgreedDeps: InstanceModLoaders? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val fullDisabledGroups: Set<GroupName> = setOf(),
@@ -56,13 +56,13 @@ data class ModpackUserConfig(
 ) {
     fun save(file: Path) {
         file.createParentDirectories().deleteIfExists()
-        file.writeText(Formats.yaml.encodeToString<ModpackUserConfig>(this))
+        file.writeText(Formats.yaml.encodeToString<InstanceUserConfig>(this))
     }
 
     companion object {
-        fun load(file: Path): Result<ModpackUserConfig> = runCatching {
-            return@runCatching if (file.exists()) Formats.yaml.decodeFromStream<ModpackUserConfig>(file.inputStream())
-            else ModpackUserConfig()
+        fun load(file: Path): Result<InstanceUserConfig> = runCatching {
+            return@runCatching if (file.exists()) Formats.yaml.decodeFromStream<InstanceUserConfig>(file.inputStream())
+            else InstanceUserConfig()
         }.onFailure { it.printStackTrace() }
     }
 }

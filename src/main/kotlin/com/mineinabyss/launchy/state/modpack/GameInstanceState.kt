@@ -4,13 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.data.config.GameInstance
-import com.mineinabyss.launchy.data.config.ModpackUserConfig
+import com.mineinabyss.launchy.data.config.InstanceUserConfig
 import com.mineinabyss.launchy.data.modpacks.Modpack
 
-class ModpackState(
+class GameInstanceState(
     val instance: GameInstance,
     val modpack: Modpack,
-    private val userConfig: ModpackUserConfig
+    private val userConfig: InstanceUserConfig
 ) {
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
     val queued = DownloadQueueState(userConfig, modpack, toggles)

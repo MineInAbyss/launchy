@@ -16,13 +16,13 @@ import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.ModDownloader.startInstall
 import com.mineinabyss.launchy.ui.elements.OutlinedRedButton
 import com.mineinabyss.launchy.ui.elements.PrimaryButton
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import kotlinx.coroutines.launch
 
 @Composable
 fun RetryFailedButton(enabled: Boolean) {
     val state = LocalLaunchyState
-    val packState = LocalModpackState
+    val packState = LocalGameInstanceState
     OutlinedRedButton(
         enabled = enabled,
         onClick = {
@@ -37,7 +37,7 @@ fun RetryFailedButton(enabled: Boolean) {
 @Composable
 fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
-    val packState = LocalModpackState
+    val packState = LocalGameInstanceState
     PrimaryButton(
         enabled = enabled,
         onClick = {

@@ -22,7 +22,7 @@ import com.mineinabyss.launchy.logic.AppDispatchers.launchOrShowDialog
 import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.logic.ModDownloader.prepareWithoutChangingInstalledMods
 import com.mineinabyss.launchy.logic.ModDownloader.startInstall
-import com.mineinabyss.launchy.state.modpack.ModpackState
+import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
 import com.mineinabyss.launchy.ui.elements.SecondaryButtonColors
 import com.mineinabyss.launchy.ui.screens.Dialog
@@ -35,7 +35,7 @@ fun PlayButton(
     hideText: Boolean = false,
     instance: GameInstance,
     modifier: Modifier = Modifier,
-    getModpackState: suspend () -> ModpackState?,
+    getModpackState: suspend () -> GameInstanceState?,
 ) {
     val state = LocalLaunchyState
     val process = state.processFor(instance)
@@ -58,7 +58,7 @@ fun PlayButton(
     )
 
     Box {
-        var foundPackState: ModpackState? by remember { mutableStateOf(null) }
+        var foundPackState: GameInstanceState? by remember { mutableStateOf(null) }
         val onClick: () -> Unit = {
             coroutineScope.launch(Dispatchers.IO) {
                 val packState = foundPackState ?: getModpackState() ?: return@launch

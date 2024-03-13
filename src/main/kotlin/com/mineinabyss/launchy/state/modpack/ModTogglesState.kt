@@ -2,7 +2,7 @@ package com.mineinabyss.launchy.state.modpack
 
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import com.mineinabyss.launchy.data.config.ModpackUserConfig
+import com.mineinabyss.launchy.data.config.InstanceUserConfig
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.Modpack
 import com.mineinabyss.launchy.logic.ToggleMods.setModEnabled
@@ -10,7 +10,7 @@ import com.mineinabyss.launchy.state.mutableStateSetOf
 
 class ModTogglesState(
     val modpack: Modpack,
-    val modpackConfig: ModpackUserConfig
+    val modpackConfig: InstanceUserConfig
 ) {
     val enabledMods = mutableStateSetOf<Mod>().apply {
         addAll(modpackConfig.toggledMods.mapNotNull { modpack.mods.getMod(it) })

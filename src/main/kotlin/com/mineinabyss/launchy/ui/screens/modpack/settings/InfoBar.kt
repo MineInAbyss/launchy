@@ -22,7 +22,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
 import com.mineinabyss.launchy.ui.elements.Tooltip
-import com.mineinabyss.launchy.ui.screens.LocalModpackState
+import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.InstallButton
 import com.mineinabyss.launchy.ui.screens.modpack.main.buttons.RetryFailedButton
 
@@ -32,7 +32,7 @@ object InfoBarProperties {
 @Composable
 fun InfoBar(modifier: Modifier = Modifier) {
     val state = LocalLaunchyState
-    val packState = LocalModpackState
+    val packState = LocalGameInstanceState
     Surface(
         tonalElevation = 2.dp,
         shadowElevation = 0.dp,
