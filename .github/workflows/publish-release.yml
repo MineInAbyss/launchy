@@ -26,14 +26,11 @@ jobs:
           cache: gradle
 
       - name: Install FUSE (ubuntu)
-        if: ${{ matrix.os == 'ubuntu-latest' }}
         run: sudo apt-get install libfuse2 fuse binutils
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        if: ${{ matrix.os == 'ubuntu-latest' }}
 
       - name: Run custom gradle package
-        run: gradle packageForRelease packageReleaseUberJarForCurrentOS
+        run: gradle packageForRelease
 
       - name: Upload build
         uses: actions/upload-artifact@v2
@@ -41,45 +38,21 @@ jobs:
           name: build-${{ matrix.os }}
           path: 'releases/*'
 
-      - name: Get version from gradle
-        shell: bash
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        id: extract_version
-        run: |
-          version=`gradle properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}'`
-          echo "version=$version" >> $GITHUB_OUTPUT
-
-      - name: Create release version artifact
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        shell: bash
-        run: |
-          echo "${{ steps.extract_version.outputs.version }}" > version.txt
-
-      - name: Upload release version artifact
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: version
-          path: version.txt
-
       - name: Stop gradle daemon for Windows cache
-        if: ${{ matrix.os == 'windows-latest' }}
         run: gradle --stop
+        if: ${{ matrix.os == 'windows-latest' }}
   publish-release:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Download all artifacts
         uses: actions/download-artifact@v2
         with:
           path: artifacts
-
-      - name: Read versions file
-        shell: bash
-        id: extract_version
-        run: |
-          version=`cat artifacts/version/version.txt`
-          echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Move all release artifacts into one folder
         shell: bash
@@ -87,11 +60,7 @@ jobs:
           mkdir releases
           mv artifacts/build*/* releases
 
-      - uses: marvinpinto/action-automatic-releases@latest
+      - uses: MineInAbyss/publish-action@develop
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: "${{ github.ref == 'refs/heads/develop' }}"
-          automatic_release_tag: v${{ steps.extract_version.outputs.version }}
-          files: |
+          release-files: |
             releases/*
-
