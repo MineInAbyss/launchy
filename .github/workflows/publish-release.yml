@@ -62,5 +62,6 @@ jobs:
 
       - uses: MineInAbyss/publish-action@develop
         with:
+          run-gradle-build: false
           release-files: |
             releases/*
