@@ -1,8 +1,6 @@
 package com.mineinabyss.launchy.data.config
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
 import com.charleskorn.kaml.encodeToStream
@@ -65,19 +63,15 @@ data class GameInstanceConfig(
         }.onFailure { it.printStackTrace() }
     }
 
-    @Composable
-    fun getBackground() = remember {
+    fun getBackgroundAsState() =
         cachedBackground.also {
             if (it.value == null) downloadScope.launch { loadBackground() }
         }
-    }
 
-    @Composable
-    fun getLogo() = remember {
+    fun getLogoAsState() =
         cachedLogo.also {
             if (it.value == null) downloadScope.launch { loadLogo() }
         }
-    }
 
     fun saveTo(path: Path) = runCatching {
         Formats.yaml.encodeToStream(this, path.outputStream())

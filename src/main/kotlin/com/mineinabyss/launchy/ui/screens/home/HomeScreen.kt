@@ -40,7 +40,9 @@ fun HomeScreen() {
                         Spacer(Modifier.height(16.dp))
                     }
                     item {
-                        InstanceList("Instances", state.gameInstances)
+                        InstanceList(
+                            "Instances",
+                            state.gameInstances.sortedByDescending { state.lastPlayed[it.config.name] })
                     }
 //                    item {
 //                        ModpackGroup("Find more", state.downloadedModpacks)

@@ -40,7 +40,7 @@ fun InstanceList(title: String, packs: List<GameInstance>) {
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(visiblePacks.sortedByDescending { state.lastPlayed[it.config.name] }) { pack ->
+                items(visiblePacks) { pack ->
                     InstanceCard(pack.config, pack)
                 }
             }

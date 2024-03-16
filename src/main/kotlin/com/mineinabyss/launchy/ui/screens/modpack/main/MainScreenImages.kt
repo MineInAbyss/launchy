@@ -11,6 +11,7 @@ import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -24,7 +25,7 @@ import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 @Composable
 fun BoxScope.BackgroundImage(windowScope: WindowScope) {
     val pack = LocalGameInstanceState
-    val background by pack.instance.config.getBackground()
+    val background by remember { pack.instance.config.getBackgroundAsState() }
     AnimatedVisibility(background != null, enter = fadeIn(), exit = fadeOut()) {
         if (background == null) return@AnimatedVisibility
         windowScope.WindowDraggableArea {
@@ -75,9 +76,9 @@ fun BoxScope.SlightBackgroundTint(modifier: Modifier = Modifier) {
 
 @Composable
 fun LogoLarge(modifier: Modifier) {
-    val state = LocalLaunchyState
+    LocalLaunchyState
     val pack = LocalGameInstanceState
-    val painter by pack.instance.config.getLogo()
+    val painter by remember { pack.instance.config.getLogoAsState() }
     AnimatedVisibility(
         painter != null,
         enter = fadeIn() + expandVertically(clip = false) + fadeIn(),
