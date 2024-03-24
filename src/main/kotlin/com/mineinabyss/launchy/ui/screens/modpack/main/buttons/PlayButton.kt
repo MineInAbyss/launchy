@@ -63,20 +63,25 @@ fun PlayButton(
             coroutineScope.launch(Dispatchers.IO) {
                 val packState = foundPackState ?: getModpackState() ?: return@launch
                 foundPackState = packState
+                val operationsQueued = packState.queued.areOperationsQueued
+
                 if (process == null) {
                     when {
                         // Assume this means not launched before
-                        packState.userAgreedDeps == null -> {
+                        packState.userAgreedModLoaders == null -> {
                             AppDispatchers.profileLaunch.launchOrShowDialog {
                                 packState.startInstall(state)
                                 Launcher.launch(state, packState, state.profile)
                             }
                         }
 
-                        packState.queued.areOperationsQueued -> {
+                        operationsQueued -> {
                             dialog = Dialog.Options(
                                 title = "Install changes before launch?",
-                                message = "New mods have been selected/removed,\nwould you like to apply these changes?",
+                                message = buildString {
+                                    appendLine("This instance has changes that are not installed yet,")
+                                    appendLine("would you like to apply these changes now?")
+                                },
                                 acceptText = "Install",
                                 declineText = "Skip",
                                 onAccept = {

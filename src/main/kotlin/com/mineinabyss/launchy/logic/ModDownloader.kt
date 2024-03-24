@@ -17,7 +17,7 @@ import kotlin.io.path.*
 object ModDownloader {
 
     suspend fun GameInstanceState.installMCAndModLoaders(state: LaunchyState, modLoaders: InstanceModLoaders) {
-        state.runTask(Tasks.installModLoadersId, InProgressTask("Installing ${modLoaders.fabricLoader}")) {
+        state.runTask(Tasks.installModLoadersId, InProgressTask("Installing ${modLoaders.fullVersionName}")) {
             Launcher.download(
                 modLoaders,
                 instance.minecraftDir,
@@ -92,9 +92,9 @@ object ModDownloader {
      * Primarily the mod loader/minecraft version.
      */
     suspend fun GameInstanceState.ensureDependenciesReady(state: LaunchyState) = coroutineScope {
-        val currentDeps = userAgreedDeps
+        val currentDeps = userAgreedModLoaders
         if (currentDeps == null) {
-            userAgreedDeps = modpack.modLoaders
+            userAgreedModLoaders = modpack.modLoaders
         }
         installMCAndModLoaders(state, currentDeps ?: modpack.modLoaders)
     }
@@ -145,7 +145,7 @@ object ModDownloader {
      */
     suspend fun GameInstanceState.startInstall(state: LaunchyState, ignoreCachedCheck: Boolean = false): Result<*> =
         coroutineScope {
-        userAgreedDeps = modpack.modLoaders
+            userAgreedModLoaders = modpack.modLoaders
         ensureDependenciesReady(state)
         copyOverrides(state)
 

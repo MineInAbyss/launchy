@@ -43,12 +43,16 @@ class DownloadQueueState(
         (modpack.mods.mods - toggles.enabledMods).filter { modDownloadInfo.contains(it.modId) }
     }
 
+    val areModLoaderUpdatesAvailable by derivedStateOf {
+        modpack.modLoaders != userConfig.userAgreedDeps
+    }
+
     val needsInstall by derivedStateOf { updates + newDownloads + failures }
 
     val areUpdatesQueued by derivedStateOf { updates.isNotEmpty() }
     val areNewDownloadsQueued by derivedStateOf { newDownloads.isNotEmpty() }
     val areDeletionsQueued by derivedStateOf { deletions.isNotEmpty() }
     val areOperationsQueued by derivedStateOf {
-        areUpdatesQueued || areNewDownloadsQueued || areDeletionsQueued
+        areUpdatesQueued || areNewDownloadsQueued || areDeletionsQueued || areModLoaderUpdatesAvailable
     }
 }

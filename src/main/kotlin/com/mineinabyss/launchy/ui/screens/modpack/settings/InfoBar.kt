@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Download
+import androidx.compose.material.icons.rounded.HistoryEdu
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -48,7 +49,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             InstallButton(
                 state.processFor(packState.instance) == null
                         && !packState.downloads.isDownloading
-                        && (packState.queued.areOperationsQueued || packState.userAgreedDeps == null)
+                        && (packState.queued.areOperationsQueued || packState.userAgreedModLoaders == null)
                         && state.inProgressTasks.isEmpty(),
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
@@ -56,6 +57,12 @@ fun InfoBar(modifier: Modifier = Modifier) {
             AnimatedVisibility(failures) {
                 RetryFailedButton(failures)
             }
+            ActionButton(
+                shown = packState.queued.areModLoaderUpdatesAvailable,
+                icon = Icons.Rounded.HistoryEdu,
+                desc = "Mod loader updates:\n${packState.userAgreedModLoaders?.fullVersionName ?: "Not installed"} -> ${packState.modpack.modLoaders.fullVersionName}",
+                count = 1
+            )
             ActionButton(
                 shown = packState.queued.areUpdatesQueued,
                 icon = Icons.Rounded.Update,

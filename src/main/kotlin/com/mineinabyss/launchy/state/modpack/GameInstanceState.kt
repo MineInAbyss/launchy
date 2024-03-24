@@ -15,14 +15,14 @@ class GameInstanceState(
     val toggles: ModTogglesState = ModTogglesState(modpack, userConfig)
     val queued = DownloadQueueState(userConfig, modpack, toggles)
     val downloads = DownloadState()
-    var userAgreedDeps by mutableStateOf(userConfig.userAgreedDeps)
+    var userAgreedModLoaders by mutableStateOf(userConfig.userAgreedDeps)
 
     fun saveToConfig() {
         userConfig.copy(
             fullEnabledGroups = modpack.mods.modGroups
                 .filter { toggles.enabledMods.containsAll(it.value) }.keys
                 .map { it.name }.toSet(),
-            userAgreedDeps = userAgreedDeps,
+            userAgreedDeps = userAgreedModLoaders,
             toggledMods = toggles.enabledMods.mapTo(mutableSetOf()) { it.info.name },
             toggledConfigs = toggles.enabledConfigs.mapTo(mutableSetOf()) { it.info.name } + toggles.enabledMods.filter { it.info.forceConfigDownload }
                 .mapTo(mutableSetOf()) { it.info.name },
