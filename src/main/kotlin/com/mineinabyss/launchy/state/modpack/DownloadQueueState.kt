@@ -1,8 +1,6 @@
 package com.mineinabyss.launchy.state.modpack
 
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.*
 import com.mineinabyss.launchy.data.ModID
 import com.mineinabyss.launchy.data.config.DownloadInfo
 import com.mineinabyss.launchy.data.config.InstanceUserConfig
@@ -15,7 +13,8 @@ class DownloadQueueState(
 ) {
     /** Live mod download info, including mods that have been removed from the latest modpack version. */
     val modDownloadInfo = mutableStateMapOf<ModID, DownloadInfo>().apply {
-        putAll(userConfig.modDownloadInfo)
+        val availableIds = toggles.availableMods.map { it.modId }
+        putAll(userConfig.modDownloadInfo.filter { it.key in availableIds })
     }
 
     /** Mods whose download url matches a previously downloaded url and exist on the filesystem */
@@ -44,8 +43,10 @@ class DownloadQueueState(
     }
 
     val areModLoaderUpdatesAvailable by derivedStateOf {
-        modpack.modLoaders != userConfig.userAgreedDeps
+        modpack.modLoaders != userAgreedModLoaders
     }
+
+    var userAgreedModLoaders by mutableStateOf(userConfig.userAgreedDeps)
 
     val needsInstall by derivedStateOf { updates + newDownloads + failures }
 

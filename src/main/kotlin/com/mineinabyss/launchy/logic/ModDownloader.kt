@@ -1,5 +1,6 @@
 package com.mineinabyss.launchy.logic
 
+import com.mineinabyss.launchy.data.ModID
 import com.mineinabyss.launchy.data.config.DownloadInfo
 import com.mineinabyss.launchy.data.config.HashCheck
 import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
@@ -92,9 +93,9 @@ object ModDownloader {
      * Primarily the mod loader/minecraft version.
      */
     suspend fun GameInstanceState.ensureDependenciesReady(state: LaunchyState) = coroutineScope {
-        val currentDeps = userAgreedModLoaders
+        val currentDeps = queued.userAgreedModLoaders
         if (currentDeps == null) {
-            userAgreedModLoaders = modpack.modLoaders
+            queued.userAgreedModLoaders = modpack.modLoaders
         }
         installMCAndModLoaders(state, currentDeps ?: modpack.modLoaders)
     }
@@ -140,12 +141,30 @@ object ModDownloader {
         }
     }
 
+    suspend fun GameInstanceState.checkHashes(
+        state: Map<ModID, DownloadInfo>
+    ): List<Pair<ModID, DownloadInfo>> = coroutineScope {
+        state.map { (modId, info) ->
+            async(AppDispatchers.IOContext) {
+                val check = runCatching { info.calculateSha1Hash(instance.minecraftDir) }.getOrNull()
+                modId to info.copy(
+                    hashCheck = when {
+                        check == info.desiredHash -> HashCheck.VERIFIED
+                        else -> HashCheck.FAILED
+                    }
+                )
+            }
+        }.awaitAll()
+    }
+
     /**
      * Updates mod loader versions and mods to latest modpack definition.
      */
-    suspend fun GameInstanceState.startInstall(state: LaunchyState, ignoreCachedCheck: Boolean = false): Result<*> =
-        coroutineScope {
-            userAgreedModLoaders = modpack.modLoaders
+    suspend fun GameInstanceState.startInstall(
+        state: LaunchyState,
+        ignoreCachedCheck: Boolean = false
+    ): Result<*> = coroutineScope {
+        queued.userAgreedModLoaders = modpack.modLoaders
         ensureDependenciesReady(state)
         copyOverrides(state)
 
@@ -170,19 +189,9 @@ object ModDownloader {
         }
 
         // Check hashes
-        val updatedHashes = queued.modDownloadInfo
-            .filterValues { it.hashCheck == HashCheck.UNKNOWN || it.hashCheck == HashCheck.FAILED }
-            .map { (modId, info) ->
-                async(AppDispatchers.IOContext) {
-                    val check = runCatching { info.calculateSha1Hash(instance.minecraftDir) }.getOrNull()
-                    modId to info.copy(
-                        hashCheck = when {
-                            check == info.desiredHash -> HashCheck.VERIFIED
-                            else -> HashCheck.FAILED
-                        }
-                    )
-                }
-            }.awaitAll()
+        val updatedHashes = checkHashes(queued.modDownloadInfo
+            .filterValues { it.hashCheck == HashCheck.UNKNOWN || it.hashCheck == HashCheck.FAILED })
+
 
         updatedHashes.forEach { (modId, newInfo) ->
             queued.modDownloadInfo[modId] = newInfo
@@ -198,6 +207,6 @@ object ModDownloader {
 
         saveToConfig()
 
-            return@coroutineScope Result.success(Unit)
+        return@coroutineScope Result.success(Unit)
     }
 }

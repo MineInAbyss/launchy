@@ -12,8 +12,11 @@ class ModTogglesState(
     val modpack: Modpack,
     val modpackConfig: InstanceUserConfig
 ) {
+    val availableMods = mutableStateSetOf<Mod>().apply {
+        addAll(modpack.mods.mods)
+    }
     val enabledMods = mutableStateSetOf<Mod>().apply {
-        addAll(modpackConfig.toggledMods.mapNotNull { modpack.mods.getMod(it) })
+        addAll(modpackConfig.toggledMods.mapNotNull { modpack.mods.getModById(it) })
         val defaultEnabled = modpack.mods.groups
             .filter { it.enabledByDefault }
             .map { it.name } - modpackConfig.seenGroups
@@ -35,7 +38,7 @@ class ModTogglesState(
     }
 
     val enabledConfigs: MutableSet<Mod> = mutableStateSetOf<Mod>().apply {
-        addAll(modpackConfig.toggledConfigs.mapNotNull { modpack.mods.getMod(it) })
+        addAll(modpackConfig.toggledConfigs.mapNotNull { modpack.mods.getModById(it) })
     }
 
     init {

@@ -21,13 +21,17 @@ import com.mineinabyss.launchy.data.Constants.SETTINGS_HORIZONTAL_PADDING
 import com.mineinabyss.launchy.data.modpacks.Group
 import com.mineinabyss.launchy.data.modpacks.Mod
 import com.mineinabyss.launchy.data.modpacks.ModConfig
+import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.DesktopHelpers
 import com.mineinabyss.launchy.logic.Instances.delete
 import com.mineinabyss.launchy.logic.Instances.updateInstance
+import com.mineinabyss.launchy.logic.ModDownloader.checkHashes
+import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.ui.elements.*
 import com.mineinabyss.launchy.ui.screens.LocalGameInstanceState
 import com.mineinabyss.launchy.ui.screens.Screen
 import com.mineinabyss.launchy.ui.screens.screen
+import kotlinx.coroutines.launch
 import kotlin.io.path.listDirectoryEntries
 
 @Composable
@@ -109,6 +113,17 @@ fun OptionsTab() {
                 }
                 OutlinedButton(onClick = { DesktopHelpers.openDirectory(pack.instance.minecraftDir) }) {
                     Text("Open .minecraft folder")
+                }
+                OutlinedButton(onClick = {
+                    AppDispatchers.IO.launch {
+                        state.runTask("checkHashes", InProgressTask("Checking hashes")) {
+                            pack.checkHashes(pack.queued.modDownloadInfo).forEach { (modId, newInfo) ->
+                                pack.queued.modDownloadInfo[modId] = newInfo
+                            }
+                        }
+                    }
+                }) {
+                    Text("Re-check hashes")
                 }
             }
 

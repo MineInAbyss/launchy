@@ -49,7 +49,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             InstallButton(
                 state.processFor(packState.instance) == null
                         && !packState.downloads.isDownloading
-                        && (packState.queued.areOperationsQueued || packState.userAgreedModLoaders == null)
+                        && (packState.queued.areOperationsQueued || packState.queued.userAgreedModLoaders == null)
                         && state.inProgressTasks.isEmpty(),
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             )
@@ -60,7 +60,7 @@ fun InfoBar(modifier: Modifier = Modifier) {
             ActionButton(
                 shown = packState.queued.areModLoaderUpdatesAvailable,
                 icon = Icons.Rounded.HistoryEdu,
-                desc = "Mod loader updates:\n${packState.userAgreedModLoaders?.fullVersionName ?: "Not installed"} -> ${packState.modpack.modLoaders.fullVersionName}",
+                desc = "Mod loader updates:\n${packState.queued.userAgreedModLoaders?.fullVersionName ?: "Not installed"} -> ${packState.modpack.modLoaders.fullVersionName}",
                 count = 1
             )
             ActionButton(

@@ -48,9 +48,8 @@ sealed class PackSource {
         override suspend fun updateInstance(instance: GameInstance): Result<GameInstance> {
             return runCatching {
                 val downloadTo = type.getFilePath(instance.configDir)
-                Downloader.download(url, downloadTo, whenChanged = {
-                    type.afterDownload(instance.configDir)
-                })
+                Downloader.download(url, downloadTo)
+                type.afterDownload(instance.configDir)
                 GameInstance(instance.configDir)
             }
         }

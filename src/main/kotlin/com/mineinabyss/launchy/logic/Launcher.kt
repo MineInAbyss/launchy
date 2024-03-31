@@ -77,6 +77,10 @@ object Launcher {
 
                     override fun onExit(p0: Int) {
                         println("Exited with state $p0")
+
+                        when (p0) {
+                            255 -> dialog = Dialog.Error("Minecraft crashed!", "See logs for more info.")
+                        }
                         state.setProcessFor(pack.instance, null)
                     }
 

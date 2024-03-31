@@ -1,7 +1,7 @@
 package com.mineinabyss.launchy.data.modpacks
 
 import com.mineinabyss.launchy.data.GroupName
-import com.mineinabyss.launchy.data.ModName
+import com.mineinabyss.launchy.data.ModID
 
 data class Mods(
     val modGroups: Map<Group, Set<Mod>>,
@@ -10,12 +10,12 @@ data class Mods(
     val mods = modGroups.values.flatten().toSet()
 
     private val nameToGroup: Map<GroupName, Group> = groups.associateBy { it.name }
-    private val nameToMod: Map<ModName, Mod> = modGroups.values
+    private val idToMod: Map<ModID, Mod> = modGroups.values
         .flatten()
-        .associateBy { it.info.name }
+        .associateBy { it.modId }
 
     //
-    fun getMod(name: ModName): Mod? = nameToMod[name]
+    fun getModById(id: ModID): Mod? = idToMod[id]
     fun getGroup(name: GroupName): Group? = nameToGroup[name]
 
     companion object {

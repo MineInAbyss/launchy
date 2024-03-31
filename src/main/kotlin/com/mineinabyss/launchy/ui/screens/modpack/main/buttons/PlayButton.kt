@@ -68,7 +68,7 @@ fun PlayButton(
                 if (process == null) {
                     when {
                         // Assume this means not launched before
-                        packState.userAgreedModLoaders == null -> {
+                        packState.queued.userAgreedModLoaders == null -> {
                             AppDispatchers.profileLaunch.launchOrShowDialog {
                                 packState.startInstall(state)
                                 Launcher.launch(state, packState, state.profile)

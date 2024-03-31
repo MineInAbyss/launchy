@@ -4,7 +4,6 @@ import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.data.Formats
 import com.mineinabyss.launchy.data.GroupName
 import com.mineinabyss.launchy.data.ModID
-import com.mineinabyss.launchy.data.ModName
 import com.mineinabyss.launchy.data.modpacks.InstanceModLoaders
 import com.mineinabyss.launchy.logic.ModDownloader
 import com.mineinabyss.launchy.logic.hashing.Hashing.checksum
@@ -47,8 +46,8 @@ data class InstanceUserConfig(
     val userAgreedDeps: InstanceModLoaders? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val fullDisabledGroups: Set<GroupName> = setOf(),
-    val toggledMods: Set<ModName> = setOf(),
-    val toggledConfigs: Set<ModName> = setOf(),
+    val toggledMods: Set<ModID> = setOf(),
+    val toggledConfigs: Set<ModID> = setOf(),
     val seenGroups: Set<GroupName> = setOf(),
     val modDownloadInfo: Map<ModID, DownloadInfo> = mapOf(),
 //    val configDownloadInfo: Map<ModID, DownloadInfo> = mapOf(),
