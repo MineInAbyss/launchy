@@ -18,8 +18,6 @@ import kotlin.io.path.*
 enum class PackType {
     Launchy, Modrinth;
 
-    fun isDownloaded(configDir: Path) = getFilePath(configDir).isRegularFile()
-
     fun getFilePath(configDir: Path): Path {
         val ext = when (this) {
             Launchy -> "yml"

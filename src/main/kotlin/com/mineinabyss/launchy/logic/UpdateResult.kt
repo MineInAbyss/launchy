@@ -1,7 +1,17 @@
 package com.mineinabyss.launchy.logic
 
 sealed interface UpdateResult {
-    object UpToDate : UpdateResult
-    object HasUpdates : UpdateResult
-    object NotCached : UpdateResult
+    val headers: Downloader.ModifyHeaders
+
+    data class UpToDate(
+        override val headers: Downloader.ModifyHeaders
+    ) : UpdateResult
+
+    data class HasUpdates(
+        override val headers: Downloader.ModifyHeaders
+    ) : UpdateResult
+
+    data class NotCached(
+        override val headers: Downloader.ModifyHeaders
+    ) : UpdateResult
 }

@@ -33,21 +33,24 @@ object Instances {
             state.runTask("updateInstance", InProgressTask("Updating instance: ${config.name}")) {
                 val cloudUrl = config.cloudInstanceURL
                 if (cloudUrl != null) {
-                    val newCloudInstance = Dirs.tmpCloudInstance(cloudUrl)
-                    Downloader.download(cloudUrl, newCloudInstance, whenChanged = {
-                        instanceFile.copyTo(configDir / "instance-backup.yml", overwrite = true)
-                        GameInstanceConfig.read(newCloudInstance).onSuccess { cloudConfig ->
-                            instanceFile.deleteIfExists()
-                            instanceFile.createFile()
-                            config.copy(
-                                description = cloudConfig.description,
-                                backgroundURL = cloudConfig.backgroundURL,
-                                logoURL = cloudConfig.logoURL,
-                                hue = cloudConfig.hue,
-                                source = cloudConfig.source,
-                            ).saveTo(instanceFile)
-                        }
-                    })
+                    val newCloudInstancePath = Dirs.createTempCloudInstanceFile()
+                    Downloader.download(
+                        cloudUrl, newCloudInstancePath, Downloader.Options(
+                            saveModifyHeadersFor = this@updateInstance
+                        )
+                    )
+                    instanceFile.copyTo(configDir / "instance-backup.yml", overwrite = true)
+                    GameInstanceConfig.read(newCloudInstancePath).onSuccess { cloudConfig ->
+                        instanceFile.deleteIfExists()
+                        instanceFile.createFile()
+                        config.copy(
+                            description = cloudConfig.description,
+                            backgroundURL = cloudConfig.backgroundURL,
+                            logoURL = cloudConfig.logoURL,
+                            hue = cloudConfig.hue,
+                            source = cloudConfig.source,
+                        ).saveTo(instanceFile)
+                    }
                 }
 
                 // Handle case where we just updated from cloud

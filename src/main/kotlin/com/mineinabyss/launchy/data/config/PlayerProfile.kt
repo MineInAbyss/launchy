@@ -36,7 +36,7 @@ data class PlayerProfile(
         avatar.also {
             if (it.value != null) return@also
             downloadScope.launch {
-                Downloader.downloadAvatar(uuid)
+                Downloader.downloadAvatar(uuid, Downloader.Options(overwrite = false))
                 it.value = BitmapPainter(
                     loadImageBitmap(Dirs.avatar(uuid).inputStream()),
                     filterQuality = FilterQuality.None

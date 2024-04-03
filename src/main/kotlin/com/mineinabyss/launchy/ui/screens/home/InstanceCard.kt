@@ -112,11 +112,8 @@ fun InstanceCard(
                 }
                 if (instance?.enabled == true)
                     PlayButton(hideText = true, instance, Modifier.weight(1f, false)) {
-                        state.inProgressTasks["modpackState"] = InProgressTask("Reading modpack configuration")
-                        try {
-                            instance.createModpackState(state)
-                        } finally {
-                            state.inProgressTasks.remove("modpackState")
+                        state.runTask("modpackState", InProgressTask("Checking for pack updates...")) {
+                            instance.createModpackState(state, awaitUpdatesCheck = true)
                         }
                     }
             }

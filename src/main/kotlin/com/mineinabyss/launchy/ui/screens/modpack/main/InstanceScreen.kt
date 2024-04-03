@@ -44,7 +44,6 @@ fun InstanceScreen() {
                 SettingsButton()
             }
         }
-        FirstLaunchDialog()
 //        HandleImportSettings()
     }
 }

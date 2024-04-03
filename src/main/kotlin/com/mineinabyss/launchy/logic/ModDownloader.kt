@@ -36,7 +36,7 @@ object ModDownloader {
         data object Failed : DownloadResult
     }
 
-    suspend fun GameInstanceState.download(mod: Mod, ignoreCachedCheck: Boolean): DownloadResult {
+    suspend fun GameInstanceState.download(mod: Mod, overwrite: Boolean): DownloadResult {
         val name = mod.info.name
         try {
             println("Starting download of $name")
@@ -44,10 +44,11 @@ object ModDownloader {
             Downloader.download(
                 url = mod.info.url,
                 writeTo = mod.absoluteDownloadDest,
-                skipDownloadIfCached = !ignoreCachedCheck
-            ) progress@{
-                downloads.inProgressMods[mod] = it
-            }
+                options = Downloader.Options(
+                    overwrite = overwrite,
+                    onProgressUpdate = { downloads.inProgressMods[mod] = it }
+                )
+            )
             return DownloadResult.Success
         } catch (ex: CancellationException) {
             throw ex // Must let the CancellationException propagate
@@ -60,32 +61,6 @@ object ModDownloader {
             downloads.inProgressMods -= mod
         }
     }
-
-//        if (mod.info.configUrl.isNotBlank() && (mod in toggles.enabledConfigs) && mod !in toggles.upToDateConfigs) {
-//            try {
-//                println("Starting download of $name config")
-//                downloads.inProgressConfigs[mod] = Progress(0, 0, 0) // set progress to 0
-//                val config = mod.config
-//                Downloader.download(url = mod.info.configUrl, writeTo = config) {
-//                    downloads.inProgressConfigs[mod] = it
-//                }
-//                toggles.downloadConfigURLs[mod] = mod.info.configUrl
-//                ArchiverFactory.createArchiver(config.extension)
-//                    .extract(config.toFile(), instance.overridesDir.toFile())
-//                config.deleteIfExists()
-//                saveToConfig()
-//                println("Successfully downloaded $name config")
-//            } catch (ex: CancellationException) {
-//                throw ex // Must let the CancellationException propagate
-//            } catch (e: Exception) {
-//                println("Failed to download $name config")
-//                downloads.failed += mod
-//                e.printStackTrace()
-//            } finally {
-//                println("Finished download of $name config")
-//                downloads.inProgressConfigs -= mod
-//            }
-//        }
 
     /**
      * Ensures dependencies the user definitely wants are installed,

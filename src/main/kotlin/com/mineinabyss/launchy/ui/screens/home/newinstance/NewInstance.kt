@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Link
@@ -31,7 +33,6 @@ import com.mineinabyss.launchy.ui.screens.home.InstanceCard
 import com.mineinabyss.launchy.ui.screens.modpack.settings.InstanceProperties
 import com.mineinabyss.launchy.ui.screens.screen
 import kotlinx.coroutines.launch
-import kotlin.collections.set
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.exists
 
@@ -41,7 +42,7 @@ val validInstanceNameRegex = Regex("^[a-zA-Z0-9_ ]+$")
 fun NewInstance() {
     val state = LocalLaunchyState
     var selectedTabIndex by remember { mutableStateOf(0) }
-    var importingInstance: GameInstanceConfig? by remember { mutableStateOf(null) }
+    var importingInstance: GameInstance.CloudInstanceWithHeaders? by remember { mutableStateOf(null) }
     Column {
         ComfyWidth {
             PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
@@ -63,7 +64,7 @@ fun NewInstance() {
 }
 
 @Composable
-fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceConfig) -> Unit = {}) {
+fun ImportTab(visible: Boolean, onGetInstance: (GameInstance.CloudInstanceWithHeaders) -> Unit = {}) {
     val state = LocalLaunchyState
     AnimatedTab(visible) {
         Column {
@@ -74,21 +75,21 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceConfig) -> Unit = {}
                     var urlText by remember { mutableStateOf("") }
                     var urlValid by remember { mutableStateOf(true) }
                     fun urlValid() = urlText.startsWith("https://") || urlText.startsWith("http://")
-                    var urlFailedToParse by remember { mutableStateOf(false) }
+                    var failMessage: String? by remember { mutableStateOf(null) }
 
                     OutlinedTextField(
                         value = urlText,
                         singleLine = true,
-                        isError = !urlValid || urlFailedToParse,
+                        isError = !urlValid || failMessage != null,
                         leadingIcon = { Icon(Icons.Rounded.Link, contentDescription = "Link") },
                         onValueChange = {
                             urlText = it
-                            urlFailedToParse = false
+                            failMessage = null
                         },
                         label = { Text("Link") },
                         supportingText = {
                             if (!urlValid) Text("Must be valid URL")
-                            else if (urlFailedToParse) Text("URL is not a valid instance file")
+                            else if (failMessage != null) Text(failMessage!!)
                         },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -97,29 +98,33 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceConfig) -> Unit = {}
                         urlValid = urlValid()
                         if (!urlValid) return@TextButton
                         val taskKey = "importCloudInstance"
-                        val downloadPath = Dirs.tmpCloudInstance(urlText)
+                        val downloadPath = Dirs.createTempCloudInstanceFile()
                         downloadPath.deleteIfExists()
                         AppDispatchers.IO.launch {
-                            state.inProgressTasks[taskKey] = InProgressTask("Importing cloud instance")
-                            val cloudInstance = Downloader.download(
-                                urlText,
-                                downloadPath,
-                                skipDownloadIfCached = false
-                            ).mapCatching {
-                                GameInstanceConfig.read(downloadPath)
-                                    .showDialogOnError("Failed to read cloud instance")
-                                    .getOrThrow()
-                            }.getOrElse {
-                                urlFailedToParse = true
-                                state.inProgressTasks.remove(taskKey)
-                                return@launch
+                            val cloudInstance = state.runTask(taskKey, InProgressTask("Importing cloud instance")) {
+                                Downloader.download(urlText, downloadPath).mapCatching {
+                                    when (it) {
+                                        is Downloader.DownloadResult.AlreadyExists -> {
+                                            failMessage = "Instance already downloaded locally"
+                                            return@launch
+                                        }
+
+                                        is Downloader.DownloadResult.Success -> {
+                                            GameInstance.CloudInstanceWithHeaders(
+                                                config = GameInstanceConfig.read(downloadPath)
+                                                    .showDialogOnError("Failed to read cloud instance")
+                                                    .getOrThrow(),
+                                                url = urlText,
+                                                headers = it.modifyHeaders
+                                            )
+                                        }
+                                    }
+                                }.getOrElse {
+                                    failMessage = "URL is not a valid instance file"
+                                    return@launch
+                                }
                             }
-                            state.inProgressTasks.remove(taskKey)
-                            onGetInstance(
-                                cloudInstance.copy(
-                                    cloudInstanceURL = urlText
-                                )
-                            )
+                            onGetInstance(cloudInstance)
                         }
                     }) {
                         Text("Import", color = MaterialTheme.colorScheme.primary)
@@ -133,16 +138,21 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceConfig) -> Unit = {}
 }
 
 @Composable
-fun ConfirmImportTab(visible: Boolean, importingInstance: GameInstanceConfig?) {
+fun ConfirmImportTab(visible: Boolean, cloudInstance: GameInstance.CloudInstanceWithHeaders?) {
+    if (cloudInstance == null) return
     val state = LocalLaunchyState
     AnimatedTab(visible) {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            ComfyWidth {
-                Text("Confirm import", style = MaterialTheme.typography.headlineMedium)
-            }
+        val scrollState = rememberScrollState()
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.verticalScroll(scrollState)
+        ) {
+            ComfyTitle("Confirm import")
             ComfyContent {
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    var nameText by remember { mutableStateOf(importingInstance?.name ?: "") }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    var nameText by remember { mutableStateOf(cloudInstance.config.name) }
                     fun nameValid() = nameText.matches(validInstanceNameRegex)
                     fun instanceExists() = Dirs.modpackConfigDir(nameText).exists()
                     var nameValid by remember { mutableStateOf(nameValid()) }
@@ -167,22 +177,21 @@ fun ConfirmImportTab(visible: Boolean, importingInstance: GameInstanceConfig?) {
                     )
 
                     InstanceProperties(
-                        minecraftDir ?: Dirs.modpackDir(nameText).toString(),
+                        minecraftDir ?: nameText,
                         onChangeMinecraftDir = { minecraftDir = it }
                     )
 
                     TextButton(
-                        enabled = importingInstance != null,
                         onClick = {
                             nameValid = nameValid()
                             instanceExists = instanceExists()
-                            val instance = importingInstance ?: return@TextButton
                             if (!nameValid || instanceExists) return@TextButton
-                            GameInstance.create(
-                                state, instance.copy(
-                                    name = nameText,
-                                    overrideMinecraftDir = minecraftDir.takeIf { it?.isNotEmpty() == true }
-                                )
+                            val editedConfig = cloudInstance.config.copy(
+                                name = nameText,
+                                overrideMinecraftDir = minecraftDir.takeIf { it?.isNotEmpty() == true }
+                            )
+                            GameInstance.createCloudInstance(
+                                state, cloudInstance.copy(config = editedConfig)
                             )
                             screen = Screen.Default
                         }
@@ -193,12 +202,10 @@ fun ConfirmImportTab(visible: Boolean, importingInstance: GameInstanceConfig?) {
             }
 
             ComfyWidth {
-                importingInstance?.let {
-                    InstanceCard(
-                        it.copy(name = "Preview"),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+                InstanceCard(
+                    cloudInstance.config.copy(name = "Preview"),
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }

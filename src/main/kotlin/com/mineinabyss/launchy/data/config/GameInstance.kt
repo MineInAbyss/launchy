@@ -35,12 +35,10 @@ class GameInstance(
     val downloadsDir: Path = minecraftDir / "launchyDownloads"
     val userConfigFile = (configDir / "config.yml")
 
-    val updateCheckerScope = CoroutineScope(Dispatchers.IO)
-
     var updatesAvailable by mutableStateOf(false)
     var enabled: Boolean by mutableStateOf(true)
 
-    suspend fun createModpackState(state: LaunchyState): GameInstanceState? {
+    suspend fun createModpackState(state: LaunchyState, awaitUpdatesCheck: Boolean = false): GameInstanceState? {
         val userConfig = InstanceUserConfig.load(userConfigFile).getOrNull() ?: InstanceUserConfig()
 
         val modpack = state.runTask("loadingModpack ${config.name}", InProgressTask("Loading modpack ${config.name}")) {
@@ -51,13 +49,12 @@ class GameInstance(
                     return null
                 }
         }
-
         val cloudUrl = config.cloudInstanceURL
-        if (cloudUrl != null) AppDispatchers.IO.launch {
-            val updates = Downloader.checkUpdates(cloudUrl)
-            if (updates.result != UpdateResult.UpToDate) {
-                updatesAvailable = true
-            }
+        if (cloudUrl != null) {
+            AppDispatchers.IO.launch {
+                val result = Downloader.checkUpdates(this@GameInstance, cloudUrl)
+                if (result !is UpdateResult.UpToDate) updatesAvailable = true
+            }.also { if(awaitUpdatesCheck) it.join() }
         }
         return GameInstanceState(this, modpack, userConfig)
     }
@@ -67,13 +64,24 @@ class GameInstance(
         userMods
     }
 
+    data class CloudInstanceWithHeaders(
+        val config: GameInstanceConfig,
+        val url: String,
+        val headers: Downloader.ModifyHeaders,
+    )
+
     companion object {
-        fun create(state: LaunchyState, config: GameInstanceConfig) {
-            val instanceDir = Dirs.modpackConfigDir(config.name)
+        fun createCloudInstance(state: LaunchyState, cloud: CloudInstanceWithHeaders) {
+            val instanceDir = Dirs.modpackConfigDir(cloud.config.name)
             instanceDir.createDirectories()
 
-            Formats.yaml.encodeToStream(config, (instanceDir / "instance.yml").outputStream())
-            state.gameInstances += GameInstance(instanceDir)
+            Formats.yaml.encodeToStream(
+                cloud.config.copy(cloudInstanceURL = cloud.url),
+                (instanceDir / "instance.yml").outputStream()
+            )
+            val instance = GameInstance(instanceDir)
+            Downloader.saveHeaders(instance, cloud.url, cloud.headers)
+            state.gameInstances += instance
         }
 
         fun readAll(rootDir: Path): List<GameInstance> {

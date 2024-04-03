@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.logic
 
 import com.mineinabyss.launchy.data.Dirs
+import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.LaunchyState
 import com.mineinabyss.launchy.util.Arch
@@ -26,55 +27,62 @@ object Downloader {
         install(HttpTimeout)
     }
 
-    suspend fun downloadAvatar(uuid: UUID) {
-        download("https://mc-heads.net/avatar/$uuid", Dirs.avatar(uuid))
+    data class ModifyHeaders(val lastModified: String, val contentLength: Long) {
+        fun toCacheString() = "Last-Modified: $lastModified, Content-Length: $contentLength"
+
+        companion object {
+            @OptIn(ExperimentalStdlibApi::class)
+            fun of(headers: Headers) = ModifyHeaders(
+                headers["Last-Modified"]?.fromHttpToGmtDate()?.timestamp?.toHexString() ?: "",
+                headers["Content-Length"]?.toLongOrNull() ?: 0
+            )
+
+            fun fileFor(instance: GameInstance, url: String) =
+                Dirs.cacheDir(instance) / "${urlToFileName(url)}.header"
+        }
     }
 
-    class CacheInfo(val result: UpdateResult, val cacheKey: String, val cacheFile: Path)
-
-    @OptIn(ExperimentalStdlibApi::class)
-    suspend fun checkUpdates(url: String): CacheInfo {
-        val headers = httpClient.head(url).headers
-        val lastModified = headers["Last-Modified"]?.fromHttpToGmtDate()?.timestamp?.toHexString()
-        val length = headers["Content-Length"]?.toLongOrNull()?.toHexString()
-        val cache = "Last-Modified: $lastModified, Content-Length: $length"
-        val cacheFile = Dirs.cacheDir / "${urlToFileName(url)}.cache"
-        val result = when {
-            cacheFile.notExists() -> UpdateResult.NotCached
-            cacheFile.readText() == cache -> UpdateResult.UpToDate
-            else -> UpdateResult.HasUpdates
+    suspend fun checkUpdates(instance: GameInstance, url: String): UpdateResult {
+        val headers = ModifyHeaders.of(httpClient.head(url).headers)
+        val cache = headers.toCacheString()
+        val cacheFile = ModifyHeaders.fileFor(instance, url)
+        return when {
+            cacheFile.notExists() -> UpdateResult.NotCached(headers)
+            cacheFile.readText() == cache -> UpdateResult.UpToDate(headers)
+            else -> UpdateResult.HasUpdates(headers)
         }
-        return CacheInfo(result, cache, cacheFile)
+    }
+
+    fun saveHeaders(instance: GameInstance, url: String, headers: ModifyHeaders) {
+        ModifyHeaders.fileFor(instance, url).createParentDirectories().apply {
+            deleteIfExists()
+            createFile()
+            writeText(headers.toCacheString())
+        }
+    }
+
+    sealed class DownloadResult {
+        data class Success(val modifyHeaders: ModifyHeaders) : DownloadResult()
+
+        data object AlreadyExists : DownloadResult()
     }
 
     suspend fun download(
         url: String,
         writeTo: Path,
-        override: Boolean = true,
-        skipDownloadIfCached: Boolean = true,
-        whenChanged: () -> Unit = {},
-        onProgressUpdate: (progress: Progress) -> Unit = {},
-    ): Result<Unit> {
+        options: Options = Options(),
+    ): Result<DownloadResult> {
         return runCatching {
-            if (!override && writeTo.exists()) return@runCatching
+            if (!options.overwrite && writeTo.exists()) return@runCatching DownloadResult.AlreadyExists
             val startTime = System.currentTimeMillis()
             writeTo.createParentDirectories()
-            if (skipDownloadIfCached) {
-                val updates = checkUpdates(url)
-                if (writeTo.exists() && updates.result == UpdateResult.UpToDate) return@runCatching
-                updates.cacheFile.apply {
-                    createParentDirectories()
-                    deleteIfExists()
-                    createFile().writeText(updates.cacheKey)
-                }
-            }
 
             httpClient.prepareGet(url) {
                 timeout {
                     requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
                 }
                 onDownload { bytesSentTotal, contentLength ->
-                    onProgressUpdate(
+                    options.onProgressUpdate(
                         Progress(
                             bytesSentTotal,
                             contentLength,
@@ -83,6 +91,12 @@ object Downloader {
                     )
                 }
             }.execute { httpResponse ->
+                val modifyHeaders = ModifyHeaders.of(httpResponse.headers)
+
+                if (options.saveModifyHeadersFor != null) {
+                    saveHeaders(options.saveModifyHeadersFor, url, modifyHeaders)
+                }
+
                 writeTo.deleteIfExists()
                 writeTo.createFile()
                 val channel: ByteReadChannel = httpResponse.body()
@@ -93,18 +107,17 @@ object Downloader {
                         writeTo.appendBytes(bytes)
                     }
                 }
-                whenChanged()
+                options.whenChanged()
+                DownloadResult.Success(modifyHeaders)
             }
         }.onFailure {
             it.printStackTrace()
         }
     }
 
-    class JavaInstallation(
-        val url: String,
-        val relativeJavaExecutable: String,
-        val archiver: Archiver,
-    )
+    suspend fun downloadAvatar(uuid: UUID, options: Options) {
+        download("https://mc-heads.net/avatar/$uuid", Dirs.avatar(uuid), options)
+    }
 
     /** @return Path to java executable */
     @OptIn(ExperimentalPathApi::class)
@@ -140,14 +153,16 @@ object Downloader {
 
             val existingInstall = extractTo.resolve(javaInstallation.relativeJavaExecutable)
             if (existingInstall.exists()) return existingInstall
-            download(javaInstallation.url, downloadTo, onProgressUpdate = {
-                state.inProgressTasks["installJDK"] =
-                    InProgressTask.bytes(
-                        "Downloading Java environment",
-                        it.bytesDownloaded,
-                        it.totalBytes
-                    )
-            })
+            download(javaInstallation.url, downloadTo, Options(
+                onProgressUpdate = {
+                    state.inProgressTasks["installJDK"] =
+                        InProgressTask.bytes(
+                            "Downloading Java environment",
+                            it.bytesDownloaded,
+                            it.totalBytes
+                        )
+                }
+            ))
             state.inProgressTasks["installJDK"] = InProgressTask("Extracting Java environment")
 
             // Handle a case where the extraction failed and the folder exists but not the java executable
@@ -161,9 +176,17 @@ object Downloader {
             state.inProgressTasks.remove("installJDK")
         }
     }
-}
 
-data class Progress(val bytesDownloaded: Long, val totalBytes: Long, val timeElapsed: Long) {
-    val percent: Float
-        get() = bytesDownloaded.toFloat() / totalBytes.toFloat()
+    class JavaInstallation(
+        val url: String,
+        val relativeJavaExecutable: String,
+        val archiver: Archiver,
+    )
+
+    data class Options(
+        val overwrite: Boolean = true,
+        val whenChanged: () -> Unit = {},
+        val onProgressUpdate: (progress: Progress) -> Unit = {},
+        val saveModifyHeadersFor: GameInstance? = null,
+    )
 }

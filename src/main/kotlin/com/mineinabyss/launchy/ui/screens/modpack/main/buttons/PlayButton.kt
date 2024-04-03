@@ -19,6 +19,7 @@ import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.AppDispatchers.launchOrShowDialog
+import com.mineinabyss.launchy.logic.Instances.updateInstance
 import com.mineinabyss.launchy.logic.Launcher
 import com.mineinabyss.launchy.logic.ModDownloader.prepareWithoutChangingInstalledMods
 import com.mineinabyss.launchy.logic.ModDownloader.startInstall
@@ -63,7 +64,7 @@ fun PlayButton(
             coroutineScope.launch(Dispatchers.IO) {
                 val packState = foundPackState ?: getModpackState() ?: return@launch
                 foundPackState = packState
-                val operationsQueued = packState.queued.areOperationsQueued
+                val updatesAvailable = packState.instance.updatesAvailable
 
                 if (process == null) {
                     when {
@@ -75,33 +76,23 @@ fun PlayButton(
                             }
                         }
 
-                        operationsQueued -> {
+                        updatesAvailable -> {
                             dialog = Dialog.Options(
-                                title = "Install changes before launch?",
+                                title = "Update Available",
                                 message = buildString {
-                                    appendLine("This instance has changes that are not installed yet,")
-                                    appendLine("would you like to apply these changes now?")
+                                    appendLine("This cloud instance has updates available.")
+                                    appendLine("Would you like to download them now?")
                                 },
-                                acceptText = "Install",
-                                declineText = "Skip",
-                                onAccept = {
-                                    AppDispatchers.profileLaunch.launch {
-                                        packState.startInstall(state)
-                                        Launcher.launch(state, packState, state.profile)
-                                    }
-                                },
-                                onDecline = {
-                                    AppDispatchers.profileLaunch.launch {
-                                        packState.prepareWithoutChangingInstalledMods(state)
-                                        Launcher.launch(state, packState, state.profile)
-                                    }
-                                }
+                                acceptText = "Download",
+                                declineText = "Ignore",
+                                onAccept = { packState.instance.updateInstance(state) },
+                                onDecline = { }
                             )
                         }
 
                         else -> {
                             AppDispatchers.profileLaunch.launchOrShowDialog {
-                                packState.prepareWithoutChangingInstalledMods(state)
+                                packState.startInstall(state)
                                 println("Launching now!")
                                 Launcher.launch(state, packState, state.profile)
                             }

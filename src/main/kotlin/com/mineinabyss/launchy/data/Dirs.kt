@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.data
 
-import com.mineinabyss.launchy.logic.urlToFileName
+import com.mineinabyss.launchy.data.config.GameInstance
 import com.mineinabyss.launchy.util.OS
 import java.util.*
 import kotlin.io.path.*
@@ -26,16 +26,13 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
-    val cacheDir = config / "cache"
-    val imageCache = cacheDir / "images"
+    fun cacheDir(instance: GameInstance) = instance.configDir / "cache"
+
+    val imageCache = config / "cache" / "images"
 
     val jdks = mineinabyss / ".jdks"
 
-    val tmp = config / ".tmp"
-
     val accounts = config / "accounts"
-
-    fun tmpCloudInstance(url: String) = tmp / "cloudInstances" / "${urlToFileName(url)}.yml"
 
     fun avatar(uuid: UUID) = imageCache / "avatar-$uuid"
 
@@ -50,10 +47,8 @@ object Dirs {
     fun createDirs() {
         config.createDirectories()
         mineinabyss.createDirectories()
-        tmp.createDirectories()
         modpackConfigsDir.createDirectories()
         jdks.createDirectories()
-        cacheDir.createDirectories()
         imageCache.createDirectories()
     }
 
@@ -61,4 +56,6 @@ object Dirs {
         if (configFile.notExists())
             configFile.createFile().writeText("{}")
     }
+
+    fun createTempCloudInstanceFile() = createTempFile(prefix = "cloudInstance", suffix = ".yml")
 }

@@ -49,7 +49,7 @@ data class GameInstanceConfig(
 
     private suspend fun loadBackground() {
         runCatching {
-            Downloader.download(backgroundURL, backgroundPath, override = false)
+            Downloader.download(backgroundURL, backgroundPath, Downloader.Options(overwrite = false))
             val painter = BitmapPainter(loadImageBitmap(backgroundPath.inputStream()))
             cachedBackground.value = painter
         }.onFailure { it.printStackTrace() }
@@ -57,7 +57,7 @@ data class GameInstanceConfig(
 
     private suspend fun loadLogo() {
         runCatching {
-            Downloader.download(logoURL, logoPath, override = false)
+            Downloader.download(logoURL, logoPath, Downloader.Options(overwrite = false))
             val painter = BitmapPainter(loadImageBitmap(logoPath.inputStream()))
             cachedLogo.value = painter
         }.onFailure { it.printStackTrace() }

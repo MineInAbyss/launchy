@@ -18,9 +18,6 @@ data class Mod(
 
     val downloadUrl: Url = Url(info.url)
 
-    val config = Dirs.tmp / "${info.name}-config.zip"
-
-
     fun compatibleWith(other: Mod) =
         other.info.name !in info.incompatibleWith && info.name !in other.info.incompatibleWith
 }
