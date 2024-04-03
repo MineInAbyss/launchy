@@ -59,21 +59,14 @@ object Auth {
         onVerificationRequired: (VerificationRequired) -> Unit,
         onAuthenticate: (FullJavaSession) -> Unit,
     ) {
-        val testAuth = MinecraftAuth.builder()
-            .withClientId("00000000402b5328")
-            .withScope("service::user.auth.xboxlive.com::MBI_SSL")
-            .deviceCode()
-            .withDeviceToken("Win32")
-            .sisuTitleAuthentication("https://multiplayer.minecraft.net/")
-            .buildMinecraftJavaProfileStep(true);
         val httpClient = MinecraftAuth.createHttpClient()
         val previousSession = state.currentProfile?.let { SessionStorage.load(it.uuid) }
         if (previousSession != null) {
-            val refreshedSession = testAuth.refresh(httpClient, previousSession)
+            val refreshedSession = MinecraftAuth.JAVA_DEVICE_CODE_LOGIN.refresh(httpClient, previousSession)
             onAuthenticate(refreshedSession)
             return
         }
-        val javaSession = testAuth.getFromInput(
+        val javaSession = MinecraftAuth.JAVA_DEVICE_CODE_LOGIN.getFromInput(
             httpClient,
             MsaDeviceCodeCallback { msaDeviceCode: MsaDeviceCode ->
                 onVerificationRequired(
