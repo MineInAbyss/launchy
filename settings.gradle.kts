@@ -18,8 +18,6 @@ dependencyResolutionManagement {
     versionCatalogs {
         create("idofrontLibs") {
             from("com.mineinabyss:catalog:$idofrontVersion")
-            version("kotlin", "1.9.22")
-            version("compose", "1.6.0")
         }
     }
 }

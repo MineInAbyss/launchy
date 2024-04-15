@@ -21,7 +21,6 @@ import com.mineinabyss.launchy.logic.AppDispatchers
 import com.mineinabyss.launchy.logic.AppDispatchers.launchOrShowDialog
 import com.mineinabyss.launchy.logic.Instances.updateInstance
 import com.mineinabyss.launchy.logic.Launcher
-import com.mineinabyss.launchy.logic.ModDownloader.prepareWithoutChangingInstalledMods
 import com.mineinabyss.launchy.logic.ModDownloader.startInstall
 import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import com.mineinabyss.launchy.ui.elements.PrimaryButtonColors
@@ -71,7 +70,7 @@ fun PlayButton(
                         // Assume this means not launched before
                         packState.queued.userAgreedModLoaders == null -> {
                             AppDispatchers.profileLaunch.launchOrShowDialog {
-                                packState.startInstall(state)
+                                packState.startInstall(state).getOrThrow()
                                 Launcher.launch(state, packState, state.profile)
                             }
                         }
@@ -92,7 +91,7 @@ fun PlayButton(
 
                         else -> {
                             AppDispatchers.profileLaunch.launchOrShowDialog {
-                                packState.startInstall(state)
+                                packState.startInstall(state).getOrThrow()
                                 println("Launching now!")
                                 Launcher.launch(state, packState, state.profile)
                             }

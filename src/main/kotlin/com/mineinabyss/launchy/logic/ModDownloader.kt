@@ -124,7 +124,7 @@ object ModDownloader {
                 val check = runCatching { info.calculateSha1Hash(instance.minecraftDir) }.getOrNull()
                 modId to info.copy(
                     hashCheck = when {
-                        check == info.desiredHash -> HashCheck.VERIFIED
+                        check == (info.desiredHash ?: check) -> HashCheck.VERIFIED
                         else -> HashCheck.FAILED
                     }
                 )
