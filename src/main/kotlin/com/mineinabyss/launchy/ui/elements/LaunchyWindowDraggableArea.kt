@@ -17,7 +17,7 @@ fun WindowScope.BetterWindowDraggableArea(
     val topBar = TopBarProvider.current
     WindowDraggableArea(modifier.pointerInput(Unit) {
         detectDragGestures(onDragStart = {
-            topBar.windowState.placement = WindowPlacement.Floating
+            topBar.ensureFloating()
         }) { _, _ -> }
     }) {
         content()
