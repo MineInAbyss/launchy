@@ -5,6 +5,8 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.logic.AppUpdateState
+import com.mineinabyss.launchy.logic.DesktopHelpers
+import com.mineinabyss.launchy.logic.GithubUpdateChecker
 import com.mineinabyss.launchy.state.InProgressTask
 import com.mineinabyss.launchy.state.modpack.GameInstanceState
 import com.mineinabyss.launchy.ui.AppTopBar
@@ -31,6 +36,7 @@ import com.mineinabyss.launchy.ui.state.TopBar
 var screen: Screen by mutableStateOf(Screen.Default)
 
 var dialog: Dialog by mutableStateOf(Dialog.None)
+var updateAvailable: AppUpdateState by mutableStateOf(AppUpdateState.Unknown)
 
 private val ModpackStateProvider = compositionLocalOf<GameInstanceState> { error("No local modpack provided") }
 
@@ -41,7 +47,20 @@ val LocalGameInstanceState: GameInstanceState
 
 @Composable
 fun Screens() = Scaffold(
-    snackbarHost = { SnackbarHost(snackbarHostState) }
+    snackbarHost = { SnackbarHost(snackbarHostState) },
+    floatingActionButton = {
+        val update = updateAvailable
+        Row {
+            AnimatedVisibility(update is AppUpdateState.UpdateAvailable) {
+                if (update !is AppUpdateState.UpdateAvailable) return@AnimatedVisibility
+                ExtendedFloatingActionButton(
+                    text = { Text("Update available") },
+                    icon = { Icon(Icons.Rounded.Update, "") },
+                    onClick = { DesktopHelpers.browse(update.release.html_url) },
+                )
+            }
+        }
+    }
 ) {
     val state = LocalLaunchyState
     val packState = state.instanceState
@@ -66,6 +85,10 @@ fun Screens() = Scaffold(
     LaunchedEffect(isDefault, state.ui.preferHue) {
         if (isDefault) currentHue = state.ui.preferHue
     }
+    LaunchedEffect(Unit) {
+        updateAvailable = GithubUpdateChecker.checkForUpdates()
+    }
+
 
     AppTopBar(
         state = TopBar,

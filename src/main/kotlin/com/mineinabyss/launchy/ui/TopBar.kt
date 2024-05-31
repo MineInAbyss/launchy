@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowPlacement
 import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.data.Constants
 import com.mineinabyss.launchy.ui.elements.BetterWindowDraggableArea
 import com.mineinabyss.launchy.ui.state.TopBarState
 
@@ -128,7 +129,7 @@ fun LaunchyTitle() {
             tint = MaterialTheme.colorScheme.primary
         )
         Text(
-            "Launchy",
+            "Launchy - ${Constants.APP_VERSION ?: "dev"}",
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.primary
         )
