@@ -3,6 +3,7 @@ package com.mineinabyss.launchy.data.config
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
+import com.charleskorn.kaml.decodeFromStream
 import com.charleskorn.kaml.encodeToStream
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats

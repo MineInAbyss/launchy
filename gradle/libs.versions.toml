@@ -1,0 +1,16 @@
+[versions]
+jarchivelib = "1.2.0"
+jmccc = "3.1.4"
+ktor = "2.3.11"
+minecraftAuth = "4.0.2"
+mpfilepicker = "3.1.0"
+
+[libraries]
+jarchivelib = { module = "org.rauschig:jarchivelib", version.ref = "jarchivelib" }
+jmccc = { module = "dev.3-3:jmccc", version.ref = "jmccc" }
+jmccc-mcdownloader = { module = "dev.3-3:jmccc-mcdownloader", version.ref = "jmccc" }
+ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-cio-jvm = { module = "io.ktor:ktor-client-cio-jvm", version.ref = "ktor" }
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+minecraftAuth = { module = "net.raphimc:MinecraftAuth", version.ref = "minecraftAuth" }
+mpfilepicker = { module = "com.darkrockstudios:mpfilepicker", version.ref = "mpfilepicker" }

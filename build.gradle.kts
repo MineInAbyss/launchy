@@ -1,12 +1,14 @@
 import de.undercouch.gradle.tasks.download.Download
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(idofrontLibs.plugins.mia.kotlin.jvm)
     alias(idofrontLibs.plugins.kotlinx.serialization)
-    alias(idofrontLibs.plugins.compose)
+    alias(idofrontLibs.plugins.jetbrainsCompose)
+    alias(idofrontLibs.plugins.compose.compiler)
+    alias(idofrontLibs.plugins.dependencyversions)
+    alias(idofrontLibs.plugins.version.catalog.update)
     id("de.undercouch.download") version "5.3.1"
 }
 
@@ -26,25 +28,31 @@ dependencies {
     implementation(compose.materialIconsExtended)
     implementation(idofrontLibs.kotlinx.serialization.json)
     implementation(idofrontLibs.kotlinx.serialization.kaml)
-    implementation("io.ktor:ktor-client-core:2.3.8")
-    implementation("io.ktor:ktor-client-cio:2.3.8")
-    implementation("io.ktor:ktor-client-cio-jvm:2.3.8")
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.cio)
+    implementation(libs.ktor.cio.jvm)
 
-    implementation("com.darkrockstudios:mpfilepicker:3.1.0")
-    implementation("org.rauschig:jarchivelib:1.2.0")
+    implementation(libs.mpfilepicker)
+    implementation(libs.jarchivelib)
 
-    implementation("net.raphimc:MinecraftAuth:4.0.0")
-    implementation("dev.3-3:jmccc-mcdownloader:3.1.4")
-    implementation("dev.3-3:jmccc:3.1.4")
-//    implementation("dev.3-3:jmccc-microsoft-authenticator:3.1.4")
+    implementation(libs.minecraftAuth)
+    implementation(libs.jmccc.mcdownloader)
+    implementation(libs.jmccc)
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.freeCompilerArgs = listOf(
-        "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
-        "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
-        "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
-    )
+idofront {
+    setJvmToolchain = false
+}
+
+kotlin {
+    jvmToolchain(17)
+    compilerOptions {
+        freeCompilerArgs.addAll(
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
+        )
+    }
 }
 
 val appInstallerName = "Launchy-" + when {
@@ -74,7 +82,14 @@ compose.desktop {
                 else -> targetFormats(TargetFormat.AppImage)
             }
 
-            modules("java.instrument", "java.management", "java.naming", "java.security.jgss", "jdk.httpserver", "jdk.unsupported")
+            modules(
+                "java.instrument",
+                "java.management",
+                "java.naming",
+                "java.security.jgss",
+                "jdk.httpserver",
+                "jdk.unsupported"
+            )
             packageName = appName
             packageVersion = "${project.version}"
             val strippedVersion = project.version.toString().substringBeforeLast("-")
@@ -160,6 +175,31 @@ tasks {
             Os.isFamily(Os.FAMILY_WINDOWS) -> dependsOn(exeRelease)
             Os.isFamily(Os.FAMILY_MAC) -> dependsOn(dmgRelease)
             else -> dependsOn(executeAppImageBuilder)
+        }
+    }
+}
+
+versionCatalogUpdate {
+    keep {
+        keepUnusedPlugins = true
+        keepUnusedVersions = true
+        keepUnusedLibraries = true
+    }
+}
+
+tasks {
+    dependencyUpdates {
+        rejectVersionIf {
+            fun isNonStable(version: String): Boolean {
+                val unstableKeywords = listOf(
+                    "-beta",
+                    "-rc",
+                    "-alpha",
+                )
+
+                return unstableKeywords.any { version.contains(it, ignoreCase = true) }
+            }
+            isNonStable(candidate.version)
         }
     }
 }

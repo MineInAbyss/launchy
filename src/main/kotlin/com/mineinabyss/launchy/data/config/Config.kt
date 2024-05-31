@@ -1,5 +1,6 @@
 package com.mineinabyss.launchy.data.config
 
+import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.data.Dirs
 import com.mineinabyss.launchy.data.Formats
 import kotlinx.serialization.Serializable
