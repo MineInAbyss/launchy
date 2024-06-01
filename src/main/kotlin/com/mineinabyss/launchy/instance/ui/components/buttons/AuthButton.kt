@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.auth.data.Auth
+import com.mineinabyss.launchy.auth.data.identity.IdentityDataSource
 import com.mineinabyss.launchy.core.ui.components.PrimaryButton
 import kotlinx.coroutines.launch
 
@@ -20,7 +20,7 @@ fun AuthButton() {
         enabled = state.profile.currentSession == null,
         onClick = {
             coroutineScope.launch {
-                Auth.authOrShowDialog(state, state.profile)
+                IdentityDataSource.authOrShowDialog(state, state.profile)
             }
         },
     ) {

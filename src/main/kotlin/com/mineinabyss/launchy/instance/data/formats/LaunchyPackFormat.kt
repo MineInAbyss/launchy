@@ -1,6 +1,10 @@
 package com.mineinabyss.launchy.instance.data.formats
 
-import com.mineinabyss.launchy.instance.data.*
+import com.mineinabyss.launchy.instance.data.InstanceModList
+import com.mineinabyss.launchy.instance.data.InstanceModLoaders
+import com.mineinabyss.launchy.instance.data.Mod
+import com.mineinabyss.launchy.instance.data.ModGroup
+import com.mineinabyss.launchy.instance.data.storage.ModConfig
 import com.mineinabyss.launchy.util.GroupName
 import kotlinx.serialization.Serializable
 import java.nio.file.Path

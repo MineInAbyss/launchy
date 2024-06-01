@@ -4,12 +4,12 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.TooltipArea
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,52 +18,50 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.core.ui.components.Tooltip
-import com.mineinabyss.launchy.instance.data.ToggleMods.setModConfigEnabled
-import com.mineinabyss.launchy.instance.data.ToggleMods.setModEnabled
 import com.mineinabyss.launchy.instance.ui.ModGroupUiState
+import com.mineinabyss.launchy.instance.ui.ModInteractions
 import com.mineinabyss.launchy.instance.ui.ModQueueState
 import com.mineinabyss.launchy.instance.ui.ModUiState
 import com.mineinabyss.launchy.util.DesktopHelpers
+import com.mineinabyss.launchy.util.Option
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ModInfoDisplay(group: ModGroupUiState, mod: ModUiState) {
-    val state = LocalGameInstanceState
-    val modEnabled by derivedStateOf { mod in state.toggles.enabledMods }
-    val configEnabled by derivedStateOf { mod in state.toggles.enabledConfigs }
-    var configExpanded by remember { mutableStateOf(false) }
-    val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
-
+fun ModInfoDisplay(
+    group: ModGroupUiState,
+    mod: ModUiState,
+    interactions: ModInteractions,
+) {
     val surfaceColor = remember(mod.queueState) { ModQueueState.surfaceColor(mod.queueState) }
     val infoIcon = remember(mod.queueState) { ModQueueState.infoIcon(mod.queueState) }
 
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = surfaceColor,
-        onClick = { if (!group.forceEnabled && !group.forceDisabled) state.toggles.setModEnabled(mod, !modEnabled) }
+        onClick = { if (group.force == Option.DEFAULT) interactions.onToggleMod(!mod.enabled) }
     ) {
-        if (state.downloads.inProgressMods.containsKey(mod) || state.downloads.inProgressConfigs.containsKey(mod)) {
-            val modProgress = state.downloads.inProgressMods[mod]
-            val configProgress = state.downloads.inProgressConfigs[mod]
-            val downloaded = (modProgress?.bytesDownloaded ?: 0L) + (configProgress?.bytesDownloaded ?: 0L)
-            val total = (modProgress?.totalBytes ?: 0L) + (configProgress?.totalBytes ?: 0L)
+        if (mod.installProgress != null) {
+            val downloaded = mod.installProgress.bytesDownloaded
+            val total = mod.installProgress.totalBytes
             LinearProgressIndicator(
                 progress = if (total == 0L) 0f else downloaded.toFloat() / total,
                 color = MaterialTheme.colorScheme.primaryContainer
             )
         }
-        Column() {
+        var configExpanded by remember { mutableStateOf(false) }
+        val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
+
+        Column {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.padding(end = 8.dp)
             ) {
                 Checkbox(
-                    enabled = !group.forceEnabled && !group.forceDisabled,
-                    checked = modEnabled,
-                    onCheckedChange = { state.toggles.setModEnabled(mod, !modEnabled) }
+                    enabled = group.force == Option.DEFAULT,
+                    checked = mod.enabled,
+                    onCheckedChange = { interactions.onToggleMod(!mod.enabled) }
                 )
 
                 if (infoIcon != null) Icon(infoIcon, "Mod Information", modifier = Modifier.padding(end = 8.dp))
@@ -71,9 +69,7 @@ fun ModInfoDisplay(group: ModGroupUiState, mod: ModUiState) {
                 Row(Modifier.weight(6f)) {
                     Text(mod.info.name, style = MaterialTheme.typography.bodyLarge)
                     // build list of mods that are incompatible with this mod
-                    val incompatibleMods = state.modpack.mods.mods
-                        .filter { !mod.compatibleWith(it) }
-                        .map { it.info.name }
+                    val incompatibleMods = mod.incompatibleWith
                     if (mod.info.requires.isNotEmpty() || incompatibleMods.isNotEmpty()) {
                         TooltipArea(
                             modifier = Modifier.alpha(0.5f),
@@ -126,12 +122,7 @@ fun ModInfoDisplay(group: ModGroupUiState, mod: ModUiState) {
                     TooltipArea(
                         modifier = Modifier.alpha(0.5f),
                         tooltip = {
-                            Tooltip {
-                                Text(
-                                    text = "Open homepage",
-                                    style = MaterialTheme.typography.labelMedium
-                                )
-                            }
+                            Tooltip("Open homepage")
                         }
                     ) {
                         IconButton(onClick = { DesktopHelpers.browse(mod.info.homepage) }) {
@@ -143,42 +134,12 @@ fun ModInfoDisplay(group: ModGroupUiState, mod: ModUiState) {
                     }
                 }
             }
+
             AnimatedVisibility(configExpanded) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .clickable {
-                            if (!mod.info.forceConfigDownload) state.toggles.setModConfigEnabled(
-                                mod,
-                                !configEnabled
-                            )
-                        }
-                        .fillMaxWidth()
-                ) {
-                    Spacer(Modifier.width(20.dp))
-                    Checkbox(
-                        checked = configEnabled || mod.info.forceConfigDownload,
-                        onCheckedChange = {
-                            if (!mod.info.forceConfigDownload) state.toggles.setModConfigEnabled(mod, !configEnabled)
-                        },
-                        enabled = !mod.info.forceConfigDownload,
-                    )
-                    Column {
-                        Text(
-                            "Download our recommended configuration",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        if (mod.info.configDesc.isNotEmpty()) {
-                            Spacer(Modifier.width(4.dp))
-                            Text(
-                                mod.info.configDesc,
-                                style = MaterialTheme.typography.bodySmall,
-                                modifier = Modifier.alpha(0.5f)
-                            )
-                        }
-                    }
-                }
+                ModConfigOptions()
             }
         }
     }
 }
+
+

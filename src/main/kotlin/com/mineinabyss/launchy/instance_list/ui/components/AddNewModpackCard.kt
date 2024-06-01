@@ -15,8 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.core.ui.Screen
-import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.core.ui.screens.Screen
+import com.mineinabyss.launchy.core.ui.screens.screen
 
 @Composable
 fun AddNewModpackCard(modifier: Modifier = Modifier) {

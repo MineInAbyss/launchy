@@ -6,9 +6,9 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
-import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.core.ui.screens.Screen
+import com.mineinabyss.launchy.core.ui.screens.screen
 import com.mineinabyss.launchy.util.Dirs
 import kotlin.io.path.copyTo
 import kotlin.io.path.div

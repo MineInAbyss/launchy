@@ -14,16 +14,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
+import com.mineinabyss.launchy.core.ui.LocalUiState
 import com.mineinabyss.launchy.core.ui.components.*
 import com.mineinabyss.launchy.util.DesktopHelpers
 import com.mineinabyss.launchy.util.Dirs
 import com.mineinabyss.launchy.util.SuggestedJVMArgs
+import com.mineinabyss.launchy.util.koinViewModel
 
 @Composable
 @Preview
-fun SettingsScreen() {
-    val state = LocalLaunchyState
+fun SettingsScreen(
+    jvm: JVMSettingsViewModel = koinViewModel(),
+) {
+    val ui = LocalUiState.current
     val scrollState = rememberScrollState()
     Column {
         ComfyTitle("Settings")
@@ -38,16 +41,16 @@ fun SettingsScreen() {
                     Column {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(
-                                state.ui.fullscreen,
-                                onCheckedChange = { state.ui.fullscreen = it }
+                                ui.fullscreen,
+                                onCheckedChange = { ui.fullscreen = it }
                             )
                             Text("Fullscreen mode")
                         }
                     }
                     Setting("Hue", icon = { Icon(Icons.Rounded.Colorize, contentDescription = "Hue") }) {
                         Slider(
-                            value = state.ui.preferHue,
-                            onValueChange = { state.ui.preferHue = it },
+                            value = ui.preferHue,
+                            onValueChange = { ui.preferHue = it },
                             valueRange = 0f..1f,
                             modifier = Modifier.weight(1f)
                         )
@@ -79,7 +82,7 @@ fun SettingsScreen() {
                         title = "Choose java executable",
                         onCloseRequest = {
                             if (it != null) {
-                                state.jvm.javaPath = it
+                                jvm.javaPath = it
                             }
                             directoryPickerShown = false
                         },
@@ -89,7 +92,7 @@ fun SettingsScreen() {
 
                     Setting("Java path") {
                         OutlinedTextField(
-                            value = state.jvm.javaPath?.toString() ?: "No path selected",
+                            value = jvm.javaPath?.toString() ?: "No path selected",
                             readOnly = true,
                             singleLine = true,
                             leadingIcon = { Icon(Icons.Rounded.Folder, contentDescription = "Link") },
@@ -105,11 +108,11 @@ fun SettingsScreen() {
 
                     Setting("Memory", icon = { Icon(Icons.Rounded.Memory, "Memory icon") }) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            val memory = state.jvm.userMemoryAllocation ?: SuggestedJVMArgs.memory
+                            val memory = jvm.userMemoryAllocation ?: SuggestedJVMArgs.memory
 
                             Slider(
                                 value = memory.toFloat(),
-                                onValueChange = { state.jvm.userMemoryAllocation = it.toInt() },
+                                onValueChange = { jvm.userMemoryAllocation = it.toInt() },
                                 valueRange = 1024f..8192f,
                                 steps = 13,
                                 modifier = Modifier.weight(1f)
@@ -119,7 +122,7 @@ fun SettingsScreen() {
                                 keyboardOptions = KeyboardOptions(
                                     keyboardType = KeyboardType.Number
                                 ),
-                                onValueChange = { state.jvm.userMemoryAllocation = it.toIntOrNull() ?: memory },
+                                onValueChange = { jvm.userMemoryAllocation = it.toIntOrNull() ?: memory },
                                 label = { Text("Memory (MB)") },
                                 modifier = Modifier.widthIn(120.dp)
                             )
@@ -127,13 +130,13 @@ fun SettingsScreen() {
                     }
 
                     Setting("JVM arguments") {
-                        AnimatedVisibility(!state.jvm.useRecommendedJvmArgs) {
+                        AnimatedVisibility(!jvm.useRecommendedJvmArgs) {
                             OutlinedTextField(
-                                value = state.jvm.userJvmArgs ?: "",
-                                enabled = !state.jvm.useRecommendedJvmArgs,
+                                value = jvm.userJvmArgs ?: "",
+                                enabled = !jvm.useRecommendedJvmArgs,
                                 singleLine = false,
                                 leadingIcon = { Icon(Icons.Rounded.Code, contentDescription = "") },
-                                onValueChange = { state.jvm.userJvmArgs = it },
+                                onValueChange = { jvm.userJvmArgs = it },
                                 label = { Text("Custom JVM arguments") },
                                 modifier = Modifier.fillMaxWidth()
                             )
@@ -141,15 +144,15 @@ fun SettingsScreen() {
 
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Checkbox(
-                                !state.jvm.useRecommendedJvmArgs,
-                                onCheckedChange = { state.jvm.useRecommendedJvmArgs = !it })
+                                !jvm.useRecommendedJvmArgs,
+                                onCheckedChange = { jvm.useRecommendedJvmArgs = !it })
                             Text("Use custom JVM arguments")
                         }
 
                         Spacer(Modifier.height(16.dp))
 
                         OutlinedTextField(
-                            value = state.jvm.jvmArgs,
+                            value = jvm.jvmArgs,
                             enabled = false,
                             singleLine = false,
                             readOnly = true,

@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
-import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.components.ComfyContent
 import com.mineinabyss.launchy.core.ui.components.TitleSmall
-import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.core.ui.screens.Screen
+import com.mineinabyss.launchy.core.ui.screens.screen
 import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.DesktopHelpers
 import com.mineinabyss.launchy.util.InProgressTask

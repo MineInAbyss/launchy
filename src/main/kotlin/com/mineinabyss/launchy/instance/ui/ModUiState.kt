@@ -7,12 +7,20 @@ import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.mineinabyss.launchy.instance.data.storage.ModConfig
 import com.mineinabyss.launchy.util.ModID
+import com.mineinabyss.launchy.util.ModName
+import com.mineinabyss.launchy.util.Progress
 
 data class ModUiState(
     val id: ModID,
     val enabled: Boolean,
-    val queueState: ModQueueState
+    val configEnabled: Boolean,
+    val queueState: ModQueueState,
+    val info: ModConfig,
+    val incompatibleWith: List<ModName>,
+    val dependsOn: List<ModName>,
+    val installProgress: Progress?,
 )
 
 

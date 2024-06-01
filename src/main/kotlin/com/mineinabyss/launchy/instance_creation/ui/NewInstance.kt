@@ -17,15 +17,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.components.AnimatedTab
 import com.mineinabyss.launchy.core.ui.components.ComfyContent
 import com.mineinabyss.launchy.core.ui.components.ComfyTitle
 import com.mineinabyss.launchy.core.ui.components.ComfyWidth
-import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.core.ui.screens.Screen
+import com.mineinabyss.launchy.core.ui.screens.screen
 import com.mineinabyss.launchy.downloads.data.Downloader
-import com.mineinabyss.launchy.instance.data.GameInstanceConfig
 import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import com.mineinabyss.launchy.instance.data.storage.InstanceConfig
 import com.mineinabyss.launchy.instance.ui.screens.InstanceProperties
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceCard
 import com.mineinabyss.launchy.util.AppDispatchers
@@ -111,7 +111,7 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceDataSource.CloudInst
 
                                         is Downloader.DownloadResult.Success -> {
                                             GameInstanceDataSource.CloudInstanceWithHeaders(
-                                                config = GameInstanceConfig.read(downloadPath)
+                                                config = InstanceConfig.read(downloadPath)
                                                     .showDialogOnError("Failed to read cloud instance")
                                                     .getOrThrow(),
                                                 url = urlText,

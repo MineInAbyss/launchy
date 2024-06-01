@@ -3,7 +3,7 @@ package com.mineinabyss.launchy.instance.data.formats
 import com.mineinabyss.launchy.instance.data.InstanceModList
 import com.mineinabyss.launchy.instance.data.InstanceModLoaders
 import com.mineinabyss.launchy.instance.data.Mod
-import com.mineinabyss.launchy.instance.data.ModConfig
+import com.mineinabyss.launchy.instance.data.storage.ModConfig
 import kotlinx.serialization.Serializable
 import java.nio.file.Path
 import kotlin.io.path.div

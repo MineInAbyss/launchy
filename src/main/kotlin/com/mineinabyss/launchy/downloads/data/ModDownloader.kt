@@ -1,12 +1,12 @@
 package com.mineinabyss.launchy.downloads.data
 
-import com.mineinabyss.launchy.core.ui.LaunchyState
+import com.mineinabyss.launchy.core.ui.LaunchyUiState
 import com.mineinabyss.launchy.instance.data.DownloadInfo
 import com.mineinabyss.launchy.instance.data.HashCheck
 import com.mineinabyss.launchy.instance.data.InstanceModLoaders
-import com.mineinabyss.launchy.instance.data.Launcher
 import com.mineinabyss.launchy.instance.data.Mod
 import com.mineinabyss.launchy.instance.ui.GameInstanceState
+import com.mineinabyss.launchy.launcher.data.Launcher
 import com.mineinabyss.launchy.util.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -17,7 +17,7 @@ import kotlin.io.path.*
 
 object ModDownloader {
 
-    suspend fun GameInstanceState.installMCAndModLoaders(state: LaunchyState, modLoaders: InstanceModLoaders) {
+    suspend fun GameInstanceState.installMCAndModLoaders(state: LaunchyUiState, modLoaders: InstanceModLoaders) {
         state.runTask(Tasks.installModLoadersId, InProgressTask("Installing ${modLoaders.fullVersionName}")) {
             Launcher.download(
                 modLoaders,
@@ -67,7 +67,7 @@ object ModDownloader {
      * does not install any mod updates or new dep versions if they changed in the modpack.
      * Primarily the mod loader/minecraft version.
      */
-    suspend fun GameInstanceState.ensureDependenciesReady(state: LaunchyState) = coroutineScope {
+    suspend fun GameInstanceState.ensureDependenciesReady(state: LaunchyUiState) = coroutineScope {
         val currentDeps = queued.userAgreedModLoaders
         if (currentDeps == null) {
             queued.userAgreedModLoaders = modpack.modLoaders
@@ -98,13 +98,13 @@ object ModDownloader {
         (existingEntries - linked).forEach { it.deleteIfExists() }
     }
 
-    suspend fun GameInstanceState.prepareWithoutChangingInstalledMods(state: LaunchyState) {
+    suspend fun GameInstanceState.prepareWithoutChangingInstalledMods(state: LaunchyUiState) {
         ensureDependenciesReady(state)
         copyMods()
     }
 
     @OptIn(ExperimentalPathApi::class)
-    fun GameInstanceState.copyOverrides(state: LaunchyState) {
+    fun GameInstanceState.copyOverrides(state: LaunchyUiState) {
         state.runTask(Tasks.copyOverridesId, InProgressTask("Copying overrides")) {
             modpack.overridesPaths.forEach {
                 it.copyToRecursively(
@@ -136,7 +136,7 @@ object ModDownloader {
      * Updates mod loader versions and mods to latest modpack definition.
      */
     suspend fun GameInstanceState.startInstall(
-        state: LaunchyState,
+        state: LaunchyUiState,
         ignoreCachedCheck: Boolean = false
     ): Result<*> = coroutineScope {
         queued.userAgreedModLoaders = modpack.modLoaders

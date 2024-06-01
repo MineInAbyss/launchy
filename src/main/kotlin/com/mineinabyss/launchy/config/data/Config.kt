@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.config.data
 
-import com.mineinabyss.launchy.auth.data.PlayerProfile
+import com.mineinabyss.launchy.auth.data.ProfileModel
 import kotlinx.serialization.Serializable
 
 
@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class Config(
     val handledImportOptions: Boolean = false,
     val onboardingComplete: Boolean = false,
-    val currentProfile: PlayerProfile? = null,
+    val currentProfile: ProfileModel? = null,
     val javaPath: String? = null,
     val jvmArguments: String? = null,
     val memoryAllocation: Int? = null,

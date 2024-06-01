@@ -1,11 +1,14 @@
 package com.mineinabyss.launchy.util
 
 import com.mineinabyss.launchy.core.ui.Dialog
-import com.mineinabyss.launchy.core.ui.dialog
+import com.mineinabyss.launchy.core.ui.screens.dialog
 import java.util.*
 
 fun <T> Result<T>.showDialogOnError(title: String? = null): Result<T> {
-    onFailure { dialog = Dialog.fromException(it, title) }
+    onFailure {
+        dialog = Dialog.fromException(it, title)
+        it.printStackTrace()
+    }
     return this
 }
 

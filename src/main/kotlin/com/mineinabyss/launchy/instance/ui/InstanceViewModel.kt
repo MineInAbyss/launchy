@@ -6,7 +6,7 @@ import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.ModID
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.withContext
 import org.to2mbn.jmccc.mcdownloader.download.Downloader
@@ -14,22 +14,36 @@ import org.to2mbn.jmccc.mcdownloader.download.Downloader
 class InstanceViewModel(
     val downloader: Downloader,
 ) : ViewModel() {
-    val modsState: StateFlow<ModListUiState> get() = _modsState
-    val installState = MutableStateFlow<InstallState>(InstallState.InProgress)
-
-    private val instance = MutableStateFlow<GameInstanceDataSource?>(null)
+    private val currentInstance = MutableStateFlow<GameInstanceDataSource?>(null)
     private val _modsState = MutableStateFlow<ModListUiState>(ModListUiState.Loading)
-    val installQueueState = MutableStateFlow<InstallState>(InstallState.InProgress)
+    private val _installState = MutableStateFlow<InstallState>(InstallState.InProgress)
+    private val _instanceUiState = MutableStateFlow<InstanceUiState?>(null)
+
+    val modsState = _modsState.asStateFlow()
+    val instanceUiState = _instanceUiState.asStateFlow()
+    val installState = _installState.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val modList = instance.mapLatest {
+    val modList = currentInstance.mapLatest {
         withContext(AppDispatchers.IO) {
             it?.loadModList()
         }
     }
 
     //TODO read
-    val userInstalledMods = MutableStateFlow<List<ModUiState>>(emptyList())
+    val userInstalledMods = MutableStateFlow<ModGroupUiState?>(null)
+//        val userMods by remember {
+//            mutableStateOf(
+//                state.instance.userMods.listDirectoryEntries("*.jar").map {
+//                    Mod(
+//                        downloadDir = it,
+//                        modId = it.fileName.toString(),
+//                        info = ModConfig(name = it.fileName.toString()),
+//                        desiredHashes = null
+//                    )
+//                }
+//            )
+//        }
 
     val enabledMods = MutableStateFlow(listOf<ModID>())
 //    val instanceUIState =
@@ -124,4 +138,8 @@ class InstanceViewModel(
 //        if (mod.info.configUrl.isNotBlank() && enabled) enabledConfigs.add(mod)
 //        else enabledConfigs.remove(mod)
 //    }
+
+    fun groupInteractionsFor(id: String): ModGroupInteractions = TODO()
+
+    fun modInteractionsFor(id: ModID): ModInteractions = TODO()
 }

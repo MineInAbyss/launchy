@@ -2,8 +2,8 @@ package com.mineinabyss.launchy.downloads.data
 
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.instance.data.DownloadInfo
-import com.mineinabyss.launchy.instance.data.InstanceUserConfig
 import com.mineinabyss.launchy.instance.data.Modpack
+import com.mineinabyss.launchy.instance.data.storage.InstanceUserConfig
 import com.mineinabyss.launchy.instance.ui.InstanceViewModel
 import com.mineinabyss.launchy.util.ModID
 

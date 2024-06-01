@@ -1,28 +1,28 @@
-package com.mineinabyss.launchy.core.ui
+package com.mineinabyss.launchy.core.ui.screens
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.auth.ui.AuthDialog
+import com.mineinabyss.launchy.core.ui.Dialog
+import com.mineinabyss.launchy.core.ui.LocalUiState
+import com.mineinabyss.launchy.core.ui.TopBar
 import com.mineinabyss.launchy.core.ui.components.AppTopBar
+import com.mineinabyss.launchy.core.ui.components.InProgressTasksIndicator
 import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
 import com.mineinabyss.launchy.core.ui.components.LeftSidebar
 import com.mineinabyss.launchy.core.ui.dialogs.SelectJVMDialog
 import com.mineinabyss.launchy.core.ui.theme.currentHue
-import com.mineinabyss.launchy.instance.ui.GameInstanceState
-import com.mineinabyss.launchy.instance.ui.components.SlightBackgroundTint
-import com.mineinabyss.launchy.instance.ui.components.settings.infobar.InfoBarProperties
 import com.mineinabyss.launchy.instance.ui.screens.InstanceScreen
 import com.mineinabyss.launchy.instance.ui.screens.InstanceSettingsScreen
 import com.mineinabyss.launchy.instance_creation.ui.NewInstance
@@ -31,22 +31,22 @@ import com.mineinabyss.launchy.settings.ui.SettingsScreen
 import com.mineinabyss.launchy.updater.data.AppUpdateState
 import com.mineinabyss.launchy.updater.data.GithubUpdateChecker
 import com.mineinabyss.launchy.util.DesktopHelpers
-import com.mineinabyss.launchy.util.InProgressTask
 
 var screen: Screen by mutableStateOf(Screen.Default)
 
 var dialog: Dialog by mutableStateOf(Dialog.None)
 var updateAvailable: AppUpdateState by mutableStateOf(AppUpdateState.Unknown)
 
-private val ModpackStateProvider = compositionLocalOf<GameInstanceState> { error("No local modpack provided") }
+//private val ModpackStateProvider = compositionLocalOf<GameInstanceState> { error("No local modpack provided") }
 
 val snackbarHostState = SnackbarHostState()
 
-val LocalGameInstanceState: GameInstanceState
-    @Composable get() = ModpackStateProvider.current
+//val LocalGameInstanceState: GameInstanceState
+//    @Composable get() = ModpackStateProvider.current
 
 @Composable
-fun Screens() = Scaffold(
+fun Screens(
+) = Scaffold(
     snackbarHost = { SnackbarHost(snackbarHostState) },
     floatingActionButton = {
         val update = updateAvailable
@@ -62,14 +62,9 @@ fun Screens() = Scaffold(
         }
     }
 ) {
-    val state = LocalLaunchyState
-    val packState = state.instanceState
-
-    if (packState != null) CompositionLocalProvider(ModpackStateProvider provides packState) {
-        Screen(Screen.Instance) { InstanceScreen() }
-        Screen(Screen.InstanceSettings, transition = Transitions.SlideUp) { InstanceSettingsScreen() }
-    }
-
+    val ui = LocalUiState.current
+    Screen(Screen.Instance) { InstanceScreen() }
+    Screen(Screen.InstanceSettings, transition = Transitions.SlideUp) { InstanceSettingsScreen() }
     Screen(Screen.Default) { HomeScreen() }
     Screen(Screen.NewInstance) { NewInstance() }
     Screen(Screen.Settings) { SettingsScreen() }
@@ -83,8 +78,8 @@ fun Screens() = Scaffold(
 
     val isDefault = screen is Screen.OnLeftSidebar
 
-    LaunchedEffect(isDefault, state.ui.preferHue) {
-        if (isDefault) currentHue = state.ui.preferHue
+    LaunchedEffect(isDefault, ui.preferHue) {
+        if (isDefault) currentHue = ui.preferHue
     }
     LaunchedEffect(Unit) {
         updateAvailable = GithubUpdateChecker.checkForUpdates()
@@ -99,17 +94,18 @@ fun Screens() = Scaffold(
         onBackButtonClicked = {
             screen = when (screen) {
                 Screen.Instance -> {
-                    packState?.saveToConfig()
+                    //TODO save states
+//                    packState?.saveToConfig()
                     Screen.Default
                 }
 
                 Screen.InstanceSettings -> {
-                    packState?.saveToConfig()
+//                    packState?.saveToConfig()
                     Screen.Instance
                 }
 
                 Screen.Settings -> {
-                    state.saveToConfig()
+//                    state.saveToConfig()
                     Screen.Default
                 }
 
@@ -119,7 +115,8 @@ fun Screens() = Scaffold(
     )
     when (val castDialog = dialog) {
         Dialog.None -> {}
-        Dialog.Auth -> AuthDialog(
+        is Dialog.Auth -> AuthDialog(
+            castDialog,
             onDismissRequest = { dialog = Dialog.None },
         )
 
@@ -143,42 +140,6 @@ fun Screens() = Scaffold(
                 acceptText = castDialog.acceptText,
                 declineText = castDialog.declineText,
             ) { Text(castDialog.message, style = LocalTextStyle.current) }
-        }
-    }
-
-    val tasks = state.inProgressTasks
-    val progressBarHeight by animateDpAsState(if (screen == Screen.InstanceSettings) InfoBarProperties.height else 0.dp)
-
-    if (tasks.isNotEmpty()) Box(Modifier.fillMaxSize().padding(bottom = progressBarHeight)) {
-        val task = tasks.values.first()
-        val textModifier = Modifier.align(Alignment.BottomStart).padding(start = 10.dp, bottom = 20.dp)
-        val progressBarModifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter)
-        val progressBarColor = MaterialTheme.colorScheme.primaryContainer
-        SlightBackgroundTint(Modifier.height(50.dp))
-        when (task) {
-            is InProgressTask.WithPercentage -> {
-                Text(
-                    "${task.name}... (${task.current}/${task.total}${if (task.measurement != null) " ${task.measurement}" else ""})",
-                    modifier = textModifier
-                )
-                LinearProgressIndicator(
-                    progress = task.current.toFloat() / task.total,
-                    modifier = progressBarModifier,
-                    color = progressBarColor
-                )
-            }
-
-            else -> {
-                Text(
-                    "${task.name}...",
-                    modifier = textModifier
-                )
-
-                LinearProgressIndicator(
-                    modifier = progressBarModifier,
-                    color = progressBarColor
-                )
-            }
         }
     }
 }
@@ -210,4 +171,5 @@ fun Screen(
             }
         }
     }
+    InProgressTasksIndicator()
 }

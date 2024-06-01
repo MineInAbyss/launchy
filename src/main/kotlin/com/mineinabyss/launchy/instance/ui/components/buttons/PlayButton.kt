@@ -15,32 +15,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.components.PrimaryButtonColors
 import com.mineinabyss.launchy.core.ui.components.SecondaryButtonColors
-import com.mineinabyss.launchy.core.ui.dialog
-import com.mineinabyss.launchy.downloads.data.ModDownloader.startInstall
-import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
-import com.mineinabyss.launchy.instance.data.Launcher
 import com.mineinabyss.launchy.instance.ui.GameInstanceState
-import com.mineinabyss.launchy.instance_list.data.Instances.updateInstance
-import com.mineinabyss.launchy.util.AppDispatchers
-import com.mineinabyss.launchy.util.AppDispatchers.launchOrShowDialog
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.mineinabyss.launchy.instance.ui.InstanceUiState
+import com.mineinabyss.launchy.launcher.ui.LauncherViewModel
+import com.mineinabyss.launchy.util.koinViewModel
 
 @Composable
 fun PlayButton(
     hideText: Boolean = false,
-    instance: GameInstanceDataSource,
+    instance: InstanceUiState,
     modifier: Modifier = Modifier,
-    getModpackState: suspend () -> GameInstanceState?,
+    launcher: LauncherViewModel = koinViewModel()
 ) {
-    val state = LocalLaunchyState
-    val process = state.processFor(instance)
-    val coroutineScope = rememberCoroutineScope()
-    val buttonIcon by remember(state.profile.currentProfile, process) {
+    val buttonIcon by remember(instance, instance.runningProcess) {
         mutableStateOf(
             when {
                 state.profile.currentProfile == null -> Icons.Rounded.PlayDisabled
@@ -60,48 +49,7 @@ fun PlayButton(
     Box {
         var foundPackState: GameInstanceState? by remember { mutableStateOf(null) }
         val onClick: () -> Unit = {
-            coroutineScope.launch(Dispatchers.IO) {
-                val packState = foundPackState ?: getModpackState() ?: return@launch
-                foundPackState = packState
-                val updatesAvailable = packState.instance.updatesAvailable
-
-                if (process == null) {
-                    when {
-                        // Assume this means not launched before
-                        packState.queued.userAgreedModLoaders == null -> {
-                            AppDispatchers.profileLaunch.launchOrShowDialog {
-                                packState.startInstall(state).getOrThrow()
-                                Launcher.launch(state, packState, state.profile)
-                            }
-                        }
-
-                        updatesAvailable -> {
-                            dialog = Dialog.Options(
-                                title = "Update Available",
-                                message = buildString {
-                                    appendLine("This cloud instance has updates available.")
-                                    appendLine("Would you like to download them now?")
-                                },
-                                acceptText = "Download",
-                                declineText = "Ignore",
-                                onAccept = { packState.instance.updateInstance(state) },
-                                onDecline = { }
-                            )
-                        }
-
-                        else -> {
-                            AppDispatchers.profileLaunch.launchOrShowDialog {
-                                packState.startInstall(state).getOrThrow()
-                                println("Launching now!")
-                                Launcher.launch(state, packState, state.profile)
-                            }
-                        }
-                    }
-                } else {
-                    process.destroyForcibly()
-                    state.setProcessFor(packState.instance, null)
-                }
-            }
+            launcher.launch(instance)
         }
         val enabled = state.profile.currentProfile != null
                 && foundPackState?.downloads?.isDownloading != true

@@ -1,7 +1,6 @@
 package com.mineinabyss.launchy.core.ui.components
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -12,26 +11,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
-import androidx.compose.ui.res.loadImageBitmap
-import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.auth.data.Auth
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mineinabyss.launchy.auth.ui.ProfileViewModel
 import com.mineinabyss.launchy.auth.ui.components.AccountsPopup
-import com.mineinabyss.launchy.core.ui.Screen
-import com.mineinabyss.launchy.core.ui.screen
-import kotlinx.coroutines.launch
+import com.mineinabyss.launchy.auth.ui.components.PlayerAvatar
+import com.mineinabyss.launchy.core.ui.screens.Screen
+import com.mineinabyss.launchy.core.ui.screens.screen
 
 @Composable
-fun LeftSidebar() {
-    val state = LocalLaunchyState
-    val coroutineScope = rememberCoroutineScope()
+fun LeftSidebar(
+    profileViewModel: ProfileViewModel = viewModel(),
+) {
     var showAccountsPopup by remember { mutableStateOf(false) }
     var accountHeadPosition: LayoutCoordinates? by remember { mutableStateOf(null) }
 
@@ -58,14 +53,12 @@ fun LeftSidebar() {
                         screen = Screen.NewInstance
                     }
                 )
-                val profile = state.profile.currentProfile
+                val profile by profileViewModel.profile.collectAsState()
                 FloatingActionButton(
                     onClick = {
-                        if (state.profile.currentProfile == null) coroutineScope.launch {
-                            if (profile == null) Auth.authOrShowDialog(state, state.profile)
-                        } else {
-                            showAccountsPopup = !showAccountsPopup
-                        }
+                        profileViewModel.authOrShowDialog()
+                        if (profile == null) profileViewModel.authOrShowDialog()
+                        else showAccountsPopup = !showAccountsPopup
                     },
                     modifier = Modifier.size(48.dp).onGloballyPositioned {
                         accountHeadPosition = it
@@ -73,18 +66,7 @@ fun LeftSidebar() {
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
                     contentColor = MaterialTheme.colorScheme.secondary,
                 ) {
-                    profile?.let { PlayerAvatar(profile, Modifier.fillMaxSize()) }
-                        ?: run {
-                            val missingSkin = remember {
-                                useResource("missing_skin.png") {
-                                    BitmapPainter(
-                                        loadImageBitmap(it),
-                                        filterQuality = FilterQuality.None
-                                    )
-                                }
-                            }
-                            Image(missingSkin, "Not logged in", Modifier.fillMaxSize())
-                        }
+                    PlayerAvatar(profile, Modifier.fillMaxSize())
                 }
             }
         }

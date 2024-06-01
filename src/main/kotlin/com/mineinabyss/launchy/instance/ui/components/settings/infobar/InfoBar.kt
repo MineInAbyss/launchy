@@ -28,7 +28,7 @@ fun InfoBar(
     instance: InstanceViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
-    val queuedState by instance.installQueueState.collectAsState()
+    val queuedState by instance._installQueueState.collectAsState()
     val queue = when (queuedState) {
         is InstallState.Queued -> queuedState as InstallState.Queued
         else -> return

@@ -22,13 +22,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.components.Tooltip
-import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.core.ui.screens.Screen
+import com.mineinabyss.launchy.core.ui.screens.screen
 import com.mineinabyss.launchy.core.ui.theme.LaunchyColors
 import com.mineinabyss.launchy.core.ui.theme.currentHue
-import com.mineinabyss.launchy.instance.data.GameInstanceConfig
 import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import com.mineinabyss.launchy.instance.data.storage.InstanceConfig
 import com.mineinabyss.launchy.instance.ui.components.SlightBackgroundTint
 import com.mineinabyss.launchy.instance.ui.components.buttons.PlayButton
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceCardStyle.cardHeight
@@ -45,7 +45,7 @@ object InstanceCardStyle {
 
 @Composable
 fun InstanceCard(
-    config: GameInstanceConfig,
+    config: InstanceConfig,
     instance: GameInstanceDataSource? = null,
     modifier: Modifier = Modifier
 ) = MaterialTheme(

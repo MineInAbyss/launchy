@@ -1,10 +1,10 @@
-package com.mineinabyss.launchy.instance.data
+package com.mineinabyss.launchy.launcher.data
 
-import com.mineinabyss.launchy.auth.data.Auth
-import com.mineinabyss.launchy.auth.ui.ProfileState
+import com.mineinabyss.launchy.auth.data.ProfileRepository
 import com.mineinabyss.launchy.core.ui.Dialog
-import com.mineinabyss.launchy.core.ui.LaunchyState
-import com.mineinabyss.launchy.core.ui.dialog
+import com.mineinabyss.launchy.core.ui.LaunchyUiState
+import com.mineinabyss.launchy.core.ui.screens.dialog
+import com.mineinabyss.launchy.instance.data.InstanceModLoaders
 import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.util.AppDispatchers
 import kotlinx.coroutines.Job
@@ -31,7 +31,8 @@ import kotlin.io.path.notExists
 
 
 object Launcher {
-    suspend fun launch(state: LaunchyState, pack: GameInstanceState, profile: ProfileState): Unit = coroutineScope {
+    suspend fun launch(state: LaunchyUiState, pack: GameInstanceState, profile: ProfileRepository): Unit =
+        coroutineScope {
         val dir = MinecraftDirectory(pack.instance.minecraftDir.toFile())
         val launcher = LauncherBuilder.buildDefault()
         val javaPath = state.jvm.javaPath
@@ -42,7 +43,7 @@ object Launcher {
         state.lastPlayed[pack.instance.config.name] = Date().time
         // Auth or show dialog
         when (val session = profile.currentSession) {
-            null -> Auth.authOrShowDialog(state, profile) {
+            null -> Authenticator.authOrShowDialog(state, profile) {
                 launch { launch(state, pack, profile) }
             }
 

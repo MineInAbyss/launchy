@@ -18,9 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mineinabyss.launchy.core.ui.Constants
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.instance.ui.InstanceViewModel
-import com.mineinabyss.launchy.instance.ui.ModGroupUiState
 import com.mineinabyss.launchy.instance.ui.ModListUiState
 import com.mineinabyss.launchy.instance.ui.components.settings.ModGroup
 import com.mineinabyss.launchy.instance.ui.components.settings.infobar.InfoBar
@@ -29,23 +27,10 @@ import com.mineinabyss.launchy.instance.ui.components.settings.infobar.InfoBar
 fun ModManagementTab(
     instance: InstanceViewModel = viewModel()
 ) {
-    val state = LocalGameInstanceState
     Scaffold(
         containerColor = Color.Transparent,
         bottomBar = { InfoBar() },
     ) { paddingValues ->
-//        val userMods by remember {
-//            mutableStateOf(
-//                state.instance.userMods.listDirectoryEntries("*.jar").map {
-//                    Mod(
-//                        downloadDir = it,
-//                        modId = it.fileName.toString(),
-//                        info = ModConfig(name = it.fileName.toString()),
-//                        desiredHashes = null
-//                    )
-//                }
-//            )
-//        }
         val modsState by instance.modsState.collectAsState()
         val groups = when (modsState) {
             is ModListUiState.Loading -> {
@@ -71,17 +56,15 @@ fun ModManagementTab(
                 LazyColumn(Modifier.fillMaxSize().padding(end = 12.dp), lazyListState) {
                     item { Spacer(Modifier.height(4.dp)) }
                     items(groups) { group ->
-                        ModGroup(group)
+                        val groupInteractions = instance.groupInteractionsFor(group.id)
+                        ModGroup(group, groupInteractions)
                     }
-                    if (userMods.isNotEmpty()) item {
-                        ModGroup(
-                            ModGroupUiState(
-                                title = "User mods",
-                                enabled = true,
-                                forceEnabled = true,
-                                mods = userMods,
-                            )
-                        )
+                    // TODO probably worth just merging into groups
+                    userMods?.let {
+                        item {
+                            val groupInteractions = instance.groupInteractionsFor(it.id)
+                            ModGroup(it, groupInteractions)
+                        }
                     }
                 }
                 VerticalScrollbar(

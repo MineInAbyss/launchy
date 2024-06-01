@@ -14,18 +14,17 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
-import com.mineinabyss.launchy.core.ui.dialog
+import com.mineinabyss.launchy.core.ui.screens.dialog
 import com.mineinabyss.launchy.util.DesktopHelpers
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun AuthDialog(
+    state: Dialog.Auth,
     onDismissRequest: () -> Unit
 ) {
-    val state = LocalLaunchyState
     LaunchyDialog(
         title = {
             Text("Authenticate with Microsoft", style = LocalTextStyle.current)
@@ -37,7 +36,7 @@ fun AuthDialog(
         declineText = null,
     ) {
         when {
-            state.profile.authCode != null -> {
+            state.verification.code != null -> {
                 val clipboard = LocalClipboardManager.current
                 val annotatedText = buildAnnotatedString {
                     withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onBackground)) {

@@ -1,16 +1,19 @@
 package com.mineinabyss.launchy.downloads.data
 
-import com.mineinabyss.launchy.core.ui.LaunchyState
+import com.mineinabyss.launchy.core.ui.LaunchyUiState
 import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
 import com.mineinabyss.launchy.util.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
+import kotlinx.serialization.json.Json
 import org.rauschig.jarchivelib.ArchiveFormat
 import org.rauschig.jarchivelib.Archiver
 import org.rauschig.jarchivelib.ArchiverFactory
@@ -22,6 +25,13 @@ import kotlin.io.path.*
 object Downloader {
     val httpClient = HttpClient(CIO) {
         install(HttpTimeout)
+        install(ContentNegotiation) {
+            json(json = Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+            })
+        }
     }
 
     data class ModifyHeaders(val lastModified: String, val contentLength: Long) {
@@ -119,7 +129,7 @@ object Downloader {
     /** @return Path to java executable */
     @OptIn(ExperimentalPathApi::class)
     suspend fun installJDK(
-        state: LaunchyState,
+        state: LaunchyUiState,
     ): Path? {
         try {
             state.inProgressTasks["installJDK"] = InProgressTask("Downloading Java environment")

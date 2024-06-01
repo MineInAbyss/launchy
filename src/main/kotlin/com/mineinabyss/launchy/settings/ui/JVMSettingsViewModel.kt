@@ -1,16 +1,17 @@
-package com.mineinabyss.launchy.core.ui
+package com.mineinabyss.launchy.settings.ui
 
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 import com.mineinabyss.launchy.config.data.Config
 import com.mineinabyss.launchy.util.SuggestedJVMArgs
 import kotlin.io.path.Path
 
-class JvmState(
+class JVMSettingsViewModel(
     val config: Config
-) {
+) : ViewModel() {
     var javaPath by mutableStateOf(config.javaPath?.let { Path(it) })
     var userMemoryAllocation by mutableStateOf(config.memoryAllocation)
     var userJvmArgs by mutableStateOf(config.jvmArguments)

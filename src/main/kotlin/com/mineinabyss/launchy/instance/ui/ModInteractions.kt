@@ -1,9 +1,11 @@
 package com.mineinabyss.launchy.instance.ui
 
-import com.mineinabyss.launchy.util.ModID
 import com.mineinabyss.launchy.util.Option
 
-class ModListInteractions(
+data class ModGroupInteractions(
     val onToggleGroup: (Option) -> Unit,
-    val onToggleMod: (ModID, Boolean) -> Unit,
+)
+
+data class ModInteractions(
+    val onToggleMod: (Boolean) -> Unit,
 )

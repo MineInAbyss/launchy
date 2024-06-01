@@ -11,13 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 
 @Composable
 fun LogoLarge(painter: BitmapPainter?, modifier: Modifier) {
-    LocalLaunchyState
-    val pack = LocalGameInstanceState
     AnimatedVisibility(
         painter != null,
         enter = fadeIn() + expandVertically(clip = false) + fadeIn(),
@@ -25,7 +21,7 @@ fun LogoLarge(painter: BitmapPainter?, modifier: Modifier) {
     ) {
         if (painter == null) return@AnimatedVisibility
         Image(
-            painter = painter!!,
+            painter = painter,
             contentDescription = "Modpack logo",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillWidth

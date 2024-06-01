@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.instance.data
 
 import com.mineinabyss.launchy.instance.data.formats.ModrinthPackFormat
+import com.mineinabyss.launchy.instance.data.storage.ModConfig
 import io.ktor.http.*
 import java.nio.file.Path
 import kotlin.io.path.div

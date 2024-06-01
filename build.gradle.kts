@@ -41,6 +41,13 @@ dependencies {
     implementation(libs.minecraftAuth)
     implementation(libs.jmccc.mcdownloader)
     implementation(libs.jmccc)
+
+    implementation(libs.multiplatform.settings)
+//    implementation(libs.multiplatform.settings.no.arg)
+    implementation(libs.multiplatform.settings.serialization)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.json)
+    implementation("io.github.irgaly.kfswatch:kfswatch:1.0.0")
 }
 
 idofront {

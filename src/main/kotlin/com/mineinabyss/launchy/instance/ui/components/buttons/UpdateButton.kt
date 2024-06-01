@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
-import com.mineinabyss.launchy.instance_list.data.Instances.updateInstance
+import com.mineinabyss.launchy.instance_list.data.InstanceRepository.updateInstance
 
 @Composable
 fun UpdateButton() {

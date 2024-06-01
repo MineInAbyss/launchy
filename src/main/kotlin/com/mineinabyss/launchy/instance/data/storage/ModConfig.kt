@@ -1,11 +1,12 @@
-package com.mineinabyss.launchy.instance.data
+package com.mineinabyss.launchy.instance.data.storage
 
 import com.mineinabyss.launchy.instance.data.formats.ModDownloadPath
+import com.mineinabyss.launchy.util.ModID
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ModConfig(
-    val id: String? = null,
+    val id: ModID? = null,
     val name: String,
     val license: String = "",
     val homepage: String = "",

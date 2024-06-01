@@ -20,25 +20,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
+import androidx.compose.ui.util.fastAny
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mineinabyss.launchy.core.ui.components.Tooltip
+import com.mineinabyss.launchy.instance.ui.InstanceViewModel
+import com.mineinabyss.launchy.instance.ui.ModGroupInteractions
 import com.mineinabyss.launchy.instance.ui.ModGroupUiState
-import com.mineinabyss.launchy.instance.ui.ModListInteractions
+import com.mineinabyss.launchy.instance.ui.ModQueueState
 
 @Composable
 fun ModGroup(
     group: ModGroupUiState,
-    interactions: ModListInteractions
+    interactions: ModGroupInteractions,
+    viewModel: InstanceViewModel = viewModel()
 ) {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
-    val state = LocalGameInstanceState
-
-//    val modsChanged = mods.any {
-//        it in state.queued.deletions || it in state.queued.newDownloads || it in state.queued.failures
-//    }
-
+    val changesQueued = group.mods.fastAny { it.queueState != ModQueueState.NONE }
     val tonalElevation by animateDpAsState(if (expanded) 1.6.dp else 1.dp)
+
     Column {
         Surface(
             tonalElevation = tonalElevation,
@@ -63,7 +63,7 @@ fun ModGroup(
                     group.title, Modifier.weight(1f),
                     style = MaterialTheme.typography.bodyLarge,
                 )
-                AnimatedVisibility(modsChanged, enter = fadeIn(), exit = fadeOut()) {
+                AnimatedVisibility(changesQueued, enter = fadeIn(), exit = fadeOut()) {
                     TooltipArea(
                         tooltip = { Tooltip("Some mods in this group have pending changes") }
                     ) {
@@ -83,7 +83,8 @@ fun ModGroup(
             ) {
                 Column {
                     for (mod in group.mods) key(mod.id) {
-                        ModInfoDisplay(group, mod)
+                        val modInteractions = remember(mod.id) { viewModel.modInteractionsFor(mod.id) }
+                        ModInfoDisplay(group, mod, modInteractions)
                     }
                 }
             }
