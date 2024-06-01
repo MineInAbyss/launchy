@@ -15,15 +15,14 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.mineinabyss.launchy.data.Dirs
-import com.mineinabyss.launchy.data.config.Config
-import com.mineinabyss.launchy.data.config.GameInstance
-import com.mineinabyss.launchy.state.LaunchyState
-import com.mineinabyss.launchy.ui.colors.AppTheme
-import com.mineinabyss.launchy.ui.screens.Screens
-import com.mineinabyss.launchy.ui.state.TopBarProvider
-import com.mineinabyss.launchy.ui.state.TopBarState
-import com.mineinabyss.launchy.util.OS
+import com.mineinabyss.launchy.config.data.Config
+import com.mineinabyss.launchy.config.data.GameInstance
+import com.mineinabyss.launchy.core.ui.LaunchyState
+import com.mineinabyss.launchy.core.ui.Screens
+import com.mineinabyss.launchy.core.ui.TopBarProvider
+import com.mineinabyss.launchy.core.ui.TopBarState
+import com.mineinabyss.launchy.core.ui.theme.AppTheme
+import com.mineinabyss.launchy.util.Dirs
 import java.awt.Dimension
 
 private val LaunchyStateProvider = compositionLocalOf<LaunchyState> { error("No local versions provided") }

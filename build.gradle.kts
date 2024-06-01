@@ -26,6 +26,9 @@ dependencies {
     }
     implementation(compose.material3)
     implementation(compose.materialIconsExtended)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.koin.compose)
+
     implementation(idofrontLibs.kotlinx.serialization.json)
     implementation(idofrontLibs.kotlinx.serialization.kaml)
     implementation(libs.ktor.core)
