@@ -5,6 +5,7 @@ import com.mineinabyss.launchy.auth.ui.ProfileState
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.LaunchyState
 import com.mineinabyss.launchy.core.ui.dialog
+import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.util.AppDispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope

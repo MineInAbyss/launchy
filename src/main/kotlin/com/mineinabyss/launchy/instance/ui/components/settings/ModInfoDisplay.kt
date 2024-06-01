@@ -17,40 +17,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.core.ui.components.Tooltip
-import com.mineinabyss.launchy.instance.data.Mod
-import com.mineinabyss.launchy.instance.data.ModGroup
 import com.mineinabyss.launchy.instance.data.ToggleMods.setModConfigEnabled
 import com.mineinabyss.launchy.instance.data.ToggleMods.setModEnabled
+import com.mineinabyss.launchy.instance.ui.ModGroupUiState
+import com.mineinabyss.launchy.instance.ui.ModQueueState
+import com.mineinabyss.launchy.instance.ui.ModUiState
 import com.mineinabyss.launchy.util.DesktopHelpers
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ModInfoDisplay(group: ModGroup, mod: Mod) {
+fun ModInfoDisplay(group: ModGroupUiState, mod: ModUiState) {
     val state = LocalGameInstanceState
     val modEnabled by derivedStateOf { mod in state.toggles.enabledMods }
     val configEnabled by derivedStateOf { mod in state.toggles.enabledConfigs }
     var configExpanded by remember { mutableStateOf(false) }
     val configTabState by animateFloatAsState(targetValue = if (configExpanded) 180f else 0f)
 
-    val surfaceColor = when (mod) {
-        in state.queued.failures -> MaterialTheme.colorScheme.error
-        in state.queued.deletions -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
-        in state.queued.newDownloads -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)
-        in state.queued.updates -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.1f)
-        else -> MaterialTheme.colorScheme.surface
-    }
+    val surfaceColor = remember(mod.queueState) { ModQueueState.surfaceColor(mod.queueState) }
+    val infoIcon = remember(mod.queueState) { ModQueueState.infoIcon(mod.queueState) }
 
-    val infoIcon: ImageVector? = when (mod) {
-        in state.queued.failures -> Icons.Rounded.Error
-        in state.queued.deletions -> Icons.Rounded.Delete
-        in state.queued.newDownloads -> Icons.Rounded.Download
-        in state.queued.updates -> Icons.Rounded.Update
-        else -> null
-    }
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = surfaceColor,

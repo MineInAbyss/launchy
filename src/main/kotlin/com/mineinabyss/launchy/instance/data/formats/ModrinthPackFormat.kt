@@ -1,9 +1,9 @@
 package com.mineinabyss.launchy.instance.data.formats
 
+import com.mineinabyss.launchy.instance.data.InstanceModList
 import com.mineinabyss.launchy.instance.data.InstanceModLoaders
 import com.mineinabyss.launchy.instance.data.Mod
 import com.mineinabyss.launchy.instance.data.ModConfig
-import com.mineinabyss.launchy.instance.data.Mods
 import kotlinx.serialization.Serializable
 import java.nio.file.Path
 import kotlin.io.path.div
@@ -47,7 +47,7 @@ data class ModrinthPackFormat(
     }
 
     override fun toGenericMods(downloadsDir: Path) =
-        Mods.withSingleGroup(files.map { it.toMod(downloadsDir) })
+        InstanceModList.withSingleGroup(files.map { it.toMod(downloadsDir) })
 
     override fun getOverridesPaths(configDir: Path): List<Path> = listOf(configDir / "mrpack" / "overrides")
 }

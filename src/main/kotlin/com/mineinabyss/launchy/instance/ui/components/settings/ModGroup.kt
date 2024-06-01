@@ -22,20 +22,21 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.core.ui.components.Tooltip
-import com.mineinabyss.launchy.instance.data.Mod
-import com.mineinabyss.launchy.instance.data.ModGroup
-import com.mineinabyss.launchy.instance.data.ToggleMods.setModEnabled
-import com.mineinabyss.launchy.util.Option
+import com.mineinabyss.launchy.instance.ui.ModGroupUiState
+import com.mineinabyss.launchy.instance.ui.ModListInteractions
 
 @Composable
-fun ModGroup(group: ModGroup, mods: Collection<Mod>) {
+fun ModGroup(
+    group: ModGroupUiState,
+    interactions: ModListInteractions
+) {
     var expanded by remember { mutableStateOf(false) }
     val arrowRotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
     val state = LocalGameInstanceState
 
-    val modsChanged = mods.any {
-        it in state.queued.deletions || it in state.queued.newDownloads || it in state.queued.failures
-    }
+//    val modsChanged = mods.any {
+//        it in state.queued.deletions || it in state.queued.newDownloads || it in state.queued.failures
+//    }
 
     val tonalElevation by animateDpAsState(if (expanded) 1.6.dp else 1.dp)
     Column {
@@ -52,20 +53,14 @@ fun ModGroup(group: ModGroup, mods: Collection<Mod>) {
             ) {
 
                 ToggleButtons(
-                    onSwitch = { option ->
-                        val mods = state.modpack.mods.modGroups[group]
-                        if (option == Option.ENABLED)
-                            mods?.forEach { state.toggles.setModEnabled(it, true) }
-                        else if (option == Option.DISABLED)
-                            mods?.forEach { state.toggles.setModEnabled(it, false) }
-                    },
+                    onSwitch = { option -> interactions.onToggleGroup(option) },
                     group = group,
-                    mods = mods
+                    mods = group.mods
                 )
 
                 Spacer(Modifier.width(10.dp))
                 Text(
-                    group.name, Modifier.weight(1f),
+                    group.title, Modifier.weight(1f),
                     style = MaterialTheme.typography.bodyLarge,
                 )
                 AnimatedVisibility(modsChanged, enter = fadeIn(), exit = fadeOut()) {
@@ -87,7 +82,9 @@ fun ModGroup(group: ModGroup, mods: Collection<Mod>) {
                 modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp, start = 10.dp)
             ) {
                 Column {
-                    for (mod in mods) ModInfoDisplay(group, mod)
+                    for (mod in group.mods) key(mod.id) {
+                        ModInfoDisplay(group, mod)
+                    }
                 }
             }
         }

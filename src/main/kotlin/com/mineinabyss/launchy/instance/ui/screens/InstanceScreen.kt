@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.instance.ui
+package com.mineinabyss.launchy.instance.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview

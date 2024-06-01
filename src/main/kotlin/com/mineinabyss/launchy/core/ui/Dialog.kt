@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.core.ui
 
-import com.mineinabyss.launchy.config.data.GameInstanceConfig
+import com.mineinabyss.launchy.instance.data.GameInstanceConfig
 
 sealed interface Dialog {
     object None : Dialog

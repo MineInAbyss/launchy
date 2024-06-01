@@ -1,7 +1,6 @@
 package com.mineinabyss.launchy.instance.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
@@ -10,27 +9,21 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowScope
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 
 @Composable
-fun BoxScope.BackgroundImage(windowScope: WindowScope) {
-    val pack = LocalGameInstanceState
-    val background by remember { pack.instance.config.getBackgroundAsState() }
-    AnimatedVisibility(background != null, enter = fadeIn(), exit = fadeOut()) {
-        if (background == null) return@AnimatedVisibility
+fun BoxScope.BackgroundImage(painter: BitmapPainter?, windowScope: WindowScope) {
+    AnimatedVisibility(painter != null, enter = fadeIn(), exit = fadeOut()) {
+        if (painter == null) return@AnimatedVisibility
         windowScope.WindowDraggableArea {
             Image(
-                painter = background!!,
+                painter = painter!!,
                 contentDescription = "Modpack background",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -74,22 +67,3 @@ fun BoxScope.SlightBackgroundTint(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-fun LogoLarge(modifier: Modifier) {
-    LocalLaunchyState
-    val pack = LocalGameInstanceState
-    val painter by remember { pack.instance.config.getLogoAsState() }
-    AnimatedVisibility(
-        painter != null,
-        enter = fadeIn() + expandVertically(clip = false) + fadeIn(),
-        modifier = Modifier.widthIn(0.dp, 500.dp).then(modifier)
-    ) {
-        if (painter == null) return@AnimatedVisibility
-        Image(
-            painter = painter!!,
-            contentDescription = "Modpack logo",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillWidth
-        )
-    }
-}

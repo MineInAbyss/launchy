@@ -20,11 +20,11 @@ import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
 import com.mineinabyss.launchy.core.ui.components.LeftSidebar
 import com.mineinabyss.launchy.core.ui.dialogs.SelectJVMDialog
 import com.mineinabyss.launchy.core.ui.theme.currentHue
-import com.mineinabyss.launchy.instance.data.GameInstanceState
-import com.mineinabyss.launchy.instance.ui.InstanceScreen
-import com.mineinabyss.launchy.instance.ui.InstanceSettingsScreen
+import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.instance.ui.components.SlightBackgroundTint
-import com.mineinabyss.launchy.instance.ui.components.settings.InfoBarProperties
+import com.mineinabyss.launchy.instance.ui.components.settings.infobar.InfoBarProperties
+import com.mineinabyss.launchy.instance.ui.screens.InstanceScreen
+import com.mineinabyss.launchy.instance.ui.screens.InstanceSettingsScreen
 import com.mineinabyss.launchy.instance_creation.ui.NewInstance
 import com.mineinabyss.launchy.instance_list.ui.HomeScreen
 import com.mineinabyss.launchy.settings.ui.SettingsScreen

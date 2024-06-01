@@ -7,7 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
-import com.mineinabyss.launchy.core.data.Downloader
+import com.mineinabyss.launchy.downloads.data.Downloader
 import com.mineinabyss.launchy.util.Dirs
 import com.mineinabyss.launchy.util.serializers.UUIDSerializer
 import kotlinx.coroutines.CoroutineScope

@@ -11,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.config.data.GameInstance
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
 
 @Composable
-fun InstanceList(title: String, packs: List<GameInstance>) {
+fun InstanceList(title: String, packs: List<GameInstanceDataSource>) {
     val state = LocalLaunchyState
     Column {
 //        var showAll by remember { mutableStateOf(false) }

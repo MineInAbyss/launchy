@@ -1,11 +1,11 @@
 package com.mineinabyss.launchy.instance_list.data
 
-import com.mineinabyss.launchy.config.data.GameInstance
-import com.mineinabyss.launchy.config.data.GameInstanceConfig
-import com.mineinabyss.launchy.core.data.Downloader
 import com.mineinabyss.launchy.core.ui.LaunchyState
 import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.downloads.data.Downloader
+import com.mineinabyss.launchy.instance.data.GameInstanceConfig
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
 import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.Dirs
 import com.mineinabyss.launchy.util.InProgressTask
@@ -15,7 +15,7 @@ import kotlin.io.path.*
 
 object Instances {
     @OptIn(ExperimentalPathApi::class)
-    fun GameInstance.delete(state: LaunchyState, deleteDotMinecraft: Boolean) {
+    fun GameInstanceDataSource.delete(state: LaunchyState, deleteDotMinecraft: Boolean) {
         state.gameInstances.remove(this)
         state.runTask("deleteInstance", InProgressTask("Deleting instance ${config.name}")) {
             AppDispatchers.IO.launch {
@@ -25,7 +25,7 @@ object Instances {
         }
     }
 
-    fun GameInstance.updateInstance(
+    fun GameInstanceDataSource.updateInstance(
         state: LaunchyState,
         onSuccess: () -> Unit = {},
     ) {

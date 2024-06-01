@@ -3,15 +3,15 @@ package com.mineinabyss.launchy.core.ui
 import androidx.compose.runtime.*
 import com.mineinabyss.launchy.auth.ui.ProfileState
 import com.mineinabyss.launchy.config.data.Config
-import com.mineinabyss.launchy.config.data.GameInstance
-import com.mineinabyss.launchy.instance.data.GameInstanceState
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.util.InProgressTask
 import java.util.*
 
 class LaunchyState(
     // Config should never be mutated unless it also updates UI state
     private val config: Config,
-    private val instances: List<GameInstance>
+    private val instances: List<GameInstanceDataSource>
 ) {
     val profile = ProfileState(config)
     var instanceState: GameInstanceState? by mutableStateOf(null)
@@ -22,14 +22,14 @@ class LaunchyState(
         putAll(config.lastPlayedMap)
     }
 
-    val gameInstances = mutableStateListOf<GameInstance>().apply {
+    val gameInstances = mutableStateListOf<GameInstanceDataSource>().apply {
         addAll(instances)
     }
 
     val inProgressTasks = mutableStateMapOf<String, InProgressTask>()
 
-    fun processFor(instance: GameInstance): Process? = launchedProcesses[instance.minecraftDir.toString()]
-    fun setProcessFor(instance: GameInstance, process: Process?) {
+    fun processFor(instance: GameInstanceDataSource): Process? = launchedProcesses[instance.minecraftDir.toString()]
+    fun setProcessFor(instance: GameInstanceDataSource, process: Process?) {
         if (process == null) launchedProcesses.remove(instance.minecraftDir.toString())
         else launchedProcesses[instance.minecraftDir.toString()] = process
     }

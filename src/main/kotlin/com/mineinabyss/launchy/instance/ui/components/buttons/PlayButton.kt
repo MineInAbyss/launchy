@@ -16,14 +16,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.config.data.GameInstance
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.components.PrimaryButtonColors
 import com.mineinabyss.launchy.core.ui.components.SecondaryButtonColors
 import com.mineinabyss.launchy.core.ui.dialog
 import com.mineinabyss.launchy.downloads.data.ModDownloader.startInstall
-import com.mineinabyss.launchy.instance.data.GameInstanceState
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
 import com.mineinabyss.launchy.instance.data.Launcher
+import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.instance_list.data.Instances.updateInstance
 import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.AppDispatchers.launchOrShowDialog
@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun PlayButton(
     hideText: Boolean = false,
-    instance: GameInstance,
+    instance: GameInstanceDataSource,
     modifier: Modifier = Modifier,
     getModpackState: suspend () -> GameInstanceState?,
 ) {

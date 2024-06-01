@@ -1,7 +1,7 @@
 package com.mineinabyss.launchy.updater.data
 
-import com.mineinabyss.launchy.core.data.Downloader
 import com.mineinabyss.launchy.core.ui.Constants
+import com.mineinabyss.launchy.downloads.data.Downloader
 import com.mineinabyss.launchy.util.Formats
 import io.ktor.client.request.*
 import io.ktor.client.statement.*

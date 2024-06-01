@@ -7,15 +7,11 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 object AppDispatchers {
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val IOContext = Dispatchers.IO.limitedParallelism(10)
-
     /** IO Dispatcher that won't get cancelled when a composable goes off screen. */
-    val IO = CoroutineScope(IOContext)
+    val IO = Dispatchers.IO
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val profileLaunch = CoroutineScope(IOContext.limitedParallelism(1))
-
+    val profileLaunch = CoroutineScope(IO.limitedParallelism(1))
 
     fun CoroutineScope.launchOrShowDialog(
         context: CoroutineContext = EmptyCoroutineContext,

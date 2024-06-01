@@ -12,8 +12,9 @@ data class LaunchyPackFormat(
     val groups: Set<ModGroup>,
     private val modGroups: Map<GroupName, Set<ModConfig>>,
 ) : PackFormat {
-    override fun toGenericMods(downloadsDir: Path): Mods {
-        return Mods(modGroups
+    override fun toGenericMods(downloadsDir: Path): InstanceModList {
+        return InstanceModList(
+            modGroups
             .mapKeys { (name, _) -> groups.single { it.name == name } }
             .mapValues { (_, mods) ->
                 mods.map {

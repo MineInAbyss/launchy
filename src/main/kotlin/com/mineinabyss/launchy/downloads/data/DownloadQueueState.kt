@@ -1,16 +1,16 @@
 package com.mineinabyss.launchy.downloads.data
 
 import androidx.compose.runtime.*
-import com.mineinabyss.launchy.config.data.DownloadInfo
-import com.mineinabyss.launchy.config.data.InstanceUserConfig
-import com.mineinabyss.launchy.instance.data.ModTogglesState
+import com.mineinabyss.launchy.instance.data.DownloadInfo
+import com.mineinabyss.launchy.instance.data.InstanceUserConfig
 import com.mineinabyss.launchy.instance.data.Modpack
+import com.mineinabyss.launchy.instance.ui.InstanceViewModel
 import com.mineinabyss.launchy.util.ModID
 
 class DownloadQueueState(
     private val userConfig: InstanceUserConfig,
     val modpack: Modpack,
-    val toggles: ModTogglesState
+    val toggles: InstanceViewModel
 ) {
     /** Live mod download info, including mods that have been removed from the latest modpack version. */
     val modDownloadInfo = mutableStateMapOf<ModID, DownloadInfo>().apply {

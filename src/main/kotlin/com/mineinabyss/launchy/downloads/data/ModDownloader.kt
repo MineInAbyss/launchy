@@ -1,13 +1,12 @@
 package com.mineinabyss.launchy.downloads.data
 
-import com.mineinabyss.launchy.config.data.DownloadInfo
-import com.mineinabyss.launchy.config.data.HashCheck
-import com.mineinabyss.launchy.core.data.Downloader
 import com.mineinabyss.launchy.core.ui.LaunchyState
-import com.mineinabyss.launchy.instance.data.GameInstanceState
+import com.mineinabyss.launchy.instance.data.DownloadInfo
+import com.mineinabyss.launchy.instance.data.HashCheck
 import com.mineinabyss.launchy.instance.data.InstanceModLoaders
 import com.mineinabyss.launchy.instance.data.Launcher
 import com.mineinabyss.launchy.instance.data.Mod
+import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.util.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

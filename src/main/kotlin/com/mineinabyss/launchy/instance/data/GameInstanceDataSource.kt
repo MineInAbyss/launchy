@@ -1,24 +1,28 @@
-package com.mineinabyss.launchy.config.data
+package com.mineinabyss.launchy.instance.data
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.res.loadImageBitmap
 import com.charleskorn.kaml.encodeToStream
-import com.mineinabyss.launchy.core.data.Downloader
 import com.mineinabyss.launchy.core.ui.LaunchyState
-import com.mineinabyss.launchy.instance.data.GameInstanceState
+import com.mineinabyss.launchy.downloads.data.Downloader
+import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.util.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.nio.file.Path
 import kotlin.io.path.*
 
-class GameInstance(
+class GameInstanceDataSource(
     val configDir: Path,
+    val config: GameInstanceConfig,
 ) {
     val instanceFile = configDir / "instance.yml"
-    val config: GameInstanceConfig = GameInstanceConfig.read(instanceFile).getOrThrow()
-
     val overridesDir = configDir / "overrides"
+    val imageLoaderDispatcher = Dispatchers.IO.limitedParallelism(1)
 
     val minecraftDir = config.overrideMinecraftDir?.let { Path(it) } ?: Dirs.modpackDir(configDir.name)
 
@@ -31,6 +35,9 @@ class GameInstance(
     var updatesAvailable by mutableStateOf(false)
     var enabled: Boolean by mutableStateOf(true)
 
+    suspend fun loadModList(): InstanceModList {
+        TODO()
+    }
     suspend fun createModpackState(state: LaunchyState, awaitUpdatesCheck: Boolean = false): GameInstanceState? {
         val userConfig = InstanceUserConfig.load(userConfigFile).getOrNull() ?: InstanceUserConfig()
 
@@ -45,9 +52,9 @@ class GameInstance(
         val cloudUrl = config.cloudInstanceURL
         if (cloudUrl != null) {
             AppDispatchers.IO.launch {
-                val result = Downloader.checkUpdates(this@GameInstance, cloudUrl)
+                val result = Downloader.checkUpdates(this@GameInstanceDataSource, cloudUrl)
                 if (result !is UpdateResult.UpToDate) updatesAvailable = true
-            }.also { if(awaitUpdatesCheck) it.join() }
+            }.also { if (awaitUpdatesCheck) it.join() }
         }
         return GameInstanceState(this, modpack, userConfig)
     }
@@ -72,20 +79,38 @@ class GameInstance(
                 cloud.config.copy(cloudInstanceURL = cloud.url),
                 (instanceDir / "instance.yml").outputStream()
             )
-            val instance = GameInstance(instanceDir)
+            val instance = GameInstanceDataSource(instanceDir)
             Downloader.saveHeaders(instance, cloud.url, cloud.headers)
             state.gameInstances += instance
         }
+    }
 
-        fun readAll(rootDir: Path): List<GameInstance> {
-            return rootDir
-                .listDirectoryEntries()
-                .filter { it.isDirectory() }
-                .mapNotNull {
-                    runCatching { GameInstance(it) }
-                        .onFailure { it.printStackTrace() }
-                        .getOrNull()
-                }
-        }
+    private suspend fun loadBackground() {
+        runCatching {
+            Downloader.download(config.backgroundURL, config.backgroundPath, Downloader.Options(overwrite = false))
+            val painter = BitmapPainter(loadImageBitmap(config.backgroundPath.inputStream()))
+            cachedBackground = painter
+        }.onFailure { it.printStackTrace() }
+    }
+
+    private suspend fun loadLogo() {
+        runCatching {
+            Downloader.download(config.logoURL, config.logoPath, Downloader.Options(overwrite = false))
+            val painter = BitmapPainter(loadImageBitmap(config.logoPath.inputStream()))
+            cachedLogo = painter
+        }.onFailure { it.printStackTrace() }
+    }
+
+    private var cachedBackground: BitmapPainter? = null
+    private var cachedLogo: BitmapPainter? = null
+
+    suspend fun getBackground() = withContext(imageLoaderDispatcher) {
+        if (cachedBackground == null) loadLogo()
+        cachedBackground
+    }
+
+    suspend fun getLogo(): BitmapPainter? = withContext(imageLoaderDispatcher) {
+        if (cachedLogo == null) loadLogo()
+        cachedLogo
     }
 }

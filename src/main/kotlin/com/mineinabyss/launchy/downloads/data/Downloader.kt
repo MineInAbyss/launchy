@@ -1,7 +1,7 @@
-package com.mineinabyss.launchy.core.data
+package com.mineinabyss.launchy.downloads.data
 
-import com.mineinabyss.launchy.config.data.GameInstance
 import com.mineinabyss.launchy.core.ui.LaunchyState
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
 import com.mineinabyss.launchy.util.*
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -34,12 +34,12 @@ object Downloader {
                 headers["Content-Length"]?.toLongOrNull() ?: 0
             )
 
-            fun fileFor(instance: GameInstance, url: String) =
+            fun fileFor(instance: GameInstanceDataSource, url: String) =
                 Dirs.cacheDir(instance) / "${urlToFileName(url)}.header"
         }
     }
 
-    suspend fun checkUpdates(instance: GameInstance, url: String): UpdateResult {
+    suspend fun checkUpdates(instance: GameInstanceDataSource, url: String): UpdateResult {
         val headers = ModifyHeaders.of(httpClient.head(url).headers)
         val cache = headers.toCacheString()
         val cacheFile = ModifyHeaders.fileFor(instance, url)
@@ -50,7 +50,7 @@ object Downloader {
         }
     }
 
-    fun saveHeaders(instance: GameInstance, url: String, headers: ModifyHeaders) {
+    fun saveHeaders(instance: GameInstanceDataSource, url: String, headers: ModifyHeaders) {
         ModifyHeaders.fileFor(instance, url).createParentDirectories().apply {
             deleteIfExists()
             createFile()
@@ -184,6 +184,6 @@ object Downloader {
         val overwrite: Boolean = true,
         val whenChanged: () -> Unit = {},
         val onProgressUpdate: (progress: Progress) -> Unit = {},
-        val saveModifyHeadersFor: GameInstance? = null,
+        val saveModifyHeadersFor: GameInstanceDataSource? = null,
     )
 }

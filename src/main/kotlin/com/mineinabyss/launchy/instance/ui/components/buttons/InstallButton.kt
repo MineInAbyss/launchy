@@ -8,14 +8,19 @@ import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.core.ui.components.OutlinedRedButton
 import com.mineinabyss.launchy.core.ui.components.PrimaryButton
 import com.mineinabyss.launchy.downloads.data.ModDownloader.startInstall
+import com.mineinabyss.launchy.instance.ui.InstallState
+import com.mineinabyss.launchy.instance.ui.InstanceViewModel
 import com.mineinabyss.launchy.util.AppDispatchers
 import kotlinx.coroutines.launch
 
@@ -34,32 +39,28 @@ fun RetryFailedButton(enabled: Boolean) {
         Text("Retry ${packState.queued.failures.size} failed downloads")
     }
 }
+
 @Composable
-fun InstallButton(enabled: Boolean, modifier: Modifier = Modifier) {
-    val state = LocalLaunchyState
-    val packState = LocalGameInstanceState
+fun InstallButton(
+    modifier: Modifier = Modifier,
+    viewModel: InstanceViewModel = viewModel(),
+) {
+    val state by viewModel.installState.collectAsState()
     PrimaryButton(
-        enabled = enabled,
-        onClick = {
-            AppDispatchers.profileLaunch.launch {
-                packState.startInstall(state, ignoreCachedCheck = true)
-            }
-        },
+        enabled = state == InstallState.Queued,
+        onClick = { viewModel.installMods() },
         modifier = modifier.width(150.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Rounded.Download, "Download")
-            val queued = packState.queued
             AnimatedVisibility(true, Modifier.animateContentSize()) {
-                val isDownloading = packState.downloads.isDownloading
-                InstallTextAnimatedVisibility(queued.areOperationsQueued && !isDownloading) {
-                    Text("Install")
+                val text = when (state) {
+                    InstallState.Queued, InstallState.Error -> "Install"
+                    InstallState.AllInstalled -> "Installed"
+                    InstallState.InProgress -> "Installing"
                 }
-                InstallTextAnimatedVisibility(!queued.areOperationsQueued && !isDownloading) {
-                    Text("Installed")
-                }
-                InstallTextAnimatedVisibility(isDownloading) {
-                    Text("Installing")
+                AnimatedContent(text) {
+                    Text(it)
                 }
             }
         }

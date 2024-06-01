@@ -5,12 +5,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.data.Downloader
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
 import com.mineinabyss.launchy.core.ui.dialog
 import com.mineinabyss.launchy.core.ui.screen
+import com.mineinabyss.launchy.downloads.data.Downloader
 import com.mineinabyss.launchy.util.AppDispatchers
 import kotlinx.coroutines.launch
 

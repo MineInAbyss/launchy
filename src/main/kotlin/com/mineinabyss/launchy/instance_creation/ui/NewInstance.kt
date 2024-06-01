@@ -17,16 +17,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.config.data.GameInstance
-import com.mineinabyss.launchy.config.data.GameInstanceConfig
-import com.mineinabyss.launchy.core.data.Downloader
 import com.mineinabyss.launchy.core.ui.Screen
 import com.mineinabyss.launchy.core.ui.components.AnimatedTab
 import com.mineinabyss.launchy.core.ui.components.ComfyContent
 import com.mineinabyss.launchy.core.ui.components.ComfyTitle
 import com.mineinabyss.launchy.core.ui.components.ComfyWidth
 import com.mineinabyss.launchy.core.ui.screen
-import com.mineinabyss.launchy.instance.ui.InstanceProperties
+import com.mineinabyss.launchy.downloads.data.Downloader
+import com.mineinabyss.launchy.instance.data.GameInstanceConfig
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import com.mineinabyss.launchy.instance.ui.screens.InstanceProperties
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceCard
 import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.Dirs
@@ -42,7 +42,7 @@ val validInstanceNameRegex = Regex("^[a-zA-Z0-9_ ]+$")
 fun NewInstance() {
     val state = LocalLaunchyState
     var selectedTabIndex by remember { mutableStateOf(0) }
-    var importingInstance: GameInstance.CloudInstanceWithHeaders? by remember { mutableStateOf(null) }
+    var importingInstance: GameInstanceDataSource.CloudInstanceWithHeaders? by remember { mutableStateOf(null) }
     Column {
         ComfyWidth {
             PrimaryTabRow(selectedTabIndex = selectedTabIndex) {
@@ -64,7 +64,7 @@ fun NewInstance() {
 }
 
 @Composable
-fun ImportTab(visible: Boolean, onGetInstance: (GameInstance.CloudInstanceWithHeaders) -> Unit = {}) {
+fun ImportTab(visible: Boolean, onGetInstance: (GameInstanceDataSource.CloudInstanceWithHeaders) -> Unit = {}) {
     val state = LocalLaunchyState
     AnimatedTab(visible) {
         Column {
@@ -110,7 +110,7 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstance.CloudInstanceWithHe
                                         }
 
                                         is Downloader.DownloadResult.Success -> {
-                                            GameInstance.CloudInstanceWithHeaders(
+                                            GameInstanceDataSource.CloudInstanceWithHeaders(
                                                 config = GameInstanceConfig.read(downloadPath)
                                                     .showDialogOnError("Failed to read cloud instance")
                                                     .getOrThrow(),
@@ -138,7 +138,7 @@ fun ImportTab(visible: Boolean, onGetInstance: (GameInstance.CloudInstanceWithHe
 }
 
 @Composable
-fun ConfirmImportTab(visible: Boolean, cloudInstance: GameInstance.CloudInstanceWithHeaders?) {
+fun ConfirmImportTab(visible: Boolean, cloudInstance: GameInstanceDataSource.CloudInstanceWithHeaders?) {
     if (cloudInstance == null) return
     val state = LocalLaunchyState
     AnimatedTab(visible) {
@@ -190,7 +190,7 @@ fun ConfirmImportTab(visible: Boolean, cloudInstance: GameInstance.CloudInstance
                                 name = nameText,
                                 overrideMinecraftDir = minecraftDir.takeIf { it?.isNotEmpty() == true }
                             )
-                            GameInstance.createCloudInstance(
+                            GameInstanceDataSource.createCloudInstance(
                                 state, cloudInstance.copy(config = editedConfig)
                             )
                             screen = Screen.Default

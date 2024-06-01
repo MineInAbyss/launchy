@@ -16,12 +16,12 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.mineinabyss.launchy.config.data.Config
-import com.mineinabyss.launchy.config.data.GameInstance
 import com.mineinabyss.launchy.core.ui.LaunchyState
 import com.mineinabyss.launchy.core.ui.Screens
 import com.mineinabyss.launchy.core.ui.TopBarProvider
 import com.mineinabyss.launchy.core.ui.TopBarState
 import com.mineinabyss.launchy.core.ui.theme.AppTheme
+import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
 import com.mineinabyss.launchy.util.Dirs
 import java.awt.Dimension
 
@@ -38,7 +38,7 @@ fun main() {
             Dirs.createDirs()
             Dirs.createConfigFiles()
             val config = Config.read().getOrElse { Config() }
-            val instances = GameInstance.readAll(Dirs.modpackConfigsDir)
+            val instances = GameInstanceDataSource.readAll(Dirs.modpackConfigsDir)
             value = LaunchyState(config, instances)
         }
         val onClose: () -> Unit = {

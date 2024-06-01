@@ -1,8 +1,7 @@
-package com.mineinabyss.launchy.config.data
+package com.mineinabyss.launchy.instance.data
 
 import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.downloads.data.ModDownloader
-import com.mineinabyss.launchy.instance.data.InstanceModLoaders
 import com.mineinabyss.launchy.util.Formats
 import com.mineinabyss.launchy.util.GroupName
 import com.mineinabyss.launchy.util.ModID

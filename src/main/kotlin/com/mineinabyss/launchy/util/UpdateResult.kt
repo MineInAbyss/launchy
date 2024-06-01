@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.util
 
-import com.mineinabyss.launchy.core.data.Downloader
+import com.mineinabyss.launchy.downloads.data.Downloader
 
 sealed interface UpdateResult {
     val headers: Downloader.ModifyHeaders

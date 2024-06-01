@@ -18,15 +18,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.core.ui.Constants
 import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
-import com.mineinabyss.launchy.instance.data.Mod
-import com.mineinabyss.launchy.instance.data.ModGroup
+import com.mineinabyss.launchy.instance.ui.ModGroupUiState
+import com.mineinabyss.launchy.instance.ui.ModUiState
 import com.mineinabyss.launchy.util.Option
 
 @Composable
 fun ToggleButtons(
     onSwitch: (Option) -> Unit,
-    group: ModGroup,
-    mods: Collection<Mod>,
+    group: ModGroupUiState,
+    mods: List<ModUiState>,
 ) {
     val state = LocalGameInstanceState
     val offColor = Color.Transparent

@@ -4,6 +4,6 @@ import java.nio.file.Path
 
 class Modpack(
     val modLoaders: InstanceModLoaders,
-    val mods: Mods,
+    val mods: InstanceModList,
     val overridesPaths: List<Path> = listOf(),
 )
