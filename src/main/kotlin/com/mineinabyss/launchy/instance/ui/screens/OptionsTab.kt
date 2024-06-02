@@ -11,8 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.core.ui.components.ComfyContent
 import com.mineinabyss.launchy.core.ui.components.TitleSmall
 import com.mineinabyss.launchy.core.ui.screens.Screen
@@ -24,9 +22,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun OptionsTab() {
-    val state = LocalLaunchyState
-    val pack = LocalGameInstanceState
-
     ComfyContent(Modifier.padding(16.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             TitleSmall("Mods")

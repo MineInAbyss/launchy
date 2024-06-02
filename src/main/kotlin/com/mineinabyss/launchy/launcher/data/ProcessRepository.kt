@@ -1,13 +1,14 @@
 package com.mineinabyss.launchy.launcher.data
 
-import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import com.mineinabyss.launchy.util.InstanceKey
 
 class ProcessRepository {
-    private val launchedProcesses = mutableMapOf<String, Process>()
+    private val launchedProcesses = mutableMapOf<InstanceKey, Process>()
 
-    fun processFor(instance: GameInstanceDataSource): Process? = launchedProcesses[instance.minecraftDir.toString()]
-    fun setProcessFor(instance: GameInstanceDataSource, process: Process?) {
-        if (process == null) launchedProcesses.remove(instance.minecraftDir.toString())
-        else launchedProcesses[instance.minecraftDir.toString()] = process
+    fun processFor(instance: InstanceKey): Process? = launchedProcesses[instance]
+
+    fun setProcessFor(instance: InstanceKey, process: Process?) {
+        if (process == null) launchedProcesses.remove(instance)
+        else launchedProcesses[instance] = process
     }
 }

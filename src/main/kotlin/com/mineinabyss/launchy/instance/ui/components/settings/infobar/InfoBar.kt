@@ -52,9 +52,11 @@ fun InfoBar(
                 Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH),
                 onClick = { viewModel.installMods() }
             )
-            val failures = queue.failures.isNotEmpty()
-            AnimatedVisibility(failures) {
-                RetryFailedButton(failures)
+            AnimatedVisibility(queue.failures.isNotEmpty()) {
+                RetryFailedButton(
+                    queue.failures.count(),
+                    onClick = { viewModel.installMods(ignoreCachedCheck = true) }
+                )
             }
             val queued = installState as? InstallState.Queued
             val instance by viewModel.instanceUiState.collectAsState()

@@ -70,6 +70,7 @@ class InstanceRepository(
 
     suspend fun fetchPackUpdates(key: InstanceKey) = withContext(AppDispatchers.IO) {
         val instance = _instances.value[key] ?: error("Instance $key not found")
+        //TODO how to pass koin scope here?
         val source = instance.config.source.getDataSource(currentKoinScope())
         val packFormat = instance.config.pack.getFormat()
         if (!source.skip(instance)) {

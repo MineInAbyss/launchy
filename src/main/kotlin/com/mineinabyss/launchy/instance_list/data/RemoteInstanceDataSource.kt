@@ -6,12 +6,14 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-class RemoteInstanceDataSource {
+class RemoteInstanceDataSource(
+    val downloader: Downloader
+) {
     suspend fun getRemoteInstance(
         url: Url
     ): Result<InstanceConfig> = runCatching {
         //TODO cache by headers
-        Downloader.httpClient.get(url).body<InstanceConfig>()
+        downloader.httpClient.get(url).body<InstanceConfig>()
     }
 
     suspend fun fetchUpdatesForInstance(

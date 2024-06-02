@@ -33,8 +33,8 @@ fun ModInfoDisplay(
     mod: ModUiState,
     interactions: ModInteractions,
 ) {
-    val surfaceColor = remember(mod.queueState) { ModQueueState.surfaceColor(mod.queueState) }
-    val infoIcon = remember(mod.queueState) { ModQueueState.infoIcon(mod.queueState) }
+    val surfaceColor = ModQueueState.surfaceColor(mod.queueState)
+    val infoIcon = ModQueueState.infoIcon(mod.queueState)
 
     Surface(
         modifier = Modifier.fillMaxWidth(),

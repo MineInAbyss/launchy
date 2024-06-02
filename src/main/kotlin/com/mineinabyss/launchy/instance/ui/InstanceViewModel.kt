@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mineinabyss.launchy.instance.data.InstanceModel
 import com.mineinabyss.launchy.instance_list.data.InstanceRepository
-import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.ModID
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
 import org.to2mbn.jmccc.mcdownloader.download.Downloader
 
 class InstanceViewModel(
@@ -21,11 +19,10 @@ class InstanceViewModel(
 
     val modsState = currentInstance.mapLatest { instance ->
         if (instance == null) return@mapLatest ModListUiState.Error("No instance selected")
-        withContext(AppDispatchers.IO) {
-            ModListUiState.Loaded(
-                instance.instanceFile
-            )
-        }
+        val pack = instanceRepo
+            .loadPack(instance.key)
+            .getOrElse { return@mapLatest ModListUiState.Error(it.message ?: "Unknown error") }
+        ModListUiState.Loaded(pack)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, ModListUiState.Loading)
 
     val instanceUiState = _instanceUiState.asStateFlow()
@@ -92,7 +89,9 @@ class InstanceViewModel(
         else enabledMods.value -= mod
     }
 
-    fun installMods() {
+    fun installMods(
+        ignoreCachedCheck: Boolean = false,
+    ) {
         TODO()
     }
 

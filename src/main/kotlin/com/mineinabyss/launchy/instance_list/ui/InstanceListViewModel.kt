@@ -14,7 +14,7 @@ class InstanceListViewModel(
 ) : ViewModel() {
     val instances = instanceRepo.instances.combine(instanceRepo.lastPlayed) { inst, lastPlayed ->
         inst.values.sortedBy { lastPlayed[it.key] }
-            .map { (config, dir, key) ->
+            .map { (config, userConfig, dir, key) ->
                 InstanceUiState(
                     title = config.name,
                     description = config.description,
@@ -27,6 +27,7 @@ class InstanceListViewModel(
                     updatesAvailable = false,
                     hue = 0f,
                     key = key,
+                    installedModLoader = userConfig.userAgreedDeps?.fullVersionName,
                 )
             }
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())

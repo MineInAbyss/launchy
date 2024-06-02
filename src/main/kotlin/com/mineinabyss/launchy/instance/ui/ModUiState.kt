@@ -6,6 +6,8 @@ import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.Update
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.mineinabyss.launchy.instance.data.storage.ModConfig
 import com.mineinabyss.launchy.util.ModID
@@ -32,20 +34,26 @@ enum class ModQueueState {
     NONE;
 
     companion object {
-        fun surfaceColor(state: ModQueueState) = when (state) {
-            RETRY_DOWNLOAD -> MaterialTheme.colorScheme.error
-            DELETE -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
-            INSTALL -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)
-            UPDATE -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.1f)
-            NONE -> MaterialTheme.colorScheme.surface
+        @Composable
+        fun surfaceColor(state: ModQueueState) = remember(state) {
+            when (state) {
+                RETRY_DOWNLOAD -> MaterialTheme.colorScheme.error
+                DELETE -> MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.25f)
+                INSTALL -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.25f)
+                UPDATE -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.1f)
+                NONE -> MaterialTheme.colorScheme.surface
+            }
         }
 
-        fun infoIcon(state: ModQueueState): ImageVector? = when (state) {
-            RETRY_DOWNLOAD -> Icons.Rounded.Error
-            DELETE -> Icons.Rounded.Delete
-            INSTALL -> Icons.Rounded.Download
-            UPDATE -> Icons.Rounded.Update
-            NONE -> null
+        @Composable
+        fun infoIcon(state: ModQueueState): ImageVector? = remember(state) {
+            when (state) {
+                RETRY_DOWNLOAD -> Icons.Rounded.Error
+                DELETE -> Icons.Rounded.Delete
+                INSTALL -> Icons.Rounded.Download
+                UPDATE -> Icons.Rounded.Update
+                NONE -> null
+            }
         }
     }
 }

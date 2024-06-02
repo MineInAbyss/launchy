@@ -23,7 +23,10 @@ class LocalInstancesDataSource(
         }
 
     fun readInstance(instanceFile: Path): Result<InstanceModel> = runCatching {
-        InstanceModel(Formats.yaml.decodeFromStream<InstanceConfig>(instanceFile.inputStream()), instanceFile.parent)
+        InstanceModel(
+            Formats.yaml.decodeFromStream<InstanceConfig>(instanceFile.inputStream()),
+            instanceFile.parent
+        )
     }
 
     fun saveInstance(instance: InstanceModel) {

@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.mineinabyss.launchy.instance.data.storage.InstanceConfig
+import com.mineinabyss.launchy.instance.data.storage.InstanceUserConfig
 import com.mineinabyss.launchy.util.Dirs
 import com.mineinabyss.launchy.util.InstanceKey
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,7 @@ import kotlin.io.path.name
 
 data class InstanceModel(
     val config: InstanceConfig,
+    val userConfig: InstanceUserConfig,
     val directory: Path,
     val key: InstanceKey = InstanceKey(directory.name),
 ) {

@@ -3,44 +3,30 @@ package com.mineinabyss.launchy.core.ui.dialogs
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
 import com.mineinabyss.launchy.core.ui.screens.Screen
 import com.mineinabyss.launchy.core.ui.screens.dialog
 import com.mineinabyss.launchy.core.ui.screens.screen
-import com.mineinabyss.launchy.downloads.data.Downloader
-import com.mineinabyss.launchy.util.AppDispatchers
-import kotlinx.coroutines.launch
+import com.mineinabyss.launchy.settings.ui.JVMSettingsViewModel
+import com.mineinabyss.launchy.util.koinViewModel
 
 @Composable
-fun SelectJVMDialog() {
-    val coroutineScope = rememberCoroutineScope()
-    val state = LocalLaunchyState
+fun SelectJVMDialog(
+    jvm: JVMSettingsViewModel = koinViewModel()
+) {
     LaunchyDialog(
         title = { Text("Install java", style = LocalTextStyle.current) },
         onAccept = {
             dialog = Dialog.None
-            AppDispatchers.IO.launch {
-                val jdkPath = runCatching {
-                    Downloader.installJDK(state)
-                }.getOrElse {
-                    dialog = Dialog.Error(
-                        "Failed to install Java",
-                        it.stackTraceToString()
-                    )
-                    return@launch
-                }
-                if (jdkPath != null) {
-                    state.jvm.javaPath = jdkPath
-                    state.saveToConfig()
-                } else {
-                    dialog = Dialog.Error(
-                        "Failed to install Java",
-                        "Please install Java manually and select the path in settings."
-                    )
-                }
+            runCatching {
+                jvm.installJDK()
+            }.getOrElse {
+                dialog = Dialog.Error(
+                    "Failed to install Java",
+                    it.stackTraceToString()
+                )
+                return@LaunchyDialog
             }
         },
         onDecline = { dialog = Dialog.None; screen = Screen.Settings },

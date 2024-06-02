@@ -40,7 +40,7 @@ fun main() = application {
         val viewModel = koinViewModel<LaunchyViewModel>()
         val onClose: () -> Unit = {
             exitApplication()
-            viewModel.saveToConfig()
+//            viewModel.saveToConfig() TODO
         }
 
         Window(
