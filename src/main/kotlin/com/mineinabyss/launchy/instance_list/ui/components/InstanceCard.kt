@@ -11,9 +11,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -21,21 +18,15 @@ import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mineinabyss.launchy.LocalLaunchyState
 import com.mineinabyss.launchy.core.ui.components.Tooltip
-import com.mineinabyss.launchy.core.ui.screens.Screen
-import com.mineinabyss.launchy.core.ui.screens.screen
 import com.mineinabyss.launchy.core.ui.theme.LaunchyColors
-import com.mineinabyss.launchy.core.ui.theme.currentHue
-import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
-import com.mineinabyss.launchy.instance.data.storage.InstanceConfig
+import com.mineinabyss.launchy.instance.ui.InstanceUiState
 import com.mineinabyss.launchy.instance.ui.components.SlightBackgroundTint
 import com.mineinabyss.launchy.instance.ui.components.buttons.PlayButton
+import com.mineinabyss.launchy.instance_list.data.InstanceCardInteractions
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceCardStyle.cardHeight
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceCardStyle.cardPadding
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceCardStyle.cardWidth
-import com.mineinabyss.launchy.util.InProgressTask
-import kotlinx.coroutines.launch
 
 object InstanceCardStyle {
     val cardHeight = 256.dp
@@ -45,37 +36,25 @@ object InstanceCardStyle {
 
 @Composable
 fun InstanceCard(
-    config: InstanceConfig,
-    instance: GameInstanceDataSource? = null,
+    instance: InstanceUiState,
+    interactions: InstanceCardInteractions,
     modifier: Modifier = Modifier
-) = MaterialTheme(
-    colorScheme = LaunchyColors(config.hue).DarkColors
-) {
-    val state = LocalLaunchyState
-    val coroutineScope = rememberCoroutineScope()
-    val background by remember(config) { config.getBackgroundAsState() }
+) = MaterialTheme(colorScheme = LaunchyColors(instance.hue).DarkColors) {
     Card(
-        onClick = {
-            instance ?: return@Card
-            coroutineScope.launch {
-                state.instanceState = instance.createModpackState(state)
-                currentHue = instance.config.hue
-                screen = Screen.Instance
-            }
-        },
-        enabled = instance?.enabled == true,
+        onClick = { interactions.onOpen() },
+        enabled = instance.enabled,
         modifier = modifier.height(cardHeight).width(cardWidth),
     ) {
         Box(Modifier.fillMaxSize()) {
             androidx.compose.animation.AnimatedVisibility(
-                visible = background != null,
+                visible = instance.background != null,
                 enter = fadeIn(),
                 modifier = Modifier.fillMaxSize()
             ) {
-                if (background != null) Image(
-                    painter = background!!,
+                if (instance.background != null) Image(
+                    painter = instance.background,
                     colorFilter =
-                    if (instance?.enabled == false) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
+                    if (instance.enabled == false) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
                     else null,
                     contentDescription = "Pack background image",
                     contentScale = ContentScale.Crop,
@@ -84,7 +63,7 @@ fun InstanceCard(
             }
             SlightBackgroundTint()
 
-            if (config.cloudInstanceURL != null) TooltipArea(
+            if (instance.isCloudInstance) TooltipArea(
                 tooltip = { Tooltip("Cloud modpack") },
                 modifier = Modifier.align(Alignment.TopEnd).padding(cardPadding + 4.dp).size(24.dp),
             ) {
@@ -98,24 +77,27 @@ fun InstanceCard(
             ) {
                 Column(Modifier.weight(1f, true)) {
                     Text(
-                        config.name,
+                        instance.title,
                         style = MaterialTheme.typography.headlineMedium,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
                     Text(
-                        config.description,
+                        instance.description,
                         style = MaterialTheme.typography.bodyMedium,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
                 }
-                if (instance?.enabled == true)
-                    PlayButton(hideText = true, instance, Modifier.weight(1f, false)) {
-                        state.runTask("modpackState", InProgressTask("Checking for pack updates...")) {
-                            instance.createModpackState(state, awaitUpdatesCheck = true)
+                if (instance.enabled)
+                    PlayButton(
+                        hideText = true,
+                        instance,
+                        Modifier.weight(1f, false),
+                        onClick = {
+                            interactions.onPlay()
                         }
-                    }
+                    )
             }
         }
     }

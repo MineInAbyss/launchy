@@ -25,6 +25,7 @@ import kotlin.io.path.inputStream
 class ProfileViewModel(
     private val profileRepository: ProfileRepository,
     private val tasks: TasksRepository,
+    private val downloader: Downloader,
 ) : ViewModel() {
     private val _profile = MutableStateFlow<ProfileUiState?>(null)
 
@@ -63,7 +64,7 @@ class ProfileViewModel(
 
     private suspend fun getAvatar(uuid: UUID): Result<BitmapPainter> = withContext(AppDispatchers.IO) {
         runCatching {
-            Downloader.downloadAvatar(uuid, Downloader.Options(overwrite = false))
+            downloader.downloadAvatar(uuid, Downloader.Options(overwrite = false))
             BitmapPainter(
                 loadImageBitmap(Dirs.avatar(uuid).inputStream()),
                 filterQuality = FilterQuality.None

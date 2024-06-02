@@ -4,7 +4,7 @@ import com.mineinabyss.launchy.auth.data.ProfileRepository
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.LaunchyUiState
 import com.mineinabyss.launchy.core.ui.screens.dialog
-import com.mineinabyss.launchy.instance.data.InstanceModLoaders
+import com.mineinabyss.launchy.instance.data.ModLoaderModel
 import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.util.AppDispatchers
 import kotlinx.coroutines.Job
@@ -92,7 +92,7 @@ object Launcher {
     }
 
     fun download(
-        modLoaders: InstanceModLoaders,
+        modLoaders: ModLoaderModel,
         minecraftDir: Path,
         onStartDownload: (String) -> Unit = {},
         onFinishDownload: (String) -> Unit = {}

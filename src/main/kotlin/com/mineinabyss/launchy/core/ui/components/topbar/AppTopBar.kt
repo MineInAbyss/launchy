@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.core.ui.components
+package com.mineinabyss.launchy.core.ui.components.topbar
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideIn
@@ -10,37 +10,18 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.CropSquare
 import androidx.compose.material.icons.rounded.Minimize
-import androidx.compose.material.icons.rounded.RocketLaunch
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowPlacement
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.Constants
+import com.mineinabyss.launchy.core.ui.LocalUiState
 import com.mineinabyss.launchy.core.ui.TopBarState
-
-@Composable
-fun WindowButton(icon: ImageVector, onClick: () -> Unit) {
-    Surface(
-        onClick = onClick,
-        modifier = Modifier.fillMaxHeight().width(44.dp),
-        contentColor = Color.White,
-        color = Color.Transparent
-    ) {
-        Icon(icon, "", Modifier.padding(10.dp))
-    }
-}
+import com.mineinabyss.launchy.core.ui.components.BetterWindowDraggableArea
 
 @Composable
 fun AppTopBar(
@@ -50,8 +31,8 @@ fun AppTopBar(
     showBackButton: Boolean,
     onBackButtonClicked: (() -> Unit),
 ) {
-    val appState = LocalLaunchyState
-    val forceFullscreen = appState.ui.fullscreen
+    val ui = LocalUiState.current
+    val forceFullscreen = ui.fullscreen
     LaunchedEffect(forceFullscreen) {
         when (forceFullscreen) {
             true -> state.windowState.placement = WindowPlacement.Fullscreen
@@ -119,36 +100,3 @@ fun AppTopBar(
     }
 }
 
-@Composable
-fun LaunchyTitle() {
-    Row {
-        Icon(
-            Icons.Rounded.RocketLaunch,
-            contentDescription = "Launchy",
-            tint = MaterialTheme.colorScheme.primary
-        )
-        Text(
-            "Launchy - ${Constants.APP_VERSION ?: "dev"}",
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.primary
-        )
-    }
-}
-
-@Composable
-fun LaunchyHeadline() {
-    Row {
-        Icon(
-            Icons.Rounded.RocketLaunch,
-            contentDescription = "Launchy",
-            tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(32.dp)
-        )
-        Text(
-            "Launchy",
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.primary,
-            style = MaterialTheme.typography.headlineLarge
-        )
-    }
-}

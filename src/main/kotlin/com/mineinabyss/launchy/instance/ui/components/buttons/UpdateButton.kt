@@ -7,18 +7,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.mineinabyss.launchy.LocalLaunchyState
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
-import com.mineinabyss.launchy.instance_list.data.InstanceRepository.updateInstance
 
 @Composable
-fun UpdateButton() {
-    val state = LocalLaunchyState
-    val pack = LocalGameInstanceState
+fun UpdateButton(onClick: () -> Unit = {}) {
     Box {
-        Button(onClick = {
-            pack.instance.updateInstance(state)
-        }) {
+        Button(onClick) {
             Icon(Icons.Rounded.Update, contentDescription = "Update")
             Text("Update Available")
         }

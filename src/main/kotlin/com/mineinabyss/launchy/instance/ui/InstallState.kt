@@ -5,7 +5,7 @@ import com.mineinabyss.launchy.util.ModID
 sealed interface InstallState {
     data object InProgress : InstallState
     data class Queued(
-        val modLoaderUpdateAvailable: Boolean,
+        val modLoaderChange: String?,
         val install: List<ModID>,
         val update: List<ModID>,
         val remove: List<ModID>,

@@ -1,7 +1,8 @@
 package com.mineinabyss.launchy.instance.data.storage
 
 import androidx.compose.runtime.Immutable
-import com.mineinabyss.launchy.downloads.data.source.PackSource
+import com.mineinabyss.launchy.downloads.data.formats.SerializedPackFormat
+import com.mineinabyss.launchy.downloads.data.sources.SerializedDownloadSource
 import com.mineinabyss.launchy.util.Dirs
 import com.mineinabyss.launchy.util.urlToFileName
 import kotlinx.serialization.Serializable
@@ -15,7 +16,8 @@ data class InstanceConfig(
     val description: String,
     val backgroundURL: String,
     val logoURL: String,
-    val source: PackSource,
+    val source: SerializedDownloadSource,
+    val pack: SerializedPackFormat,
     val hue: Float = 0f,
     val cloudInstanceURL: String? = null,
     val overrideMinecraftDir: String? = null,

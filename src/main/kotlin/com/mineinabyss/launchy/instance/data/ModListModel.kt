@@ -1,11 +1,12 @@
 package com.mineinabyss.launchy.instance.data
 
 import androidx.compose.runtime.Immutable
+import com.mineinabyss.launchy.downloads.data.formats.Mod
 import com.mineinabyss.launchy.util.GroupName
 import com.mineinabyss.launchy.util.ModID
 
 @Immutable
-data class InstanceModList(
+data class ModListModel(
     val modGroups: Map<ModGroup, Set<Mod>>,
 ) {
     val groups = modGroups.keys
@@ -20,13 +21,13 @@ data class InstanceModList(
     fun getModById(id: ModID): Mod? = idToMod[id]
     fun getGroup(name: GroupName): ModGroup? = nameToGroup[name]
 
-//    companion object {
-//        const val VERSIONS_URL = "https://raw.githubusercontent.com/MineInAbyss/launchy/master/versions.yml"
-//
-//        fun withSingleGroup(mods: Collection<Mod>) = InstanceModList(
-//            modGroups = mapOf(
-//                ModGroup("Default", forceEnabled = true) to mods.toSet()
-//            )
-//        )
-//    }
+    companion object {
+        const val VERSIONS_URL = "https://raw.githubusercontent.com/MineInAbyss/launchy/master/versions.yml"
+
+        fun withSingleGroup(mods: Collection<Mod>) = ModListModel(
+            modGroups = mapOf(
+                ModGroup("Default", forceEnabled = true) to mods.toSet()
+            )
+        )
+    }
 }

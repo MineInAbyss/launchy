@@ -3,7 +3,7 @@ package com.mineinabyss.launchy.downloads.data
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
-import com.mineinabyss.launchy.instance.data.Mod
+import com.mineinabyss.launchy.downloads.data.formats.Mod
 import com.mineinabyss.launchy.util.Progress
 
 class DownloadState {

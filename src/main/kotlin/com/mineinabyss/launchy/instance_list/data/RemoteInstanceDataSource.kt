@@ -12,7 +12,6 @@ class RemoteInstanceDataSource {
     ): Result<InstanceConfig> = runCatching {
         //TODO cache by headers
         Downloader.httpClient.get(url).body<InstanceConfig>()
-//        source.read(newCloudInstancePath).onSuccess { cloudConfig ->
     }
 
     suspend fun fetchUpdatesForInstance(

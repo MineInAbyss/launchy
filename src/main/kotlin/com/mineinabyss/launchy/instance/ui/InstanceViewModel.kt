@@ -1,34 +1,35 @@
 package com.mineinabyss.launchy.instance.ui
 
 import androidx.lifecycle.ViewModel
-import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import androidx.lifecycle.viewModelScope
+import com.mineinabyss.launchy.instance.data.InstanceModel
+import com.mineinabyss.launchy.instance_list.data.InstanceRepository
 import com.mineinabyss.launchy.util.AppDispatchers
 import com.mineinabyss.launchy.util.ModID
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import org.to2mbn.jmccc.mcdownloader.download.Downloader
 
 class InstanceViewModel(
     val downloader: Downloader,
+    val instanceRepo: InstanceRepository,
 ) : ViewModel() {
-    private val currentInstance = MutableStateFlow<GameInstanceDataSource?>(null)
-    private val _modsState = MutableStateFlow<ModListUiState>(ModListUiState.Loading)
+    private val currentInstance = MutableStateFlow<InstanceModel?>(null)
+
     private val _installState = MutableStateFlow<InstallState>(InstallState.InProgress)
     private val _instanceUiState = MutableStateFlow<InstanceUiState?>(null)
 
-    val modsState = _modsState.asStateFlow()
+    val modsState = currentInstance.mapLatest { instance ->
+        if (instance == null) return@mapLatest ModListUiState.Error("No instance selected")
+        withContext(AppDispatchers.IO) {
+            ModListUiState.Loaded(
+                instance.instanceFile
+            )
+        }
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, ModListUiState.Loading)
+
     val instanceUiState = _instanceUiState.asStateFlow()
     val installState = _installState.asStateFlow()
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val modList = currentInstance.mapLatest {
-        withContext(AppDispatchers.IO) {
-            it?.loadModList()
-        }
-    }
 
     //TODO read
     val userInstalledMods = MutableStateFlow<ModGroupUiState?>(null)
@@ -142,4 +143,6 @@ class InstanceViewModel(
     fun groupInteractionsFor(id: String): ModGroupInteractions = TODO()
 
     fun modInteractionsFor(id: ModID): ModInteractions = TODO()
+
+    fun buttonInteractions(): ButtonInteractions = TODO()
 }

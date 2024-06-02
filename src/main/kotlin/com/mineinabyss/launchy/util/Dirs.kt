@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.util
 
-import com.mineinabyss.launchy.instance.data.GameInstanceDataSource
+import com.mineinabyss.launchy.instance.data.InstanceModel
 import java.util.*
 import kotlin.io.path.*
 
@@ -25,7 +25,7 @@ object Dirs {
         OS.LINUX -> home / ".config"
     } / "mineinabyss"
 
-    fun cacheDir(instance: GameInstanceDataSource) = instance.configDir / "cache"
+    fun cacheDir(instance: InstanceModel) = instance.directory / "cache"
 
     val imageCache = config / "cache" / "images"
 

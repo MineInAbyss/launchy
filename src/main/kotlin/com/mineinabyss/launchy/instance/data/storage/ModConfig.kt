@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.instance.data.storage
 
-import com.mineinabyss.launchy.instance.data.formats.ModDownloadPath
+import com.mineinabyss.launchy.downloads.data.formats.ModDownloadPath
 import com.mineinabyss.launchy.util.ModID
 import kotlinx.serialization.Serializable
 

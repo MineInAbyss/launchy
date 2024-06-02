@@ -1,10 +1,10 @@
 package com.mineinabyss.launchy.downloads.data
 
 import com.mineinabyss.launchy.core.ui.LaunchyUiState
+import com.mineinabyss.launchy.downloads.data.formats.Mod
 import com.mineinabyss.launchy.instance.data.DownloadInfo
 import com.mineinabyss.launchy.instance.data.HashCheck
-import com.mineinabyss.launchy.instance.data.InstanceModLoaders
-import com.mineinabyss.launchy.instance.data.Mod
+import com.mineinabyss.launchy.instance.data.ModLoaderModel
 import com.mineinabyss.launchy.instance.ui.GameInstanceState
 import com.mineinabyss.launchy.launcher.data.Launcher
 import com.mineinabyss.launchy.util.*
@@ -17,7 +17,7 @@ import kotlin.io.path.*
 
 object ModDownloader {
 
-    suspend fun GameInstanceState.installMCAndModLoaders(state: LaunchyUiState, modLoaders: InstanceModLoaders) {
+    suspend fun GameInstanceState.installMCAndModLoaders(state: LaunchyUiState, modLoaders: ModLoaderModel) {
         state.runTask(Tasks.installModLoadersId, InProgressTask("Installing ${modLoaders.fullVersionName}")) {
             Launcher.download(
                 modLoaders,
@@ -36,7 +36,7 @@ object ModDownloader {
         data object Failed : DownloadResult
     }
 
-    suspend fun GameInstanceState.download(mod: Mod, overwrite: Boolean): DownloadResult {
+    suspend fun download(mod: Mod, overwrite: Boolean): DownloadResult {
         val name = mod.info.name
         try {
             println("Starting download of $name")

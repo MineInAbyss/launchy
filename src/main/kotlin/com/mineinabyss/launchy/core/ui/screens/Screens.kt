@@ -17,20 +17,22 @@ import com.mineinabyss.launchy.auth.ui.AuthDialog
 import com.mineinabyss.launchy.core.ui.Dialog
 import com.mineinabyss.launchy.core.ui.LocalUiState
 import com.mineinabyss.launchy.core.ui.TopBar
-import com.mineinabyss.launchy.core.ui.components.AppTopBar
 import com.mineinabyss.launchy.core.ui.components.InProgressTasksIndicator
 import com.mineinabyss.launchy.core.ui.components.LaunchyDialog
 import com.mineinabyss.launchy.core.ui.components.LeftSidebar
+import com.mineinabyss.launchy.core.ui.components.topbar.AppTopBar
 import com.mineinabyss.launchy.core.ui.dialogs.SelectJVMDialog
 import com.mineinabyss.launchy.core.ui.theme.currentHue
+import com.mineinabyss.launchy.instance.ui.InstanceViewModel
 import com.mineinabyss.launchy.instance.ui.screens.InstanceScreen
 import com.mineinabyss.launchy.instance.ui.screens.InstanceSettingsScreen
 import com.mineinabyss.launchy.instance_creation.ui.NewInstance
-import com.mineinabyss.launchy.instance_list.ui.HomeScreen
+import com.mineinabyss.launchy.instance_list.ui.InstanceListScreen
 import com.mineinabyss.launchy.settings.ui.SettingsScreen
 import com.mineinabyss.launchy.updater.data.AppUpdateState
 import com.mineinabyss.launchy.updater.data.GithubUpdateChecker
 import com.mineinabyss.launchy.util.DesktopHelpers
+import com.mineinabyss.launchy.util.koinViewModel
 
 var screen: Screen by mutableStateOf(Screen.Default)
 
@@ -46,6 +48,7 @@ val snackbarHostState = SnackbarHostState()
 
 @Composable
 fun Screens(
+    instanceViewModel: InstanceViewModel = koinViewModel()
 ) = Scaffold(
     snackbarHost = { SnackbarHost(snackbarHostState) },
     floatingActionButton = {
@@ -63,9 +66,12 @@ fun Screens(
     }
 ) {
     val ui = LocalUiState.current
-    Screen(Screen.Instance) { InstanceScreen() }
+    Screen(Screen.Instance) {
+        val instance by instanceViewModel.instanceUiState.collectAsState()
+        InstanceScreen(instance ?: return@Screen)
+    }
     Screen(Screen.InstanceSettings, transition = Transitions.SlideUp) { InstanceSettingsScreen() }
-    Screen(Screen.Default) { HomeScreen() }
+    Screen(Screen.Default) { InstanceListScreen() }
     Screen(Screen.NewInstance) { NewInstance() }
     Screen(Screen.Settings) { SettingsScreen() }
     AnimatedVisibility(

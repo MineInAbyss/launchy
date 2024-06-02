@@ -1,6 +1,6 @@
 package com.mineinabyss.launchy.instance.ui.components.settings.infobar
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -25,10 +25,10 @@ import com.mineinabyss.launchy.instance.ui.components.buttons.RetryFailedButton
 
 @Composable
 fun InfoBar(
-    instance: InstanceViewModel = viewModel(),
+    viewModel: InstanceViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
-    val queuedState by instance._installQueueState.collectAsState()
+    val queuedState by viewModel.installState.collectAsState()
     val queue = when (queuedState) {
         is InstallState.Queued -> queuedState as InstallState.Queued
         else -> return
@@ -46,15 +46,22 @@ fun InfoBar(
                 .padding(horizontal = SETTINGS_HORIZONTAL_PADDING, vertical = 6.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            InstallButton(Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH))
+            val installState by viewModel.installState.collectAsState()
+            InstallButton(
+                installState,
+                Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH),
+                onClick = { viewModel.installMods() }
+            )
             val failures = queue.failures.isNotEmpty()
             AnimatedVisibility(failures) {
                 RetryFailedButton(failures)
             }
+            val queued = installState as? InstallState.Queued
+            val instance by viewModel.instanceUiState.collectAsState()
             ActionButton(
-                shown = queue.modLoaderUpdateAvailable,
+                shown = queue.modLoaderChange != null,
                 icon = Icons.Rounded.HistoryEdu,
-                desc = "Mod loader updates:\n${packState.queued.userAgreedModLoaders?.fullVersionName ?: "Not installed"} -> ${packState.modpack.modLoaders.fullVersionName}",
+                desc = "Mod loader updates:\n${instance?.installedModLoader ?: "Not installed"} -> ${queue.modLoaderChange}",
                 count = 1
             )
             ActionButton(

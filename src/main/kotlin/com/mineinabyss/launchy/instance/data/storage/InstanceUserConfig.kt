@@ -2,7 +2,7 @@ package com.mineinabyss.launchy.instance.data.storage
 
 import com.charleskorn.kaml.decodeFromStream
 import com.mineinabyss.launchy.instance.data.DownloadInfo
-import com.mineinabyss.launchy.instance.data.InstanceModLoaders
+import com.mineinabyss.launchy.instance.data.ModLoaderModel
 import com.mineinabyss.launchy.util.Formats
 import com.mineinabyss.launchy.util.GroupName
 import com.mineinabyss.launchy.util.ModID
@@ -13,7 +13,7 @@ import kotlin.io.path.*
 
 @Serializable
 data class InstanceUserConfig(
-    val userAgreedDeps: InstanceModLoaders? = null,
+    val userAgreedDeps: ModLoaderModel? = null,
     val fullEnabledGroups: Set<GroupName> = setOf(),
     val fullDisabledGroups: Set<GroupName> = setOf(),
     val toggledMods: Set<ModID> = setOf(),

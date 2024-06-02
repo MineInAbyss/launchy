@@ -17,40 +17,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mineinabyss.launchy.instance_list.ui.components.InstanceList
 
 @Composable
-fun HomeScreen(viewModel: InstanceListViewModel = viewModel()) {
+fun InstanceListScreen(viewModel: InstanceListViewModel = viewModel()) {
     Box {
         val scrollState = rememberLazyListState()
         BoxWithConstraints {
             Column(Modifier.padding(end = 20.dp).fillMaxSize()) {
-//                var searchQuery by remember { mutableStateOf("") }
-//                SearchBar(
-//                    searchQuery,
-//                    active = false,
-//                    placeholder = { Text("Search for modpacks") },
-//                    onQueryChange = { searchQuery = it },
-//                    onSearch = {},
-//                    onActiveChange = {},
-//                    modifier = Modifier.fillMaxWidth(),
-//                    leadingIcon = {
-//                        Icon(Icons.Rounded.Search, contentDescription = "Search")
-//                    }
-//                ) {
-//                }
                 LazyColumn(state = scrollState, modifier = Modifier.fillMaxSize()) {
                     item {
                         Spacer(Modifier.height(16.dp))
                     }
                     item {
-                        val instances by viewModel.gameInstances.collectAsState()
-                        val lastPlayed by viewModel.lastPlayed.collectAsState()
-                        InstanceList(
-                            "Instances",
-                            instances.sortedByDescending { lastPlayed[it.config.name] }
-                        )
+                        val instances by viewModel.instances.collectAsState()
+                        InstanceList("Instances", instances)
                     }
-//                    item {
-//                        ModpackGroup("Find more", state.downloadedModpacks)
-//                    }
                 }
             }
 

@@ -54,7 +54,7 @@ fun AuthDialog(
                         }
                         pop()
 
-                        append(" and enter the code ${state.profile.authCode}")
+                        append(" and enter the code ${state.verification.code}")
                     }
                 }
                 val inlineContent = mapOf(

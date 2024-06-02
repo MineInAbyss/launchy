@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.core.ui.Constants
-import com.mineinabyss.launchy.core.ui.LocalGameInstanceState
 import com.mineinabyss.launchy.instance.ui.ModGroupUiState
 import com.mineinabyss.launchy.instance.ui.ModUiState
 import com.mineinabyss.launchy.util.Option
@@ -28,10 +27,9 @@ fun ToggleButtons(
     group: ModGroupUiState,
     mods: List<ModUiState>,
 ) {
-    val state = LocalGameInstanceState
     val offColor = Color.Transparent
     val offTextColor = MaterialTheme.colorScheme.surface
-    val forced = group.forceEnabled || group.forceDisabled
+    val forced = group.force != Option.DEFAULT
     Surface(shape = RoundedCornerShape(20.0.dp)) {
         Surface(
             color = MaterialTheme.colorScheme.background,
@@ -43,8 +41,8 @@ fun ToggleButtons(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.width(Constants.SETTINGS_PRIMARY_BUTTON_WIDTH)
             ) {
-                val fullEnable = state.toggles.enabledMods.containsAll(mods)
-                val fullDisable = mods.none { it in state.toggles.enabledMods }
+                val fullEnable = mods.all { it.enabled }
+                val fullDisable = mods.all { !it.enabled }
 
                 val disableColorContainer by animateColorAsState(
                     if (fullDisable) MaterialTheme.colorScheme.errorContainer

@@ -1,6 +1,7 @@
 package com.mineinabyss.launchy.config.data
 
 import com.mineinabyss.launchy.auth.data.ProfileModel
+import com.mineinabyss.launchy.util.InstanceKey
 import kotlinx.serialization.Serializable
 
 
@@ -15,5 +16,5 @@ data class Config(
     val useRecommendedJvmArguments: Boolean = true,
     val preferHue: Float? = null,
     val startInFullscreen: Boolean = false,
-    val lastPlayedMap: Map<String, Long> = mapOf(),
+    val lastPlayedMap: Map<InstanceKey, Long> = mapOf(),
 )

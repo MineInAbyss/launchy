@@ -1,4 +1,4 @@
-package com.mineinabyss.launchy.instance.data.formats
+package com.mineinabyss.launchy.downloads.data.formats
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable

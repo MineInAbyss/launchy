@@ -4,13 +4,12 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mineinabyss.launchy.core.ui.windowScope
+import com.mineinabyss.launchy.instance.ui.InstanceUiState
 import com.mineinabyss.launchy.instance.ui.InstanceViewModel
 import com.mineinabyss.launchy.instance.ui.components.BackgroundImage
 import com.mineinabyss.launchy.instance.ui.components.LogoLarge
@@ -23,12 +22,11 @@ import com.mineinabyss.launchy.util.koinViewModel
 @Preview
 @Composable
 fun InstanceScreen(
+    instance: InstanceUiState,
     viewModel: InstanceViewModel = koinViewModel(),
 ) {
-    val instance by viewModel.instanceUiState.collectAsState()
-
     Box {
-        BackgroundImage(instance?.background, windowScope)
+        BackgroundImage(instance.background, windowScope)
 
         Column(
             modifier =
@@ -38,14 +36,18 @@ fun InstanceScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LogoLarge(instance?.logo, Modifier.weight(3f, false))
+            LogoLarge(instance.logo, Modifier.weight(3f, false))
             Row(
                 horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth().weight(1f, false),
             ) {
-                PlayButton(hideText = false, instance) { packState }
-                AnimatedVisibility(packState.instance.updatesAvailable) {
+                PlayButton(
+                    hideText = false,
+                    instance,
+                    onClick = { viewModel.launch() },
+                )
+                AnimatedVisibility(instance.updatesAvailable) {
                     UpdateButton()
                 }
                 SettingsButton()
