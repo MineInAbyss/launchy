@@ -126,22 +126,22 @@ modGroups:
       url: https://cdn.modrinth.com/data/YL57xq9U/versions/kGdJ11Rt/iris-mc1.20.4-1.6.17.jar
       configUrl: https://github.com/MineInAbyss/launchy-mods/releases/download/v1.0.0/shaderpacks.zip
       configDesc: "Includes the following shaderpacks: \n - BSL v8.1.02.2 \n - Complementary Shaders v4.4 \n - Continuum v2.0.4 \n - Sonic Ether's Unbelievable Shaders PTGI HRR 3"
-      incompatibleWith: [ Distant Horizons ]
+      incompatibleWith: [ Voxy ]
 
-    #- name: Voxy
-    #  license: ARR
-    #  homepage: https://modrinth.com/mod/voxy
-    #  desc: Level-Of-Detail mod to allow for extreme performance and render distances
-    #  url: https://cdn.modrinth.com/data/fxxUqruK/versions/5FA1V2zz/voxy-0.1.3-alpha.jar
-    #  incompatibleWith: [ Distant Horizons ]
+    - name: Voxy
+      license: ARR
+      homepage: https://modrinth.com/mod/voxy
+      desc: Level-Of-Detail mod to allow for extreme performance and render distances
+      url: https://cdn.modrinth.com/data/fxxUqruK/versions/pSAhmtO2/voxy-0.1.5-alpha.jar
+      incompatibleWith: [ Iris ]
 
-    - name: Distant Horizons
-      license: LGPL-3
-      homepage: https://modrinth.com/mod/distanthorizons
-      desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://github.com/kawashirov/distant-horizons/releases/download/2.0.1-a-kawa-2/DistantHorizons-2.0.1-a-kawa-2-1.20.2.jar
-      #incompatibleWith: [ Iris shaders, Voxy ]
-      incompatibleWith: [ Iris shaders ]
+    #- name: Distant Horizons
+    #  license: LGPL-3
+    #  homepage: https://modrinth.com/mod/distanthorizons
+    #  desc: Level-Of-Detail mod to allow for better performance and higher render-distance
+    #  url: https://github.com/kawashirov/distant-horizons/releases/download/2.0.1-a-kawa-2/DistantHorizons-2.0.1-a-kawa-2-1.20.2.jar
+    #  #incompatibleWith: [ Iris shaders, Voxy ]
+    #  incompatibleWith: [ Iris shaders ]
 
     - name: Falling leaves
       license: MIT
