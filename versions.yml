@@ -139,7 +139,7 @@ modGroups:
       license: LGPL-3
       homepage: https://modrinth.com/mod/distanthorizons
       desc: Level-Of-Detail mod to allow for better performance and higher render-distance
-      url: https://github.com/kawashirov/distant-horizons/releases/download/2.0.1-a-kawa-2/DistantHorizons-2.0.1-a-kawa-2-1.20.2.jar
+      url: https://cdn.modrinth.com/data/uCdwusMi/versions/jptcCdp2/DistantHorizons-2.2.1-a-1.20.4-forge-fabric.jar
       #incompatibleWith: [ Iris shaders, Voxy ]
       incompatibleWith: [ Iris shaders ]
 
